@@ -4,7 +4,7 @@ open Fable.SimpleHttp
 open Fable.SimpleJson
 open Types
 
-let url = "https://api-stage.sledilnik.org/api/stats-weekly" // TODO: switch to production before merge
+let url = "https://api.sledilnik.org/api/stats-weekly"
 
 type private TransferLocation =
     { family : int option

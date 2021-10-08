@@ -20,7 +20,7 @@ type DisplayType =
     | IcuCases
     static member All = [ ConfirmedCases; HospitalizedCases; IcuCases ]
 
-    static member Default = HospitalizedCases
+    static member Default = IcuCases
 
     member this.GetName =
         match this with
@@ -521,6 +521,10 @@ let renderChartOptions state dispatch =
                                   | Relative100k -> pojo {| format = "{value} %" |}
                                   | _ -> pojo {| format = "{value}" |}
                               reversedStacks = true |})
+           credits =
+                match state.DisplayType with
+                | IcuCases -> chartCreditsHospitals
+                | _ -> chartCreditsNIJZ
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}

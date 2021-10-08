@@ -277,6 +277,15 @@ let chartCreditsMZ =
         href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
     |} |> pojo
 
+let chartCreditsHospitals =
+    {|
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsHospitals") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/teme/mreza-javne-zdravstvene-sluzbe/"
+    |} |> pojo
+
 let chartCreditsMIZS =
     {|
         enabled = true
