@@ -304,8 +304,8 @@ let renderChartOptions state dispatch =
                   CasesRecovered = dp.IcuRecovered |> intOptionToFloat
                   CasesOther = dp.IcuOther |> intOptionToFloat })
 
-    let label, allSeries =
-        let color, data =
+    let label, allSeries, lastWeek =
+        let color, data, lastWeek =
             match state.DisplayType with
             | ConfirmedCases ->
                 let daily =
@@ -356,7 +356,8 @@ let renderChartOptions state dispatch =
                             yield sumRec // flush
                     }
 
-                "#d5c768", weeklyConfirmedData
+                "#d5c768", weeklyConfirmedData, weeklyConfirmedData |> Seq.tryLast
+
 
             | HospitalizedCases ->
                 "#de9a5a",
@@ -365,13 +366,15 @@ let renderChartOptions state dispatch =
                 |> Seq.rev
                 |> Seq.skipWhile (fun dp -> dp.CasesOther.IsNone) // skip empty weeks at tail
                 |> Seq.rev
-                |> Seq.map checkAndProcess100k
+                |> Seq.map checkAndProcess100k,
+                None
 
             | IcuCases ->
                 "#fb6a4a",
                 weeklyIcuData
                 |> Seq.skipWhile (fun dp -> dp.CasesOther.IsNone)
-                |> Seq.map checkAndProcess100k
+                |> Seq.map checkAndProcess100k,
+                None
 
         let startDate =
             data |> Seq.map (fun dp -> dp.Date) |> Seq.min // TODO: can we get it from raneg selector?
@@ -509,7 +512,8 @@ let renderChartOptions state dispatch =
                                         )
                                     fmtHeader =
                                         I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
-                         |> Seq.toArray |} ]
+                         |> Seq.toArray |} ],
+        lastWeek
 
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
@@ -525,6 +529,21 @@ let renderChartOptions state dispatch =
     label,
     {| baseOptions with
            series = List.toArray allSeries
+           xAxis =
+               baseOptions.xAxis
+               |> Array.map (fun xAxis ->
+                   match lastWeek with
+                   | Some lw ->
+                      {| xAxis with
+                          tickInterval = 86400000 * 7
+                          plotBands =
+                                [|
+                                   {| from=jsTime <| lw.Date
+                                      ``to``=jsTime <| lw.DateTo.AddDays(7.) // ugly hack to fully color incomplete week
+                                      color="#ffffe0"
+                                    |}
+                                |] |} |> pojo
+                   | None -> pojo xAxis )
            yAxis =
                baseOptions.yAxis
                |> Array.map
