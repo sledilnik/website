@@ -314,7 +314,8 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true |}
            credits =
                 match state.DisplayType with
-                | HospitalAdmitted | HospitalDischarged | ICUAdmitted | Deceased -> chartCreditsMZ
+                | HospitalAdmitted | HospitalDischarged | Deceased -> chartCreditsMZHospitals
+                | ICUAdmitted -> chartCreditsHospitals
                 | _ -> chartCreditsNIJZ
            responsive =
                pojo

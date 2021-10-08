@@ -96,7 +96,7 @@ let totalVsWeekChartOptions state =
         credits =
             match state.Metric with
             | Cases -> chartCreditsNIJZ
-            | Hospitalized | Deceased -> chartCreditsMZ
+            | Hospitalized | Deceased -> chartCreditsMZHospitals
 
     |} |> pojo
 

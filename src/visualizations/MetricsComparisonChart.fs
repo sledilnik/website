@@ -318,7 +318,7 @@ let renderChartOptions state dispatch =
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
-        credits = chartCreditsNIJZMZ
+        credits = chartCreditsNIJZMZHospitals
     |}
 
 let renderChartContainer state dispatch =
