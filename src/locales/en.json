@@ -783,7 +783,7 @@
             "casesProtected": "Protected with Vaccination",
             "casesPartiallyVaccinated": "Partially Vaccinated",
             "casesRecovered": "Recovered",
-            "casesOtherShort": "Other",
+            "casesUnvaccinated": "Unvaccinated",
             "casesOther": "Other (unvaccinated, partially vaccinated)"
         },
         "schools": {

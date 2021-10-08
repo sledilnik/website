@@ -438,7 +438,7 @@ let renderChartOptions state dispatch =
 
         let otherLabel =
             if state.DisplayType = IcuCases then
-                "casesOtherShort"
+                "casesUnvaccinated"
             else
                 "casesOther"
 

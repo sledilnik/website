@@ -1412,7 +1412,7 @@
             "casesPartiallyVaccinated": "Delno cepljeni",
             "casesRecovered": "Prebolevniki",
             "casesOther": "Ostali (necepljeni, delno cepljeni)",
-            "casesOtherShort": "Ostali"
+            "casesUnvaccinated": "Necepljeni"
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
