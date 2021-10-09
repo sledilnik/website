@@ -147,8 +147,8 @@ let renderChartOptions state dispatch =
         |> Seq.mapi
             (fun i dp ->
                 let protectedWithVaccine = // protected 14 days after 2nd dose
-                    if i >= 14 then
-                        state.Data.[i - 14]
+                    if i >= 15 then
+                        state.Data.[i - 15]
                             .Vaccination
                             .Administered2nd
                             .ToDate
@@ -158,7 +158,7 @@ let renderChartOptions state dispatch =
                 dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
-    let protectedWithVaccineOnDay date =
+    let protectedWithVaccineOnDay (date: DateTime) =
         match protectedWithVaccineMap.TryFind(date) with
         | Some v -> v
         | None -> None
