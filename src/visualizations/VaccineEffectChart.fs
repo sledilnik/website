@@ -37,7 +37,7 @@ type ChartType =
     | Relative100k
     static member All = [ Absolute; Absolute100k; Relative100k ]
 
-    static member Default = Absolute100k
+    static member Default = Absolute
 
     member this.GetName =
         match this with
@@ -147,8 +147,8 @@ let renderChartOptions state dispatch =
         |> Seq.mapi
             (fun i dp ->
                 let protectedWithVaccine = // protected 14 days after 2nd dose
-                    if i >= 14 then
-                        state.Data.[i - 14]
+                    if i >= 15 then
+                        state.Data.[i - 15]
                             .Vaccination
                             .Administered2nd
                             .ToDate
@@ -158,46 +158,10 @@ let renderChartOptions state dispatch =
                 dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
-    let protectedWithVaccineOnDay date =
+    let protectedWithVaccineOnDay (date: DateTime) =
         match protectedWithVaccineMap.TryFind(date) with
         | Some v -> v
         | None -> None
-
-    let partiallyVaccinatedMap =
-        state.Data
-        |> Seq.toArray
-        |> Seq.mapi
-            (fun i dp ->
-                let protectedWithVaccine = // protected 14 days after 2nd dose
-                    if i >= 14 then
-                        state.Data.[i - 14]
-                            .Vaccination
-                            .Administered2nd
-                            .ToDate
-                    else
-                        None
-
-                dp.Date,
-                dp.Vaccination.Administered.ToDate
-                |> Utils.subtractIntOption protectedWithVaccine)
-        |> Map.ofSeq
-
-    let partiallyVaccinatedOnDay date =
-        match partiallyVaccinatedMap.TryFind(date) with
-        | Some v -> v
-        | None -> None
-
-    let recoveredMap =
-        state.Data
-        |> Seq.toArray
-        |> Seq.mapi (fun i dp -> dp.Date, dp.Cases.RecoveredToDate)
-        |> Map.ofSeq
-
-    let recoveredOnDay date =
-        match recoveredMap.TryFind(date) with
-        | Some v -> v
-        | None -> None
-
 
     let intOptionToFloat opt =
         match opt with
@@ -225,26 +189,38 @@ let renderChartOptions state dispatch =
         | Absolute -> dp
         | Absolute100k
         | Relative100k ->
-            let protectedWithVaccine = protectedWithVaccineOnDay dp.DateTo
-            let partiallyVaccinated = partiallyVaccinatedOnDay dp.DateTo
-            let recovered = recoveredOnDay dp.DateTo
+            let protectedWithVaccine =
+                Math.Round(
+                    (((protectedWithVaccineOnDay dp.Date
+                       |> Option.defaultValue 0)
+                      + (protectedWithVaccineOnDay dp.DateTo
+                         |> Option.defaultValue 0)
+                      |> float)
+                     / 2.),
+                    0
+                )
+                |> int
+                |> Some
 
             let otherPopulation =
-                if state.DisplayType = IcuCases then
-                    Utils.Dictionaries.regions.["si"].Population
-                    |> Utils.subtractIntOption protectedWithVaccine
-                    |> Utils.subtractIntOption partiallyVaccinated
-                    |> Utils.subtractIntOption recovered
-                else
-                    Utils.Dictionaries.regions.["si"].Population
-                    |> Utils.subtractIntOption protectedWithVaccine
+                Utils.Dictionaries.regions.["si"].Population
+                |> Utils.subtractIntOption protectedWithVaccine
+
+            let casesOther =
+                match state.DisplayType with
+                | IcuCases -> // group all not fully protected under Other
+                    (dp.CasesOther |> Option.defaultValue 0.)
+                    + (dp.CasesPartiallyVaccinated
+                       |> Option.defaultValue 0.)
+                    + (dp.CasesRecovered |> Option.defaultValue 0.)
+                    |> Some
+                | _ -> dp.CasesOther
 
             { dp with
                   CasesProtectedWithVaccine = get100k dp.CasesProtectedWithVaccine protectedWithVaccine
-                  CasesPartiallyVaccinated = get100k dp.CasesPartiallyVaccinated partiallyVaccinated
-                  CasesRecovered = get100k dp.CasesRecovered recovered
-                  CasesOther = get100k dp.CasesOther otherPopulation }
-
+                  CasesPartiallyVaccinated = None
+                  CasesRecovered = None
+                  CasesOther = get100k casesOther otherPopulation }
 
     let dailyConfirmedData =
         state.Data
@@ -437,7 +413,8 @@ let renderChartOptions state dispatch =
                 I18N.tOptions txtId {| multiple = I18N.NumberFormat.formatNumber multiple |}
 
         let otherLabel =
-            if state.DisplayType = IcuCases then
+            if state.DisplayType = IcuCases
+               && state.ChartType = Absolute then
                 "casesUnvaccinated"
             else
                 "casesOther"
@@ -457,7 +434,9 @@ let renderChartOptions state dispatch =
                                   fmtHeader =
                                       I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
                        |> Seq.toArray |}
-          if state.DisplayType = IcuCases then
+
+          if state.DisplayType = IcuCases
+             && state.ChartType = Absolute then // can only show for ICU in absolute
               yield
                   pojo
                       {| name = chartText "casesRecovered"
