@@ -760,6 +760,10 @@
         "pctEverywhere": {
             "title": "PCT!",
             "description": "Pogoj PCT (prebolel, cepljen, testiran) morajo izpolnjevati vsi, ki opravljajo delo in vsi uporabniki storitev."
+        },
+        "liftMasksRV": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso obvezne v okoljih, kjer vsi izpolnjujejo pogoj cepljeni ali preboleli in v zaprtih javnih krajih, kjer se nudi priprava in strežba jedi in pijač."
         }
     },
     "phase": {

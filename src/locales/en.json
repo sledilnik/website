@@ -1267,6 +1267,10 @@
         "pctEverywhere": {
             "title": "RVT!",
             "description": "RVT (recovered, vaccinated, tested) condition must be met by all those who perform the work and all users of the services."
+        },
+        "liftMasksRV": {
+            "title": "Masks",
+            "description": "Easing restrictions: no mask requirement in environment where all participants are vaccinated or recovered and in indoor public spaces where food and drinks are being served."
         }
     },
     "days": {
