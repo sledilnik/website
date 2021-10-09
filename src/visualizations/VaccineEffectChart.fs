@@ -381,7 +381,7 @@ let renderChartOptions state dispatch =
                     |> Option.defaultValue 0.)
 
         let multiple =
-            Utils.roundTo3Decimals (otherC / protectedC)
+            Utils.roundTo1Decimal (otherC / protectedC)
 
         let label =
             match state.ChartType with
@@ -430,7 +430,7 @@ let renderChartOptions state dispatch =
                        |> Seq.map
                            (fun dp ->
                                {| x = jsDatesMiddle dp.Date dp.DateTo
-                                  y = Utils.roundTo3Decimals (dp.CasesOther |> Option.defaultValue 0.)
+                                  y = Utils.roundTo1Decimal (dp.CasesOther |> Option.defaultValue 0.)
                                   fmtHeader =
                                       I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
                        |> Seq.toArray |}
@@ -447,7 +447,7 @@ let renderChartOptions state dispatch =
                              |> Seq.map
                                  (fun dp ->
                                      {| x = jsDatesMiddle dp.Date dp.DateTo
-                                        y = Utils.roundTo3Decimals (dp.CasesRecovered |> Option.defaultValue 0.)
+                                        y = Utils.roundTo1Decimal (dp.CasesRecovered |> Option.defaultValue 0.)
                                         fmtHeader =
                                             I18N.tOptions
                                                 "days.weekYearFromToDate"
@@ -465,7 +465,7 @@ let renderChartOptions state dispatch =
                                  (fun dp ->
                                      {| x = jsDatesMiddle dp.Date dp.DateTo
                                         y =
-                                            Utils.roundTo3Decimals (
+                                            Utils.roundTo1Decimal (
                                                 dp.CasesPartiallyVaccinated
                                                 |> Option.defaultValue 0.
                                             )
@@ -485,7 +485,7 @@ let renderChartOptions state dispatch =
                              (fun dp ->
                                  {| x = jsDatesMiddle dp.Date dp.DateTo
                                     y =
-                                        Utils.roundTo3Decimals (
+                                        Utils.roundTo1Decimal (
                                             dp.CasesProtectedWithVaccine
                                             |> Option.defaultValue 0.
                                         )
