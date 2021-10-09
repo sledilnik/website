@@ -191,8 +191,16 @@ let renderChartOptions state dispatch =
         | Relative100k ->
             let protectedWithVaccine =
                 Math.Round(
-                    (((protectedWithVaccineOnDay dp.Date |> Option.defaultValue 0)
-                    + (protectedWithVaccineOnDay dp.DateTo |> Option.defaultValue 0) |> float) / 2.), 0) |> int |> Some
+                    (((protectedWithVaccineOnDay dp.Date
+                       |> Option.defaultValue 0)
+                      + (protectedWithVaccineOnDay dp.DateTo
+                         |> Option.defaultValue 0)
+                      |> float)
+                     / 2.),
+                    0
+                )
+                |> int
+                |> Some
 
             let otherPopulation =
                 Utils.Dictionaries.regions.["si"].Population
@@ -201,11 +209,11 @@ let renderChartOptions state dispatch =
             let casesOther =
                 match state.DisplayType with
                 | IcuCases -> // group all not fully protected under Other
-                    Some(
-                        (dp.CasesOther |> Option.defaultValue 0.)
-                        + (dp.CasesPartiallyVaccinated |> Option.defaultValue 0.)
-                        + (dp.CasesRecovered |> Option.defaultValue 0.)
-                    )
+                    (dp.CasesOther |> Option.defaultValue 0.)
+                    + (dp.CasesPartiallyVaccinated
+                       |> Option.defaultValue 0.)
+                    + (dp.CasesRecovered |> Option.defaultValue 0.)
+                    |> Some
                 | _ -> dp.CasesOther
 
             { dp with
@@ -373,7 +381,7 @@ let renderChartOptions state dispatch =
                     |> Option.defaultValue 0.)
 
         let multiple =
-            Utils.roundTo1Decimal (otherC / protectedC)
+            Utils.roundTo3Decimals (otherC / protectedC)
 
         let label =
             match state.ChartType with
@@ -422,7 +430,7 @@ let renderChartOptions state dispatch =
                        |> Seq.map
                            (fun dp ->
                                {| x = jsDatesMiddle dp.Date dp.DateTo
-                                  y = Utils.roundTo1Decimal (dp.CasesOther |> Option.defaultValue 0.)
+                                  y = Utils.roundTo3Decimals (dp.CasesOther |> Option.defaultValue 0.)
                                   fmtHeader =
                                       I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
                        |> Seq.toArray |}
@@ -439,7 +447,7 @@ let renderChartOptions state dispatch =
                              |> Seq.map
                                  (fun dp ->
                                      {| x = jsDatesMiddle dp.Date dp.DateTo
-                                        y = Utils.roundTo1Decimal (dp.CasesRecovered |> Option.defaultValue 0.)
+                                        y = Utils.roundTo3Decimals (dp.CasesRecovered |> Option.defaultValue 0.)
                                         fmtHeader =
                                             I18N.tOptions
                                                 "days.weekYearFromToDate"
@@ -457,7 +465,7 @@ let renderChartOptions state dispatch =
                                  (fun dp ->
                                      {| x = jsDatesMiddle dp.Date dp.DateTo
                                         y =
-                                            Utils.roundTo1Decimal (
+                                            Utils.roundTo3Decimals (
                                                 dp.CasesPartiallyVaccinated
                                                 |> Option.defaultValue 0.
                                             )
@@ -477,7 +485,7 @@ let renderChartOptions state dispatch =
                              (fun dp ->
                                  {| x = jsDatesMiddle dp.Date dp.DateTo
                                     y =
-                                        Utils.roundTo1Decimal (
+                                        Utils.roundTo3Decimals (
                                             dp.CasesProtectedWithVaccine
                                             |> Option.defaultValue 0.
                                         )
