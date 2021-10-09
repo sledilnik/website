@@ -189,7 +189,10 @@ let renderChartOptions state dispatch =
         | Absolute -> dp
         | Absolute100k
         | Relative100k ->
-            let protectedWithVaccine = protectedWithVaccineOnDay dp.DateTo
+            let protectedWithVaccine =
+                Math.Round(
+                    (((protectedWithVaccineOnDay dp.Date |> Option.defaultValue 0)
+                    + (protectedWithVaccineOnDay dp.DateTo |> Option.defaultValue 0) |> float) / 2.), 0) |> int |> Some
 
             let otherPopulation =
                 Utils.Dictionaries.regions.["si"].Population
