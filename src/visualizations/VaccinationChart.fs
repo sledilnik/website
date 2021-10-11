@@ -379,9 +379,10 @@ let renderAgeChart state dispatch =
             [| "#FFDA6B";"#E9B825";"#AEEFDB";"#80DABF";"#52C4A2";"#43B895";"#33AB87";"#2DA782"
                "#26A37D";"#189A73";"#F4B2E0";"#E586C8";"#D559B0";"#C33B9A";"#B01C83";"#9e1975" |]
 
+    // SURS 2021-H1: see https://docs.google.com/spreadsheets/d/1aBOp6GW7RpUg3GcrHThWb-6Czj8mlgATlHF2dUw9rTU/edit#gid=2092138705
     let ageGroupPopulation =
-            [| 372727; 141046; 113475; 134316; 151422; 160837; 150023; 151029
-               150947; 144449; 135564; 101248;  77562;  60447;  37062;  17972 |]
+            [| 374210; 141126; 113005; 133642; 150074; 161814; 152766; 149801
+               152352; 144472; 136527; 107823;  75738;  61052;  36642;  17933 |]
 
     let allSeries = seq {
         for ageGroup, idx in allAgeGroups do
