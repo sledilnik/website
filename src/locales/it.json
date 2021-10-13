@@ -772,6 +772,10 @@
         "pctEverywhere": {
             "description": "Devono ricadere nelle categorie GVT (guariti, vaccinati, testati) coloro che lavorano o usufruiscono dei servizi.",
             "title": "GVT!"
+        },
+        "liftMasksRV": {
+            "title": "Mascherine",
+            "description": "Allentamento: nessun obbligo di mascherine in ambienti in cui tutti i partecipanti sono vaccinati o guariti e in spazi pubblici al chiuso dove vengono serviti cibi e bevande."
         }
     },
     "tableDict": {
@@ -914,7 +918,7 @@
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
-            "vaccinationAdministered": "Vaccinati",
+            "vaccinationAdministered": "Vaccinati - Prima dose",
             "niVentilator": "Su ventilatore (non invasivo)",
             "vaccinationAdministered2nd": "Vaccinazioni completate"
         },
@@ -1082,7 +1086,7 @@
             "disclaimer": "Nota: I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
             "disclaimerRegion": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane. Questo è il motivo per cui c'è una deviazione dal numero totale di morti.",
             "vaccinated2nd": "Vaccinazioni completate",
-            "vaccinated1st": "Vaccinati"
+            "vaccinated1st": "Vaccinati - Prima dose"
         },
         "regions": {
             "deceased": "Decessi",
@@ -1093,7 +1097,7 @@
             "newCases7Days": "Nuovi (media di 7 giorni)",
             "disclaimer": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane.",
             "vaccinated2nd": "Vaccinazioni completate",
-            "vaccinated1st": "Vaccinazioni",
+            "vaccinated1st": "Vaccinati - Prima dose",
             "vaccinated7Days": "Al giorno (media di 7 giorni)",
             "vaccinated": "Vaccinati",
             "allCases": "Tutti"
@@ -1460,7 +1464,7 @@
             "deliveredDoses": "Dosi consegnate",
             "usedDoses": "Dosi utilizzate",
             "administered2nd": "Vaccinazioni completate",
-            "administered": "Vaccinati",
+            "administered": "Vaccinati - Prima dose",
             "az": "AstraZeneca",
             "moderna": "Moderna",
             "pfizer": "Pfizer/BioNTech",
@@ -1472,7 +1476,7 @@
             "janssen": "Janssen",
             "byWeek": "Somministrazioni (per settimana)",
             "unusedDoses": "Dosi non utilizzate",
-            "byAge1st": "Vaccinati (età)",
+            "byAge1st": "Vaccinati - Prima dose (età)",
             "byAgeAll": "Vaccinazione completata (età)",
             "unused": "Giacenza",
             "byWeekSupply": "Giacenza (per settimana)"
