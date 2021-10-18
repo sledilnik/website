@@ -109,7 +109,7 @@ type State =
 
 // we do not have all historical data for vaccinations by municipaality - do not show date intervals
 let mapWithoutHistoricalData state =
-    state.MapToDisplay = MunicipalityMap && (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
+    (* DISABLED: state.MapToDisplay = MunicipalityMap && *) (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
 
 type Msg =
     | GeoJsonRequested

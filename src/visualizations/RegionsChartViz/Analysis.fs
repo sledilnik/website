@@ -9,7 +9,7 @@ type ContentType =
     | ViewVaccinated
     with
     static member Default = ViewConfirmed
-    static member All = [ ViewConfirmed; ViewVaccinated; ViewDeceased ]
+    static member All = [ ViewConfirmed; (* DISABLED: ViewVaccinated; *) ViewDeceased ]
     static member GetName = function
        | ViewConfirmed      -> I18N.chartText "regions" "confirmedCases"
        | ViewDeceased       -> I18N.chartText "regions" "deceased"
