@@ -1393,8 +1393,8 @@
             "usedDoses": "Uporabljeni odmerki",
             "unusedDoses": "Neporabljeni odmerki",
             "deliveredDoses": "Dobavljeni odmerki",
-            "disabled": "Podatki o cepljenju se od 25. 3. 2020 NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a>.",
-            "janssen": "Janssen"
+            "janssen": "Janssen",
+            "disabled": "Zaradi usklajevanja podatkov o 3. odmerku cepiva so podatki trenutno nezanesljivi in jih ne prikazujemo. Te podatke lahko trenutno spremljate na strani <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a>."
         },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
@@ -1416,7 +1416,8 @@
             "casesPartiallyVaccinated": "Delno cepljeni",
             "casesRecovered": "Prebolevniki",
             "casesOther": "Ostali (necepljeni, delno cepljeni)",
-            "casesUnvaccinated": "Necepljeni"
+            "casesUnvaccinated": "Necepljeni",
+            "disabled": "Zaradi usklajevanja podatkov o 3. odmerku cepiva so podatki trenutno nezanesljivi in jih ne prikazujemo. Te podatke lahko trenutno spremljate na strani <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a>."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
