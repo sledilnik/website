@@ -44,7 +44,7 @@ type ContentType =
     static member Default mapToDisplay =
         match mapToDisplay with
         | MunicipalityMap -> ConfirmedCases
-        | RegionMap       -> Vaccinated1st
+        | RegionMap       -> (* DISABLED: Vaccinated1st *) ConfirmedCases
     static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
@@ -109,7 +109,7 @@ type State =
 
 // we do not have all historical data for vaccinations by municipaality - do not show date intervals
 let mapWithoutHistoricalData state =
-    state.MapToDisplay = MunicipalityMap && (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
+    (* DISABLED: state.MapToDisplay = MunicipalityMap && *) (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
 
 type Msg =
     | GeoJsonRequested
