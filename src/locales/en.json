@@ -762,7 +762,7 @@
             "usedDoses": "Used Doses",
             "unusedDoses": "Unused Doses",
             "deliveredDoses": "Delivered Doses",
-            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a> website (in Slovenian only)."
+            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
         "vaccineEffect": {
             "title": "Vaccination Effect",
@@ -784,7 +784,8 @@
             "casesPartiallyVaccinated": "Partially Vaccinated",
             "casesRecovered": "Recovered",
             "casesUnvaccinated": "Unvaccinated",
-            "casesOther": "Other (unvaccinated, partially vaccinated)"
+            "casesOther": "Other (unvaccinated, partially vaccinated)",
+            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
