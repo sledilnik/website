@@ -397,7 +397,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Vaccination
             ClassName = "vaccination-chart"
             ChartTextsGroup = "vaccination"
-            ChartEnabled = false // DISABLED: until NIJZ resolves 3rd dose issue
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
 
@@ -405,7 +405,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = VaccineEffect
             ClassName = "vaccine-effect-chart"
             ChartTextsGroup = "vaccineEffect"
-            ChartEnabled = false // DISABLED: until NIJZ resolves 3rd dose issue
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
