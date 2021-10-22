@@ -34,7 +34,7 @@ type MetricType =
         match ct with
         | ViewConfirmed -> [ NewCases7Days; ActiveCases; ConfirmedCases ]
         | ViewDeceased -> [ ]
-        | ViewVaccinated -> [ Vaccinated7Days; Vaccinated1st; Vaccinated2nd; Vaccinated3rd ]
+        | ViewVaccinated -> [ Vaccinated7Days; Vaccinated2nd; Vaccinated1st; Vaccinated3rd ]
     static member GetName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
         | ConfirmedCases -> I18N.chartText "regions" "allCases"

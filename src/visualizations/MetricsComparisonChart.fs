@@ -94,8 +94,8 @@ module Metrics  =
         { Metric=VentilatorToday;       Color="#a50f15"; Visible=true;  Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
-        { Metric=VacAdministeredToday;  Color="#189a73"; Visible=false; Type=Today;  Id="vaccinationAdministered" }
         { Metric=VacAdministered2Today; Color="#2ca25f"; Visible=false; Type=Today;  Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministeredToday;  Color="#189a73"; Visible=false; Type=Today;  Id="vaccinationAdministered" }
         { Metric=VacAdministered3Today; Color="#66c2a4"; Visible=false; Type=Today;  Id="vaccinationAdministered3rd" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
@@ -107,8 +107,8 @@ module Metrics  =
         { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
-        { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
         { Metric=VacAdministered2ToDate;Color="#0e5842"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
         { Metric=VacAdministered3ToDate;Color="#2ca25f"; Visible=true;  Type=ToDate; Id="vaccinationAdministered3rd" }
         { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
