@@ -747,16 +747,20 @@
             }
         },
         "vaccination": {
-            "title": "Vaccination",
-            "titleMenu": "Vaccination",
+            "title": "Vaccination by Age Groups",
+            "titleMenu": "Vaccination - age",
+            "byAgeAll": "Fully Vaccinated",
+            "byAge1st": "1 dose",
+            "byAge3rd": "Additional dose"
+        },
+        "vaccines": {
+            "title": "Vaccines",
+            "titleMenu": "Vaccines",
             "used": "Used",
             "byManufacturer": "Delivered",
             "unused": "Supply",
             "byWeek": "Usage (weekly)",
             "byWeekSupply": "Supply (weekly)",
-            "byAgeAll": "Fully Vaccinated (age)",
-            "byAge1st": "Vaccinated - 1 dose (age)",
-            "byAge3rd": "Vaccinated - additional dose (age)",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
@@ -766,8 +770,7 @@
             "administered3rd": "Vaccinated - additional dose",
             "usedDoses": "Used Doses",
             "unusedDoses": "Unused Doses",
-            "deliveredDoses": "Delivered Doses",
-            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
+            "deliveredDoses": "Delivered Doses"
         },
         "vaccineEffect": {
             "title": "Vaccination Effect",

@@ -49,11 +49,15 @@ export default {
   },
   'vaccination-chart': {
     titleKey: 'charts.vaccination.titleMenu',
-    icon: 'graph',
+    icon: 'column',
+  },
+  'vaccines-chart': {
+    titleKey: 'charts.vaccines.titleMenu',
+    icon: 'column',
   },
   'vaccine-effect-chart': {
     titleKey: 'charts.vaccineEffect.titleMenu',
-    icon: 'graph',
+    icon: 'column',
   },
   'schools-chart': {
     titleKey: 'charts.schools.titleMenu',

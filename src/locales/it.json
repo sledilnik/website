@@ -1461,6 +1461,12 @@
             "unitsQuarantine": "Unità - Quarantena"
         },
         "vaccination": {
+            "titleMenu": "Vaccinazione per fasce di età",
+            "title": "Vaccinazione - età",
+            "byAge1st": "Prima dose",
+            "byAgeAll": "Vaccinazione completata"
+        },
+        "vaccines": {
             "deliveredDoses": "Dosi consegnate",
             "usedDoses": "Dosi utilizzate",
             "administered2nd": "Vaccinazioni completate",
@@ -1470,13 +1476,11 @@
             "pfizer": "Pfizer/BioNTech",
             "byManufacturer": "Consegnati",
             "used": "Utilizzati",
-            "titleMenu": "Vaccinazione",
-            "title": "Vaccinazione",
+            "titleMenu": "Vaccini",
+            "title": "Vaccini",
             "janssen": "Janssen",
             "byWeek": "Somministrazioni (per settimana)",
             "unusedDoses": "Dosi non utilizzate",
-            "byAge1st": "Vaccinati - Prima dose (età)",
-            "byAgeAll": "Vaccinazione completata (età)",
             "unused": "Giacenza",
             "byWeekSupply": "Giacenza (per settimana)"
         },

@@ -113,6 +113,11 @@ export default {
           text: this.$t('charts.vaccination.title'),
           dimensions: [1140, 720]
         },
+        "Vaccines": {
+          value: "Vaccines",
+          text: this.$t('charts.vaccines.title'),
+          dimensions: [1140, 720]
+        },
         "VaccineEffect": {
           value: "VaccineEffect",
           text: this.$t('charts.vaccineEffect.title'),

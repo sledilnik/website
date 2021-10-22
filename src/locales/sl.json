@@ -1379,27 +1379,30 @@
             }
         },
         "vaccination": {
-            "title": "Cepljenje",
-            "titleMenu": "Cepljenje - stanje",
+            "title": "Cepljenje po starostnih skupinah",
+            "titleMenu": "Cepljenje - starost",
+            "byAgeAll": "Polno cepljeni",
+            "byAge1st": "1 odmerek",
+            "byAge3rd": "Dodatni odmerek"
+        },
+        "vaccines": {
+            "title": "Cepiva",
+            "titleMenu": "Cepiva - stanje",
             "used": "Poraba",
             "byManufacturer": "Dobava",
             "unused": "Zaloga",
             "byWeek": "Poraba (tedensko)",
             "byWeekSupply": "Zaloga (tedensko)",
-            "byAgeAll": "Polno cepljeni (starost)",
-            "byAge1st": "Cepljeni - 1 odmerek (starost)",
-            "byAge3rd": "Cepljeni - dodatni odmerek (starost)",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
-            "administered": "Cepljeni - 1 odmerek",
-            "administered2nd": "Polno cepljeni",
-            "administered3rd": "Cepljeni - dodatni odmerek",
+            "janssen": "Janssen",
             "usedDoses": "Uporabljeni odmerki",
             "unusedDoses": "Neporabljeni odmerki",
             "deliveredDoses": "Dobavljeni odmerki",
-            "janssen": "Janssen",
-            "disabled": "Zaradi zaznanih napak v podatkih o cepljenju, ki jih pridobivamo iz cepimose.si, teh podatkov začasno ne prikazujemo. NIJZ napako prioritetno ureja in graf bomo ponovno objavili, ko bodo napake odpravljene."
+            "administered": "Cepljeni - 1 odmerek",
+            "administered2nd": "Polno cepljeni",
+            "administered3rd": "Cepljeni - dodatni odmerek"
         },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
@@ -2076,8 +2079,12 @@
             "answer": "[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).\nNa grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu."
         },
         "vaccination-chart": {
-            "question": "Kaj kaže graf \"Cepljenje\"?",
-            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Porabljena cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
+            "question": "Kaj kaže graf \"Cepljenje po starostnih skupinah\"?",
+            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje precepljenost po starostnih skupinah. Osnovni pogled *Polno cepljeni* prikazuje precepljenost z vsemi odmerki po starostnih skupinah.\n\nIzberete lahko prikaz *Na dan* ali *Skupaj* in pa prikaz *Absolutno* ali kot *Delež prebivalstva*."
+        },
+        "vaccines-chart": {
+            "question": "Kaj kaže graf \"Cepiva\"?",
+            "answer": "[Graf](/sl/stats#vaccines-chart) prikazuje dobave in porabe cepiva. Osnovni pogled *Poraba* prikazuje dnevno porabo odmerkov cepiva po proizvajalcu. Možen je prikaz *Na dan* ali pa *Skupaj*\n\nV pogledu *Dobava* pa lahko vidite število dobavljenih in podarjenih (ali vrnjenih) odmerkov po proizvajalcu.\n\nV pogledu *Zaloga* pa lahko vidite trenutno oceno zaloge neporabljenega cepiva po proizvajalcu.\n\nV pogledu *Poraba (tedensko)* pa lahko vidite tedensko porabo odmerkov cepiva po tednih in primerjavo porabe za 1. odmerek, polno cepljenje in dodatni odmerek."
         },
         "vaccine-effect-chart": {
             "question": "Kaj kaže graf \"Učinek cepljenja\"?",
