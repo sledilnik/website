@@ -1382,7 +1382,7 @@
             "title": "Cepljenje po starostnih skupinah",
             "titleMenu": "Cepljenje - starost",
             "byAgeAll": "Polno cepljeni",
-            "byAge1st": "1 odmerek",
+            "byAge1st": "Prvi odmerek",
             "byAge3rd": "Dodatni odmerek"
         },
         "vaccines": {
@@ -1400,9 +1400,9 @@
             "usedDoses": "Uporabljeni odmerki",
             "unusedDoses": "Neporabljeni odmerki",
             "deliveredDoses": "Dobavljeni odmerki",
-            "administered": "Cepljeni - 1 odmerek",
+            "administered": "Prvi odmerek",
             "administered2nd": "Polno cepljeni",
-            "administered3rd": "Cepljeni - dodatni odmerek"
+            "administered3rd": "Dodatni odmerek"
         },
         "vaccineEffect": {
             "title": "Učinek cepljenja",

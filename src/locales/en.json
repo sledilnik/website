@@ -750,8 +750,8 @@
             "title": "Vaccination by Age Groups",
             "titleMenu": "Vaccination - age",
             "byAgeAll": "Fully Vaccinated",
-            "byAge1st": "1 dose",
-            "byAge3rd": "Additional dose"
+            "byAge1st": "First Dose",
+            "byAge3rd": "Additional Dose"
         },
         "vaccines": {
             "title": "Vaccines",
@@ -765,9 +765,9 @@
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
-            "administered": "Vaccinated - 1 dose",
+            "administered": "First Dose",
             "administered2nd": "Fully Vaccinated",
-            "administered3rd": "Vaccinated - additional dose",
+            "administered3rd": "Additional Dose",
             "usedDoses": "Used Doses",
             "unusedDoses": "Unused Doses",
             "deliveredDoses": "Delivered Doses"
