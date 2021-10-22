@@ -54,7 +54,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         PatientsData = [||]
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
         Error = None
     }
 

@@ -11,6 +11,7 @@ type Metric =
     | DeceasedToDate
     | Vaccinated1stToDate
     | Vaccinated2ndToDate
+    | Vaccinated3rdToDate
 
 type DataPoint = {
     Region : string
@@ -37,6 +38,8 @@ let parseRegionsData (csv : string) =
                 Some { Region = region ; Metric = Vaccinated1stToDate ; Value = None }
             | [| "region" ; region ; "vaccinated" ; "2nd" ; "todate" |] ->
                 Some { Region = region ; Metric = Vaccinated2ndToDate ; Value = None }
+            | [| "region" ; region ; "vaccinated" ; "3rd" ; "todate" |] ->
+                Some { Region = region ; Metric = Vaccinated3rdToDate ; Value = None }
             | unknown ->
                 printfn "Error parsing regions header: %s" col
                 None
@@ -77,12 +80,15 @@ let parseRegionsData (csv : string) =
                                 { state with Vaccinated1stToDate = dp.Value }
                             | Vaccinated2ndToDate ->
                                 { state with Vaccinated2ndToDate = dp.Value }
+                            | Vaccinated3rdToDate ->
+                                { state with Vaccinated3rdToDate = dp.Value }
                         ) { Name = region
                             ActiveCases = None
                             ConfirmedToDate = None
                             DeceasedToDate = None
                             Vaccinated1stToDate = None
-                            Vaccinated2ndToDate = None })
+                            Vaccinated2ndToDate = None
+                            Vaccinated3rdToDate = None })
 
                 let dataPoint : RegionsDataPoint = { Date = date ; Regions = data |> Array.toList }
                 return dataPoint

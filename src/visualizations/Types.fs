@@ -41,6 +41,7 @@ type Cases =
 type Vaccination =
     { Administered : TodayToDate
       Administered2nd : TodayToDate
+      Administered3rd : TodayToDate
       Used : TodayToDate
       Delivered : TodayToDate }
 
@@ -161,7 +162,8 @@ type AreaCases =
       ConfirmedToDate : int option
       DeceasedToDate : int option
       Vaccinated1stToDate : int option
-      Vaccinated2ndToDate : int option }
+      Vaccinated2ndToDate : int option
+      Vaccinated3rdToDate : int option }
 
 type RegionMunicipalities =
     { Name : string

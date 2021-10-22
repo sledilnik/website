@@ -79,6 +79,7 @@ type private TransferStatsDataPoint =
         {|
             administered : {| toDate : int option; today : int option |}
             administered2nd : {| toDate : int option; today : int option |}
+            administered3rd : {| toDate : int option; today : int option |}
             used : {| toDate : int option |}
             delivered : {| toDate : int option |}
         |}
@@ -130,6 +131,7 @@ type private TransferStatsDataPoint =
           Vaccination =
             { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today }
               Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = this.vaccination.administered2nd.today }
+              Administered3rd = { ToDate = this.vaccination.administered3rd.toDate; Today = this.vaccination.administered3rd.today }
               Used = {
                 ToDate = this.vaccination.used.toDate
                 Today = this.vaccination.used.toDate |> todayFromToDate prevDP.vaccination.used.toDate
