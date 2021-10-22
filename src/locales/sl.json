@@ -2080,11 +2080,11 @@
         },
         "vaccination-chart": {
             "question": "Kaj kaže graf \"Cepljenje po starostnih skupinah\"?",
-            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje precepljenost po starostnih skupinah. Osnovni pogled *Polno cepljeni* prikazuje precepljenost z vsemi odmerki po starostnih skupinah.\n\nIzberete lahko prikaz *Na dan* ali *Skupaj* in pa prikaz *Absolutno* ali kot *Delež prebivalstva*."
+            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje precepljenost po starostnih skupinah. Osnovni pogled *Polno cepljeni* prikazuje precepljenost z vsemi odmerki po starostnih skupinah.\n\n*Prvi odmerek* prikaže število cepljenih oseb s prvim odmerkom, *Dodatni odmerek* pa šteje osebe, ki so že polno cepljene in so prejele poživitveni (dodatni) odmerek.\n\nIzberete lahko prikaz *Na dan* ali *Skupaj* in pa prikaz *Absolutno* ali kot *Delež prebivalstva*."
         },
         "vaccines-chart": {
             "question": "Kaj kaže graf \"Cepiva\"?",
-            "answer": "[Graf](/sl/stats#vaccines-chart) prikazuje dobave in porabe cepiva. Osnovni pogled *Poraba* prikazuje dnevno porabo odmerkov cepiva po proizvajalcu. Možen je prikaz *Na dan* ali pa *Skupaj*\n\nV pogledu *Dobava* pa lahko vidite število dobavljenih in podarjenih (ali vrnjenih) odmerkov po proizvajalcu.\n\nV pogledu *Zaloga* pa lahko vidite trenutno oceno zaloge neporabljenega cepiva po proizvajalcu.\n\nV pogledu *Poraba (tedensko)* pa lahko vidite tedensko porabo odmerkov cepiva po tednih in primerjavo porabe za 1. odmerek, polno cepljenje in dodatni odmerek."
+            "answer": "[Graf](/sl/stats#vaccines-chart) prikazuje dobave in porabe cepiva. Osnovni pogled *Poraba* prikazuje dnevno porabo odmerkov cepiva po proizvajalcu. Možen je prikaz *Na dan* ali pa *Skupaj*\n\nV pogledu *Dobava* pa lahko vidite število dobavljenih in podarjenih (ali vrnjenih) odmerkov po proizvajalcu.\n\nV pogledu *Zaloga* pa lahko vidite trenutno oceno zaloge neporabljenega cepiva po proizvajalcu.\n\nV pogledu *Poraba (tedensko)* pa lahko vidite tedensko porabo odmerkov cepiva po tednih in primerjavo porabe za prvi odmerek, polno cepljenje (vsi odmerki) in dodatni (poživitveni) odmerek."
         },
         "vaccine-effect-chart": {
             "question": "Kaj kaže graf \"Učinek cepljenja\"?",
