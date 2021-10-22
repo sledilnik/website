@@ -64,11 +64,15 @@ type Metric =
     | VacAdministeredToDate
     | VacAdministered2Today
     | VacAdministered2ToDate
+    | VacAdministered3Today
+    | VacAdministered3ToDate
     with
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
              ConfirmedCasesToDate; ActiveCases; RecoveredToDate
-             VacAdministeredToday; VacAdministeredToDate; VacAdministered2Today; VacAdministered2ToDate ]
+             VacAdministeredToday; VacAdministeredToDate;
+             VacAdministered2Today; VacAdministered2ToDate;
+             VacAdministered3Today; VacAdministered3ToDate ]
             |> List.contains metric
 
 type MetricCfg = {
@@ -91,7 +95,8 @@ module Metrics  =
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
         { Metric=VacAdministeredToday;  Color="#189a73"; Visible=false; Type=Today;  Id="vaccinationAdministered" }
-        { Metric=VacAdministered2Today; Color="#0e5842"; Visible=false; Type=Today;  Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered2Today; Color="#2ca25f"; Visible=false; Type=Today;  Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered3Today; Color="#66c2a4"; Visible=false; Type=Today;  Id="vaccinationAdministered3rd" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
         { Metric=ICUIn;                 Color="#fb6a4a"; Visible=true;  Type=Today;  Id="icuAdmitted" }
@@ -104,6 +109,7 @@ module Metrics  =
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
         { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
         { Metric=VacAdministered2ToDate;Color="#0e5842"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered3ToDate;Color="#2ca25f"; Visible=true;  Type=ToDate; Id="vaccinationAdministered3rd" }
         { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#fb6a4a"; Visible=false; Type=ToDate; Id="icuAdmitted" }
@@ -197,6 +203,8 @@ let statsDataGenerator metric =
         | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
         | VacAdministered2Today -> point.Vaccination.Administered2nd.Today
         | VacAdministered2ToDate -> point.Vaccination.Administered2nd.ToDate
+        | VacAdministered3Today -> point.Vaccination.Administered3rd.Today
+        | VacAdministered3ToDate -> point.Vaccination.Administered3rd.ToDate
         | _ -> None
 
 let patientsDataGenerator metric =

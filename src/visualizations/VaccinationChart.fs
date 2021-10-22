@@ -37,7 +37,8 @@ type DisplayType =
     | ByWeekSupply
     | ByAge1st
     | ByAgeAll
-    static member All = [ Used ; Delivered; Unused; ByAgeAll; ByAge1st; ByWeekUsage; ByWeekSupply; ]
+    | ByAge3rd
+    static member All = [ Used ; Delivered; Unused; ByAgeAll; ByAge1st; ByAge3rd; ByWeekUsage; ByWeekSupply; ]
     static member Default = Used
     static member GetName =
         function
@@ -46,6 +47,7 @@ type DisplayType =
         | Unused -> chartText "unused"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
+        | ByAge3rd -> chartText "byAge3rd"
         | ByWeekUsage -> chartText "byWeek"
         | ByWeekSupply -> chartText "byWeekSupply"
 
@@ -349,6 +351,10 @@ let renderAgeChart state dispatch =
                 match state.MetricType with
                 | Today  -> subtractSafely aG.administered2nd prevAG.administered2nd
                 | ToDate -> aG.administered2nd
+            | ByAge3rd ->
+                match state.MetricType with
+                | Today  -> subtractSafely aG.administered3rd prevAG.administered3rd
+                | ToDate -> aG.administered3rd
             | _ -> None
         let y =
             match state.ScaleType with
@@ -547,7 +553,7 @@ let renderChartContainer (state: State) dispatch =
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
                     | Used | Unused | Delivered ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow
-                    | ByAgeAll | ByAge1st ->
+                    | ByAgeAll | ByAge1st | ByAge3rd ->
                         renderAgeChart state dispatch |> Highcharts.chartFromWindow ] ]
 
 let renderScaleTypeSelectors state dispatch =
@@ -620,11 +626,11 @@ let render (state: State) dispatch =
                 renderDisplaySelectors state dispatch
 
                 match state.DisplayType with
-                | Used | Delivered | ByAgeAll | ByAge1st -> renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                | Used | Delivered | ByAgeAll | ByAge1st | ByAge3rd -> renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
                 | _ -> Html.none
 
                 match state.DisplayType with
-                | ByAgeAll | ByAge1st -> renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch)
+                | ByAgeAll | ByAge1st | ByAge3rd -> renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch)
                 | _ -> Html.none
             ]
             renderChartContainer state dispatch ]
