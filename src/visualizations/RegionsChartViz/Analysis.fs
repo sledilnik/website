@@ -9,7 +9,7 @@ type ContentType =
     | ViewVaccinated
     with
     static member Default = ViewConfirmed
-    static member All = [ ViewConfirmed; (* DISABLED: ViewVaccinated; *) ViewDeceased ]
+    static member All = [ ViewConfirmed; ViewVaccinated; ViewDeceased ]
     static member GetName = function
        | ViewConfirmed      -> I18N.chartText "regions" "confirmedCases"
        | ViewDeceased       -> I18N.chartText "regions" "deceased"
@@ -23,6 +23,7 @@ type MetricType =
     | Vaccinated7Days
     | Vaccinated1st
     | Vaccinated2nd
+    | Vaccinated3rd
   with
     static member Default (ct : ContentType) =
         match ct with
@@ -33,7 +34,7 @@ type MetricType =
         match ct with
         | ViewConfirmed -> [ NewCases7Days; ActiveCases; ConfirmedCases ]
         | ViewDeceased -> [ ]
-        | ViewVaccinated -> [ Vaccinated7Days; Vaccinated1st; Vaccinated2nd ]
+        | ViewVaccinated -> [ Vaccinated7Days; Vaccinated2nd; Vaccinated1st; Vaccinated3rd ]
     static member GetName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
         | ConfirmedCases -> I18N.chartText "regions" "allCases"
@@ -42,6 +43,7 @@ type MetricType =
         | Vaccinated7Days -> I18N.chartText "regions" "vaccinated7Days"
         | Vaccinated1st -> I18N.chartText "regions" "vaccinated1st"
         | Vaccinated2nd -> I18N.chartText "regions" "vaccinated2nd"
+        | Vaccinated3rd -> I18N.chartText "regions" "vaccinated3rd"
 
 type MetricRelativeTo = Absolute | Pop100k
 
@@ -58,9 +60,10 @@ let getMetric regionDayData metricType =
     | ConfirmedCases -> regionDayData.ConfirmedToDate
     | NewCases7Days -> regionDayData.ConfirmedToDate
     | Deceased -> regionDayData.DeceasedToDate
-    | Vaccinated7Days -> regionDayData.Vaccinated1stToDate |> Utils.sumIntOption regionDayData.Vaccinated2ndToDate
+    | Vaccinated7Days -> regionDayData.Vaccinated1stToDate |> Utils.sumIntOption regionDayData.Vaccinated2ndToDate |> Utils.sumIntOption regionDayData.Vaccinated3rdToDate
     | Vaccinated1st -> regionDayData.Vaccinated1stToDate
     | Vaccinated2nd -> regionDayData.Vaccinated2ndToDate
+    | Vaccinated3rd -> regionDayData.Vaccinated3rdToDate
     |> Utils.optionToInt
 
 

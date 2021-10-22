@@ -270,6 +270,7 @@
             "recovered": "Recovered",
             "vaccinationAdministered": "Vaccinated - 1 dose",
             "vaccinationAdministered2nd": "Fully Vaccinated",
+            "vaccinationAdministered3rd": "Vaccinated - additional dose",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -481,6 +482,7 @@
             "vaccinated7Days": "Per Day (7-day avg.)",
             "vaccinated1st": "Vaccinated - 1 dose",
             "vaccinated2nd": "Fully Vaccinated",
+            "vaccinated3rd": "Vaccinated - additional dose",
             "deceased": "Deaths",
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
@@ -509,6 +511,7 @@
             "confirmedCases": "Confirmed Cases",
             "vaccinated1st": "Vaccinated - 1 dose",
             "vaccinated2nd": "Fully Vaccinated",
+            "vaccinated3rd": "Vaccinated - additional dose",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
             "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
@@ -744,25 +747,30 @@
             }
         },
         "vaccination": {
-            "title": "Vaccination",
-            "titleMenu": "Vaccination",
+            "title": "Vaccination by Age Groups",
+            "titleMenu": "Vaccination - age",
+            "byAgeAll": "Fully Vaccinated",
+            "byAge1st": "First Dose",
+            "byAge3rd": "Additional Dose"
+        },
+        "vaccines": {
+            "title": "Vaccines",
+            "titleMenu": "Vaccines",
             "used": "Used",
             "byManufacturer": "Delivered",
             "unused": "Supply",
             "byWeek": "Usage (weekly)",
             "byWeekSupply": "Supply (weekly)",
-            "byAgeAll": "Fully Vaccinated (age)",
-            "byAge1st": "Vaccinated - 1 dose (age)",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
-            "administered": "Vaccinated - 1 dose",
+            "administered": "First Dose",
             "administered2nd": "Fully Vaccinated",
+            "administered3rd": "Additional Dose",
             "usedDoses": "Used Doses",
             "unusedDoses": "Unused Doses",
-            "deliveredDoses": "Delivered Doses",
-            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
+            "deliveredDoses": "Delivered Doses"
         },
         "vaccineEffect": {
             "title": "Vaccination Effect",

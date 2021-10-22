@@ -918,6 +918,12 @@
             "title": "Slučajevi u školama i vrtićima"
         },
         "vaccination": {
+            "titleMenu": "Cjepljenje po dobnim skupinama",
+            "title": "Cjepljenje - dob",
+            "byAge1st": "Cijepljeni",
+            "byAgeAll": "Potpuno cijepljeni"
+        },
+        "vaccines": {
             "deliveredDoses": "Isporučene doze",
             "usedDoses": "Korištene doze",
             "administered2nd": "Potpuno cijepljeni",
@@ -933,8 +939,6 @@
             "byWeek": "Korištenje (tjedno)",
             "unusedDoses": "Nekorištene doze",
             "unused": "Opskrba",
-            "byAge1st": "Cijepljeni (dob)",
-            "byAgeAll": "Potpuno cijepljeni (dob)",
             "byWeekSupply": "Opskrba (tjedno)"
         },
         "sewage": {
