@@ -364,7 +364,8 @@
             "hideAll": "Sakrij sve",
             "dsMIZS": "MIZŠ",
             "dsNIB": "Nacionalni biološki institut",
-            "total": "Ukupno"
+            "total": "Ukupno",
+            "dsHospitals": "bolnice"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -387,7 +388,8 @@
             "disclaimer": "Napomena: podatke o preminulima po općinama, NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih.",
             "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva.",
             "vaccinated2nd": "Potpuno cijepljeni",
-            "vaccinated1st": "Cijepljeni"
+            "vaccinated1st": "Cijepljeni – prva doza",
+            "vaccinated3rd": "Cijepljen – dodatna doza"
         },
         "countriesNewCasesPer100k": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -475,9 +477,10 @@
             "titleMenu_MNE": "Crna Gora – stanje",
             "titleMenu_MKD": "Sjeverna Makedonija – stanje",
             "titleMenu_SVN": "Slovenija – stanje",
-            "vaccinationAdministered": "Cijepljeni",
+            "vaccinationAdministered": "Cijepljeni – prva doza",
             "niVentilator": "Na respiratoru (neinvazivno)",
-            "vaccinationAdministered2nd": "Potpuno cijepljeni"
+            "vaccinationAdministered2nd": "Potpuno cijepljeni",
+            "vaccinationAdministered3rd": "Cijepljen – dodatna doza"
         },
         "spread": {
             "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
@@ -586,10 +589,11 @@
             "newCases7Days": "Novi (7-dnevni prosjek)",
             "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna.",
             "vaccinated2nd": "Potpuno cijepljeni",
-            "vaccinated1st": "Cijepljeni",
+            "vaccinated1st": "Prva doza",
             "vaccinated7Days": "Na dan (7-dnevni prosjek)",
             "vaccinated": "Cijepljeni",
-            "allCases": "Sve"
+            "allCases": "Sve",
+            "vaccinated3rd": "Dodatna doza"
         },
         "cases": {
             "active": "Aktivni",
@@ -659,7 +663,7 @@
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "positivePctHAT": "Udio pozitivnih: RAT (%)",
-            "testsHAT": "Provedeni testovi: RAT",
+            "testsHAT": "Provedeni testovi: Brzi antigenski testovi",
             "vaccineDosesAdministered": "Primijenjene doze cjepiva"
         },
         "sources": {
@@ -920,8 +924,9 @@
         "vaccination": {
             "titleMenu": "Cjepljenje po dobnim skupinama",
             "title": "Cjepljenje - dob",
-            "byAge1st": "Cijepljeni",
-            "byAgeAll": "Potpuno cijepljeni"
+            "byAge1st": "Prva doza",
+            "byAgeAll": "Potpuno cijepljeni",
+            "byAge3rd": "Dodatna doza"
         },
         "vaccines": {
             "deliveredDoses": "Isporučene doze",
@@ -939,7 +944,8 @@
             "byWeek": "Korištenje (tjedno)",
             "unusedDoses": "Nekorištene doze",
             "unused": "Opskrba",
-            "byWeekSupply": "Opskrba (tjedno)"
+            "byWeekSupply": "Opskrba (tjedno)",
+            "administered3rd": "Dodatna doza"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
@@ -957,7 +963,9 @@
             "title": "Učinak cijepljenja",
             "absolute": "Apsolutno",
             "hospitalizedCases": "Hospitalizirani",
-            "confirmedCases": "Potvrđeni slučajevi"
+            "confirmedCases": "Potvrđeni slučajevi",
+            "icuCases": "Odjel intenzivne njege",
+            "casesRecovered": "Ozdravili"
         }
     },
     "shortMonth": {
@@ -1270,6 +1278,9 @@
         },
         "liftServicesAll": {
             "title": "Usluge"
+        },
+        "liftMasksRV": {
+            "title": "Maske"
         }
     },
     "pageNotFound": {
