@@ -7,6 +7,11 @@
 You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `<iframe>`.
 For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master/examples/embed.html) and [`embed_multi.html`](https://github.com/sledilnik/website/tree/master/examples/embed_multi.html).
 
+## Hospital Cards
+We prepared status cards for all hospitals that they can integrate on their internet/intranet.
+
+For example, see [`embed_hospitals.html`](https://github.com/sledilnik/website/tree/master/examples/embed_hospitals.html).
+
 ## Charts
 
 | Chart                       | Url                                                                |
