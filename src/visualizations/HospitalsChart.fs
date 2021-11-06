@@ -57,7 +57,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ConsumeHospitalsData (Ok data) ->
         { state with
             facData = data
-            facilities = data |> getSortedFacilityCodes
+            facilities =
+                data
+                |> getSortedFacilityCodes
+                |> List.filter (fun code -> not (code.StartsWith("pb") || code.StartsWith("upk"))) // care hospitals
         } |> State.switchBreakdown state.scope, Cmd.none
     | ConsumeHospitalsData (Error err) ->
         { state with error = Some err }, Cmd.none
@@ -80,7 +83,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let getAllScopes state = seq {
     yield Totals, I18N.t "charts.hospitals.allHospitals"
-    yield Projection, I18N.t "charts.hospitals.projection"
+    // yield Projection, I18N.t "charts.hospitals.projection"
     for fcode in state.facilities do
         yield Facility fcode, Utils.Dictionaries.GetFacilityName(fcode)
 }
