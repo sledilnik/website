@@ -113,12 +113,12 @@ let extractFacilityDataPoint (scope: Scope) (atype:AssetType) (ctype: CountType)
 let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int option)) =
     let extractTotalsCount : TotalPatientStats -> int option =
         match cType with
-        | Beds -> fun ps -> ps.inHospital.today
+        | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
         | Icus -> fun ps -> ps.icu.today
         | Vents -> fun _ -> failwithf "no vents in data"
     let extractFacilityCount : FacilityPatientStats -> int option =
         match cType with
-        | Beds -> fun ps -> ps.inHospital.today
+        | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
         | Icus -> fun ps -> ps.icu.today
         | Vents -> fun _ -> failwithf "no vents in data"
 
@@ -270,24 +270,19 @@ let renderChartOptions (state : State) dispatch =
     let series = [|
         let gf7, gf14, gf21 = growthFactor 7, growthFactor 14, growthFactor 21
 
-        let clr = "#444"
         if state.scope = Projection then
-            yield renderFacilitiesSeries state.scope Beds Max 1.0 clr Dash (I18N.t "charts.hospitals.bedsMax")
+            yield renderFacilitiesSeries state.scope Beds Max 1.0 "#808080" Dash (I18N.t "charts.hospitals.bedsMax")
         else
             yield pojo {| showInLegend = false; data=[||] |}
 
-        yield renderFacilitiesSeries state.scope Beds Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsAll")
-        yield renderFacilitiesSeries state.scope Beds Total 0.7 "#777" Dash (I18N.t "charts.hospitals.beds70")
-        //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
-        //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
-        yield renderPatientsSeries state.scope Beds clr Solid (I18N.t "charts.hospitals.bedsFull")
+        yield renderFacilitiesSeries state.scope Beds Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsAll")
+        //yield renderFacilitiesSeries state.scope Beds Total 0.7 "#808080" Dash (I18N.t "charts.hospitals.beds70")
+        yield renderPatientsSeries state.scope Beds "#be7A2a" Solid (I18N.t "charts.hospitals.bedsFull")
 
-        let clr = "#c44"
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
-        yield renderFacilitiesSeries state.scope Icus Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsICUAll")
-        yield renderFacilitiesSeries state.scope Icus Total 0.7 "#c88" Dash (I18N.t "charts.hospitals.bedsICU70")
-        //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
-        yield renderPatientsSeries state.scope Icus clr Solid (I18N.t "charts.hospitals.bedsICUFull")
+        yield renderFacilitiesSeries state.scope Icus Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsICUAll")
+        yield renderPatientsSeries state.scope Icus "#fb6a4a" Solid (I18N.t "charts.hospitals.bedsICUFull")
+
         if state.scope = Projection then
             let clr = "#888"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  (I18N.t "charts.hospitals.projection7")
@@ -318,21 +313,7 @@ let renderChartOptions (state : State) dispatch =
     {| baseOptions with
         yAxis = yAxes
         series = series
-        legend = pojo
-            {|
-                enabled = Some true
-                title = ""
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "rgba(255,255,255,0.5)"
-            |}
+        legend = pojo {| enabled = true; layout = "horizontal" |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
             if false //state.scope = Projection
             then
@@ -355,9 +336,10 @@ let renderChartOptions (state : State) dispatch =
         )
         plotOptions = pojo
                 {|
-                    spline = pojo {| dataLabels = pojo {| enabled = true |} |}
+                    spline = pojo {| dataLabels = pojo {| enabled = false |} |}
                     line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                 |}
+        credits = chartCreditsMZHospitals
     |}
 
 let renderChartContainer state dispatch =
