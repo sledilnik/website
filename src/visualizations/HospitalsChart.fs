@@ -403,7 +403,7 @@ let renderTable (state: State) dispatch =
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Beds Max |> numericCell
+        //yield getFacilityDp scope Beds Max |> numericCell
         // icu
         let cur = getPatientsDp scope Icus
         let total = getFacilityDp scope Icus Total
@@ -412,7 +412,7 @@ let renderTable (state: State) dispatch =
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Icus Max |> numericCell
+        //yield getFacilityDp scope Icus Max |> numericCell
         // resp
         //let cur = getPatientsDp scope Vents
         let cur = getFacilityDp scope Vents Occupied
@@ -422,7 +422,7 @@ let renderTable (state: State) dispatch =
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield Html.td []
+        //yield Html.td []
     ]
 
     Html.table [
@@ -435,9 +435,9 @@ let renderTable (state: State) dispatch =
                         prop.className "text-center"
                         prop.children [
                             Html.th []
-                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 4 ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsICUShort"); prop.colSpan 4 ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.ventilators"); prop.colSpan 4 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 3 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsICUShort"); prop.colSpan 3 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.ventilators"); prop.colSpan 3 ]
                         ]
                     ]
                     Html.tableRow [
@@ -447,17 +447,17 @@ let renderTable (state: State) dispatch =
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // icu
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // vents
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                         ]
                     ]
                 ]
