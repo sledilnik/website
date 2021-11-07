@@ -76,7 +76,6 @@ export default {
     }),
   },
   created() {
-    debugger
     const cardType = this.$route.params.type
     this.card = cards[cardType]
     this.$store.dispatch('stats/fetchSummary')
