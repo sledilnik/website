@@ -278,6 +278,7 @@ let renderChartOptions (state : State) dispatch =
 
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
         yield renderFacilitiesSeries state.scope Icus Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsICUAll")
+        //yield renderFacilitiesSeries state.scope Icus Total 0.7 "#808080" Dash (I18N.t "charts.hospitals.bedsICU70")
         yield renderPatientsSeries state.scope Icus "#fb6a4a" Solid (I18N.t "charts.hospitals.bedsICUFull")
 
         yield renderPatientsSeries state.scope Vents "#a50f15" Solid (I18N.t "charts.hospitals.ventsFull")
