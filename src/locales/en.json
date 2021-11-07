@@ -680,6 +680,7 @@
             "all": "All",
             "full": "Occupied",
             "empty": "Free",
+            "ventsFull": "Ventilators, occupied",
             "bedsICUFull": "ICU beds, occupied",
             "bedsICU70": "ICU beds, 70%",
             "bedsICUAll": "ICU beds, all",

@@ -1118,6 +1118,7 @@
             "bedsICUAll": "Intenzivne, vse",
             "bedsICU70": "Intenzivne, 70%",
             "bedsICUFull": "Intenzivne, zasedene",
+            "ventsFull": "Respiratorji, zasedeni",
             "ventilators": "Respiratorji",
             "empty": "Prosto",
             "full": "Zasedeno",

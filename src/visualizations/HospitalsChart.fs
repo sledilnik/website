@@ -115,7 +115,7 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
         match cType with
         | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
         | Icus -> fun ps -> ps.icu.today
-        | Vents -> fun _ -> failwithf "no vents in data"
+        | Vents -> fun ps -> ps.critical.today |> Utils.sumIntOption ps.niv.today
     let extractFacilityCount : FacilityPatientStats -> int option =
         match cType with
         | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
@@ -283,6 +283,12 @@ let renderChartOptions (state : State) dispatch =
         yield renderFacilitiesSeries state.scope Icus Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsICUAll")
         yield renderPatientsSeries state.scope Icus "#fb6a4a" Solid (I18N.t "charts.hospitals.bedsICUFull")
 
+        yield renderPatientsSeries state.scope Vents "#a50f15" Solid (I18N.t "charts.hospitals.ventsFull")
+
+        //let clr = "#4ad"
+        //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
+        //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
+
         if state.scope = Projection then
             let clr = "#888"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  (I18N.t "charts.hospitals.projection7")
@@ -295,9 +301,6 @@ let renderChartOptions (state : State) dispatch =
             yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 (I18N.t "charts.hospitals.projection21")
 
 
-        //let clr = "#4ad"
-        //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
-        //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
     |]
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
