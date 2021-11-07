@@ -6,6 +6,7 @@
           :cardName="card.cardName"
           :cardData="summary[card.cardName]"
           :loading="!card || !summary || !summary[card.cardName] || !summary[card.cardName].value"
+          :withBrand="true"
         />
       </div>
     </b-row>
