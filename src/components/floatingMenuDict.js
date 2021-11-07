@@ -25,7 +25,7 @@ export default {
   },
   'hospitals-chart': {
     titleKey: 'charts.hospitals.titleMenu',
-    icon: 'line',
+    icon: 'graph',
   },
   'map-chart': {
     titleKey: 'charts.map.titleMenu',
