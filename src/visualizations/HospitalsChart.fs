@@ -202,7 +202,6 @@ let renderChartOptions (state : State) dispatch =
 
         {|
             //visible = state.activeSeries |> Set.contains series
-            ``type``="line"
             color = color
             name = name
             dashStyle = dash |> DashStyle.toString
@@ -228,7 +227,6 @@ let renderChartOptions (state : State) dispatch =
             | [||] -> DateTime.Now |> jsTime, None
             | data -> data.[data.Length-1] |> extractPatientDataPoint scope aType
         {|
-            ``type``="line"
             color = color
             name = name
             showInLegend = false
@@ -251,7 +249,6 @@ let renderChartOptions (state : State) dispatch =
 
     let renderPatientsSeries (scope: Scope) (aType) color dash name =
         {|
-            ``type``="line"
             color = color
             name = name
             dashStyle = dash |> DashStyle.toString
@@ -309,14 +306,20 @@ let renderChartOptions (state : State) dispatch =
             true
         res
 
+    let className = "covid19-hospitals-chart"
     let baseOptions =
         basicChartOptions
-            state.scaleType "hospitals-chart"
+            state.scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
+        chart = pojo
+           {| animation = false
+              ``type`` = "line"
+              zoomType = "x"
+              className = className
+              events = pojo {| load = onLoadEvent (className) |} |}
         yAxis = yAxes
         series = series
-        legend = pojo {| enabled = true; layout = "horizontal" |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
             if false //state.scope = Projection
             then
@@ -341,6 +344,14 @@ let renderChartOptions (state : State) dispatch =
                 {|
                     line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                 |}
+        responsive = pojo
+           {| rules =
+                  [| {| condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {| yAxis =
+                                   [| {| labels = pojo {| enabled = false |} |}
+                                      {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
+        legend = pojo {| enabled = true; layout = "horizontal" |}
         credits = chartCreditsMZHospitals
     |}
 
