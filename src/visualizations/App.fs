@@ -120,7 +120,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "hospitals-chart"
             ChartTextsGroup = "hospitals"
             ChartEnabled = true
-            Explicit = true
+            Explicit = false
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
 
     let metricsComparison =
@@ -660,12 +660,12 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison;
+        [ metricsComparison; spread; dailyComparison;
           vaccination; vaccines; tests;
           map; municipalities; regions100k;
           schools; schoolStatus
           sewage; ageGroupsTimeline;
-          patients; patientsICU; // patientsCare;
+          patients; patientsICU; hospitals; // patientsCare;
           vaccineEffect; regionMap;
           weeklyDemographics; ageGroups;
           sources; europeMap;

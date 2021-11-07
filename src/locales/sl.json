@@ -1101,7 +1101,7 @@
         },
         "hospitals": {
             "title": "Kapacitete bolnišnic",
-            "titleMenu": "Kapacitete",
+            "titleMenu": "Bolnišnice - kapacitete",
             "allHospitals": "Vse bolnišnice",
             "projection": "Projekcija",
             "projection7": "Projekcija, 7-dnevno podvajanje",

@@ -696,7 +696,7 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital Capacity",
-            "titleMenu": "Capacity"
+            "titleMenu": "Hospital - capacity"
         },
         "ostanizdrav": {
             "title": "The #OstaniZdrav Exposure Notification App",
