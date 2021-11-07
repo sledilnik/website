@@ -440,7 +440,7 @@ let renderTable (state: State) dispatch =
 
     Html.table [
         prop.className "facilities-navigate b-table-sticky-header b-table table-striped table-hover table-bordered text-center"
-        prop.style [ style.width (length.percent 100.0); style.fontSize 16 ]
+        prop.style [ style.width (length.percent 100.0); style.fontSize 12 ]
         prop.children [
             Html.thead [
                 prop.children [
