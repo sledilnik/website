@@ -1281,6 +1281,10 @@
         "liftMasksRV": {
             "title": "Masks",
             "description": "Easing restrictions: no mask requirement in environment where all participants are vaccinated or recovered and in indoor public spaces where food and drinks are being served."
+        },
+        "gatherings3": {
+            "title": "Gatherings",
+            "description": "Prohibition of gathering (except for close family members), no celebrations.<br>Restaurants and bars allowed from 5AM to 10PM (seated service only).<br>Restrictions of culture and sport events (only indoors, seated with free seat between spectators)."
         }
     },
     "days": {

@@ -181,6 +181,7 @@ let addContainmentMeasuresFlags
         6,  9, 2021, "#FFe6e6", "pctContacts"
         15, 9, 2021, "#FFe6e6", "pctEverywhere"
         30, 9, 2021, "#ebfaeb", "liftMasksRV"
+        8, 11, 2021, "#FFe6e6", "gatherings3"
     |]
     {|
         ``type`` = "flags"

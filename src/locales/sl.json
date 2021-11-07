@@ -764,6 +764,10 @@
         "liftMasksRV": {
             "title": "Maske",
             "description": "Sprostitev ukrepov: maske niso obvezne v okoljih, kjer vsi izpolnjujejo pogoj cepljeni ali preboleli in v zaprtih javnih krajih, kjer se nudi priprava in strežba jedi in pijač."
+        },
+        "gatherings3": {
+            "title": "Zbiranje",
+            "description": "Prepoved zbiranja (razen za ožje družinske člane in skupno gospodinjstvo), slavja, poroke.<br>Gostinski obrati samo med 5. in 22. uro (sedeča postrežba).<br>Omejitve športnih in kulturnih prireditev (samo prireditve v zaprtih prostorih s sedišči in prostim sedežem med gledalci)."
         }
     },
     "phase": {
