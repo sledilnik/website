@@ -425,13 +425,12 @@ let renderTable (state: State) dispatch =
     ]
 
     Html.table [
-        prop.className "facilities-navigate b-table-sticky-header b-table table-striped table-hover table-bordered text-lg-right"
+        prop.className "facilities-navigate b-table-sticky-header b-table table-striped table-hover table-bordered text-center"
         prop.style [ style.width (length.percent 100.0); style.fontSize 16 ]
         prop.children [
             Html.thead [
                 prop.children [
                     Html.tableRow [
-                        prop.className "text-center"
                         prop.children [
                             Html.th []
                             Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 3 ]
