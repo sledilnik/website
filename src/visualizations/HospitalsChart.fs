@@ -251,7 +251,7 @@ let renderChartOptions (state : State) dispatch =
 
     let renderPatientsSeries (scope: Scope) (aType) color dash name =
         {|
-            ``type``="spline"
+            ``type``="line"
             color = color
             name = name
             dashStyle = dash |> DashStyle.toString
@@ -336,7 +336,6 @@ let renderChartOptions (state : State) dispatch =
         )
         plotOptions = pojo
                 {|
-                    spline = pojo {| dataLabels = pojo {| enabled = false |} |}
                     line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                 |}
         credits = chartCreditsMZHospitals
