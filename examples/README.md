@@ -22,6 +22,7 @@ For example, see [`embed_cards.html`](https://github.com/sledilnik/website/tree/
 | Hospitalizirani             | https://covid-19.sledilnik.org/embed.html#/chart/Patients          |
 | Intenzivna terapija         | https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients       |
 | Negovalne bolnišnice        | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients      |
+| Kapacitete bolnišnic        | https://covid-19.sledilnik.org/embed.html#/chart/Hospitals         |
 | Delež resnih primerov       | https://covid-19.sledilnik.org/embed.html#/chart/Ratios            |
 | Testiranje                  | https://covid-19.sledilnik.org/embed.html#/chart/Tests             |
 | Obravnava v ZD              | https://covid-19.sledilnik.org/embed.html#/chart/HCenters          |
