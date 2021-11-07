@@ -54,12 +54,21 @@
           <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
         </div>
       </div>
-      <div class="data-time" :class="{ outdated }">
-        {{
-          $t("infocard.lastUpdated", {
-            date: date,
-          })
-        }}
+      <div class="footer d-flex justify-content-between">
+        <div class="data-time" :class="{ outdated }">
+          {{
+            $t("infocard.lastUpdated", {
+              date: date,
+            })
+          }}
+        </div>
+        <a
+          v-if="withBrand" 
+          class="brand-link"
+          target="_blank"
+          href="https://covid-19.sledilnik.org/"
+          >COVID-19 Sledilnik</a
+        >
       </div>
     </div>
     <div class="hp-card" v-else>
@@ -76,6 +85,7 @@ export default {
     cardData: Object,
     loading: Boolean,
     cardName: String,
+    withBrand: Boolean
   },
   computed: {
     subLabelExtraText(){
