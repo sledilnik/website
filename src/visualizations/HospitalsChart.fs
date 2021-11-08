@@ -370,35 +370,15 @@ let renderTable (state: State) dispatch =
 
     let getFacilityDp (breakdown: Scope) (atype:AssetType) (ctype: CountType) =
         let renderPoint = extractFacilityDataPoint breakdown atype ctype
-        match state.facData with
-        | [||]
-        | [| _ |] -> None
-        | data ->
-            seq {
-                for i = data.Length-1 downto data.Length / 2 do
-                    yield data.[i]
-            }
-            |> Seq.map (renderPoint >> snd)
-            |> Seq.skipWhile Option.isNone
-            |> Seq.take 1
-            |> Seq.tryExactlyOne
-            |> Option.flatten
+        match state.facData |> Array.tryLast with
+        | None -> None
+        | Some dp -> dp |> (renderPoint >> snd)
 
     let getPatientsDp (breakdown: Scope) (atype:AssetType) =
         let renderPoint = extractPatientDataPoint breakdown atype
-        match state.patientsData with
-        | [||]
-        | [| _ |] -> None
-        | data ->
-            seq {
-                yield data.[data.Length-1]
-                yield data.[data.Length-2]
-            }
-            |> Seq.map (renderPoint >> snd)
-            |> Seq.skipWhile Option.isNone
-            |> Seq.take 1
-            |> Seq.tryExactlyOne
-            |> Option.flatten
+        match state.patientsData |> Array.tryLast with
+        | None -> None
+        | Some dp -> dp |> (renderPoint >> snd)
 
     let renderFacilityCells scope (facilityName: string) = [
         yield Html.th [
@@ -407,36 +387,31 @@ let renderTable (state: State) dispatch =
         ]
 
         let numericCell (pt: int option) =
-            Html.td [ prop.text (pt |> Option.map string |> Option.defaultValue "") ]
+            Html.td [ prop.text (pt |> Option.defaultValue 0 |> string) ]
 
-        // postelje
+        // acute
         let cur = getPatientsDp scope Beds
         let total = getFacilityDp scope Beds Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Beds Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        //yield getFacilityDp scope Beds Max |> numericCell
+
         // icu
         let cur = getPatientsDp scope Icus
         let total = getFacilityDp scope Icus Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Icus Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        //yield getFacilityDp scope Icus Max |> numericCell
-        // resp
-        //let cur = getPatientsDp scope Vents
+
+        // vents
         let cur = getFacilityDp scope Vents Occupied
         let total = getFacilityDp scope Vents Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Vents Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        //yield Html.td []
     ]
 
     Html.table [
