@@ -1390,9 +1390,11 @@
         "vaccination": {
             "title": "Cepljenje po starostnih skupinah",
             "titleMenu": "Cepljenje - starost",
+            "protectedWithVaccine": "Zaščiteni s cepljenjem",
             "byAgeAll": "Polno cepljeni",
             "byAge1st": "Prvi odmerek",
-            "byAge3rd": "Dodatni odmerek"
+            "byAge3rd": "Dodatni odmerek",
+            "disclaimer": "Opomba: graf označuje odstotek populacije, ki je prejela drugi ali tretji odmerek v zadnjih šestih mesecih."
         },
         "vaccines": {
             "title": "Cepiva",
