@@ -41,7 +41,7 @@ type DisplayType =
 
     static member GetName =
         function
-        | Protected -> chartText "protectedWithVaccine"
+        | Protected -> chartText "protectedEstimated"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
         | ByAge3rd -> chartText "byAge3rd"
