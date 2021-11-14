@@ -36,15 +36,15 @@ type DisplayType =
     | ByAge1st
     | ByAgeAll
     | ByAge3rd
-    static member All = [ Protected; ByAgeAll; ByAge1st; ByAge3rd ]
-    static member Default = Protected
+    static member All = [ ByAgeAll; ByAge1st; ByAge3rd; Protected ]
+    static member Default = ByAgeAll
 
     static member GetName =
         function
-        | Protected -> chartText "protectedEstimated"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
         | ByAge3rd -> chartText "byAge3rd"
+        | Protected -> chartText "protectedEstimated"
 
 type State =
     { VaccinationData: VaccinationStats array
