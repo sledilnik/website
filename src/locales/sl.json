@@ -1390,10 +1390,10 @@
         "vaccination": {
             "title": "Cepljenje po starostnih skupinah",
             "titleMenu": "Cepljenje - starost",
-            "protectedEstimated": "Ocena zaščitenosti",
             "byAgeAll": "Polno cepljeni",
             "byAge1st": "Prvi odmerek",
             "byAge3rd": "Dodatni odmerek",
+            "protectedEstimated": "Ocena zaščitenosti",
             "disclaimer": "Opomba: graf prikazuje odstotek populacije, ki je polno cepljena v zadnjih 6 mesecih oziroma je v tem času prejela dodatni odmerek cepiva. Zaščita se upošteva 14 dni po prejetem odmerku in do 6 mesecev od vzpostavljene zaščite."
         },
         "vaccines": {
