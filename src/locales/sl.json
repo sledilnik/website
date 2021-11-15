@@ -843,7 +843,7 @@
             "description": "nov režim testiranja HAT"
         },
         "19": {
-            "title": "faza<br>18",
+            "title": "faza<br>19",
             "description": "nov režim testiranja HAT"
         }
     },
@@ -1392,7 +1392,9 @@
             "titleMenu": "Cepljenje - starost",
             "byAgeAll": "Polno cepljeni",
             "byAge1st": "Prvi odmerek",
-            "byAge3rd": "Dodatni odmerek"
+            "byAge3rd": "Dodatni odmerek",
+            "protectedEstimated": "Ocena zaščitenosti",
+            "disclaimer": "Opomba: graf prikazuje odstotek populacije, ki je polno cepljena v zadnjih 6 mesecih oziroma je v tem času prejela dodatni odmerek cepiva. Zaščita se upošteva 14 dni po prejetem odmerku in do 6 mesecev od vzpostavljene zaščite."
         },
         "vaccines": {
             "title": "Cepiva",

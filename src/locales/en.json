@@ -756,7 +756,9 @@
             "titleMenu": "Vaccination - age",
             "byAgeAll": "Fully Vaccinated",
             "byAge1st": "First Dose",
-            "byAge3rd": "Additional Dose"
+            "byAge3rd": "Additional Dose",
+            "protectedEstimated": "Protection Estimate",
+            "disclaimer": "Note: the chart shows the share of the population that was fully vaccinated in the previous 6 months or have received an additional dose of the vaccine. Protection is considered to be effective 14 days after receiving this dose and lasts 6 months from that date."
         },
         "vaccines": {
             "title": "Vaccines",
