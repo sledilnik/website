@@ -1473,7 +1473,9 @@
             "title": "Vaccinazione - età",
             "byAge1st": "Prima dose",
             "byAgeAll": "Vaccinazione completata",
-            "byAge3rd": "Dose aggiuntiva"
+            "byAge3rd": "Dose aggiuntiva",
+            "protectedEstimated": "Stima della protezione",
+            "disclaimer": "Nota: il grafico mostra la quota di popolazione che è stata completamente vaccinata nei 6 mesi precedenti o che ha ricevuto una dose aggiuntiva di vaccino. La protezione è considerata efficace 14 giorni dopo aver ricevuto questa dose e dura 6 mesi da quella data."
         },
         "vaccines": {
             "deliveredDoses": "Dosi consegnate",
@@ -1644,7 +1646,7 @@
             "description": "test rapidi antigenici"
         },
         "15": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei test antigenici rapidi",
             "title": "fase<br>15"
         },
         "16": {
@@ -1658,6 +1660,10 @@
         "18": {
             "description": "metodologia dei test antigeni rapidi",
             "title": "fase<br>18"
+        },
+        "19": {
+            "title": "fase<br>19",
+            "description": "nuova metodologia dei TAR"
         }
     },
     "weekday": {
