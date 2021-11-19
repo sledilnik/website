@@ -199,6 +199,10 @@
         "18": {
             "title": "phase<br>18",
             "description": "rapid antigen tests methodology"
+        },
+        "19": {
+            "title": "phase<br>19",
+            "description": "rapid antigen tests methodology"
         }
     },
     "charts": {
@@ -678,15 +682,16 @@
             "data": "Data",
             "max": "Max",
             "all": "All",
-            "full": "Full",
-            "empty": "Empty",
-            "bedsICUFull": "ICU beds, full",
+            "full": "Occupied",
+            "empty": "Free",
+            "ventsFull": "Ventilators, occupied",
+            "bedsICUFull": "ICU beds, occupied",
             "bedsICU70": "ICU beds, 70%",
             "bedsICUAll": "ICU beds, all",
-            "bedsFull": "Beds, full",
-            "beds70": "Beds, 70%",
-            "bedsAll": "Beds, all",
-            "bedsMax": "Beds, maximum",
+            "bedsFull": "Acute beds, occupied",
+            "beds70": "Acute beds, 70%",
+            "bedsAll": "Acute beds, all",
+            "bedsMax": "Acute beds, maximum",
             "bedsICUShort": "ICU beds",
             "ventilators": "Ventilators",
             "bedsICU": "ICU Beds",
@@ -695,7 +700,7 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital Capacity",
-            "titleMenu": "Capacity"
+            "titleMenu": "Hospital - capacity"
         },
         "ostanizdrav": {
             "title": "The #OstaniZdrav Exposure Notification App",
@@ -751,7 +756,9 @@
             "titleMenu": "Vaccination - age",
             "byAgeAll": "Fully Vaccinated",
             "byAge1st": "First Dose",
-            "byAge3rd": "Additional Dose"
+            "byAge3rd": "Additional Dose",
+            "protectedEstimated": "Protection Estimate",
+            "disclaimer": "Note: the chart shows the share of the population that was fully vaccinated in the previous 6 months or have received an additional dose of the vaccine. Protection is considered to be effective 14 days after receiving this dose and lasts 6 months from that date."
         },
         "vaccines": {
             "title": "Vaccines",
@@ -1280,6 +1287,10 @@
         "liftMasksRV": {
             "title": "Masks",
             "description": "Easing restrictions: no mask requirement in environment where all participants are vaccinated or recovered and in indoor public spaces where food and drinks are being served."
+        },
+        "gatherings3": {
+            "title": "Gatherings",
+            "description": "Prohibition of gathering (except for close family members), no celebrations.<br>Restaurants and bars allowed from 5AM to 10PM (seated service only).<br>Restrictions of culture and sport events (only indoors, seated with free seat between spectators)."
         }
     },
     "days": {

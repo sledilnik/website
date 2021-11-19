@@ -6,6 +6,7 @@
           :cardName="card.cardName"
           :cardData="summary[card.cardName]"
           :loading="!card || !summary || !summary[card.cardName] || !summary[card.cardName].value"
+          :withBrand="true"
         />
       </div>
     </b-row>
@@ -36,6 +37,26 @@ const cards = {
     cardName: 'deceasedToDate',
     title: 'Umrli',
   },
+  testsToday: {
+    cardName: 'testsToday',
+    title: 'Umrli',
+  },
+  testsTodayHAT: {
+    cardName: 'testsTodayHAT',
+    title: 'Umrli',
+  },
+  casesAvg7Days: {
+    cardName: 'casesAvg7Days',
+    title: 'Umrli',
+  },
+  casesActive100k: {
+    cardName: 'casesActive100k',
+    title: 'Umrli',
+  },
+  vaccinationSummary: {
+    cardName: 'vaccinationSummary',
+    title: 'Umrli',
+  },
 }
 
 export default {
@@ -55,11 +76,12 @@ export default {
     }),
   },
   created() {
+    const cardType = this.$route.params.type
+    this.card = cards[cardType]
     this.$store.dispatch('stats/fetchSummary')
   },
   mounted(){
-    const cardType = this.$route.params.type
-    this.card = cards[cardType]
+    
   }
 }
 </script>

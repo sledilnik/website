@@ -32,10 +32,11 @@ type MetricType =
         | ToDate -> I18N.t "charts.common.showToDate"
 
 type DisplayType =
+    | Protected
     | ByAge1st
     | ByAgeAll
     | ByAge3rd
-    static member All = [ ByAgeAll; ByAge1st; ByAge3rd ]
+    static member All = [ ByAgeAll; ByAge1st; ByAge3rd; Protected ]
     static member Default = ByAgeAll
 
     static member GetName =
@@ -43,6 +44,7 @@ type DisplayType =
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
         | ByAge3rd -> chartText "byAge3rd"
+        | Protected -> chartText "protectedEstimated"
 
 type State =
     { VaccinationData: VaccinationStats array
@@ -59,6 +61,16 @@ type Msg =
     | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
+
+let currentScaleType state =
+    match state.DisplayType with
+    | Protected -> Relative
+    | _ -> state.ScaleType
+
+let currentMetricType state =
+    match state.DisplayType with
+    | Protected -> ToDate
+    | _ -> state.MetricType
 
 let init: State * Cmd<Msg> =
     let cmd =
@@ -103,12 +115,18 @@ let defaultSeriesOptions stackType =
        pointPadding = 0
        groupPadding = 0 |}
 
-let subtractSafely curr prev =
+let subtractSafely prev curr  =
     match curr, prev with
     | Some c, Some p -> Some(c - p)
     | Some c, None -> Some c
     | _ -> None
 
+let addSafely prev curr  =
+    match curr, prev with
+    | Some c, Some p -> Some(c + p)
+    | Some c, None -> Some c
+    | None, Some p -> Some p
+    | _ -> None
 
 // Highcharts will sum columns together when there aren't enough pixels to draw them individually
 // As data in some of the vaccination charts is cumulative already, the aggregation method must be "high"
@@ -146,7 +164,7 @@ let renderAgeChart state dispatch =
             points
             |> Array.sortByDescending
                 (fun ag ->
-                    match state.ScaleType with
+                    match currentScaleType state with
                     | Absolute -> 0.
                     | Relative ->
                         ((float) ag?point?vaccinated
@@ -214,38 +232,45 @@ let renderAgeChart state dispatch =
             s.Append "</table>" |> ignore
             s.ToString()
 
-    let getAgeGroupRec dp prevDP ageGroup population =
-        let aG =
+    let getAgeGroupRec (i: int) (dp: VaccinationStats) ageGroup population =
+        let getAgeGroup dp ageGroup =
             dp.administeredPerAge
             |> List.find
                 (fun aG ->
                     aG.ageFrom = ageGroup.AgeFrom
                     && aG.ageTo = ageGroup.AgeTo)
 
-        let prevAG =
-            prevDP.administeredPerAge
-            |> List.find
-                (fun aG ->
-                    aG.ageFrom = ageGroup.AgeFrom
-                    && aG.ageTo = ageGroup.AgeTo)
+        let getValue dp ageGroup =
+            let aG = getAgeGroup dp ageGroup
+            match state.DisplayType with
+            | Protected
+            | ByAgeAll -> aG.administered2nd
+            | ByAge1st -> aG.administered
+            | ByAge3rd -> aG.administered3rd
 
         let value =
-            match state.DisplayType with
-            | ByAge1st ->
-                match state.MetricType with
-                | Today -> subtractSafely aG.administered prevAG.administered
-                | ToDate -> aG.administered
-            | ByAgeAll ->
-                match state.MetricType with
-                | Today -> subtractSafely aG.administered2nd prevAG.administered2nd
-                | ToDate -> aG.administered2nd
-            | ByAge3rd ->
-                match state.MetricType with
-                | Today -> subtractSafely aG.administered3rd prevAG.administered3rd
-                | ToDate -> aG.administered3rd
+            match state.DisplayType, currentMetricType state with
+            | Protected, _ ->
+                if i >= 15 then             // need 14 days for protection
+                    if i >= 15 + 183 then   // waning protection after 6 months + 3rd dose protected
+                        getValue state.VaccinationData.[i-15] ageGroup
+                        |> subtractSafely (getValue state.VaccinationData.[i-15-183] ageGroup)
+                        |> addSafely (getAgeGroup state.VaccinationData.[i-15] ageGroup).administered3rd
+                    else
+                        getValue state.VaccinationData.[i-15] ageGroup
+                else
+                    None
+            | _, Today ->
+                if i > 0 then
+                    getValue dp ageGroup
+                    |> subtractSafely (getValue state.VaccinationData.[i-1] ageGroup)
+                else
+                    getValue dp ageGroup
+            | _, ToDate ->
+                getValue dp ageGroup
 
         let y =
-            match state.ScaleType with
+            match currentScaleType state with
             | Absolute ->
                 match value with
                 | Some v -> Some((float) v)
@@ -317,16 +342,13 @@ let renderAgeChart state dispatch =
                     pojo
                         {| name = ageGroup.Label
                            ``type`` =
-                               match state.ScaleType with
+                               match currentScaleType state with
                                | Absolute -> "column"
                                | Relative -> "line"
                            color = ageGroupColors.[idx]
                            data =
                                state.VaccinationData
-                               |> Array.pairwise
-                               |> Array.map
-                                   (fun (prevDP, currDP) ->
-                                       getAgeGroupRec currDP prevDP ageGroup ageGroupPopulation.[idx]) |}
+                               |> Array.mapi (fun i dp -> getAgeGroupRec i dp ageGroup ageGroupPopulation.[idx]) |}
         }
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
@@ -337,7 +359,7 @@ let renderAgeChart state dispatch =
         res
 
     let stackType =
-        match state.ScaleType with
+        match currentScaleType state with
         | Absolute -> Some "normal"
         | Relative -> None
 
@@ -429,10 +451,17 @@ let render (state: State) dispatch =
     | _, None ->
         Html.div [ Utils.renderChartTopControls [ renderDisplaySelectors state dispatch
 
-                                                  renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                                                  if state.DisplayType <> Protected then
+                                                    renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
 
-                                                  renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch) ]
-                   renderChartContainer state dispatch ]
+                                                    renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch)
+                                                ]
+                   renderChartContainer state dispatch
+
+                   if state.DisplayType = Protected then
+                       Html.div [ prop.className "disclaimer"
+                                  prop.children [ Utils.Markdown.render (chartText "disclaimer") ] ]
+                ]
 
 let vaccinationChart () =
     React.elmishComponent ("VaccinationChart", init, update, render)

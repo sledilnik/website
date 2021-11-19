@@ -776,6 +776,10 @@
         "liftMasksRV": {
             "title": "Mascherine",
             "description": "Allentamento: nessun obbligo di mascherine in ambienti in cui tutti i partecipanti sono vaccinati o guariti e in spazi pubblici al chiuso dove vengono serviti cibi e bevande."
+        },
+        "gatherings3": {
+            "title": "Assembramenti",
+            "description": "Divieto di riunirsi (eccetto per i familiari stretti), nessuna celebrazione.<br>Ristoranti e bar ammessi dalle 5 alle 22 (solo servizio seduto).<br>Restrizioni di eventi culturali e sportivi (solo al chiuso, seduti con posto libero tra gli spettatori)."
         }
     },
     "tableDict": {
@@ -918,9 +922,10 @@
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
-            "vaccinationAdministered": "Vaccinati - Prima dose",
+            "vaccinationAdministered": "Vaccinati - prima dose",
             "niVentilator": "Su ventilatore (non invasivo)",
-            "vaccinationAdministered2nd": "Vaccinazioni completate"
+            "vaccinationAdministered2nd": "Vaccinazioni completate",
+            "vaccinationAdministered3rd": "Vaccinati - dose aggiuntiva"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -931,22 +936,23 @@
             "bedsICU": "Posti letto in terapia intensiva",
             "ventilators": "Ventilatori",
             "bedsICUShort": "Posti letto in terapia intensiva",
-            "bedsMax": "Posti letto, massimo",
-            "bedsAll": "Posti letto, tutti",
+            "bedsMax": "Posti letto acuti, massimo",
+            "bedsAll": "Posti letto acuti, tutti",
             "beds": "Posti letto in ospedale",
             "bedsShort": "Posti letto",
-            "beds70": "Posti letto, 70%",
-            "bedsFull": "Posti letto, completi",
+            "beds70": "Posti letto acuti, 70%",
+            "bedsFull": "Posti letto acuti, occupati",
             "bedsICUAll": "Letti di terapia intensiva, tutti",
             "bedsICU70": "Letti in terapia intensiva, 70%",
-            "bedsICUFull": "Letti in terapia intensiva, pieni",
-            "empty": "Vuoto",
-            "full": "Completo",
+            "bedsICUFull": "Letti in terapia intensiva, occupati",
+            "empty": "Disponibile",
+            "full": "Occupato",
             "all": "Tutti",
             "max": "Max",
             "data": "Dati",
             "allHospitals": "Tutti gli ospedali",
-            "titleMenu": "Capacità"
+            "titleMenu": "Ospedale - capacità",
+            "ventsFull": "Ventilatori, occupati"
         },
         "countriesTotalDeathsPer100k": {
             "yAxisTitle": "Totale decessi su 100.000 persone",
@@ -1086,7 +1092,8 @@
             "disclaimer": "Nota: I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
             "disclaimerRegion": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane. Questo è il motivo per cui c'è una deviazione dal numero totale di morti.",
             "vaccinated2nd": "Vaccinazioni completate",
-            "vaccinated1st": "Vaccinati - Prima dose"
+            "vaccinated1st": "Vaccinati - prima dose",
+            "vaccinated3rd": "Vaccinati - dose aggiuntiva"
         },
         "regions": {
             "deceased": "Decessi",
@@ -1100,7 +1107,8 @@
             "vaccinated1st": "Prima dose",
             "vaccinated7Days": "Al giorno (media di 7 giorni)",
             "vaccinated": "Vaccinati",
-            "allCases": "Tutti"
+            "allCases": "Tutti",
+            "vaccinated3rd": "Dose aggiuntiva"
         },
         "spread": {
             "absolute": "Crescita giornaliera assoluta",
@@ -1464,7 +1472,10 @@
             "titleMenu": "Vaccinazione per fasce di età",
             "title": "Vaccinazione - età",
             "byAge1st": "Prima dose",
-            "byAgeAll": "Vaccinazione completata"
+            "byAgeAll": "Vaccinazione completata",
+            "byAge3rd": "Dose aggiuntiva",
+            "protectedEstimated": "Stima della protezione",
+            "disclaimer": "Nota: il grafico mostra la quota di popolazione che è stata completamente vaccinata nei 6 mesi precedenti o che ha ricevuto una dose aggiuntiva di vaccino. La protezione è considerata efficace 14 giorni dopo aver ricevuto questa dose e dura 6 mesi da quella data."
         },
         "vaccines": {
             "deliveredDoses": "Dosi consegnate",
@@ -1482,7 +1493,8 @@
             "byWeek": "Somministrazioni (per settimana)",
             "unusedDoses": "Dosi non utilizzate",
             "unused": "Giacenza",
-            "byWeekSupply": "Giacenza (per settimana)"
+            "byWeekSupply": "Giacenza (per settimana)",
+            "administered3rd": "Dose aggiuntiva"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
@@ -1535,7 +1547,8 @@
             "casesUnvaccinated": "Non vaccinati",
             "casesRecovered": "Guariti",
             "icuCasesRatio": "Non vaccinati, guariti e parzialmente vaccinati sono ricoverati in unità di terapia intensiva **{{multiple}}** volte tanto quanto quelli completamente protetti con la vaccinazione.",
-            "casesPartiallyVaccinated": "Parzialmente vaccinati"
+            "casesPartiallyVaccinated": "Parzialmente vaccinati",
+            "disabled": "A causa di errori rilevati nei dati di vaccinazione ottenuti da cepimose.si, abbiamo rimosso temporaneamente questi grafici. Il NIJZ sta risolvendo il problema in via prioritaria e pubblicheremo nuovamente i grafici non appena gli errori saranno eliminati."
         }
     },
     "footer": {
@@ -1633,7 +1646,7 @@
             "description": "test rapidi antigenici"
         },
         "15": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei test antigenici rapidi",
             "title": "fase<br>15"
         },
         "16": {
@@ -1647,6 +1660,10 @@
         "18": {
             "description": "metodologia dei test antigeni rapidi",
             "title": "fase<br>18"
+        },
+        "19": {
+            "title": "fase<br>19",
+            "description": "nuova metodologia dei TAR"
         }
     },
     "weekday": {

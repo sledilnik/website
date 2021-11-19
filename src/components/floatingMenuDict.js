@@ -23,6 +23,10 @@ export default {
     titleKey: 'charts.carePatients.titleMenu',
     icon: 'column',
   },
+  'hospitals-chart': {
+    titleKey: 'charts.hospitals.titleMenu',
+    icon: 'graph',
+  },
   'map-chart': {
     titleKey: 'charts.map.titleMenu',
     icon: 'map',
