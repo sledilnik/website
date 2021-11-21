@@ -1321,14 +1321,14 @@
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
             },
             "excess": {
-                "title": "Presežek glede na zadnjih 5 let",
+                "title": "Presežek glede na 2015-19",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeathsMZ": "COVID-19 smrti v bolnišnicah in DSO-jih (Vlada)",
                 "covidDeathsNIJZ": "Smrti s COVID-19 (NIJZ)",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
             },
             "excessByAgeGroup": {
-                "title": "Presežek glede na zadnjih 5 let po starostnih skupinah",
+                "title": "Presežek glede na 2015-19 po starostnih skupinah",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani mesec niso popolni. Širina stolpca predstavlja razmerje med smrtmi v starostni skupini stolpca in vsemi smrtmi v posameznem mesecu.",
                 "totalDeceased": "Skupaj umrlih",
                 "sex": {
@@ -2087,7 +2087,7 @@
         },
         "excess-deaths-chart": {
             "question": "Kaj nam pove graf \"Presežne smrti\"?",
-            "answer": "[Graf](/sl/stats#excess-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 2010-2019 ter Presežek glede na zadnjih 5 let. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev. Vir podatkov je centralni register prebivalstva pri MNZ in zajema vse smrti na področju Republike Slovenije kot tudi Slovencev v tujini, kar se razlikuje od podobnih podatkov, ki jih sicer objavlja SURS. Za zadnjih nekaj tednov so podatki še nepopolni in so možni še popravki. Potrjene COVID-19 smrti temeljijo na vladnih podatkih."
+            "answer": "[Graf](/sl/stats#excess-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 2010-2019 ter Presežek glede na 2015-2019. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev. Vir podatkov je centralni register prebivalstva pri MNZ in zajema vse smrti na področju Republike Slovenije kot tudi Slovencev v tujini, kar se razlikuje od podobnih podatkov, ki jih sicer objavlja SURS. Za zadnjih nekaj tednov so podatki še nepopolni in so možni še popravki. Potrjene COVID-19 smrti temeljijo na vladnih podatkih."
         },
         "daily-comparison-chart": {
             "question": "Kaj kaže graf \"Primerjava po dnevih v tednu\"?",
