@@ -19,6 +19,7 @@ let chartText = I18N.chartText "vaccination"
 type ScaleType =
     | Absolute
     | Relative
+    | PopulationShare
 
 type MetricType =
     | Today
@@ -64,7 +65,7 @@ type Msg =
 
 let currentScaleType state =
     match state.DisplayType with
-    | Protected -> Relative
+    | Protected -> PopulationShare
     | _ -> state.ScaleType
 
 let currentMetricType state =
@@ -166,7 +167,8 @@ let renderAgeChart state dispatch =
                 (fun ag ->
                     match currentScaleType state with
                     | Absolute -> 0.
-                    | Relative ->
+                    | Relative -> 0.
+                    | PopulationShare ->
                         ((float) ag?point?vaccinated
                          / (float) ag?point?population))
             |> Array.iter
@@ -271,11 +273,12 @@ let renderAgeChart state dispatch =
 
         let y =
             match currentScaleType state with
-            | Absolute ->
+            | Absolute
+            | Relative ->
                 match value with
                 | Some v -> Some((float) v)
                 | _ -> None
-            | Relative ->
+            | PopulationShare ->
                 match value with
                 | Some v -> Some((float) v / (float) population * 100.)
                 | _ -> None
@@ -343,8 +346,8 @@ let renderAgeChart state dispatch =
                         {| name = ageGroup.Label
                            ``type`` =
                                match currentScaleType state with
-                               | Absolute -> "column"
-                               | Relative -> "line"
+                               | Absolute | Relative -> "column"
+                               | PopulationShare -> "line"
                            color = ageGroupColors.[idx]
                            data =
                                state.VaccinationData
@@ -361,7 +364,8 @@ let renderAgeChart state dispatch =
     let stackType =
         match currentScaleType state with
         | Absolute -> Some "normal"
-        | Relative -> None
+        | Relative -> Some "percent"
+        | PopulationShare -> None
 
     let baseOptions =
         basicChartOptions
@@ -409,7 +413,8 @@ let renderScaleTypeSelectors state dispatch =
 
     Html.div [ prop.className "chart-display-property-selector"
                prop.children [ renderScaleTypeSelector Absolute state.ScaleType (I18N.t "charts.common.absolute")
-                               renderScaleTypeSelector Relative state.ScaleType (I18N.t "charts.common.populationShare") ] ]
+                               renderScaleTypeSelector Relative state.ScaleType (I18N.t "charts.common.relative")
+                               renderScaleTypeSelector PopulationShare state.ScaleType (I18N.t "charts.common.populationShare") ] ]
 
 let renderMetricTypeSelectors state dispatch =
     let renderMetricTypeSelector (metricTypeToRender: MetricType) =
