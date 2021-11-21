@@ -23,8 +23,8 @@ with
     static member All = [ StackedNormal; StackedPercent ]
     member this.GetName =
         match this with
-        | StackedNormal  -> chartText "showNormal"
-        | StackedPercent -> chartText "showPercent"
+        | StackedNormal  -> I18N.t "charts.common.absolute"
+        | StackedPercent -> I18N.t "charts.common.relative"
 
 type PageType =
     | HospitalsPage
