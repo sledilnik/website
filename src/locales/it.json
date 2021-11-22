@@ -1404,7 +1404,7 @@
                 "covidDeaths MZ": "Decessi confermati per COVID-19 (governo)",
                 "covidDeaths NIJZ": "Decessi confermati per COVID-19 (NIJZ)",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
-                "title": "Eccedenza rispetto agli ultimi 5 anni",
+                "title": "Eccedenza rispetto agli anni 2015-19",
                 "covidDeathsNIJZ": "Morti da COVID-19 (NIJZ)",
                 "covidDeathsMZ": "Morti di COVID-19 negli ospedali e Case di riposo (Governo)"
             },
@@ -1424,7 +1424,7 @@
                 },
                 "totalDeceased": "Totale decessi",
                 "disclaimer": "Nota: i dati sui decessi dell'ultimo mese sono incompleti. La larghezze delle colonne rappresenta il rapporto tra i decessi nella fascia di età della colonna e tutti i decessi in un determinato mese.",
-                "title": "Eccesso rispetto agli ultimi 5 anni per classi di età"
+                "title": "Eccesso rispetto agli anni 2015-19 per classi di età"
             }
         },
         "metricsCorrelation": {
