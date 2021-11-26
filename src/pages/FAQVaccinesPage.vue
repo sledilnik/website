@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="custom-container">
-      <div class="static-page-wrapper" v-if="faqVaccines && faqVaccines[0]">
-        <h1>{{ faqVaccines[0].name }}</h1>
-        <div v-html-md="faqVaccines[0].name"></div>
+      <div class="static-page-wrapper">
+        <h1>
+          {{ $t("faqVaccinesPage.title") }}
+        </h1>
+        <div v-html-md="$t('faqVaccinesPage.description')"></div>
         <vue-fuse
-          class="form-control my-4"
+          v-if="faqVaccines[0]"
+          class="vue-fuse-search form-control my-4"
           :placeholder="$t('restrictionsPage.searchPlaceholder')"
           :keys="searchKeys"
           :list="faqVaccines[0].faq"
@@ -15,16 +18,10 @@
           :distance="1000"
           event-name="searchResults"
         ></vue-fuse>
-        <div
-          v-for="(item, index) in faqVaccines"
-          :key="index"
-          :id="`faq-${index}`"
-        >
-          <details v-for="(faq, index) in item.faq" :key="index">
-            <summary>{{ faq.question }}</summary>
-              <p v-html="faq.answer" />
-          </details>
-        </div>
+        <details v-for="(item, index) in searchResults" :key="index">
+          <summary>{{ item.question }}</summary>
+            <p v-html="item.answer" />
+        </details>
       </div>
     </div>
   </div>
@@ -39,6 +36,7 @@ export default {
   },
   data() {
     return {
+      loaded: false,
       searchKeys: ["answer", "question"],
       searchResults: []
     };
@@ -47,11 +45,31 @@ export default {
     ...mapActions("faqVaccines", {
       fetchOne: "fetchOne",
     }),
+    addTooltips() {
+      this.$el.querySelectorAll("span[data-term]").forEach((el) => {
+        for (let faq of this.faqVaccines) {
+          for (let term of faq.glossary) {
+            if (term.slug === el.getAttribute('data-term')) {
+              el.setAttribute("title", term.definition);
+            }
+          }
+        }
+      });
+    },
   },
   computed: {
     ...mapState("faqVaccines", {
       faqVaccines: "faqVaccines",
     }),
+  },
+  mounted() {
+    let checker = setInterval(() => {
+      let elm = document.querySelector(".vue-fuse-search");
+      if (elm) {
+        this.loaded = true;
+        clearInterval(checker);
+      }
+    }, 80);
   },
   created() {
     // fetch data
@@ -59,11 +77,30 @@ export default {
     this.$on("searchResults", (results) => {
       this.searchResults = results;
     });
-    // TODO: match all the hits with items from glossary 
-    // document.querySelectorAll('[data-term="value"]').setAttribute('title', '...');
+  },
+  watch: {
+    loaded: function () {
+      this.addTooltips();
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss"></style>
+<style lang="scss">
+span[data-term] {
+  cursor: help;
+  font-weight: 600;
+  transition: all 0.35s ease-in-out;
+  box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+
+  &:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 600;
+    box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
+  }
+}
+</style>
