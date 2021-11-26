@@ -253,13 +253,16 @@ let renderAgeChart state dispatch =
         let value =
             match state.DisplayType, currentMetricType state with
             | Protected, _ ->
-                if i >= 15 then             // need 14 days for protection
-                    if i >= 15 + 183 then   // waning protection after 6 months + 3rd dose protected
-                        getValue state.VaccinationData.[i-15] ageGroup
-                        |> subtractSafely (getValue state.VaccinationData.[i-15-183] ageGroup)
-                        |> addSafely (getAgeGroup state.VaccinationData.[i-15] ageGroup).administered3rd
+                if i >= 15 then // need 14 days for protection
+                    let fullyVaccinated = getValue state.VaccinationData.[i-15] ageGroup |> Option.defaultValue 0
+                    if i >= 15 + 183 then // waning protection after 6 months + 3rd dose protects again
+                        let lostProtection = getValue state.VaccinationData.[i-15-183] ageGroup |> Option.defaultValue 0
+                        let boosterReceived = (getAgeGroup state.VaccinationData.[i-15] ageGroup).administered3rd |> Option.defaultValue 0
+                        // protected only the one that already lost protection
+                        let boosterProtected = min lostProtection boosterReceived
+                        Some (fullyVaccinated - lostProtection + boosterProtected)
                     else
-                        getValue state.VaccinationData.[i-15] ageGroup
+                        Some fullyVaccinated
                 else
                     None
             | _, Today ->
