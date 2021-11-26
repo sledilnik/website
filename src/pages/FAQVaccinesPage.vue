@@ -76,6 +76,7 @@ export default {
     this.fetchOne(1);
     this.$on("searchResults", (results) => {
       this.searchResults = results;
+      this.addTooltips();
     });
   },
   watch: {

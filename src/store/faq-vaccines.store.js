@@ -13,7 +13,8 @@ const getters = {
 
 const actions = {
   async fetchOne({ commit }, id) {
-    const obj = await contentApi.get(`/faq/${id}/`);
+    const lang = localStorage.getItem ("i18nextLng") || 'sl';
+    const obj = await contentApi.get(`/faq/${id}/?lang=${lang}`);
     commit(FRESH_FAQ_VACCINES, [obj]);
   },
   async fetchAll({ dispatch }) {
