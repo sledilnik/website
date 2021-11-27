@@ -1,30 +1,49 @@
 <template>
-  <div>
-    <div class="custom-container">
-      <div class="static-page-wrapper">
-        <h1>
-          {{ $t("faqVaccines.title") }}
-        </h1>
-        <div v-html-md="$t('faqVaccines.description')"></div>
+  <div class="custom-container">
+    <div class="static-page-wrapper">
+      <h1>{{ $t("faqVaccines.title") }}</h1>
+      <div v-html-md="$t('faqVaccines.description')"></div>
+      <div v-if="faqVaccines[lang][0]">
         <vue-fuse
-          v-if="faqVaccines[0]"
           class="vue-fuse-search form-control my-4"
           :placeholder="$t('restrictionsPage.searchPlaceholder')"
           :keys="searchKeys"
-          :list="faqVaccines[0].faq"
+          :list="faqVaccines[lang][0].faq"
           :defaultAll="true"
           :min-match-char-length="4"
           :threshold="0.3"
           :distance="1000"
           event-name="searchResults"
         ></vue-fuse>
-        <details v-for="(item, index) in searchResults" :key="index">
+        <details
+          v-for="item in searchResults"
+          :key="`faq-${item.slug}`"
+          :id="`faq-${item.slug}`">
           <summary>{{ item.question }}</summary>
-            <p v-html-md="item.answer" />
+          <p v-html-md="item.answer" />
         </details>
-        <div v-html-md="$t('faqVaccines.credits')"></div>
-        <div v-html-md="$t('faqVaccines.version')"></div>
+        <h2>{{ $t("faqVaccines.glossary") }}</h2>
+        <vue-fuse
+          class="vue-fuse-search form-control my-4"
+          :placeholder="$t('restrictionsPage.searchPlaceholder')"
+          :keys="searchKeysGlossary"
+          :list="faqVaccines[lang][0].glossary"
+          :defaultAll="true"
+          :min-match-char-length="4"
+          :threshold="0.3"
+          :distance="1000"
+          event-name="searchResultsGlossary"
+        ></vue-fuse>
+        <details
+          v-for="item in searchResultsGlossary"
+          :key="`glossary-${item.slug}`"
+          :id="`glossary-${item.slug}`">
+          <summary>{{ item.term }}</summary>
+          <p v-html-md="item.definition" />
+        </details>
       </div>
+      <div v-html-md="$t('faqVaccines.credits')"></div>
+      <div v-html-md="$t('faqVaccines.version')"></div>
     </div>
   </div>
 </template>
@@ -39,8 +58,11 @@ export default {
   data() {
     return {
       loaded: false,
+      lang: localStorage.getItem ("i18nextLng") || 'sl',
       searchKeys: ["answer", "question"],
-      searchResults: []
+      searchKeysGlossary: ["term", "definition"],
+      searchResults: [],
+      searchResultsGlossary: []
     };
   },
   methods: {
@@ -48,15 +70,17 @@ export default {
       fetchOne: "fetchOne",
     }),
     addTooltips() {
-      this.$el.querySelectorAll("span[data-term]").forEach((el) => {
-        for (let faq of this.faqVaccines) {
-          for (let term of faq.glossary) {
-            if (term.slug === el.getAttribute('data-term')) {
-              el.setAttribute("title", term.definition);
+      if (this.lang && this.faqVaccines[this.lang]) {
+        this.$el.querySelectorAll("span[data-term]").forEach((el) => {
+          for (let entry of this.faqVaccines[this.lang]) {
+            for (let term of entry.glossary) {
+              if (term.slug === el.getAttribute('data-term')) {
+                el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
+              }
             }
           }
-        }
-      });
+        });
+      }
     },
   },
   computed: {
@@ -78,6 +102,10 @@ export default {
     this.fetchOne(1);
     this.$on("searchResults", (results) => {
       this.searchResults = results;
+      this.addTooltips();
+    });
+    this.$on("searchResultsGlossary", (results) => {
+      this.searchResultsGlossary = results;
       this.addTooltips();
     });
   },

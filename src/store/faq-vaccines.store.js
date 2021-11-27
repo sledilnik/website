@@ -1,9 +1,11 @@
 import ContentApiService from "../services/content-api.service";
-import { unionBy } from "lodash";
 
 const contentApi = new ContentApiService();
 const state = {
-  faqVaccines: {},
+  faqVaccines: {
+    sl: [],
+    en: []
+  }
 };
 
 export const FRESH_FAQ_VACCINES = 'FRESH_FAQ_VACCINES'
@@ -15,7 +17,7 @@ const actions = {
   async fetchOne({ commit }, id) {
     const lang = localStorage.getItem ("i18nextLng") || 'sl';
     const obj = await contentApi.get(`/faq/${id}/?lang=${lang}`);
-    commit(FRESH_FAQ_VACCINES, [obj]);
+    commit(FRESH_FAQ_VACCINES, { obj, lang });
   },
   async fetchAll({ dispatch }) {
     dispatch("fetch", { limit: 30 }, { timeout: 900 }); // When we hit 30, make pagination
@@ -27,8 +29,8 @@ const actions = {
 };
 
 const mutations = {
-  [FRESH_FAQ_VACCINES] (state, faqVaccines) {
-    state.faqVaccines = unionBy(faqVaccines, state.faqVaccines, "id");
+  [FRESH_FAQ_VACCINES] (state, payload) {
+    state.faqVaccines[payload.lang] = [payload.obj];
   },
 };
 
