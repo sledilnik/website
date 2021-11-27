@@ -3,9 +3,9 @@
     <div class="custom-container">
       <div class="static-page-wrapper">
         <h1>
-          {{ $t("faqVaccinesPage.title") }}
+          {{ $t("faqVaccines.title") }}
         </h1>
-        <div v-html-md="$t('faqVaccinesPage.description')"></div>
+        <div v-html-md="$t('faqVaccines.description')"></div>
         <vue-fuse
           v-if="faqVaccines[0]"
           class="vue-fuse-search form-control my-4"
@@ -20,8 +20,9 @@
         ></vue-fuse>
         <details v-for="(item, index) in searchResults" :key="index">
           <summary>{{ item.question }}</summary>
-            <p v-html="item.answer" />
+            <p v-html-md="item.answer" />
         </details>
+        <div v-html-md="$t('faqVaccines.credits')"></div>
       </div>
     </div>
   </div>
