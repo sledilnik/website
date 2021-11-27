@@ -23,6 +23,7 @@
             <p v-html-md="item.answer" />
         </details>
         <div v-html-md="$t('faqVaccines.credits')"></div>
+        <div v-html-md="$t('faqVaccines.version')"></div>
       </div>
     </div>
   </div>
