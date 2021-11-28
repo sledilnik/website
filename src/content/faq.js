@@ -42,6 +42,7 @@ export default [
             "patients-chart",
             "icu-patients-chart",
             "care-patients-chart",
+            "patients-age-chart",
             "hospitals-chart",
             "deceased-chart",
             "excess-deaths-chart",
