@@ -27,8 +27,8 @@ export default {
     titleKey: 'charts.hospitals.titleMenu',
     icon: 'graph',
   },
-  'episari-chart': {
-    titleKey: 'charts.episari.titleMenu',
+  'patients-age-chart': {
+    titleKey: 'charts.patientsAge.titleMenu',
     icon: 'column',
   },
   'map-chart': {

@@ -1134,7 +1134,7 @@
             "max": "Max",
             "data": "Podatki"
         },
-        "episari": {
+        "patientsAge": {
             "title": "Hospitalizirani po starosti, tedensko",
             "titleMenu": "Hospitalizirani - starost",
             "meanAge": "Povprečna starost",

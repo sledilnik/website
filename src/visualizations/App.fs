@@ -24,7 +24,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Patients" -> Some Patients
             | "IcuPatients" -> Some IcuPatients
             | "CarePatients" -> Some CarePatients
-            | "Episari" -> Some Episari
+            | "PatientsAge" -> Some PatientsAge
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -329,10 +329,10 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
-    let episari =
-          { VisualizationType = Episari
-            ClassName = "episari-chart"
-            ChartTextsGroup = "episari"
+    let patientsAge =
+          { VisualizationType = PatientsAge
+            ClassName = "patients-age-chart"
+            ChartTextsGroup = "patientsAge"
             ChartEnabled = true
             Explicit = false
             Renderer =
@@ -341,7 +341,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView EpisariChart.episariChart {| data = data |} }
+                    | Success data -> lazyView PatientsAgeChart.patientsAgeChart {| data = data |} }
 
     let ratios =
           { VisualizationType = Ratios
@@ -688,7 +688,7 @@ let render (state: State) (_: Msg -> unit) =
           map; municipalities; regions100k;
           schools; schoolStatus
           sewage; ageGroupsTimeline;
-          patients; patientsICU; hospitals; episari; // patientsCare;
+          patients; patientsICU; hospitals; patientsAge; // patientsCare;
           vaccineEffect; regionMap;
           weeklyDemographics; ageGroups;
           sources; europeMap;
@@ -713,7 +713,8 @@ let render (state: State) (_: Msg -> unit) =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources; vaccination; vaccines; vaccineEffect;
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsICU; patientsCare; episari; deceased; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsICU; patientsCare; patientsAge;
+          deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; schoolStatus; hcCases
           countriesCasesPer100k
           countriesActiveCasesPer100k

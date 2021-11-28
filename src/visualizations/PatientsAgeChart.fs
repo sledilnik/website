@@ -1,5 +1,5 @@
 [<RequireQualifiedAccess>]
-module EpisariChart
+module PatientsAgeChart
 
 open System
 open System.Text
@@ -12,7 +12,7 @@ open Fable.Core.JsInterop
 open Highcharts
 open Types
 
-let chartText = I18N.chartText "episari"
+let chartText = I18N.chartText "patientsAge"
 
 type DisplayType =
     | HospitalIn
@@ -234,7 +234,7 @@ let renderAgeChart state dispatch =
     let baseOptions =
         basicChartOptions
             Linear
-            "covid19-episari-chart"
+            "covid19-patients-age-chart"
             state.RangeSelectionButtonIndex
             onRangeSelectorButtonClick
 
@@ -299,7 +299,7 @@ let renderMeanAgeChart state dispatch =
     let baseOptions =
         basicChartOptions
             Linear
-            "covid19-episari-chart"
+            "covid19-patients-age-chart"
             state.RangeSelectionButtonIndex
             onRangeSelectorButtonClick
 
@@ -348,5 +348,5 @@ let render state dispatch =
                                               | _ -> Utils.renderBarChartTypeSelector state.ChartType (BarChartTypeChanged >> dispatch) ]
                renderChartContainer state dispatch ]
 
-let episariChart (props: {| data: WeeklyEpisariData |}) =
-    React.elmishComponent ("EpisariChart", init props.data, update, render)
+let patientsAgeChart (props: {| data: WeeklyEpisariData |}) =
+    React.elmishComponent ("PatientsAgeChart", init props.data, update, render)

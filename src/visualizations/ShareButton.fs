@@ -18,7 +18,7 @@ let dropdown (viz: Visualization) =
             | Patients -> (1140, 720)
             | IcuPatients -> (1140, 720)
             | CarePatients -> (1140, 720)
-            | Episari -> (1140, 720)
+            | PatientsAge -> (1140, 720)
             | Ratios -> (1140, 720)
             | HCenters -> (1140, 720)
             | Tests -> (1140, 720)

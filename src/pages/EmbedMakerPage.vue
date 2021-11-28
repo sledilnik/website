@@ -83,9 +83,9 @@ export default {
           text: this.$t('charts.hospitals.title'),
           dimensions: [1140, 720]
         },
-        "Episari": {
-          value: "Episari",
-          text: this.$t('charts.episari.title'),
+        "PatientsAge": {
+          value: "PatientsAge",
+          text: this.$t('charts.patientsAge.title'),
           dimensions: [1140, 720]
         },
 //        "Ratios": {
