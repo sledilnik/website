@@ -23,19 +23,8 @@
           <p v-html-md="item.answer" />
         </details>
         <h2>{{ $t("faqVaccines.glossary") }}</h2>
-        <vue-fuse
-          class="vue-fuse-search form-control my-4"
-          :placeholder="$t('restrictionsPage.searchPlaceholder')"
-          :keys="searchKeysGlossary"
-          :list="faqVaccines[lang][0].glossary"
-          :defaultAll="true"
-          :min-match-char-length="4"
-          :threshold="0.3"
-          :distance="1000"
-          event-name="searchResultsGlossary"
-        ></vue-fuse>
         <details
-          v-for="item in searchResultsGlossary"
+          v-for="item in faqVaccines[lang][0].glossary"
           :key="`glossary-${item.slug}`"
           :id="`glossary-${item.slug}`">
           <summary>{{ item.term }}</summary>
@@ -60,9 +49,7 @@ export default {
       loaded: false,
       lang: localStorage.getItem ("i18nextLng") || 'sl',
       searchKeys: ["answer", "question"],
-      searchKeysGlossary: ["term", "definition"],
       searchResults: [],
-      searchResultsGlossary: []
     };
   },
   methods: {
@@ -70,17 +57,16 @@ export default {
       fetchOne: "fetchOne",
     }),
     addTooltips() {
-      if (this.lang && this.faqVaccines[this.lang]) {
-        this.$el.querySelectorAll("span[data-term]").forEach((el) => {
-          for (let entry of this.faqVaccines[this.lang]) {
-            for (let term of entry.glossary) {
-              if (term.slug === el.getAttribute('data-term')) {
-                el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
-              }
+      this.$el.querySelectorAll("span[data-term]").forEach((el) => {
+        for (let entry of this.faqVaccines[this.lang]) {
+          for (let term of entry.glossary) {
+            if (term.slug === el.getAttribute('data-term')) {
+              el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
+              el.setAttribute("tabindex", 0);
             }
           }
-        });
-      }
+        }
+      });
     },
   },
   computed: {
@@ -102,10 +88,6 @@ export default {
     this.fetchOne(1);
     this.$on("searchResults", (results) => {
       this.searchResults = results;
-      this.addTooltips();
-    });
-    this.$on("searchResultsGlossary", (results) => {
-      this.searchResultsGlossary = results;
       this.addTooltips();
     });
   },
@@ -132,6 +114,29 @@ span[data-term] {
     color: rgba(0, 0, 0, 0.8);
     font-weight: 600;
     box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
+  }
+}
+@media (pointer: coarse), (hover: none) {
+  span[data-term] {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    outline: none;
+  }
+  span[data-term]:focus::after {
+    content: attr(title);
+    position: absolute;
+    top: 90%;
+    width: 200px;
+    background-color: #414040;
+    color: white;
+    border: 1px solid;
+    padding: 3px 6px;
+    margin: 10px;
+    font-size: 10px;
+    font-weight: 200;
+    line-height: 1.4;
+    z-index: 1;
   }
 }
 </style>
