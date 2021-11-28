@@ -1137,6 +1137,7 @@
         "episari": {
             "title": "Hospitalizirani po starosti, tedensko",
             "titleMenu": "Hospitalizirani - starost",
+            "meanAge": "Povprečna starost",
             "hospitalIn": "Sprejeti v bolnišnico",
             "icuIn": "Sprejeti v intenzivno",
             "deceased": "Umrli"

@@ -18,10 +18,12 @@ type DisplayType =
     | HospitalIn
     | IcuIn
     | Deceased
+    | MeanAge
     static member All =
         [ HospitalIn
           IcuIn
-          Deceased ]
+          Deceased
+          MeanAge]
 
     static member Default = HospitalIn
 
@@ -30,6 +32,7 @@ type DisplayType =
         | HospitalIn -> chartText "hospitalIn"
         | IcuIn -> chartText "icuIn"
         | Deceased -> chartText "deceased"
+        | MeanAge -> chartText "meanAge"
 
 type State =
     { DisplayType: DisplayType
@@ -166,7 +169,7 @@ let renderAgeChart state dispatch =
             s.ToString()
 
 
-    let getAgeGroupRec (dp: WeeklyEpisariDataPoint) ageGroup population =
+    let getAgeGroupRec (dp: WeeklyEpisariDataPoint) ageGroup =
         let getValue dp ageGroup =
             let aG =
                 dp.PerAge
@@ -178,6 +181,7 @@ let renderAgeChart state dispatch =
                 | HospitalIn -> aG.CovidIn
                 | IcuIn -> aG.IcuIn
                 | Deceased -> aG.Deceased
+                | MeanAge -> None
 
         let value = getValue dp ageGroup
 
@@ -204,8 +208,6 @@ let renderAgeChart state dispatch =
     let allSeries =
         seq {
             for ageGroup, idx in allAgeGroups do
-                let popStats = Utils.AgePopulationStats.populationStatsForAgeGroup ageGroup
-                let population = popStats.Male + popStats.Female
                 yield
                     pojo
                         {| name = ageGroup.Label
@@ -214,7 +216,7 @@ let renderAgeChart state dispatch =
                            data =
                                state.Data
                                |> Array.skipWhile (fun dp -> dp.PerAge.Length <= 1) // skip if we do not have per AG data, just mean value
-                               |> Array.map (fun dp -> getAgeGroupRec dp ageGroup population) |}
+                               |> Array.map (fun dp -> getAgeGroupRec dp ageGroup) |}
         }
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
@@ -252,10 +254,78 @@ let renderAgeChart state dispatch =
            tooltip = defaultTooltip "" (fun () -> tooltipFormatter jsThis) |}
 
 
+let renderMeanAgeChart state dispatch =
+
+    let getMeanAgeRec (dp: WeeklyEpisariDataPoint) metricType =
+        let getPerMeanAge dp =
+            let meanAG =
+                dp.PerAge
+                |> List.tryFind (fun aG -> aG.GroupKey.AgeFrom.IsNone && aG.GroupKey.AgeTo.IsNone) // mean age stored with to-from
+            match meanAG with
+            | None -> None
+            | Some aG ->
+                match metricType with
+                | HospitalIn -> aG.CovidIn
+                | IcuIn -> aG.IcuIn
+                | Deceased -> aG.Deceased
+                | MeanAge -> None
+
+        {| x = jsDatesMiddle dp.Date dp.DateTo
+           y = getPerMeanAge dp
+           fmtHeader = I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+        |> pojo
+
+    let allSeries =
+        seq {
+            for metricType, color in [ (HospitalIn, "#be7A2a"); (IcuIn, "#fb6a4a"); (Deceased, "#6d5b80") ] do
+                yield
+                    pojo
+                        {| name = metricType.GetName
+                           ``type`` = "line"
+                           color = color
+                           data =
+                               state.Data
+                               |> Array.skipWhile (fun dp -> dp.PerAge.IsEmpty) // skip if no age data
+                               |> Array.map (fun dp -> getMeanAgeRec dp metricType) |}
+        }
+
+    let onRangeSelectorButtonClick (buttonIndex: int) =
+        let res (_: Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+
+        res
+
+    let baseOptions =
+        basicChartOptions
+            Linear
+            "covid19-episari-chart"
+            state.RangeSelectionButtonIndex
+            onRangeSelectorButtonClick
+
+    {| baseOptions with
+           series = Seq.toArray allSeries
+           yAxis =
+               baseOptions.yAxis
+               |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
+           plotOptions =
+               pojo
+                   {| line = pojo {| marker = pojo {| enabled = false |} |}
+                      series = defaultSeriesOptions None |}
+           legend =
+               pojo
+                   {| enabled = true
+                      layout = "horizontal" |}
+           tooltip = defaultTooltip "" None |}
+
+
 let renderChartContainer state dispatch =
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
-                          prop.children [ renderAgeChart state dispatch |> chartFromWindow ] ] ]
+                          prop.children [
+                              match state.DisplayType with
+                              | MeanAge -> renderMeanAgeChart state dispatch |> chartFromWindow
+                              | _ -> renderAgeChart state dispatch |> chartFromWindow ] ] ]
 
 let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
     let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
@@ -273,7 +343,9 @@ let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
 
 let render state dispatch =
     Html.div [ Utils.renderChartTopControls [ renderDisplaySelectors state.DisplayType (DisplayTypeChanged >> dispatch)
-                                              Utils.renderBarChartTypeSelector state.ChartType (BarChartTypeChanged >> dispatch) ]
+                                              match state.DisplayType with
+                                              | MeanAge -> Html.none
+                                              | _ -> Utils.renderBarChartTypeSelector state.ChartType (BarChartTypeChanged >> dispatch) ]
                renderChartContainer state dispatch ]
 
 let episariChart (props: {| data: WeeklyEpisariData |}) =
