@@ -316,7 +316,7 @@ let renderMeanAgeChart state dispatch =
                pojo
                    {| enabled = true
                       layout = "horizontal" |}
-           tooltip = defaultTooltip "" None |}
+           tooltip = defaultTooltip "<b>{point.fmtHeader}</b><br>" None |}
 
 
 let renderChartContainer state dispatch =
