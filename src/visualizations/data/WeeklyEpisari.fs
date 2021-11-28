@@ -70,7 +70,16 @@ type private TransferWEpisariDataPoint =
           CovidAcquiredInHospital = this.covidAcquiredInHospital
           CovidOut = this.covidOut
           CovidDeceased = this.covidDeceased
-          PerAge = this.perAge |> List.map (fun item -> item.ToDomain)
+          PerAge =
+            this.perAge
+            |> List.map (fun item -> item.ToDomain)
+            |> List.sortWith (fun a1 a2 ->
+                match a1.GroupKey.AgeFrom, a1.GroupKey.AgeTo, a2.GroupKey.AgeFrom, a2.GroupKey.AgeTo with
+                | Some a1f, Some a1t, Some a2f, Some a2t    -> if a1t < a2f then -1 else 1  // fully specified
+                | Some a1f, None, Some a2f, _               -> if a1f < a2f then -1 else 1  // X+
+                | None, None, _, _                          -> 1                            // no range -> mean value (put last)
+                | _, _, _, _                                -> -1                           // keep order
+            )
         }
 
 type private TransferWEpisariData = TransferWEpisariDataPoint[]

@@ -220,6 +220,7 @@ type VisualizationType =
     | Patients
     | IcuPatients
     | CarePatients
+    | Episari
     | Ratios
     | HCenters
     | Hospitals

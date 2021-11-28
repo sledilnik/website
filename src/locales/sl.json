@@ -1134,6 +1134,13 @@
             "max": "Max",
             "data": "Podatki"
         },
+        "episari": {
+            "title": "Hospitalizirani po starosti, tedensko",
+            "titleMenu": "Hospitalizirani - starost",
+            "hospitalIn": "Sprejeti v bolnišnico",
+            "icuIn": "Sprejeti v intenzivno",
+            "deceased": "Umrli"
+        },
         "hcCases": {
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
             "titleMenu": "Zdravstvo in DSO - primeri",

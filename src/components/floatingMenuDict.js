@@ -27,6 +27,10 @@ export default {
     titleKey: 'charts.hospitals.titleMenu',
     icon: 'graph',
   },
+  'episari-chart': {
+    titleKey: 'charts.episari.titleMenu',
+    icon: 'column',
+  },
   'map-chart': {
     titleKey: 'charts.map.titleMenu',
     icon: 'map',
