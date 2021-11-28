@@ -18,18 +18,16 @@
         <details
           v-for="item in searchResults"
           :key="item.slug"
-          :id="item.slug"
-          @click="smoothScroll">
-          <summary :id="item.slug">{{ item.question }}</summary>
+          :id="item.slug">
+          <summary>{{ item.question }}</summary>
           <p v-html-md="item.answer" />
         </details>
         <h2>{{ $t("faqVaccines.glossary") }}</h2>
         <details
           v-for="item in faqVaccines[lang][0].glossary"
           :key="item.slug"
-          :id="item.slug"
-          @click="smoothScroll">
-          <summary :id="item.slug">{{ item.term }}</summary>
+          :id="item.slug">
+          <summary>{{ item.term }}</summary>
           <p v-html-md="item.definition" />
         </details>
       </div>
@@ -74,9 +72,11 @@ export default {
       const offset = -90;
       window.location.hash = e.target.id;
       window.history.pushState(null, null, e.target.hash);
-      this.$scrollTo(document.querySelector(this.$route.hash), 500, {
-        offset: offset,
-      })
+      if (e.target.hash) {
+        this.$scrollTo(this.$el.querySelector(this.$route.hash), 500, {
+          offset: offset,
+        })
+      }
     },
   },
   computed: {
@@ -87,15 +87,19 @@ export default {
   mounted() {
     if (this.$route.hash) {
       const checker = setInterval(() => {
-        const elm = document.querySelector(this.$route.hash)
+        const elm = this.$el.querySelector(this.$route.hash)
         if (elm) {
           // element found on page
           clearInterval(checker)
           const offset = -90
-          this.$scrollTo(document.querySelector(this.$route.hash), 500, {
+          this.$scrollTo(this.$el.querySelector(this.$route.hash), 500, {
             offset: offset,
           })
           this.loaded = true
+          // open question, if anchor link
+          if (document.querySelector(this.$route.hash)) {
+            document.querySelector(this.$route.hash).open = true;
+          }
         }
       }, 100)
 
