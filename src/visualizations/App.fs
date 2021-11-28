@@ -63,6 +63,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
           Query = query
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
+          WeeklyEpisariData = NotAsked
           RegionsData = NotAsked
           MunicipalitiesData = NotAsked
           RenderingMode = renderingMode }
@@ -74,6 +75,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
+                  Cmd.ofMsg WeeklyEpisariDataRequested
                   Cmd.ofMsg RegionsDataRequest
                   Cmd.ofMsg MunicipalitiesDataRequest ]
         | "world" ->
@@ -84,6 +86,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
+                  Cmd.ofMsg WeeklyEpisariDataRequested
                   Cmd.ofMsg RegionsDataRequest
                   Cmd.ofMsg MunicipalitiesDataRequest ]
 
@@ -101,6 +104,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.WeeklyStats.load
     | WeeklyStatsDataLoaded data -> { state with WeeklyStatsData = data }, Cmd.none
+    | WeeklyEpisariDataRequested ->
+        match state.WeeklyEpisariData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with WeeklyEpisariData = Loading }, Cmd.OfAsync.result Data.WeeklyEpisari.load
+    | WeeklyEpisariDataLoaded data -> { state with WeeklyEpisariData = data }, Cmd.none
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none

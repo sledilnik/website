@@ -85,6 +85,15 @@ type AgeGroup =
 
 type AgeGroupsList = AgeGroup list
 
+type HospitalAgeGroup =
+    { GroupKey : AgeGroupKey
+      CovidIn : int option
+      VaccinatedIn : int option
+      IcuIn : int option
+      Deceased : int option }
+
+type HospitalAgeGroupsList = HospitalAgeGroup list
+
 type StatsDataPoint =
     { DayFromStart : int
       Date : System.DateTime
@@ -155,6 +164,29 @@ type WeeklyStatsDataPoint =
     }
 
 type WeeklyStatsData = WeeklyStatsDataPoint[]
+
+type WeeklyEpisariDataPoint =
+    { Week : string
+      Date : System.DateTime
+      DateTo : System.DateTime
+      Source : string option
+      Missing : string option
+      SariIn : int option
+      TestedIn : int option
+      CovidIn : int option
+      CovidInNotSari : int option
+      CovidInVaccinated : int option
+      CovidInVaccinatedUnknown : int option
+      CovidInNotVaccinated : int option
+      CovidIcuIn : int option
+      CovidDiscoveredInHospital : int option
+      CovidAcquiredInHospital : int option
+      CovidOut : int option
+      CovidDeceased : int option
+      PerAge : HospitalAgeGroupsList
+    }
+
+type WeeklyEpisariData = WeeklyEpisariDataPoint[]
 
 type AreaCases =
     { Name : string
@@ -233,6 +265,7 @@ type State =
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
+      WeeklyEpisariData : RemoteData<WeeklyEpisariData, string>
       RegionsData : RemoteData<RegionsData, string>
       MunicipalitiesData : RemoteData<MunicipalitiesData, string>
       RenderingMode : RenderingMode }
@@ -251,6 +284,8 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | WeeklyStatsDataRequested
     | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
+    | WeeklyEpisariDataRequested
+    | WeeklyEpisariDataLoaded of RemoteData<WeeklyEpisariData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
     | MunicipalitiesDataRequest
