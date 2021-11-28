@@ -17,17 +17,19 @@
         ></vue-fuse>
         <details
           v-for="item in searchResults"
-          :key="`faq-${item.slug}`"
-          :id="`faq-${item.slug}`">
-          <summary>{{ item.question }}</summary>
+          :key="item.slug"
+          :id="item.slug"
+          @click="smoothScroll">
+          <summary :id="item.slug">{{ item.question }}</summary>
           <p v-html-md="item.answer" />
         </details>
         <h2>{{ $t("faqVaccines.glossary") }}</h2>
         <details
           v-for="item in faqVaccines[lang][0].glossary"
-          :key="`glossary-${item.slug}`"
-          :id="`glossary-${item.slug}`">
-          <summary>{{ item.term }}</summary>
+          :key="item.slug"
+          :id="item.slug"
+          @click="smoothScroll">
+          <summary :id="item.slug">{{ item.term }}</summary>
           <p v-html-md="item.definition" />
         </details>
       </div>
@@ -68,6 +70,14 @@ export default {
         }
       });
     },
+    smoothScroll(e) {
+      const offset = -90;
+      window.location.hash = e.target.id;
+      window.history.pushState(null, null, e.target.hash);
+      this.$scrollTo(document.querySelector(this.$route.hash), 500, {
+        offset: offset,
+      })
+    },
   },
   computed: {
     ...mapState("faqVaccines", {
@@ -75,13 +85,24 @@ export default {
     }),
   },
   mounted() {
-    let checker = setInterval(() => {
-      let elm = document.querySelector(".vue-fuse-search");
-      if (elm) {
-        this.loaded = true;
-        clearInterval(checker);
-      }
-    }, 80);
+    if (this.$route.hash) {
+      const checker = setInterval(() => {
+        const elm = document.querySelector(this.$route.hash)
+        if (elm) {
+          // element found on page
+          clearInterval(checker)
+          this.loaded = true
+          const offset = -90
+          this.$scrollTo(document.querySelector(this.$route.hash), 500, {
+            offset: offset,
+          })
+        }
+      }, 100)
+
+      setTimeout(() => {
+        clearInterval(checker)
+      }, 5000)
+    }
   },
   created() {
     // fetch data
