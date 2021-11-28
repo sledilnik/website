@@ -91,11 +91,11 @@ export default {
         if (elm) {
           // element found on page
           clearInterval(checker)
-          this.loaded = true
           const offset = -90
           this.$scrollTo(document.querySelector(this.$route.hash), 500, {
             offset: offset,
           })
+          this.loaded = true
         }
       }, 100)
 
