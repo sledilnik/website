@@ -1947,6 +1947,7 @@
         "searchPlaceholder": "Vnesite iskalni niz",
         "pageTitle": "FAQ - Pogosta vprašanja in odgovori",
         "intro": "_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_",
+        "vaccinesFaqIntro": "Zaradi veliko vprašanj o cepivih smo z strokovnjaki pripravili tudi posebno stran [Odgovori na pogosta vprašanja o covidu-19 in cepivih](/sl/faq-vaccines).",
         "section": {
             "general": "Splošno",
             "data": "O podatkih",
