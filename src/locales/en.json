@@ -363,6 +363,14 @@
             "title": "Nursing Hospitals",
             "titleMenu": "Nursing Hospitals"
         },
+        "patientsAge": {
+            "title": "Hospitalizations by Age, weekly",
+            "titleMenu": "Hospitalizations - age",
+            "meanAge": "Mean Age",
+            "hospitalIn": "Admitted to Hospital",
+            "icuIn": "Admitted to ICU",
+            "deceased": "Deceased"
+        },
         "ratios": {
             "title": "Share of Serious Cases",
             "titleMenu": "Serious Cases",
