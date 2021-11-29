@@ -1,6 +1,6 @@
 <template>
   <div class="collapsable">
-    <img :class="'icon ' + classCopy" @click="copy" v-b-tooltip.top.hover :title="tooltipTitle" :alt=tooltipTitle />
+    <img :class="'icon ' + toolipClass" @click="copy" v-b-tooltip.top :title="tooltipTitle" :alt="tooltipTitle" />
     <details :id="id">
       <summary>{{ title }}</summary>
       <p v-html-md="body" />
@@ -18,24 +18,27 @@ export default {
   data() {
     return {
       tooltipTitle: this.$t('embedMaker.copy'),
-      classCopy: "copy"
+      toolipClass: "copy"
     };
   },
   methods: {
     copy($event) {
       const element = $event.target
       const dummy = document.createElement('input');
-      const text = window.location.href + "#" + element.nextSibling.id;
+      let text = window.location.href + "#" + element.nextSibling.id;
+      if (window.location.hash !== "") {
+        text = window.location.href.split("#")[0] + "#" + element.nextSibling.id;
+      }
       document.body.appendChild(dummy);
       dummy.value = text;
       dummy.select();
       document.execCommand('copy');
       document.body.removeChild(dummy);
       this.tooltipTitle = this.$t('embedMaker.copied');
-      this.classCopy = "check";
+      this.toolipClass = "check";
       setTimeout(() => {
         this.tooltipTitle = this.$t('embedMaker.copy');
-        this.classCopy = "copy";
+        this.toolipClass = "copy";
       }, 2000)
     }
   },

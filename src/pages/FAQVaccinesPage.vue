@@ -12,6 +12,7 @@
           :defaultAll="true"
           :min-match-char-length="4"
           :threshold="0.3"
+          :shouldSort="false"
           :distance="1000"
           event-name="searchResults"
         ></vue-fuse>
