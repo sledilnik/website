@@ -15,21 +15,21 @@
           :distance="1000"
           event-name="searchResults"
         ></vue-fuse>
-        <details
+        <Collapsable
           v-for="item in searchResults"
           :key="item.slug"
-          :id="item.slug">
-          <summary>{{ item.question }}</summary>
-          <p v-html-md="item.answer" />
-        </details>
+          :id="item.slug"
+          :title="item.question"
+          :body="item.answer"
+        />
         <h2>{{ $t("faqVaccines.glossary") }}</h2>
-        <details
+        <Collapsable
           v-for="item in faqVaccines[lang][0].glossary"
           :key="item.slug"
-          :id="item.slug">
-          <summary>{{ item.term }}</summary>
-          <p v-html-md="item.definition" />
-        </details>
+          :id="item.slug"
+          :title="item.term"
+          :body="item.definition"
+        />
       </div>
       <div v-html-md="$t('faqVaccines.credits')"></div>
       <div v-html-md="$t('faqVaccines.version')"></div>
@@ -39,10 +39,12 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import Collapsable from "@/components/Collapsable";
 
 export default {
   name: "FAQVaccinesPage",
   components: {
+    Collapsable,
   },
   data() {
     return {
@@ -50,6 +52,7 @@ export default {
       lang: localStorage.getItem ("i18nextLng") || 'sl',
       searchKeys: ["answer", "question"],
       searchResults: [],
+      tooltipTitle: this.$t('embedMaker.copy'),
     };
   },
   methods: {
@@ -57,16 +60,18 @@ export default {
       fetchOne: "fetchOne",
     }),
     addTooltips() {
-      this.$el.querySelectorAll("span[data-term]").forEach((el) => {
-        for (let entry of this.faqVaccines[this.lang]) {
-          for (let term of entry.glossary) {
-            if (term.slug === el.getAttribute('data-term')) {
-              el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
-              el.setAttribute("tabindex", 0);
+      if (this.faqVaccines[this.lang]) {
+        this.$el.querySelectorAll("span[data-term]").forEach((el) => {
+          for (let entry of this.faqVaccines[this.lang]) {
+            for (let term of entry.glossary) {
+              if (term.slug === el.getAttribute('data-term')) {
+                el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
+                el.setAttribute("tabindex", 0);
+              }
             }
           }
-        }
-      });
+        });
+      }
     },
     smoothScroll(e) {
       const offset = -90;
@@ -85,6 +90,14 @@ export default {
     }),
   },
   mounted() {
+    let checker = setInterval(() => {
+      let elm = document.querySelector(".vue-fuse-search");
+      if (elm) {
+        this.loaded = true;
+        clearInterval(checker);
+      }
+    }, 80);
+
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = this.$el.querySelector(this.$route.hash)
@@ -95,7 +108,8 @@ export default {
           this.$scrollTo(this.$el.querySelector(this.$route.hash), 500, {
             offset: offset,
           })
-          this.loaded = true
+          this.loaded = true;
+          this.addTooltips();
           // open question, if anchor link
           if (document.querySelector(this.$route.hash)) {
             document.querySelector(this.$route.hash).open = true;

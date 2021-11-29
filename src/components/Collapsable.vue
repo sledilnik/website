@@ -1,8 +1,11 @@
 <template>
-  <details :id="`${id}`">
-    <summary>{{ title }}</summary>  
-    <p v-html-md="body" />
-  </details>
+  <div class="collapsable">
+    <img :class="'icon ' + classCopy" @click="copy" v-b-tooltip.top.hover :title="tooltipTitle" :alt=tooltipTitle />
+    <details :id="id">
+      <summary>{{ title }}</summary>
+      <p v-html-md="body" />
+    </details>
+  </div>
 </template>
 <script>
 export default {
@@ -11,6 +14,30 @@ export default {
     id: String,
     title: String,
     body: String,
+  },
+  data() {
+    return {
+      tooltipTitle: this.$t('embedMaker.copy'),
+      classCopy: "copy"
+    };
+  },
+  methods: {
+    copy($event) {
+      const element = $event.target
+      const dummy = document.createElement('input');
+      const text = window.location.href + "#" + element.nextSibling.id;
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+      this.tooltipTitle = this.$t('embedMaker.copied');
+      this.classCopy = "check";
+      setTimeout(() => {
+        this.tooltipTitle = this.$t('embedMaker.copy');
+        this.classCopy = "copy";
+      }, 2000)
+    }
   },
 };
 </script>
@@ -33,7 +60,11 @@ details {
     line-height: 1.71;
     color: rgba(0, 0, 0, 0.75);
     position: relative;
-    padding-right: 10%;
+    padding-right: 18%;
+
+    @media only screen and (min-width: 768px) {
+      padding-right: 10%;
+    }
 
     summary::-webkit-details-marker {
         display: none;
@@ -74,6 +105,24 @@ details[open] {
     &:after {
       content: url("../assets/svg/close-dd.svg");
     }
+  }
+}
+.collapsable {
+  position: relative;
+}
+.icon {
+  width: 28px;
+  cursor: pointer;
+  padding: 5px;
+  position: absolute;
+  top: -3px;
+  right: 30px;
+  z-index: 10;
+  &.copy {
+    content: url("../assets/svg/copy.svg");
+  }
+  &.check {
+    content: url("../assets/svg/check.svg");
   }
 }
 
