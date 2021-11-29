@@ -27,6 +27,10 @@ export default {
     titleKey: 'charts.hospitals.titleMenu',
     icon: 'graph',
   },
+  'patients-age-chart': {
+    titleKey: 'charts.patientsAge.titleMenu',
+    icon: 'column',
+  },
   'map-chart': {
     titleKey: 'charts.map.titleMenu',
     icon: 'map',

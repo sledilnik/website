@@ -1134,6 +1134,14 @@
             "max": "Max",
             "data": "Podatki"
         },
+        "patientsAge": {
+            "title": "Hospitalizirani po starosti, tedensko",
+            "titleMenu": "Hospitalizirani - starost",
+            "meanAge": "Povprečna starost",
+            "hospitalIn": "Sprejeti v bolnišnico",
+            "icuIn": "Sprejeti v intenzivno",
+            "deceased": "Umrli"
+        },
         "hcCases": {
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
             "titleMenu": "Zdravstvo in DSO - primeri",
@@ -2076,6 +2084,10 @@
         "care-patients-chart": {
             "question": "Kaj nam pove graf \"Negovalne bolnišnice\"?",
             "answer": "[Graf](/sl/stats#care-patients-chart) nam prikazuje število oseb, ki so nameščeni v negovalne oddelke v bolnišnicah. Te osebe ne potrebujejo hospitalizacijo, zato niso nameščene na akutni oddelek ali intenzivno terapijo ampak so nameščene na negovalnem oddelku začasno.\nPonavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni na negovalni oddelek za čas ko se v njihovem DSO pripravlja reorganizacija na rdečo in sivo cono. Podobno gre za potrjene primere v psihiatričnih bolnišnicah."
+        },
+        "patients-age-chart": {
+            "question": "Kaj nam pove graf \"Hospitalizirani po starosti, tedensko\"?",
+            "answer": "[Graf](/sl/stats#patients-age-chart) nam prikazuje število oseb po starostnih skupinah, ki so v posameznem tednu bili *sprejeti v bolnišnico*, *sprejeti na oddelek intenzivne terapije* ali so *umrli* v bolnišnici. Podatki se lahko prikažejo *Absolutno* in se vidi tudi trend gibanja po tednih ali pa *Relativno* kjer so razvidni deleži v odstotkih posameznih starostnih skupin.\n\nMožen je tudi prikaz *Povprečne starosti*, ki prikazuje povprečno starost sprejetih v bolnišnico, na oddelek intenzivne terapije in umrlih.\n\nPodatke tedensko zbira NIJZ na podlagi EPISARI poročanja bolnišnic."
         },
         "hospitals-chart": {
             "question": "Kaj nam pove graf \"Kapacitete bolnišnic\"?",
