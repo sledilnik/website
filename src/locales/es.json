@@ -69,7 +69,9 @@
             "share": "Compartir",
             "webpage": "Página web",
             "log": "Logarítmica",
-            "linear": "Lineal"
+            "linear": "Lineal",
+            "showToDate": "A la fecha",
+            "showToday": "Por día"
         },
         "metricsComparison": {
             "icuDischarged": "Dados de Alta de UTI",
@@ -121,7 +123,8 @@
             "bedsShort": "Camas"
         },
         "phaseDiagram": {
-            "hospitalized": "Hospitalizados"
+            "hospitalized": "Hospitalizados",
+            "deceased": "Muertes"
         },
         "spread": {
             "hospitalized": "hospitalizados"
@@ -136,7 +139,10 @@
             "ventilatorHospital": "En Respirador (entubado)",
             "icuHospital": "En ITU",
             "hospitalCases": "Hospitalizados",
-            "hospitalizations": "Hospitalizaciones"
+            "hospitalizations": "Hospitalizaciones",
+            "ventilatorCases": "En Respirador (entubado)",
+            "deceasedCases": "Muertes",
+            "icuCases": "En UTI"
         },
         "patients": {
             "allHospitals": "Todos Hospitales",
@@ -144,11 +150,18 @@
             "hospitalizedIn": "Hospitalizado en:",
             "byHospital": "Por Hospital",
             "titleMenu": "Hospitalizaciones",
-            "title": "Hospitalizaciones"
+            "title": "Hospitalizaciones",
+            "niVentilator": "En Respirador (no invasivo)",
+            "icu-discharged": "Dados de Alta de UTI",
+            "ventilator": "En Respirador (entubado)"
         },
         "cases": {
             "deceased-hospital": "Muertes (en hospital)",
-            "hospitalized": "Hospitalizados"
+            "hospitalized": "Hospitalizados",
+            "recovered": "Recuperaciones",
+            "title": "Casos Confirmados",
+            "icu": "En UTI",
+            "ventilator": "En Respirador (entubado)"
         },
         "deceased": {
             "deceased-rest": "Fuera de Hospital",
@@ -171,6 +184,59 @@
             "new": "Casos Confirmados",
             "title": "Comparación por Día de Semana",
             "titleMenu": "Día de Semana: Comparación"
+        },
+        "regions": {
+            "allCases": "Todo",
+            "confirmedCases": "Casos Confirmados",
+            "deceased": "Muertes",
+            "activeCases": "Casos Activos"
+        },
+        "sources": {
+            "confirmedCases": "Casos Confirmados"
+        },
+        "regions100k": {
+            "confirmedCases": "Casos Confirmados",
+            "deceased": "Muertes",
+            "activeCases": "Casos Activos"
+        },
+        "map": {
+            "all": "Todo",
+            "deceased": "Muertes",
+            "confirmedCases": "Casos Confirmados"
+        },
+        "europe": {
+            "statusNone": "-"
+        },
+        "municipalities": {
+            "viewTotal": "Todo"
+        },
+        "ageGroups": {
+            "deceased": "Muertes",
+            "confirmedCases": "Casos Confirmados"
+        },
+        "infections": {
+            "all": "Todo"
+        },
+        "vaccineEffect": {
+            "confirmedCases": "Casos Confirmados",
+            "hospitalizedCases": "Hospitalizados",
+            "casesRecovered": "Recuperaciones"
+        },
+        "schoolStatus": {
+            "showAll": "Todo"
+        },
+        "sewage": {
+            "activeCases": "Casos Activos"
+        },
+        "excessDeaths": {
+            "excessByAgeGroup": {
+                "sex": {
+                    "both": "Todo"
+                }
+            }
+        },
+        "weeklyDemographics": {
+            "newCases": "Nuevos Casos"
         }
     },
     "infocard": {
@@ -342,6 +408,12 @@
     "cm": {
         "epidemic": {
             "description": "Declaración de epidemia, prescrito aislamiento general"
+        },
+        "app": {
+            "title": "#OstaniZdrav"
+        },
+        "croatia": {
+            "title": "Croacia"
         }
     },
     "country": {
@@ -563,5 +635,33 @@
         "AGO": "Angola",
         "AFG": "Afganistán",
         "ABW": "Aruba"
+    },
+    "mk": {
+        "phase": {
+            "5": {
+                "title": "fase<br>5"
+            },
+            "2": {
+                "title": "fase<br>2"
+            },
+            "3": {
+                "title": "fase<br>3"
+            },
+            "4": {
+                "title": "fase<br>4"
+            },
+            "6": {
+                "title": "fase<br>6"
+            },
+            "1": {
+                "title": "fase<br>1"
+            }
+        }
+    },
+    "tableDict": {
+        "cases_active": "Casos Activos",
+        "state_in_hospital": "Hospitalizados",
+        "state_icu": "En UTI",
+        "state_critical": "En Respirador (entubado)"
     }
 }
