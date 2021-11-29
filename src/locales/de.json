@@ -583,7 +583,8 @@
             "titleMenu": "Region – Fälle",
             "newCases7Days": "Neue Fälle (7-Tage-Durchschnitt)",
             "vaccinated1st": "Geimpft",
-            "vaccinated": "Geimpft"
+            "vaccinated": "Geimpft",
+            "allCases": "Alle"
         },
         "cases": {
             "hospitalized": "Hospitalisierte",
@@ -870,6 +871,23 @@
         "icuPatients": {
             "titleMenu": "Intensivbehandlung",
             "title": "Intensivbehandlung"
+        },
+        "sewage": {
+            "activeCases": "Aktive Fälle"
+        },
+        "vaccineEffect": {
+            "confirmedCases": "Bestätigte Fälle",
+            "icuCases": "Auf Intensivstationen",
+            "hospitalizedCases": "Hospitalisierte",
+            "absolute": "Absolut",
+            "casesRecovered": "Genesene"
+        },
+        "schoolStatus": {
+            "showActive": "Aktive",
+            "showAll": "Alle"
+        },
+        "schools": {
+            "kindergarten": "Kindergarten"
         }
     },
     "tableDict": {
@@ -1120,6 +1138,51 @@
         },
         "liftServices": {
             "title": "Dienstleistungen"
+        },
+        "bordersStrict": {
+            "title": "Grenzen"
+        },
+        "liftShops2": {
+            "title": "Geschäfte"
+        },
+        "liftBorders": {
+            "title": "Grenzen"
+        },
+        "liftMunicipality2": {
+            "title": "Gemeinden"
+        },
+        "bordersClosed": {
+            "title": "Grenzen"
+        },
+        "liftServicesAll": {
+            "title": "Dienste"
+        },
+        "liftMasksOnEvents": {
+            "title": "Masken"
+        },
+        "liftGatherings50": {
+            "title": "Bis zu 50"
+        },
+        "liftGatherings": {
+            "title": "Versammlungen"
+        },
+        "gym": {
+            "title": "Fitnessstudio"
+        },
+        "liftRegions": {
+            "title": "Regionen"
+        },
+        "liftMasksOutside": {
+            "title": "Masken"
+        },
+        "liftRegions2": {
+            "title": "Regionen"
+        },
+        "masksOnEvents": {
+            "title": "Masken"
+        },
+        "liftMasksRV": {
+            "title": "Masken"
         }
     },
     "region": {
