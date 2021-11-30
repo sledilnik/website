@@ -1955,6 +1955,7 @@
         "searchPlaceholder": "Vnesite iskalni niz",
         "pageTitle": "FAQ - Pogosta vprašanja in odgovori",
         "intro": "_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_",
+        "vaccinesFaqIntro": "Zaradi veliko vprašanj o cepivih smo z strokovnjaki pripravili tudi posebno stran [Odgovori na pogosta vprašanja o covidu-19 in cepivih](/sl/faq-vaccines).",
         "section": {
             "general": "Splošno",
             "data": "O podatkih",
@@ -2241,6 +2242,13 @@
             "question": "Kaj nam pove graf \"Primerjava po državah\"?",
             "answer": "[Graf](/en/stats#countries-chart) prikazuje primerjavo Slovenije in drugih skupin držav pri vseh smrtih s COVID-19 na miljon prebivalcev. Graf je urejen kronološko. Graf lahko uredite po različnih primerjavah z izbiro gumbov pod grafom."
         }
+    },
+    "faqVaccines": {
+        "title": "Odgovori na pogosta vprašanja o covidu-19 in cepivih",
+        "description": "To je zbirka doslej znanih dejstev in raziskav o bolezni covid-19, cepivih in njihovih učinkih, s katero želimo pomagati pri iskanju odgovorov vsem, ki potrebujete preverjene in z znanstvenimi spoznanji potrjene informacije. Odgovore smo želeli napisati čim bolj razumljivo tudi za nestrokovnjake, zato nismo vključili znanstvenih referenc, čeprav so odgovori dobro podprti s kredibilnimi znanstvenimi informacijami. Glede virusa, bolezni in delovanja cepiv se znanstvena spoznanja sčasoma izpopolnjujejo in zdaj vemo veliko več kot pred slabima dvema letoma.\n\nZbirko bomo sproti in po potrebi dopolnjevali v skladu z novimi spoznanji in vprašanji. Odgovore na zastavljena vprašanja lahko delite z drugimi in na družbenih omrežjih.",
+        "credits": "*Odgovore so pripravili in pregledali:*\n\n * prof. Roman Jerala, Odsek za sintezno biologijo in imunologijo, Kemijski inštitut, Ljubljana\n\n * prof. Alojz Ihan, Medicinska fakulteta, Univerza v Ljubljani\n\n * izr. prof. Tomaž Bratkovič, Fakulteta za farmacijo, Univerza v Ljubljani\n\n * prof. Borut Štrukelj, Fakulteta za farmacijo, Univerza v Ljubljani\n\n * akad. prof. Tatjana Avšič - Županc, Medicinska fakulteta, Univerza v Ljubljani\n\nZa pomoč in spodbudo pri pripravi odgovorov se zahvaljujemo sodelavcem COVID-19 Sledilnika ter SAZU za lektoriranje.",
+        "version": "*Verzija 1.0, 23.11.2021*",
+        "glossary": "Slovar izrazov"
     },
     "donation": {
         "title": "Podpiram Sledilnik",

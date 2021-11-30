@@ -166,7 +166,11 @@ export default {
       line-height: 1.71;
       color: rgba(0, 0, 0, 0.75);
       position: relative;
-      padding-right: 10%;
+      padding-right: 18%;
+
+      @media only screen and (min-width: 768px) {
+        padding-right: 10%;
+      }
 
       &:after {
         content: url('../assets/svg/expand-dd.svg');

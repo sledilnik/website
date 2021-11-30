@@ -54,7 +54,7 @@
           <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
         </div>
       </div>
-      <div class="footer d-flex justify-content-between">
+      <div class="footer d-flex justify-content-between mt-auto">
         <div class="data-time" :class="{ outdated }">
           {{
             $t("infocard.lastUpdated", {
@@ -78,8 +78,6 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
-
 export default {
   props: {
     cardData: Object,
@@ -283,7 +281,6 @@ export default {
 .data-time {
   font-size: 12px;
   color: #a0a0a0;
-  margin-top: auto;
 
   &.outdated {
     color: #bf5747;
