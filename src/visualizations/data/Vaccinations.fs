@@ -13,7 +13,8 @@ type VaccinationAgeGroup =
     { ageFrom : int option
       ageTo : int option
       administered : int option
-      administered2nd : int option }
+      administered2nd : int option
+      administered3rd : int option }
 
 type VaccinationStats = {
     year: int
@@ -21,6 +22,7 @@ type VaccinationStats = {
     day: int
     administered: VaccinationCounts
     administered2nd: VaccinationCounts
+    administered3rd: VaccinationCounts
     usedToDate: int option
     usedByManufacturer: Map<string,int>
     deliveredToDate: int option

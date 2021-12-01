@@ -287,22 +287,27 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                             prop.children [
                                 let confirmedCases = dp.ConfirmedToday |> Option.defaultValue 0
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
-                                let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
-                                let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
+                                // let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
+                                // let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
+                                let closedToDate = confirmedToDate - activeCases
                                 let cHeight = Math.Ceiling(float confirmedCases * float barMaxHeight / float maxValue)
                                 let aHeight = Math.Ceiling(float (activeCases-confirmedCases) * float barMaxHeight / float maxValue)
-                                let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight - int cHeight
+                                // let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
+                                // let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight - int cHeight
+                                let clHeight = confirmedToDate * barMaxHeight / maxValue - int aHeight - int cHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
+                                            // Html.div [
+                                            //     prop.style [ style.height (int dHeight) ]
+                                            //     prop.className "bar--deceased" ]
+                                            // Html.div [
+                                            //     prop.style [ style.height rHeight ]
+                                            //     prop.className "bar--recovered" ]
                                             Html.div [
-                                                prop.style [ style.height (int dHeight) ]
-                                                prop.className "bar--deceased" ]
-                                            Html.div [
-                                                prop.style [ style.height rHeight ]
-                                                prop.className "bar--recovered" ]
+                                                prop.style [ style.height (int clHeight) ]
+                                                prop.className "bar--closed" ]
                                         Html.div [
                                             prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
@@ -330,17 +335,23 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
                                                     Html.b [ prop.text (I18N.NumberFormat.formatNumber(activeCases)) ] ] ]
                                         Html.div [
-                                            if (recoveredToDate > 0) then
-                                                prop.className "recovered"
+                                            if (closedToDate > 0) then
+                                                prop.className "closed"
                                                 prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
-                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(recoveredToDate)) ] ] ]
-                                        Html.div [
-                                            if (deceasedToDate > 0) then
-                                                prop.className "deceased"
-                                                prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
-                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(deceasedToDate)) ] ] ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.closed") ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(closedToDate)) ] ] ]
+                                        // Html.div [
+                                        //     if (recoveredToDate > 0) then
+                                        //         prop.className "recovered"
+                                        //         prop.children [
+                                        //             Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
+                                        //             Html.b [ prop.text (I18N.NumberFormat.formatNumber(recoveredToDate)) ] ] ]
+                                        // Html.div [
+                                        //     if (deceasedToDate > 0) then
+                                        //         prop.className "deceased"
+                                        //         prop.children [
+                                        //             Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
+                                        //             Html.b [ prop.text (I18N.NumberFormat.formatNumber(deceasedToDate)) ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [

@@ -54,7 +54,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         PatientsData = [||]
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
         Error = None
     }
 
@@ -209,7 +209,7 @@ let renderChartOptions (state : State) dispatch =
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
-        credits = chartCreditsNIJZMZ
+        credits = chartCreditsNIJZMZHospitals
     |}
 
 let renderChartContainer (state : State) dispatch =

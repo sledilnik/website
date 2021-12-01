@@ -83,13 +83,13 @@ let calcCasesByAgeForDay
         | None, None -> None
 
     let calcAgeGroupDiff
-        (prevDay: IDictionary<AgeGroupKey, AgeGroup>) ageGroup =
+        (prevDay: IDictionary<AgeGroupKey, AgeGroup>) (ageGroup : AgeGroup) =
         match prevDay.TryGetValue ageGroup.GroupKey with
         | true, prevDayGroup ->
-            { GroupKey = ageGroup.GroupKey
-              Male = calcIntOptionDiff prevDayGroup.Male ageGroup.Male
-              Female = calcIntOptionDiff prevDayGroup.Female ageGroup.Female
-              All = calcIntOptionDiff prevDayGroup.All ageGroup.All
+            { AgeGroup.GroupKey = ageGroup.GroupKey
+              AgeGroup.Male = calcIntOptionDiff prevDayGroup.Male ageGroup.Male
+              AgeGroup.Female = calcIntOptionDiff prevDayGroup.Female ageGroup.Female
+              AgeGroup.All = calcIntOptionDiff prevDayGroup.All ageGroup.All
             }
         | false, _ -> ageGroup
 

@@ -24,6 +24,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Patients" -> Some Patients
             | "IcuPatients" -> Some IcuPatients
             | "CarePatients" -> Some CarePatients
+            | "PatientsAge" -> Some PatientsAge
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -31,6 +32,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Vaccination" -> Some Vaccination
+            | "Vaccines" -> Some Vaccines
             | "VaccineEffect" -> Some VaccineEffect
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
@@ -62,6 +64,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
           Query = query
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
+          WeeklyEpisariData = NotAsked
           RegionsData = NotAsked
           MunicipalitiesData = NotAsked
           RenderingMode = renderingMode }
@@ -73,6 +76,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
+                  Cmd.ofMsg WeeklyEpisariDataRequested
                   Cmd.ofMsg RegionsDataRequest
                   Cmd.ofMsg MunicipalitiesDataRequest ]
         | "world" ->
@@ -83,6 +87,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
+                  Cmd.ofMsg WeeklyEpisariDataRequested
                   Cmd.ofMsg RegionsDataRequest
                   Cmd.ofMsg MunicipalitiesDataRequest ]
 
@@ -100,6 +105,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.WeeklyStats.load
     | WeeklyStatsDataLoaded data -> { state with WeeklyStatsData = data }, Cmd.none
+    | WeeklyEpisariDataRequested ->
+        match state.WeeklyEpisariData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with WeeklyEpisariData = Loading }, Cmd.OfAsync.result Data.WeeklyEpisari.load
+    | WeeklyEpisariDataLoaded data -> { state with WeeklyEpisariData = data }, Cmd.none
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
@@ -119,7 +129,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "hospitals-chart"
             ChartTextsGroup = "hospitals"
             ChartEnabled = true
-            Explicit = true
+            Explicit = false
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
 
     let metricsComparison =
@@ -319,6 +329,20 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
+    let patientsAge =
+          { VisualizationType = PatientsAge
+            ClassName = "patients-age-chart"
+            ChartTextsGroup = "patientsAge"
+            ChartEnabled = true
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyEpisariData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView PatientsAgeChart.patientsAgeChart {| data = data |} }
+
     let ratios =
           { VisualizationType = Ratios
             ClassName = "ratios-chart"
@@ -400,6 +424,14 @@ let render (state: State) (_: Msg -> unit) =
             ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
+
+    let vaccines =
+          { VisualizationType = Vaccines
+            ClassName = "vaccines-chart"
+            ChartTextsGroup = "vaccines"
+            ChartEnabled = true
+            Explicit = false
+            Renderer = fun _ -> lazyView VaccinesChart.vaccinesChart () }
 
     let vaccineEffect =
           { VisualizationType = VaccineEffect
@@ -651,12 +683,13 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; tests;
+        [ metricsComparison; spread; dailyComparison;
+          vaccination; vaccines; tests;
           map; municipalities; regions100k;
           schools; schoolStatus
           sewage; ageGroupsTimeline;
-          patients; patientsICU; // patientsCare;
-          vaccineEffect; vaccination; regionMap;
+          patients; patientsICU; hospitals; patientsAge; // patientsCare;
+          vaccineEffect; regionMap;
           weeklyDemographics; ageGroups;
           sources; europeMap;
           metricsCorrelation; deceased; excessDeaths
@@ -678,9 +711,10 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources; vaccineEffect; vaccination
+          municipalities; sources; vaccination; vaccines; vaccineEffect;
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsICU; patientsCare; patientsAge;
+          deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; schoolStatus; hcCases
           countriesCasesPer100k
           countriesActiveCasesPer100k

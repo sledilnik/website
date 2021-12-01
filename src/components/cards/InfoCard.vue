@@ -54,12 +54,21 @@
           <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
         </div>
       </div>
-      <div class="data-time" :class="{ outdated }">
-        {{
-          $t("infocard.lastUpdated", {
-            date: date,
-          })
-        }}
+      <div class="footer d-flex justify-content-between mt-auto">
+        <div class="data-time" :class="{ outdated }">
+          {{
+            $t("infocard.lastUpdated", {
+              date: date,
+            })
+          }}
+        </div>
+        <a
+          v-if="withBrand" 
+          class="brand-link"
+          target="_blank"
+          href="https://covid-19.sledilnik.org/"
+          >COVID-19 Sledilnik</a
+        >
       </div>
     </div>
     <div class="hp-card" v-else>
@@ -69,13 +78,12 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
-
 export default {
   props: {
     cardData: Object,
     loading: Boolean,
     cardName: String,
+    withBrand: Boolean
   },
   computed: {
     subLabelExtraText(){
@@ -273,7 +281,6 @@ export default {
 .data-time {
   font-size: 12px;
   color: #a0a0a0;
-  margin-top: auto;
 
   &.outdated {
     color: #bf5747;

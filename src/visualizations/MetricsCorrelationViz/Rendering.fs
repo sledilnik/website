@@ -77,7 +77,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         Data = data
         DisplayType = DisplayType.Default
-        RangeSelectionButtonIndex = 1
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 
@@ -274,7 +274,7 @@ let renderChartOptions state dispatch =
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         responsive = responsive
-        credits = chartCreditsNIJZMZ
+        credits = chartCreditsNIJZMZHospitals
     |}
 
 let renderChartContainer state dispatch =

@@ -27,6 +27,10 @@ ProjectSection(SolutionItems) = preProject
 	vue.config.js = vue.config.js
 	fsharplint-config.json = fsharplint-config.json
 	owid.analyzer.bat = owid.analyzer.bat
+	base.Dockerfile = base.Dockerfile
+	docker-compose.test.yml = docker-compose.test.yml
+	docker-compose.yml = docker-compose.yml
+	Dockerfile = Dockerfile
 EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Owid.Analyzer", "Owid.Analyzer\Owid.Analyzer.fsproj", "{D5A56421-F648-49B1-8DAD-53117E9C1BD8}"

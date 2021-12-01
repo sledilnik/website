@@ -35,7 +35,7 @@ type State = {
             error = None
             facilities = []
             scope = Totals
-            RangeSelectionButtonIndex = 0
+            RangeSelectionButtonIndex = 1
         }
     static member switchBreakdown breakdown state = { state with scope = breakdown }
 
@@ -57,7 +57,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ConsumeHospitalsData (Ok data) ->
         { state with
             facData = data
-            facilities = data |> getSortedFacilityCodes
+            facilities =
+                data
+                |> getSortedFacilityCodes
+                |> List.filter (fun code -> not (code.StartsWith("pb") || code.StartsWith("upk"))) // care hospitals
         } |> State.switchBreakdown state.scope, Cmd.none
     | ConsumeHospitalsData (Error err) ->
         { state with error = Some err }, Cmd.none
@@ -80,7 +83,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let getAllScopes state = seq {
     yield Totals, I18N.t "charts.hospitals.allHospitals"
-    yield Projection, I18N.t "charts.hospitals.projection"
+    // yield Projection, I18N.t "charts.hospitals.projection"
     for fcode in state.facilities do
         yield Facility fcode, Utils.Dictionaries.GetFacilityName(fcode)
 }
@@ -110,14 +113,14 @@ let extractFacilityDataPoint (scope: Scope) (atype:AssetType) (ctype: CountType)
 let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int option)) =
     let extractTotalsCount : TotalPatientStats -> int option =
         match cType with
-        | Beds -> fun ps -> ps.inHospital.today
+        | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
         | Icus -> fun ps -> ps.icu.today
-        | Vents -> fun _ -> failwithf "no vents in data"
+        | Vents -> fun ps -> ps.critical.today |> Utils.sumIntOption ps.niv.today
     let extractFacilityCount : FacilityPatientStats -> int option =
         match cType with
-        | Beds -> fun ps -> ps.inHospital.today
+        | Beds -> fun ps -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
         | Icus -> fun ps -> ps.icu.today
-        | Vents -> fun _ -> failwithf "no vents in data"
+        | Vents -> fun ps -> ps.critical.today |> Utils.sumIntOption ps.niv.today
 
     match scope with
     | Totals ->
@@ -199,7 +202,6 @@ let renderChartOptions (state : State) dispatch =
 
         {|
             //visible = state.activeSeries |> Set.contains series
-            ``type``="line"
             color = color
             name = name
             dashStyle = dash |> DashStyle.toString
@@ -225,7 +227,6 @@ let renderChartOptions (state : State) dispatch =
             | [||] -> DateTime.Now |> jsTime, None
             | data -> data.[data.Length-1] |> extractPatientDataPoint scope aType
         {|
-            ``type``="line"
             color = color
             name = name
             showInLegend = false
@@ -248,7 +249,6 @@ let renderChartOptions (state : State) dispatch =
 
     let renderPatientsSeries (scope: Scope) (aType) color dash name =
         {|
-            ``type``="spline"
             color = color
             name = name
             dashStyle = dash |> DashStyle.toString
@@ -267,24 +267,26 @@ let renderChartOptions (state : State) dispatch =
     let series = [|
         let gf7, gf14, gf21 = growthFactor 7, growthFactor 14, growthFactor 21
 
-        let clr = "#444"
         if state.scope = Projection then
-            yield renderFacilitiesSeries state.scope Beds Max 1.0 clr Dash (I18N.t "charts.hospitals.bedsMax")
+            yield renderFacilitiesSeries state.scope Beds Max 1.0 "#808080" Dash (I18N.t "charts.hospitals.bedsMax")
         else
             yield pojo {| showInLegend = false; data=[||] |}
 
-        yield renderFacilitiesSeries state.scope Beds Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsAll")
-        yield renderFacilitiesSeries state.scope Beds Total 0.7 "#777" Dash (I18N.t "charts.hospitals.beds70")
-        //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
-        //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
-        yield renderPatientsSeries state.scope Beds clr Solid (I18N.t "charts.hospitals.bedsFull")
+        yield renderFacilitiesSeries state.scope Beds Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsAll")
+        //yield renderFacilitiesSeries state.scope Beds Total 0.7 "#808080" Dash (I18N.t "charts.hospitals.beds70")
+        yield renderPatientsSeries state.scope Beds "#be7A2a" Solid (I18N.t "charts.hospitals.bedsFull")
 
-        let clr = "#c44"
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
-        yield renderFacilitiesSeries state.scope Icus Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsICUAll")
-        yield renderFacilitiesSeries state.scope Icus Total 0.7 "#c88" Dash (I18N.t "charts.hospitals.bedsICU70")
-        //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
-        yield renderPatientsSeries state.scope Icus clr Solid (I18N.t "charts.hospitals.bedsICUFull")
+        yield renderFacilitiesSeries state.scope Icus Total 1.0 "#808080" Solid (I18N.t "charts.hospitals.bedsICUAll")
+        //yield renderFacilitiesSeries state.scope Icus Total 0.7 "#808080" Dash (I18N.t "charts.hospitals.bedsICU70")
+        yield renderPatientsSeries state.scope Icus "#fb6a4a" Solid (I18N.t "charts.hospitals.bedsICUFull")
+
+        yield renderPatientsSeries state.scope Vents "#a50f15" Solid (I18N.t "charts.hospitals.ventsFull")
+
+        //let clr = "#4ad"
+        //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
+        //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
+
         if state.scope = Projection then
             let clr = "#888"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  (I18N.t "charts.hospitals.projection7")
@@ -297,9 +299,6 @@ let renderChartOptions (state : State) dispatch =
             yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 (I18N.t "charts.hospitals.projection21")
 
 
-        //let clr = "#4ad"
-        //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
-        //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
     |]
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -308,28 +307,20 @@ let renderChartOptions (state : State) dispatch =
             true
         res
 
+    let className = "covid19-hospitals-chart"
     let baseOptions =
         basicChartOptions
-            state.scaleType "hospitals-chart"
+            state.scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
+        chart = pojo
+           {| animation = false
+              ``type`` = "line"
+              zoomType = "x"
+              className = className
+              events = pojo {| load = onLoadEvent (className) |} |}
         yAxis = yAxes
         series = series
-        legend = pojo
-            {|
-                enabled = Some true
-                title = ""
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "rgba(255,255,255,0.5)"
-            |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
             if false //state.scope = Projection
             then
@@ -352,9 +343,17 @@ let renderChartOptions (state : State) dispatch =
         )
         plotOptions = pojo
                 {|
-                    spline = pojo {| dataLabels = pojo {| enabled = true |} |}
                     line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                 |}
+        responsive = pojo
+           {| rules =
+                  [| {| condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {| yAxis =
+                                   [| {| labels = pojo {| enabled = false |} |}
+                                      {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
+        legend = pojo {| enabled = true; layout = "horizontal" |}
+        credits = chartCreditsMZHospitals
     |}
 
 let renderChartContainer state dispatch =
@@ -371,35 +370,15 @@ let renderTable (state: State) dispatch =
 
     let getFacilityDp (breakdown: Scope) (atype:AssetType) (ctype: CountType) =
         let renderPoint = extractFacilityDataPoint breakdown atype ctype
-        match state.facData with
-        | [||]
-        | [| _ |] -> None
-        | data ->
-            seq {
-                for i = data.Length-1 downto data.Length / 2 do
-                    yield data.[i]
-            }
-            |> Seq.map (renderPoint >> snd)
-            |> Seq.skipWhile Option.isNone
-            |> Seq.take 1
-            |> Seq.tryExactlyOne
-            |> Option.flatten
+        match state.facData |> Array.tryLast with
+        | None -> None
+        | Some dp -> dp |> (renderPoint >> snd)
 
     let getPatientsDp (breakdown: Scope) (atype:AssetType) =
         let renderPoint = extractPatientDataPoint breakdown atype
-        match state.patientsData with
-        | [||]
-        | [| _ |] -> None
-        | data ->
-            seq {
-                yield data.[data.Length-1]
-                yield data.[data.Length-2]
-            }
-            |> Seq.map (renderPoint >> snd)
-            |> Seq.skipWhile Option.isNone
-            |> Seq.take 1
-            |> Seq.tryExactlyOne
-            |> Option.flatten
+        match state.patientsData |> Array.tryLast with
+        | None -> None
+        | Some dp -> dp |> (renderPoint >> snd)
 
     let renderFacilityCells scope (facilityName: string) = [
         yield Html.th [
@@ -408,51 +387,45 @@ let renderTable (state: State) dispatch =
         ]
 
         let numericCell (pt: int option) =
-            Html.td [ prop.text (pt |> Option.map string |> Option.defaultValue "") ]
+            Html.td [ prop.text (pt |> Option.defaultValue 0 |> string) ]
 
-        // postelje
+        // acute
         let cur = getPatientsDp scope Beds
         let total = getFacilityDp scope Beds Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Beds Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Beds Max |> numericCell
+
         // icu
         let cur = getPatientsDp scope Icus
         let total = getFacilityDp scope Icus Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Icus Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Icus Max |> numericCell
-        // resp
-        //let cur = getPatientsDp scope Vents
+
+        // vents
         let cur = getFacilityDp scope Vents Occupied
         let total = getFacilityDp scope Vents Total
-        //let free = getFree cur total
         let free = getFacilityDp scope Vents Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield Html.td []
     ]
 
     Html.table [
-        prop.className "facilities-navigate b-table-sticky-header b-table table-striped table-hover table-bordered text-lg-right"
-        prop.style [ style.width (length.percent 100.0); style.fontSize 16 ]
+        prop.className "facilities-navigate b-table-sticky-header b-table table-striped table-hover table-bordered text-center"
+        prop.style [ style.width (length.percent 100.0); style.fontSize 12 ]
         prop.children [
             Html.thead [
                 prop.children [
                     Html.tableRow [
-                        prop.className "text-center"
                         prop.children [
                             Html.th []
-                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 4 ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsICUShort"); prop.colSpan 4 ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.ventilators"); prop.colSpan 4 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 3 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsICUShort"); prop.colSpan 3 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.ventilators"); prop.colSpan 3 ]
                         ]
                     ]
                     Html.tableRow [
@@ -462,17 +435,17 @@ let renderTable (state: State) dispatch =
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // icu
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // vents
                             Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
                             Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
-                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
+                            //Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                         ]
                     ]
                 ]

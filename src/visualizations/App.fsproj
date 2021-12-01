@@ -17,6 +17,7 @@
         <Compile Include="data/Loader.fs" />
         <Compile Include="data/Stats.fs" />
         <Compile Include="data/WeeklyStats.fs" />
+        <Compile Include="data/WeeklyEpisari.fs" />
         <Compile Include="data/Municipalities.fs" />
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
@@ -36,6 +37,7 @@
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="DailyComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
+        <Compile Include="PatientsAgeChart.fs" />
         <Compile Include="PatientsChart.fs" />
         <Compile Include="RatiosChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
@@ -50,6 +52,7 @@
         <Compile Include="SchoolsChart.fs" />
         <Compile Include="SchoolStatusChart.fs" />
         <Compile Include="VaccinationChart.fs" />
+        <Compile Include="VaccinesChart.fs" />
         <Compile Include="VaccineEffectChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="SewageChart.fs" />

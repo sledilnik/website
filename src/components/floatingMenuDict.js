@@ -23,6 +23,14 @@ export default {
     titleKey: 'charts.carePatients.titleMenu',
     icon: 'column',
   },
+  'hospitals-chart': {
+    titleKey: 'charts.hospitals.titleMenu',
+    icon: 'graph',
+  },
+  'patients-age-chart': {
+    titleKey: 'charts.patientsAge.titleMenu',
+    icon: 'column',
+  },
   'map-chart': {
     titleKey: 'charts.map.titleMenu',
     icon: 'map',
@@ -49,11 +57,15 @@ export default {
   },
   'vaccination-chart': {
     titleKey: 'charts.vaccination.titleMenu',
-    icon: 'graph',
+    icon: 'column',
+  },
+  'vaccines-chart': {
+    titleKey: 'charts.vaccines.titleMenu',
+    icon: 'column',
   },
   'vaccine-effect-chart': {
     titleKey: 'charts.vaccineEffect.titleMenu',
-    icon: 'graph',
+    icon: 'column',
   },
   'schools-chart': {
     titleKey: 'charts.schools.titleMenu',

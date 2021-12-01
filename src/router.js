@@ -216,6 +216,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "Restrictions.route" */ './pages/RestrictionsPage.vue'),
       },
       {
+        path: 'faq-vaccines',
+        name: 'faq-vaccines',
+        component: () => import(/* webpackChunkName: "FAQVaccinesPage.route" */ './pages/FAQVaccinesPage.vue'),
+        // component: FAQVaccinesPage
+      },
+      {
         path: 'posts',
         name: 'posts',
         component: () => import(/* webpackChunkName: "Posts.route" */ './pages/PostsPage.vue'),

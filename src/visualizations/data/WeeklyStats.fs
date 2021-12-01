@@ -76,6 +76,10 @@ type private TransferWStatsDataPoint =
             |}
         hospitalizedVaccinated : int option
         hospitalizedOther : int option
+        icuVaccinated : int option
+        icuVaccinatedPartially : int option
+        icuRecovered : int option
+        icuOther : int option
         confirmed : int option
         investigated : int option
         healthcare : int option
@@ -98,6 +102,10 @@ type private TransferWStatsDataPoint =
           DateTo = System.DateTime(this.``to``.year, this.``to``.month, this.``to``.day)
           HospitalizedVaccinated = this.hospitalizedVaccinated
           HospitalizedOther = this.hospitalizedOther
+          IcuVaccinated = this.icuVaccinated
+          IcuVaccinatedPartially = this.icuVaccinatedPartially
+          IcuRecovered = this.icuRecovered
+          IcuOther = this.icuOther
           ConfirmedCases = this.confirmed
           InvestigatedCases = this.investigated
           HealthcareCases = this.healthcare

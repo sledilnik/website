@@ -9,6 +9,7 @@
           :cardName="cardName"
           :cardData="summary[cardName]"
           :loading="!summary || !summary[cardName] || !summary[cardName].value"
+          :withBrand="false"
         />
       </div>
       <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
