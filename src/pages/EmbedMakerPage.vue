@@ -71,11 +71,21 @@ export default {
         "IcuPatients": {
           value: "IcuPatients",
           text: this.$t('charts.icuPatients.title'),
-          dimensions: [1140, 720]
+          dimensions: [1140, 1130]
         },
         "CarePatients": {
           value: "CarePatients",
           text: this.$t('charts.carePatients.title'),
+          dimensions: [1140, 720]
+        },
+        "Hospitals": {
+          value: "Hospitals",
+          text: this.$t('charts.hospitals.title'),
+          dimensions: [1140, 720]
+        },
+        "PatientsAge": {
+          value: "PatientsAge",
+          text: this.$t('charts.patientsAge.title'),
           dimensions: [1140, 720]
         },
 //        "Ratios": {
@@ -111,6 +121,11 @@ export default {
         "Vaccination": {
           value: "Vaccination",
           text: this.$t('charts.vaccination.title'),
+          dimensions: [1140, 720]
+        },
+        "Vaccines": {
+          value: "Vaccines",
+          text: this.$t('charts.vaccines.title'),
           dimensions: [1140, 720]
         },
         "VaccineEffect": {

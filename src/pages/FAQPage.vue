@@ -3,6 +3,7 @@
     <div class="faq-page-wrapper">
       <h1>{{ $t("faq.pageTitle") }}</h1>
       <div class="intro" v-html-md="$t('faq.intro')" />
+      <div class="intro" v-html-md="$t('faq.vaccinesFaqIntro')" />
       <vue-fuse
         class="form-control my-4"
         :placeholder="$t('faq.searchPlaceholder')"

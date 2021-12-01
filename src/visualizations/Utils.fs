@@ -1410,6 +1410,8 @@ module Dictionaries =
             "733","387","OS","nm","Osnovna šola Žužemberk, Podružnica Ajdovec"
             "734","387","OS","nm","Osnovna šola Žužemberk Podružnica Dvor"
             "735","387","OS","nm","Osnovna šola Žužemberk, Podružnica Šmihel"
+            "25075","25075","OS","lj","Osnovna šola Zagradec"
+            "25015","25015","OS","kr","Osnovna šola Janeza Puharja Kranj - Center"            
             "1089","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA"
             "14049","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA, ENOTA OB HUBLJU"
             "14050","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA, ENOTA RIBNIK"

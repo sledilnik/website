@@ -19,7 +19,8 @@
         },
         "infections": {
             "otherPersons": "Andre personer",
-            "allConfirmed": "Alle bekreftede"
+            "allConfirmed": "Alle bekreftede",
+            "all": "Alle"
         },
         "tests": {
             "shareOfPositive": "Andel positive tester (%)",
@@ -133,7 +134,8 @@
                 "date": "Dato"
             },
             "userPublishedByCount": {
-                "users": "Brukere"
+                "users": "Brukere",
+                "date": "Dato"
             },
             "usercount": {
                 "date": "Dato"
@@ -142,8 +144,6 @@
         "countriesActiveCasesPer100k": {
             "legendTitle": "Aktive tilfeller per 100k folk",
             "yAxisTitle": "Aktive tilfeller per 100k folk"
-        },
-        "ageGroupsTimeline": {
         },
         "ageGroups": {
             "confirmedCases": "Bekreftede tilfeller",
@@ -175,7 +175,7 @@
             "noData": "Ingen data",
             "countryStatus": "",
             "incidence100k": "",
-            "newCases": "",
+            "newCases": "Nye tilfeller",
             "title": "",
             "titleMenu": "Europa - situasjon"
         },
@@ -185,8 +185,8 @@
         "map": {
             "per100k": "per 100000",
             "confirmedCases": "Bekreftede tilfeller",
-            "deceased": "",
-            "absolute": "",
+            "deceased": "Dødsfall",
+            "absolute": "Absolutt",
             "last_x_days": "{{ count }} dag",
             "last_x_days_plural": "{{ count }} dager",
             "population": "befolkning",
@@ -197,15 +197,16 @@
             "relativeIncrease": "Ukentlig økning"
         },
         "regions100k": {
-            "deceased": "",
-            "confirmedCases": "",
-            "activeCases": "",
+            "deceased": "Dødsfall",
+            "confirmedCases": "Bekreftede tilfeller",
+            "activeCases": "Aktive tilfeller",
             "title": ""
         },
         "regions": {
             "deceased": "Dødsfall",
             "confirmedCases": "Bekreftede tilfeller",
-            "activeCases": "Aktive tilfeller"
+            "activeCases": "Aktive tilfeller",
+            "allCases": "Alle"
         },
         "weeklyDemographics": {
             "newCases": "Nye tilfeller",
@@ -227,7 +228,8 @@
             "hospital": "Sykehus",
             "work": "Arbeid",
             "family": "Familie",
-            "quarantine": "Karantene"
+            "quarantine": "Karantene",
+            "confirmedCases": "Bekreftede tilfeller"
         },
         "schoolStatus": {
             "student-hs": "Student",
@@ -235,7 +237,8 @@
             "kid": "Barn",
             "unit": "Klasse",
             "persons": "Personer",
-            "showAll": "Alle"
+            "showAll": "Alle",
+            "showActive": "Aktiv"
         },
         "hospitals": {
             "full": "Full",
@@ -259,7 +262,8 @@
             "excessByAgeGroup": {
                 "sex": {
                     "female": "Kvinner",
-                    "male": "Menn"
+                    "male": "Menn",
+                    "both": "Alle"
                 }
             },
             "absolute": {
@@ -268,7 +272,8 @@
         },
         "metricsCorrelation": {
             "cases": "Bekreftede tilfeller",
-            "titleMenu": "Korrelasjon"
+            "titleMenu": "Korrelasjon",
+            "hospitalized": "Hospitalisert"
         },
         "hcCases": {
             "otherCases": "Andre personer",
@@ -279,7 +284,8 @@
             "icuHospital": "På intensivavdeling",
             "deceasedCases": "Dødsfall",
             "icuCases": "På intensivavdeling",
-            "mortality": "Dødelighet"
+            "mortality": "Dødelighet",
+            "hospitalCases": "Hospitalisert"
         },
         "icuPatients": {
             "titleMenu": "Intensivbehandling",
@@ -292,7 +298,9 @@
             "icu-admitted": "Innlagt på intensivavdeling",
             "icu-deceased": "Død",
             "deceased": "Død",
-            "byHospital": "Etter sykehus"
+            "byHospital": "Etter sykehus",
+            "hospitalized": "Hospitalisert",
+            "icu": "Intensivavdeling"
         },
         "deceased": {
             "deceased-total": "Totale dødsfall",
@@ -310,6 +318,22 @@
             "deceasedHospitals": "Dødssted",
             "showPercent": "Forholdsvis",
             "showNormal": "Absolutt"
+        },
+        "phaseDiagram": {
+            "cases": "Bekreftede tilfeller",
+            "hospitalized": "Hospitalisert",
+            "deceased": "Dødsfall"
+        },
+        "schools": {
+            "kindergarten": "Barnehage"
+        },
+        "sewage": {
+            "activeCases": "Aktive tilfeller"
+        },
+        "vaccineEffect": {
+            "hospitalizedCases": "Hospitalisert",
+            "confirmedCases": "Bekreftede tilfeller",
+            "icuCases": "Intensivavdeling"
         }
     },
     "phase": {
@@ -373,6 +397,9 @@
         "16": {
             "description": "hurtigtestmetode",
             "title": "fase<br>16"
+        },
+        "18": {
+            "description": "hurtigtestmetode"
         }
     },
     "weekdayShort": {
@@ -499,6 +526,26 @@
             "bordersClosure": {
                 "title": "grenser"
             }
+        },
+        "phase": {
+            "1": {
+                "title": "fase<br>1"
+            },
+            "2": {
+                "title": "fase<br>2"
+            },
+            "5": {
+                "title": "fase<br>5"
+            },
+            "6": {
+                "title": "fase<br>6"
+            },
+            "4": {
+                "title": "fase<br>4"
+            },
+            "3": {
+                "title": "fase<br>3"
+            }
         }
     },
     "cm": {
@@ -576,6 +623,48 @@
         },
         "liftFoodMarkets": {
             "title": "Markeder"
+        },
+        "services2": {
+            "title": "Tjenester"
+        },
+        "liftFoodMarkets2": {
+            "title": "Markeder"
+        },
+        "liftShops2": {
+            "title": "Butikker"
+        },
+        "liftMasksOnEvents": {
+            "title": "Masker"
+        },
+        "liftMasksOutside": {
+            "title": "Masker"
+        },
+        "liftGatherings50": {
+            "title": "Opptil 50"
+        },
+        "liftGatherings": {
+            "title": "Sammenkomster"
+        },
+        "liftMasksRV": {
+            "title": "Masker"
+        },
+        "liftServicesAll": {
+            "title": "Tjenester"
+        },
+        "services": {
+            "title": "Tjenester"
+        },
+        "liftShops": {
+            "title": "Butikker"
+        },
+        "gatherings2": {
+            "title": "Sammenkomster"
+        },
+        "masksOnEvents": {
+            "title": "Masker"
+        },
+        "liftServices": {
+            "title": "Tjenester"
         }
     },
     "week": "Uke",
@@ -586,5 +675,14 @@
     "posts": {
         "readingTime": "min å lese",
         "timestamp": "{{ date, %e. %B %Y }}"
+    },
+    "tableDict": {
+        "cases_active": "Aktive tilfeller",
+        "state_icu": "På intensivavdeling",
+        "cases_confirmed": "Bekreftede tilfeller (daglig)",
+        "state_in_hospital": "Hospitalisert"
+    },
+    "country": {
+        "HRV": "Kroatia"
     }
 }

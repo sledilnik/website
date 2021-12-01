@@ -22,9 +22,9 @@ type DisplayType =
     | Lab of string
     static member All state =
         seq {
-            yield PositiveSplit
-            for typ in [ "hagt"; "regular"; ] do // "ns-apr20" ] do
+            for typ in [ "regular"; "hagt"; ] do // "ns-apr20" ] do
                 yield Data typ
+            // yield PositiveSplit
             // yield TotalPCR
             // yield ByLab
             // yield ByLabPercent
@@ -205,16 +205,16 @@ let renderTestsChart (state: State) dispatch =
         | Lab lab -> dp.labs.[lab].positive.today
         | _ -> dp.total.positive.today
 
-    let negativeTests (dp: LabTestsStats) =
+    let performedTests (dp: LabTestsStats) =
         match state.DisplayType with
-        | Data typ -> dp.data.[typ].performed.today |> Utils.subtractIntOption dp.data.[typ].positive.today
-        | Lab lab -> dp.labs.[lab].performed.today |> Utils.subtractIntOption dp.labs.[lab].positive.today
-        | _ -> dp.total.performed.today |> Utils.subtractIntOption dp.total.positive.today
+        | Data typ -> dp.data.[typ].performed.today
+        | Lab lab -> dp.labs.[lab].performed.today
+        | _ -> dp.total.performed.today
 
     let percentPositive (dp: LabTestsStats) =
-        match positiveTests dp, negativeTests dp with
-        | Some positive, Some negative ->
-            Some (Math.Round(float positive / float (positive+negative) * float 100.0, 2))
+        match positiveTests dp, performedTests dp with
+        | Some positive, Some performed ->
+            Some (Math.Round(float positive / float performed * float 100.0, 2))
         | _ -> None
 
     let allYAxis =
@@ -250,13 +250,14 @@ let renderTestsChart (state: State) dispatch =
     let allSeries =
         [ yield
             pojo
-                {| name = I18N.t "charts.tests.negativeTests"
+                {| name = I18N.t "charts.tests.performedTests"
                    ``type`` = "column"
                    color = "#19aebd"
                    yAxis = 0
                    data =
                        state.LabData
-                       |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
+                       |> Seq.skipWhile (fun dp -> Option.isNone (performedTests dp))
+                       |> Seq.map (fun dp -> (dp.JsDate12h, performedTests dp))
                        |> Seq.toArray |}
           yield
               pojo
@@ -266,6 +267,7 @@ let renderTestsChart (state: State) dispatch =
                      yAxis = 0
                      data =
                          state.LabData
+                         |> Seq.skipWhile (fun dp -> Option.isNone (performedTests dp))
                          |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
                          |> Seq.toArray |}
           yield
@@ -276,6 +278,7 @@ let renderTestsChart (state: State) dispatch =
                      yAxis = 1
                      data =
                          state.LabData
+                         |> Seq.skipWhile (fun dp -> Option.isNone (performedTests dp))
                          |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
                          |> Seq.toArray |} ]
 
@@ -296,7 +299,7 @@ let renderTestsChart (state: State) dispatch =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                       series =
-                          {| stacking = "normal"
+                          {| stacking = None
                              crisp = false
                              borderWidth = 0
                              pointPadding = 0

@@ -41,6 +41,7 @@ type Cases =
 type Vaccination =
     { Administered : TodayToDate
       Administered2nd : TodayToDate
+      Administered3rd : TodayToDate
       Used : TodayToDate
       Delivered : TodayToDate }
 
@@ -83,6 +84,15 @@ type AgeGroup =
         colors.[ageGroupIndex]
 
 type AgeGroupsList = AgeGroup list
+
+type HospitalAgeGroup =
+    { GroupKey : AgeGroupKey
+      CovidIn : int option
+      VaccinatedIn : int option
+      IcuIn : int option
+      Deceased : int option }
+
+type HospitalAgeGroupsList = HospitalAgeGroup list
 
 type StatsDataPoint =
     { DayFromStart : int
@@ -137,6 +147,10 @@ type WeeklyStatsDataPoint =
       DateTo : System.DateTime
       HospitalizedVaccinated : int option
       HospitalizedOther : int option
+      IcuVaccinated : int option
+      IcuVaccinatedPartially : int option
+      IcuRecovered : int option
+      IcuOther : int option
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
@@ -151,13 +165,37 @@ type WeeklyStatsDataPoint =
 
 type WeeklyStatsData = WeeklyStatsDataPoint[]
 
+type WeeklyEpisariDataPoint =
+    { Week : string
+      Date : System.DateTime
+      DateTo : System.DateTime
+      Source : string option
+      Missing : string option
+      SariIn : int option
+      TestedIn : int option
+      CovidIn : int option
+      CovidInNotSari : int option
+      CovidInVaccinated : int option
+      CovidInVaccinatedUnknown : int option
+      CovidInNotVaccinated : int option
+      CovidIcuIn : int option
+      CovidDiscoveredInHospital : int option
+      CovidAcquiredInHospital : int option
+      CovidOut : int option
+      CovidDeceased : int option
+      PerAge : HospitalAgeGroupsList
+    }
+
+type WeeklyEpisariData = WeeklyEpisariDataPoint[]
+
 type AreaCases =
     { Name : string
       ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
       Vaccinated1stToDate : int option
-      Vaccinated2ndToDate : int option }
+      Vaccinated2ndToDate : int option
+      Vaccinated3rdToDate : int option }
 
 type RegionMunicipalities =
     { Name : string
@@ -182,6 +220,7 @@ type VisualizationType =
     | Patients
     | IcuPatients
     | CarePatients
+    | PatientsAge
     | Ratios
     | HCenters
     | Hospitals
@@ -192,6 +231,7 @@ type VisualizationType =
     | Regions
     | Regions100k
     | Vaccination
+    | Vaccines
     | VaccineEffect
     | Schools
     | SchoolStatus
@@ -226,6 +266,7 @@ type State =
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
+      WeeklyEpisariData : RemoteData<WeeklyEpisariData, string>
       RegionsData : RemoteData<RegionsData, string>
       MunicipalitiesData : RemoteData<MunicipalitiesData, string>
       RenderingMode : RenderingMode }
@@ -244,6 +285,8 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | WeeklyStatsDataRequested
     | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
+    | WeeklyEpisariDataRequested
+    | WeeklyEpisariDataLoaded of RemoteData<WeeklyEpisariData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
     | MunicipalitiesDataRequest

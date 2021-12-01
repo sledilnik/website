@@ -26,7 +26,8 @@ type TotalCasesForDate =
       TotalConfirmedCases : int option
       TotalDeceasedCases : int option
       TotalVaccinated1st : int option
-      TotalVaccinated2nd : int option }
+      TotalVaccinated2nd : int option
+      TotalVaccinated3rd : int option }
 
 type Area =
     { Id : string
@@ -39,6 +40,7 @@ type ContentType =
     | ConfirmedCases
     | Vaccinated1st
     | Vaccinated2nd
+    | Vaccinated3rd
     | Deceased
     with
     static member Default mapToDisplay =
@@ -49,6 +51,7 @@ type ContentType =
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
        | Vaccinated2nd  -> I18N.t "charts.map.vaccinated2nd"
+       | Vaccinated3rd  -> I18N.t "charts.map.vaccinated3rd"
        | Deceased       -> I18N.t "charts.map.deceased"
 
 let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
@@ -69,7 +72,7 @@ with
             [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues; Bubbles ]
         | RegionMap, ConfirmedCases ->
             [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues ]
-        | _, Vaccinated1st | _, Vaccinated2nd ->
+        | _, Vaccinated1st | _, Vaccinated2nd | _, Vaccinated3rd ->
             [ AbsoluteValues; RegionPopulationWeightedValues ]
         | _, Deceased ->
             [ AbsoluteValues; RegionPopulationWeightedValues ]
@@ -109,7 +112,7 @@ type State =
 
 // we do not have all historical data for vaccinations by municipaality - do not show date intervals
 let mapWithoutHistoricalData state =
-    state.MapToDisplay = MunicipalityMap && (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
+    state.MapToDisplay = MunicipalityMap && (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd || state.ContentType = Vaccinated3rd)
 
 type Msg =
     | GeoJsonRequested
@@ -167,7 +170,8 @@ let processData (queryObj : obj) (municipalitiesData : MunicipalitiesData) : Are
                                      TotalConfirmedCases = municipality.ConfirmedToDate
                                      TotalDeceasedCases = municipality.DeceasedToDate
                                      TotalVaccinated1st = municipality.Vaccinated1stToDate
-                                     TotalVaccinated2nd = municipality.Vaccinated2ndToDate |} }
+                                     TotalVaccinated2nd = municipality.Vaccinated2ndToDate
+                                     TotalVaccinated3rd = municipality.Vaccinated3rdToDate |} }
         |> Seq.groupBy (fun dp -> dp.Name)
         |> Seq.map (fun (name, dp) ->
             let totalCases =
@@ -181,7 +185,8 @@ let processData (queryObj : obj) (municipalitiesData : MunicipalitiesData) : Are
                       TotalConfirmedCases = dp.TotalConfirmedCases
                       TotalDeceasedCases = dp.TotalDeceasedCases
                       TotalVaccinated1st = dp.TotalVaccinated1st
-                      TotalVaccinated2nd = dp.TotalVaccinated2nd } )
+                      TotalVaccinated2nd = dp.TotalVaccinated2nd
+                      TotalVaccinated3rd = dp.TotalVaccinated3rd } )
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( name, totalCases ) )
         |> Map.ofSeq
@@ -216,7 +221,8 @@ let processRegionsData (queryObj : obj) (regionsData : RegionsData) : Area seq =
                                      TotalConfirmedCases = region.ConfirmedToDate
                                      TotalDeceasedCases = region.DeceasedToDate
                                      TotalVaccinated1st = region.Vaccinated1stToDate
-                                     TotalVaccinated2nd = region.Vaccinated2ndToDate|} }
+                                     TotalVaccinated2nd = region.Vaccinated2ndToDate
+                                     TotalVaccinated3rd = region.Vaccinated3rdToDate |} }
         |> Seq.groupBy (fun dp -> dp.Name)
         |> Seq.map (fun (name, dp) ->
             let totalCases =
@@ -230,7 +236,8 @@ let processRegionsData (queryObj : obj) (regionsData : RegionsData) : Area seq =
                       TotalConfirmedCases = dp.TotalConfirmedCases
                       TotalDeceasedCases = dp.TotalDeceasedCases
                       TotalVaccinated1st = dp.TotalVaccinated1st
-                      TotalVaccinated2nd = dp.TotalVaccinated2nd } )
+                      TotalVaccinated2nd = dp.TotalVaccinated2nd
+                      TotalVaccinated3rd = dp.TotalVaccinated3rd } )
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( name, totalCases ) )
         |> Map.ofSeq
@@ -299,10 +306,12 @@ let seriesData (state : State) =
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let vaccinated1stValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated1st) |> Seq.choose id |> Seq.toArray
                     let vaccinated2ndValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated2nd) |> Seq.choose id |> Seq.toArray
+                    let vaccinated3rdValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated3rd) |> Seq.choose id |> Seq.toArray
                     let chartValue =
                         match state.ContentType with
                         | Vaccinated1st -> vaccinated1stValue
                         | Vaccinated2nd -> vaccinated2ndValue
+                        | Vaccinated3rd -> vaccinated3rdValue
                         | _ -> confirmedCasesValue
                     let newCases =
                         chartValue
@@ -315,6 +324,7 @@ let seriesData (state : State) =
                         | ConfirmedCases -> confirmedCasesValue
                         | Vaccinated1st -> vaccinated1stValue
                         | Vaccinated2nd -> vaccinated2ndValue
+                        | Vaccinated3rd -> vaccinated3rdValue
                         | Deceased -> deceasedValue
 
                     let totalConfirmed = confirmedCasesValue |> Array.tryLast
@@ -383,7 +393,7 @@ let seriesData (state : State) =
                                     else 0.0001
                                 | RelativeIncrease ->
                                     min weeklyIncrease 200. // for colorAxis limit to 200%
-                            | Vaccinated1st | Vaccinated2nd ->
+                            | Vaccinated1st | Vaccinated2nd | Vaccinated3rd ->
                                 match state.DisplayType with
                                 | AbsoluteValues ->
                                     if absolute > 0 then float absolute
@@ -528,7 +538,7 @@ let tooltipFormatter state jsThis =
                       else ""
             else
                 label
-        | Vaccinated1st | Vaccinated2nd ->
+        | Vaccinated1st | Vaccinated2nd | Vaccinated3rd ->
             let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (Utils.formatToInt absolute)
             let chart =
                 if not (mapWithoutHistoricalData state) && (Array.max newCases) > 0.
@@ -665,7 +675,7 @@ let renderMap (state : State) =
                         | 7 -> 3500.
                         | 1 -> 500.
                         | _ -> 100.
-            | Vaccinated1st, _ | Vaccinated2nd, _ ->
+            | Vaccinated1st, _ | Vaccinated2nd, _ | Vaccinated3rd, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 1. else dataMax
             | Deceased, _ ->
@@ -674,8 +684,6 @@ let renderMap (state : State) =
 
         let colorMin =
             match state.ContentType, state.DisplayType with
-                //| Vaccinated1st, RegionPopulationWeightedValues | Vaccinated2nd, RegionPopulationWeightedValues ->
-                //    data |> Seq.map(fun dp -> dp.value) |> Seq.min
                 | _, RegionPopulationWeightedValues -> colorMax / 7000.
                 | _, AbsoluteValues -> 0.9
                 | _, Bubbles -> minValue100k()
@@ -722,7 +730,7 @@ let renderMap (state : State) =
 
         let colorAxis =
             match state.ContentType with
-                | Vaccinated1st | Vaccinated2nd ->
+                | Vaccinated1st | Vaccinated2nd | Vaccinated3rd ->
                     {|
                         ``type`` = "linear"
                         tickInterval = 0.4
@@ -917,13 +925,14 @@ let renderContentTypeSelector state dispatch =
     let contentTypes =
         if state.MapToDisplay = RegionMap then
             [("ConfirmedCases", ContentType.ConfirmedCases)
-             ("Vaccinated1st", ContentType.Vaccinated1st)
              ("Vaccinated2nd", ContentType.Vaccinated2nd)
+             ("Vaccinated1st", ContentType.Vaccinated1st)
+             ("Vaccinated3rd", ContentType.Vaccinated3rd)
              ("Deceased", ContentType.Deceased)]
          else
             [("ConfirmedCases", ContentType.ConfirmedCases)
-             ("Vaccinated1st", ContentType.Vaccinated1st)
-             ("Vaccinated2nd", ContentType.Vaccinated2nd)]
+             ("Vaccinated2nd", ContentType.Vaccinated2nd)
+             ("Vaccinated1st", ContentType.Vaccinated1st)] // no 3rd dose for municipality yet
 
     let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
         Html.option [

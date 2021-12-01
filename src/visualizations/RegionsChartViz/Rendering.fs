@@ -78,7 +78,10 @@ let init (config: RegionsChartConfig) (data : RegionsData)
       RegionsData = data
       RegionsSorted = regionsSorted
       RegionsConfig = regionsConfig
-      RangeSelectionButtonIndex = 0
+      RangeSelectionButtonIndex =
+        match config.RelativeTo with
+        | Absolute -> 3 // switch to all-time view for absolute values
+        | Pop100k -> 0
       ShowAll = true },
     Cmd.none
 

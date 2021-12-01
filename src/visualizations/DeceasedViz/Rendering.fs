@@ -147,7 +147,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
         credits =
             match state.Page with
             | AgeGroupsPage | PersonTypePage -> chartCreditsNIJZ
-            | HospitalsPage -> chartCreditsMZ
+            | HospitalsPage -> chartCreditsMZHospitals
     |}
 
 let renderChartContainer (state : DeceasedVizState) dispatch =

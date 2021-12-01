@@ -49,7 +49,7 @@ type DisplayType =
           BySourceCountry
           Quarantine ]
 
-    static member Default = BySourceCountry
+    static member Default = ByLocation
 
     member this.GetName =
         match this with

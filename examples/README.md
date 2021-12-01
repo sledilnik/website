@@ -7,6 +7,11 @@
 You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `<iframe>`.
 For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master/examples/embed.html) and [`embed_multi.html`](https://github.com/sledilnik/website/tree/master/examples/embed_multi.html).
 
+## Cards
+We prepared status cards for all hospitals that they can integrate on their internet/intranet.
+
+For example, see [`embed_cards.html`](https://github.com/sledilnik/website/tree/master/examples/embed_cards.html).
+
 ## Charts
 
 | Chart                       | Url                                                                |
@@ -17,6 +22,8 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Hospitalizirani             | https://covid-19.sledilnik.org/embed.html#/chart/Patients          |
 | Intenzivna terapija         | https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients       |
 | Negovalne bolnišnice        | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients      |
+| Kapacitete bolnišnic        | https://covid-19.sledilnik.org/embed.html#/chart/Hospitals         |
+| Hospitalizirani starost     | https://covid-19.sledilnik.org/embed.html#/chart/PatientsAge      |
 | Delež resnih primerov       | https://covid-19.sledilnik.org/embed.html#/chart/Ratios            |
 | Testiranje                  | https://covid-19.sledilnik.org/embed.html#/chart/Tests             |
 | Obravnava v ZD              | https://covid-19.sledilnik.org/embed.html#/chart/HCenters          |

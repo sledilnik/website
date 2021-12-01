@@ -199,6 +199,10 @@
         "18": {
             "title": "phase<br>18",
             "description": "rapid antigen tests methodology"
+        },
+        "19": {
+            "title": "phase<br>19",
+            "description": "rapid antigen tests methodology"
         }
     },
     "charts": {
@@ -208,6 +212,7 @@
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
+            "dsHospitals": "hospitals",
             "dsSURS": "SURS",
             "dsMIZS": "MIZŠ",
             "dsMNZ": "MNZ",
@@ -267,8 +272,9 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
-            "vaccinationAdministered": "Vaccinated",
+            "vaccinationAdministered": "Vaccinated - first dose",
             "vaccinationAdministered2nd": "Fully Vaccinated",
+            "vaccinationAdministered3rd": "Vaccinated - additional dose",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -357,6 +363,14 @@
             "title": "Nursing Hospitals",
             "titleMenu": "Nursing Hospitals"
         },
+        "patientsAge": {
+            "title": "Hospitalizations by Age, weekly",
+            "titleMenu": "Hospitalizations - age",
+            "meanAge": "Mean Age",
+            "hospitalIn": "Admitted to Hospital",
+            "icuIn": "Admitted to ICU",
+            "deceased": "Deceased"
+        },
         "ratios": {
             "title": "Share of Serious Cases",
             "titleMenu": "Serious Cases",
@@ -414,6 +428,7 @@
             "hagt": "Regular: RAT",
             "regular": "Regular: PCR",
             "ns-apr20": "Study: PCR",
+            "performedTests": "Tests Performed",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"
@@ -477,8 +492,9 @@
             "newCases7Days": "New (7-day avg.)",
             "vaccinated": "Vaccinated",
             "vaccinated7Days": "Per Day (7-day avg.)",
-            "vaccinated1st": "Vaccinated",
+            "vaccinated1st": "First Dose",
             "vaccinated2nd": "Fully Vaccinated",
+            "vaccinated3rd": "Additional Dose",
             "deceased": "Deaths",
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
@@ -505,8 +521,9 @@
             "bubbles": "Distribution",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "vaccinated1st": "Vaccinated",
+            "vaccinated1st": "Vaccinated - first dose",
             "vaccinated2nd": "Fully Vaccinated",
+            "vaccinated3rd": "Vaccinated - additional dose",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
             "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
@@ -554,6 +571,7 @@
             "active": "Active: ",
             "recovered": "Recovered: ",
             "deceased": "Deaths: ",
+            "closed": "Closed: ",
             "doubles": "Doubles ",
             "weeklyGrowth": "Weekly growth ",
             "yesterday": "yesterday",
@@ -648,14 +666,14 @@
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excess": {
-                "title": "Excess relative to the last 5 years",
+                "title": "Excess relative to years 2015-19",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeathsMZ": "COVID-19 deaths in hospitals and DSO-jih (Government)",
                 "covidDeathsNIJZ": "COVID-19 deaths (NIJZ)",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excessByAgeGroup": {
-                "title": "Excess relative to the last 5 years by age groups",
+                "title": "Excess relative to years 2015-19 by age groups",
                 "disclaimer": "Note: data on deaths for the last month is incomplete. Column widths represent the ratio between deaths in the age group of the column versus all deaths in a given month.",
                 "totalDeceased": "Total deceased",
                 "sex": {
@@ -672,15 +690,16 @@
             "data": "Data",
             "max": "Max",
             "all": "All",
-            "full": "Full",
-            "empty": "Empty",
-            "bedsICUFull": "ICU beds, full",
+            "full": "Occupied",
+            "empty": "Free",
+            "ventsFull": "Ventilators, occupied",
+            "bedsICUFull": "ICU beds, occupied",
             "bedsICU70": "ICU beds, 70%",
             "bedsICUAll": "ICU beds, all",
-            "bedsFull": "Beds, full",
-            "beds70": "Beds, 70%",
-            "bedsAll": "Beds, all",
-            "bedsMax": "Beds, maximum",
+            "bedsFull": "Acute beds, occupied",
+            "beds70": "Acute beds, 70%",
+            "bedsAll": "Acute beds, all",
+            "bedsMax": "Acute beds, maximum",
             "bedsICUShort": "ICU beds",
             "ventilators": "Ventilators",
             "bedsICU": "ICU Beds",
@@ -689,7 +708,7 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital Capacity",
-            "titleMenu": "Capacity"
+            "titleMenu": "Hospital - capacity"
         },
         "ostanizdrav": {
             "title": "The #OstaniZdrav Exposure Notification App",
@@ -741,40 +760,55 @@
             }
         },
         "vaccination": {
-            "title": "Vaccination",
-            "titleMenu": "Vaccination",
-            "used": "Vaccination Used",
-            "byManufacturer": "Vaccination Delivered",
-            "unused": "Vaccination Unused",
-            "byWeek": "By Week",
-            "byAgeAll": "By Age: Fully Vaccinated",
-            "byAge1st": "By Age: Vaccinated",
+            "title": "Vaccination by Age Groups",
+            "titleMenu": "Vaccination - age",
+            "byAgeAll": "Fully Vaccinated",
+            "byAge1st": "First Dose",
+            "byAge3rd": "Additional Dose",
+            "protectedEstimated": "Protection Estimate",
+            "disclaimer": "Note: the chart shows the share of the population that was fully vaccinated in the previous 6 months or have received an additional dose of the vaccine. Protection is considered to be effective 14 days after receiving this dose and lasts 6 months from that date."
+        },
+        "vaccines": {
+            "title": "Vaccines",
+            "titleMenu": "Vaccines",
+            "used": "Used",
+            "byManufacturer": "Delivered",
+            "unused": "Supply",
+            "byWeek": "Usage (weekly)",
+            "byWeekSupply": "Supply (weekly)",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
-            "administered": "Vaccinated",
+            "administered": "First Dose",
             "administered2nd": "Fully Vaccinated",
+            "administered3rd": "Additional Dose",
             "usedDoses": "Used Doses",
             "unusedDoses": "Unused Doses",
-            "deliveredDoses": "Delivered Doses",
-            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a> website (in Slovenian only)."
+            "deliveredDoses": "Delivered Doses"
         },
         "vaccineEffect": {
             "title": "Vaccination Effect",
             "titleMenu": "Vaccination - effect",
             "confirmedCases": "Confirmed Cases",
             "hospitalizedCases": "Hospitalized",
+            "icuCases": "ICU",
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
             "relative100k": "Relative per 100.000 People in Group",
             "confirmedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
             "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}).",
+            "icuCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, recovered, partially vaccinated) were addmitted in intensive care unit.",
             "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
             "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
+            "icuCasesRatio": "Unvaccinated, recovered and partially vaccinated are admitted in intensive care unit **{{multiple}}** times as many as fully protected with vaccination.",
             "disclaimer": "<br>However, due to the differences in vaccination rates between age groups, this interpretation should be treated with caution - read more about the Simpson's paradox in [the article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Protected with Vaccination",
-            "casesOther": "Other (unvaccinated, partially vaccinated)"
+            "casesPartiallyVaccinated": "Partially Vaccinated",
+            "casesRecovered": "Recovered",
+            "casesUnvaccinated": "Unvaccinated",
+            "casesOther": "Other (unvaccinated, partially vaccinated)",
+            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
@@ -1257,6 +1291,14 @@
         "pctEverywhere": {
             "title": "RVT!",
             "description": "RVT (recovered, vaccinated, tested) condition must be met by all those who perform the work and all users of the services."
+        },
+        "liftMasksRV": {
+            "title": "Masks",
+            "description": "Easing restrictions: no mask requirement in environment where all participants are vaccinated or recovered and in indoor public spaces where food and drinks are being served."
+        },
+        "gatherings3": {
+            "title": "Gatherings",
+            "description": "Prohibition of gathering (except for close family members), no celebrations.<br>Restaurants and bars allowed from 5AM to 10PM (seated service only).<br>Restrictions of culture and sport events (only indoors, seated with free seat between spectators)."
         }
     },
     "days": {
@@ -1793,7 +1835,7 @@
             "answer": "All confirmed cases are shown in the [Confirmed Cases graph](/en/stats#cases-chart). In order to be able to monitor the epidemic, it is important to know how many are still infected. For this reason, we use the following terminology:\n\n**Closed cases**  are the sum of all confirmed cases who are no longer infected with the virus, that is, the recovered and the deceased.\n\n**Active cases** are all confirmed virus infections that still haven’t recovered (are still infected with the virus). See also\n [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)"
         },
         "chart-phases": {
-            "question": "What do the different phases (phases 1-14) in the graph mean?",
+            "question": "What do the different phases (phases 1-18) in the graph mean?",
             "answer": "The vertical lines divide the stages, delimited by the dates, when the authorities changed the way information about the spread of the infection was collected (the test method was changed, self-isolation interventions were introduced, bans on gathering and movement of persons, and mandatory basic protection were required).\n\nThe phases are shown because the change in testing methodology has also changed the importance of certain indicators by which the prevalence of infections can be judged.\n\n* **Phase 1 (March 4-12, 2020)**: The first cases of infection in Slovenia are recorded. All cases are followed, all contacts are tested.\n\n* **Phase 2 (March 13-19, 2020)**: The testing methodology is changed, and self-isolation and social distancing measures are introduced.\n\n* **Phase 3 (March 20-April 7)**: The testing methodology is revised and a ban on gathering more than five people in public areas is put in place.\n\n* **Phase 4 (April 8-15)**: New change in testing methodology – people with mild symptoms from households with more than one respiratory infections are also tested.\n\n* **Phase 5 (April 15-21)**: New change in testing methodology – re-testing, if possible, of **all suspected SARS-CoV-2 virus infections**.\n\n* ** Phase 6 (April 21–May 15**: New change in testing methodology – All persons **suspected of being infected with SARS-CoV-2** are tested again. A national survey of 3000 randomly sampled persons (additional testing, blood testing for the presence of antibodies) begins.\n\n* **Phase 7 (May 15–present)**: The Slovenian government called an official end to its coronavirus epidemic – a quarantine of at least 14 days will remain in place for people from non-EU states, except for some exemptions (diplomats, cargo). Citizens still have to follow basic rules to prevent a possible spread of infection."
         },
         "patients-chart": {

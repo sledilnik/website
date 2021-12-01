@@ -37,7 +37,7 @@
         "newCases7d": "Новые Случаи",
         "incidence": "14-дневная заболеваемость",
         "testsHAT": "Тесты сегодня: Экспресс-тесты на антитела",
-        "vaccinationSummary": "Вакцинировано",
+        "vaccinationSummary": "Полностью вакцинировано",
         "active": "Активные случаи"
     },
     "navbar": {
@@ -234,6 +234,9 @@
         },
         "12": {
             "description": "новая методика тестирования"
+        },
+        "13": {
+            "description": "новая методика тестирования"
         }
     },
     "weekdayShort": {
@@ -255,13 +258,33 @@
         "phase": {
             "1": {
                 "title": "фаза<br>1"
+            },
+            "2": {
+                "title": "фаза<br>2"
+            },
+            "3": {
+                "title": "фаза<br>3"
+            },
+            "4": {
+                "title": "фаза<br>4"
+            },
+            "5": {
+                "title": "фаза<br>5"
+            },
+            "6": {
+                "title": "фаза<br>6"
             }
         }
     },
     "charts": {
         "metricsComparison": {
             "vaccinationAdministered2nd": "Полностью вакцинировано",
-            "vaccinationAdministered": "Вакцинировано"
+            "vaccinationAdministered": "Вакцинировано",
+            "confirmedCases": "Подтвержденные Случаи",
+            "activeCases": "Активные случаи",
+            "recovered": "Выздоровели",
+            "hospitalized": "Госпитализированы",
+            "icu": "В реанимации"
         },
         "common": {
             "showAll": "Показать все",
@@ -272,7 +295,87 @@
             "sortBy": "Сортировка по:",
             "to": "-",
             "from": " ",
-            "loading": "Загрузка данных…"
+            "loading": "Загрузка данных…",
+            "linkFaq": "ЧаВо"
+        },
+        "dailyComparison": {
+            "new": "Подтвержденные Случаи",
+            "active": "Активные случаи"
+        },
+        "cases": {
+            "icu": "В реанимации",
+            "hospitalized": "Госпитализированы",
+            "title": "Подтвержденные Случаи",
+            "recovered": "Выздоровели"
+        },
+        "vaccineEffect": {
+            "casesRecovered": "Выздоровели",
+            "hospitalizedCases": "Госпитализированы",
+            "confirmedCases": "Подтвержденные Случаи"
+        },
+        "sewage": {
+            "activeCases": "Активные случаи"
+        },
+        "regions": {
+            "activeCases": "Активные случаи",
+            "vaccinated1st": "Вакцинировано",
+            "vaccinated": "Вакцинировано",
+            "vaccinated2nd": "Полностью вакцинировано",
+            "confirmedCases": "Подтвержденные Случаи"
+        },
+        "map": {
+            "confirmedCases": "Подтвержденные Случаи",
+            "vaccinated1st": "Вакцинировано",
+            "vaccinated2nd": "Полностью вакцинировано"
+        },
+        "vaccination": {
+            "byAgeAll": "Полностью вакцинировано"
+        },
+        "vaccines": {
+            "administered2nd": "Полностью вакцинировано"
+        },
+        "metricsCorrelation": {
+            "hospitalized": "Госпитализированы"
+        },
+        "patients": {
+            "hospitalized": "Госпитализированы"
+        },
+        "ratios": {
+            "hospitalCases": "Госпитализированы",
+            "icuCases": "В реанимации",
+            "icuHospital": "В реанимации"
+        },
+        "regions100k": {
+            "activeCases": "Активные случаи",
+            "confirmedCases": "Подтвержденные Случаи"
+        },
+        "ageGroups": {
+            "confirmedCases": "Подтвержденные Случаи"
+        },
+        "phaseDiagram": {
+            "hospitalized": "Госпитализированы"
+        },
+        "hospitals": {
+            "data": "Данные"
+        },
+        "sources": {
+            "confirmedCases": "Подтвержденные Случаи"
+        },
+        "weeklyDemographics": {
+            "newCases": "Новые Случаи"
+        }
+    },
+    "tableDict": {
+        "cases_active": "Активные случаи",
+        "state_in_hospital": "Госпитализированы",
+        "state_icu": "В реанимации"
+    },
+    "cm": {
+        "croatia": {
+            "title": "Хорватия"
+        },
+        "app": {
+            "title": "#OstaniZdrav"
         }
     }
 }
