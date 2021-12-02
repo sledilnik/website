@@ -56,6 +56,13 @@ export default {
       tooltipTitle: this.$t('embedMaker.copy'),
     };
   },
+  metaInfo() {
+    return {
+      meta: [
+        { vmid: 'og:image', property: 'og:image', content: 'https://' + location.host + '/covid-19-logo--vax-faq.png' },
+      ],
+    }
+  },
   methods: {
     ...mapActions("faqVaccines", {
       fetchOne: "fetchOne",
