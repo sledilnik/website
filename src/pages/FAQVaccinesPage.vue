@@ -66,7 +66,7 @@ export default {
           for (let entry of this.faqVaccines[this.lang]) {
             for (let term of entry.glossary) {
               if (term.slug === el.getAttribute('data-term')) {
-                el.setAttribute("title", term.definition.replace(/<[^>]*>?/gm, ''));
+                el.setAttribute("data-definition", term.definition.replace(/<[^>]*>?/gm, ''));
                 el.setAttribute("tabindex", 0);
               }
             }
@@ -142,29 +142,25 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 span[data-term] {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  outline: none;
   cursor: help;
   font-weight: 600;
   transition: all 0.35s ease-in-out;
-  box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
-  text-decoration: none;
   color: rgba(0, 0, 0, 0.8);
-
-  &:hover {
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: 600;
-    box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: -2px;
+    border-bottom: 2px $yellow dotted;
+    z-index: 1;
   }
-}
-@media (pointer: coarse), (hover: none) {
-  span[data-term] {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    outline: none;
-  }
-  span[data-term]:focus::after {
-    content: attr(title);
+  &:hover::after {
+    content: attr(data-definition);
     position: absolute;
     top: 90%;
     width: 200px;
@@ -176,7 +172,7 @@ span[data-term] {
     font-size: 10px;
     font-weight: 200;
     line-height: 1.4;
-    z-index: 1;
+    z-index: 2;
   }
 }
 </style>
