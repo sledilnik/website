@@ -1423,6 +1423,17 @@
             "administered2nd": "Polno cepljeni",
             "administered3rd": "Dodatni odmerek"
         },
+        "vaccineEffectAge": {
+            "title": "Hospitalizacije glede na status cepljenja in starost",
+            "titleMenu": "Cepljenje, starost - učinek",
+            "absolute": "Absolutno",
+            "absolute100k": "Na 100.000 oseb v skupini",
+            "vaccinatedIn": "Hospitalizirani - zaščiteni s cepljenjem",
+            "unvaccinatedIn": "Hospitalizirani - ostali",
+            "ageBelow65": "Mlajši od 65 let",
+            "ageAbove65": "Starejši od 65 let",
+            "ageAll": "Vse starosti"
+        },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
             "titleMenu": "Cepljenje - učinek",
