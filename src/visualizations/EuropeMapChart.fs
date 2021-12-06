@@ -268,47 +268,14 @@ let redCountries =
 let darkRedCountries =
     Map.ofList
         [
-            ("ARG", "")
-            ("BHR", "")
-            ("BOL", "")
             ("BWA", "")
-            ("BRA", "")
-            ("CHL", "")
-            ("EGY", "")
-            ("ECU", "")
             ("SWZ", "")
-            ("IND", "")
-            ("IRN", "")
             ("ZAF", "")
-            ("COL", "")
-            ("CRI", "")
-            ("KWT", "")
             ("LSO", "")
-            ("LIE", "")
-            ("MWL", "")
-            ("MDV", "")
-            ("MYS", "")
-            ("MNG", "")
             ("MOZ", "")
             ("NAM", "")
-            ("NPL", "")
-            ("OMN", "")
-            ("PRY", "")
-            ("PER", "")
-            ("RUS", "")
-            ("SYC", "")
-            ("SYR", "")
-            ("SDN", "")
-            ("SUR", "")
-            ("LKA", "")
-            ("TZA", "")
-            ("TTO", "")
-            ("TUN", "")
-            ("URY", "")
-            ("ZMB", "")
-            ("GBR", "")
             ("ZWE", "")
-    ]
+        ]
 
 let loadEuropeGeoJson =
     async {
@@ -410,7 +377,11 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             match fixedCode with
             | "SVN" -> chartText "statusNone", "#10829a", ""
             | _ ->
-                chartText "statusOrange", "#FFC65A", ""
+                match darkRed with
+                | Some dRedNote ->
+                    chartText "statusDarkRed", "#B23A32", ""
+                | _ ->
+                    chartText "statusOrange", "#FFC65A", ""
                 // match darkRed with
                 // | Some dRedNote ->
                 //     if dRedNote.Length > 0
