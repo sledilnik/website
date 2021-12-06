@@ -161,7 +161,7 @@ let renderChartOptions (state: State) dispatch =
              |> List.sumBy
                 (fun (key, ag) ->
                     match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                    | Some f, _ -> if f >= 65 then ag.Male + ag.Female else 0
+                    | Some f, _ -> if f >= 65 then ag.Population else 0
                     | _, _ -> 0)) - protectedWithVaccineAbove65
 
         {
