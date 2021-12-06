@@ -189,7 +189,7 @@ let renderChartOptions (state: State) dispatch =
         state.Data
         |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
         |> Array.map (fun dp -> getSummaryData dp)
-        |> Array.last
+        |> Array.sum
 
     let allSeries =
         [
@@ -201,7 +201,9 @@ let renderChartOptions (state: State) dispatch =
                        data =
                             match state.ChartType with
                             | Absolute -> summaryData.VaccinatedIn
-                            | Absolute100k -> summaryData.VaccinatedIn100k |}
+                            | Absolute100k -> summaryData.VaccinatedIn100k
+                            |> Array.map
+                                (fun dp -> {| y = dp |}) |}
           yield
                 pojo
                     {| name = chartText "otherIn"
@@ -210,7 +212,9 @@ let renderChartOptions (state: State) dispatch =
                        data =
                             match state.ChartType with
                             | Absolute -> summaryData.OtherIn
-                            | Absolute100k -> summaryData.OtherIn100k |}
+                            | Absolute100k -> summaryData.OtherIn100k
+                            |> Array.map
+                                (fun dp -> {| y = dp |}) |}
         ]
 
     let label = I18N.tOptions
