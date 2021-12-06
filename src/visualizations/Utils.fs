@@ -2967,23 +2967,25 @@ module AgePopulationStats =
         GroupKey: AgeGroupKey
         Male: int
         Female: int
+        Population: int
     }
 
+    // SURS 2021-H1: see dict-age-groups.csv
     let agePopulationStats =
         [
-            { AgeFrom = Some 0; AgeTo = Some 4 }, 53183, 50328
-            { AgeFrom = Some 5; AgeTo = Some 14 }, 106600, 100566
-            { AgeFrom = Some 15; AgeTo = Some 24 }, 100391, 93739
-            { AgeFrom = Some 25; AgeTo = Some 34 }, 133471, 122333
-            { AgeFrom = Some 35; AgeTo = Some 44 }, 162436, 146922
-            { AgeFrom = Some 45; AgeTo = Some 54 }, 153735, 146868
-            { AgeFrom = Some 55; AgeTo = Some 64 }, 147957, 147089
-            { AgeFrom = Some 65; AgeTo = Some 74 }, 101173, 113253
-            { AgeFrom = Some 75; AgeTo = Some 84 }, 54460, 81981
-            { AgeFrom = Some 85; AgeTo = None }, 13635, 36760
+            { AgeFrom = Some 0; AgeTo = Some 4 }, 51230, 48119, 99349
+            { AgeFrom = Some 5; AgeTo = Some 14 }, 112440, 105942, 218382
+            { AgeFrom = Some 15; AgeTo = Some 24 }, 103950, 93655, 197605
+            { AgeFrom = Some 25; AgeTo = Some 34 }, 131969, 114678, 246647
+            { AgeFrom = Some 35; AgeTo = Some 44 }, 165807, 146081, 311888
+            { AgeFrom = Some 45; AgeTo = Some 54 }, 157163, 145404, 302567
+            { AgeFrom = Some 55; AgeTo = Some 64 }, 148797, 148027, 296824
+            { AgeFrom = Some 65; AgeTo = Some 74 }, 116695, 127655, 244350
+            { AgeFrom = Some 75; AgeTo = Some 84 }, 56086, 80704, 136790
+            { AgeFrom = Some 85; AgeTo = None }, 15801, 38774, 54575
         ]
-        |> List.map (fun (ageGroupId,  male,  female) ->
-            ageGroupId, { GroupKey = ageGroupId;  Male = male;  Female = female })
+        |> List.map (fun (ageGroupId, male, female, pop) ->
+            ageGroupId, { GroupKey = ageGroupId; Male = male; Female = female; Population = pop })
         |> Map.ofList
 
     let toAgeGroupId (groupKey: AgeGroupKey) =
