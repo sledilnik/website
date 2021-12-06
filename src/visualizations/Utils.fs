@@ -2964,7 +2964,7 @@ module Dictionaries =
 module AgePopulationStats =
 
     type AgeGroupPopulationStats = {
-        Key: AgeGroupKey
+        GroupKey: AgeGroupKey
         Male: int
         Female: int
     }
@@ -2983,7 +2983,7 @@ module AgePopulationStats =
             { AgeFrom = Some 85; AgeTo = None }, 13635, 36760
         ]
         |> List.map (fun (ageGroupId,  male,  female) ->
-            ageGroupId, { Key = ageGroupId;  Male = male;  Female = female })
+            ageGroupId, { GroupKey = ageGroupId;  Male = male;  Female = female })
         |> Map.ofList
 
     let toAgeGroupId (groupKey: AgeGroupKey) =

@@ -1429,10 +1429,12 @@
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
             "vaccinatedIn": "Hospitalizirani - zaščiteni s cepljenjem",
-            "unvaccinatedIn": "Hospitalizirani - ostali",
+            "otherIn": "Hospitalizirani - ostali",
             "ageBelow65": "Mlajši od 65 let",
             "ageAbove65": "Starejši od 65 let",
-            "ageAll": "Vse starosti"
+            "ageAll": "Vse starosti",
+            "hospitalizedIn": "Od {{ startDate, %e. %b %Y  }} do {{ endDate, %e. %b %Y }}.",
+            "disclaimer": "<br>Zaradi razlik v precepljenosti med starostnimi skupinami moramo biti previdni pri interpretaciji - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
         },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
