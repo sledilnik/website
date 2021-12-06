@@ -245,6 +245,10 @@ let renderChartOptions (state: State) dispatch =
                pojo
                    {| // formatter = fun () -> tooltipFormatter state jsThis
                       headerFormat = "<b>{point.x}</b><br>"
+                      valueDecimals =
+                          match state.ChartType with
+                          | Absolute -> 0
+                          | Absolute100k -> 1
                       shared = true
                       split = false
                       useHTML = true |}
