@@ -1070,7 +1070,7 @@
             "title": "COVID-19 Situazione in Europa",
             "titleMenu": "Europa - situazione",
             "weeklyIncrease": "Aumento settimanale",
-            "statusDarkRed": "guariti/vaccinati o quarantena di 10 giorni (divieto di ammissione per gli stranieri senza residenza)"
+            "statusDarkRed": "quarantena di 10 giorni e test molecolare il 1°, 5° e 10° giorno, divieto di ammissione per gli stranieri senza residenza"
         },
         "map": {
             "confirmedCases": "Casi confermati",
