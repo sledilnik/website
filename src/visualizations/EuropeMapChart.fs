@@ -248,6 +248,7 @@ let redCountries =
             ("TWN", "")
             ("THA", "")
             ("TUN", "")
+            ("TUR", "")
             ("UGA", "")
             ("ZMB", "")
             ("USA", "")
