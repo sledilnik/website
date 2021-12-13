@@ -546,8 +546,8 @@
             "statusNone": "-",
             "statusGreen": "no restrictions",
             "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine",
-            "statusRed": "recovered/vaccinated or 10-day quarantine (negative PCR test required for foreigners without residence)",
-            "statusDarkRed": "recovered/vaccinated or 10-day quarantine (denied entry for foreigners without residence)",
+            "statusRed": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine<br>*confirmed presence of omicron variant",
+            "statusDarkRed": "10-day quarantine and PCR test on 1st, 5th and 10th day, denied entry for foreigners without residence<br>*confirmed presence of omicron variant",
             "noData": "No data"
         },
         "world": {
