@@ -957,7 +957,7 @@
             "deceasedHospitals": "Kraj smrti",
             "deceasedByType": "DSO status",
             "deceasedByAge": "Starost",
-            "deceased-rhoccupant": "Oskrbovanci domov za starejše občane",
+            "deceased-rhoccupant": "Stanovalci domov za starejše občane",
             "deceased-other": "Ostali",
             "deceased-icu": "Intenzivna terapija",
             "deceased-acute": "Akutni oddelek",
@@ -1065,7 +1065,7 @@
             "relative": "Relativno",
             "hcStaff": "Zaposleni v zdravstvu",
             "rhStaff": "Zaposleni v domovih za starejše občane",
-            "rhOccupant": "Oskrbovanci domov za starejše občane",
+            "rhOccupant": "Stanovalci domov za starejše občane",
             "allConfirmed": "Vsi potrjeni",
             "otherPersons": "Ostale osebe"
         },
@@ -1151,7 +1151,7 @@
             "healthcareMaleCases": "Zdravstvo - moški",
             "healthcareFemaleCases": "Zdravstvo - ženske",
             "healthcareEmployeesCases": "Zaposleni v zdravstvu",
-            "rhOccupantCases": "Oskrbovanci domov za starejše občane",
+            "rhOccupantCases": "Stanovalci domov za starejše občane",
             "totalConfirmed": "Vsi potrjeni",
             "otherCases": "Ostali potrjeni"
         },
