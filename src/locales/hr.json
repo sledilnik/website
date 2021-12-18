@@ -514,7 +514,7 @@
             "projection7": "Projekcija, 7-dnevno udvostručenje",
             "bedsICUAll": "Kreveti intenzivne njege, svi",
             "bedsICU": "Kreveti intenzivne njege",
-            "empty": "Prazne",
+            "empty": "Nepopunjene",
             "projection21": "Projekcija, 21-dnevno udvostručenje",
             "beds": "Bolnički kreveti",
             "projection14": "Projekcija, 14-dnevno udvostručenje",
@@ -528,13 +528,14 @@
             "bedsAll": "Kreveti, svi",
             "bedsICU70": "Kreveti intenzivne njege, 70 %",
             "all": "Sve",
-            "full": "Pune",
+            "full": "Popunjene",
             "title": "Kapacitet bolnice",
             "allHospitals": "Sve bolnice",
             "bedsICUFull": "Kreveti intenzivne njege, popunjeni",
             "bedsICUShort": "Kreveti intenzivne njege",
             "ventilators": "Respiratori",
-            "titleMenu": "Kapacitet"
+            "titleMenu": "Bolnica – kapacitet",
+            "ventsFull": "Ventilatori, zauzeti"
         },
         "tests": {
             "positiveTests": "Pozitivni testovi",
@@ -609,7 +610,7 @@
             "deceased-hospital": "Umrli (bolinca)"
         },
         "europe": {
-            "statusRed": "oporavljeni/cijepljeni ili desetodnevna karantena (negativan PCR test potreban za strance bez prebivališta)",
+            "statusRed": "oporavljeni/cijepljeni ili PCR/RAT test ili desetodnevna karantena<br>*potvrđena prisutnost omikronske varijante",
             "statusOrange": "oporavljeni/cijepljeni ili negativni PCR/RAT test ili desetodnevna karantena",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
@@ -837,7 +838,7 @@
         "excessDeaths": {
             "excess": {
                 "excessDeaths": "Prekomjerni mortalitet (u usporedbi s 2015. do 2019.)",
-                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina",
+                "title": "Prekomjerni mortalitet u odnosu na godine 2015. – 2019.",
                 "covidDeathsMZ": "Potvrđeni smrtni slučajevi od COVID-19 (vlada)",
                 "covidDeathsNIJZ": "Potvrđeni smrtni slučajevi od COVID-19 (NIJZ)",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
@@ -851,7 +852,7 @@
             "weekDate": "{{ dateFrom, %e. %m. }} – {{ dateTo, %e. %m. }}",
             "weekDateWithYear": "{{ dateFrom, %e. %m. %Y. }} – {{ dateTo, %e. %m. %Y. }}",
             "excessByAgeGroup": {
-                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina po dobnim skupinama",
+                "title": "Prekomjerni mortalitet u odnosu na godine 2015. – 2019. po dobnim skupinama",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za posljednji mjesec nisu potpuni. Širine stupaca predstavljaju omjer između umrlih u dobnoj skupini stupca i svih umrlih u danom mjesecu.",
                 "sex": {
                     "female": "Žene",
@@ -926,7 +927,8 @@
             "title": "Cjepljenje - dob",
             "byAge1st": "Prva doza",
             "byAgeAll": "Potpuno cijepljeni",
-            "byAge3rd": "Dodatna doza"
+            "byAge3rd": "Dodatna doza",
+            "protectedEstimated": "Procjena zaštite"
         },
         "vaccines": {
             "deliveredDoses": "Isporučene doze",
@@ -965,7 +967,19 @@
             "hospitalizedCases": "Hospitalizirani",
             "confirmedCases": "Potvrđeni slučajevi",
             "icuCases": "Odjel intenzivne njege",
-            "casesRecovered": "Ozdravili"
+            "casesRecovered": "Ozdravili",
+            "casesProtected": "Zaštićeni cjepivom",
+            "casesPartiallyVaccinated": "Djelomično zaštićeni",
+            "casesUnvaccinated": "Necijepljeni",
+            "casesOther": "Ostali (necijepljeni, djelomično cijepljeni)"
+        },
+        "patientsAge": {
+            "deceased": "Umrli",
+            "meanAge": "Prosječna starost",
+            "hospitalIn": "Primljeni u bolnici",
+            "icuIn": "Primljeni na odjel intenzivne njege",
+            "title": "Hospitalizacija po starosti, tjedno",
+            "titleMenu": "Hospitalizacija – starost"
         }
     },
     "shortMonth": {
@@ -1402,6 +1416,10 @@
         },
         "18": {
             "title": "faza<br>18",
+            "description": "metoda brzog testiranja antigena"
+        },
+        "19": {
+            "title": "faza<br>19",
             "description": "metoda brzog testiranja antigena"
         }
     },
