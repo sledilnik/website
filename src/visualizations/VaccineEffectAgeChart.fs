@@ -14,6 +14,28 @@ open Data.Vaccinations
 
 let chartText = I18N.chartText "vaccineEffectAge"
 
+type DisplayType =
+    | Summary
+    | AllAges
+    | AgeBelow65
+    | AgeAbove65
+    static member All = [ Summary; AllAges; AgeBelow65; AgeAbove65 ]
+    static member Default = Summary
+
+    member this.GetName =
+        match this with
+        | Summary -> chartText "summary"
+        | AllAges -> chartText "ageAll"
+        | AgeBelow65 -> chartText "ageBelow65"
+        | AgeAbove65 -> chartText "ageAbove65"
+
+    member this.GetIndex =
+        match this with
+        | Summary | AllAges -> 0
+        | AgeBelow65 -> 1
+        | AgeAbove65 -> 2
+
+
 type ChartType =
     | Absolute
     | Absolute100k
@@ -58,12 +80,16 @@ type State =
     { Data: WeeklyEpisariData
       VaccinationData: VaccinationStats array
       Error: string option
-      ChartType: ChartType }
+      DisplayType: DisplayType
+      ChartType: ChartType
+      RangeSelectionButtonIndex: int }
 
 type Msg =
     | ConsumeVaccinationData of Result<VaccinationStats array, string>
     | ConsumeServerError of exn
+    | DisplayTypeChanged of DisplayType
     | ChartTypeChanged of ChartType
+    | RangeSelectionChanged of int
 
 
 let init data : State * Cmd<Msg> =
@@ -73,7 +99,9 @@ let init data : State * Cmd<Msg> =
         { Data = data
           VaccinationData = [||]
           Error = None
-          ChartType = ChartType.Default }
+          DisplayType = DisplayType.Default
+          ChartType = ChartType.Default
+          RangeSelectionButtonIndex = 3 }
     state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -81,10 +109,23 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ConsumeVaccinationData (Ok data) -> { state with VaccinationData = data }, Cmd.none
     | ConsumeVaccinationData (Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
+    | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
     | ChartTypeChanged chartType -> { state with ChartType = chartType }, Cmd.none
+    | RangeSelectionChanged buttonIndex -> { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 
-let renderChartOptions (state: State) dispatch =
+let averageOnWeek (dataMap : Map<DateTime, int>) (date: DateTime) (dateTo: DateTime)=
+    match dataMap.TryFind(date), dataMap.TryFind(date) with
+    | Some v1, Some v2 ->
+        Math.Round((((v1 + v2) |> float) / 2.), 0) |> int
+    | Some v1, None -> v1
+    | None, Some v2 -> v2
+    | None, None -> 0
+
+let get100k value population =
+    value * 100000. / (float)population
+
+let getSummaryData (state: State) (dp: WeeklyEpisariDataPoint) : HospitalizedData =
 
     let protectedWithVaccineMap =
         state.VaccinationData
@@ -99,7 +140,6 @@ let renderChartOptions (state: State) dispatch =
 
                 dp.Date, protectedWithVaccine)
         |> Map.ofSeq
-
 
     let protectedWithVaccineAbove65Map =
         state.VaccinationData
@@ -120,75 +160,65 @@ let renderChartOptions (state: State) dispatch =
                 dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
-    let averageOnWeek (dataMap : Map<DateTime, int>) (date: DateTime) (dateTo: DateTime)=
-        match dataMap.TryFind(date), dataMap.TryFind(date) with
-        | Some v1, Some v2 ->
-            Math.Round((((v1 + v2) |> float) / 2.), 0) |> int
-        | Some v1, None -> v1
-        | None, Some v2 -> v2
-        | None, None -> 0
+    let vaccinatedIn = dp.CovidInVaccinated |> Option.defaultValue 0 |> float
+    let otherIn = ((dp.CovidIn |> Option.defaultValue 0) |> float) - vaccinatedIn
+    let protectedWithVaccine = averageOnWeek protectedWithVaccineMap dp.Date dp.DateTo
+    let otherPopulation =
+        (Utils.Dictionaries.regions.["si"].Population |> Option.defaultValue 0)
+        - protectedWithVaccine
 
-    let get100k value population =
-        value * 100000. / (float)population
+    let vaccinatedInAbove65 =
+        (dp.PerAge
+            |> List.sumBy
+            (fun ag ->
+                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+                | Some f, None -> if f = 65 then (ag.VaccinatedIn |> Option.defaultValue 0) else 0
+                | _, _ -> 0)) |> float
+    let otherInAbove65 =
+        ((dp.PerAge
+            |> List.sumBy
+            (fun ag ->
+                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+                | Some f, _ -> if f >= 65 then (ag.CovidIn |> Option.defaultValue 0) else 0
+                | _, _ -> 0)) |> float) - vaccinatedInAbove65
+    let protectedWithVaccineAbove65 = averageOnWeek protectedWithVaccineAbove65Map dp.Date dp.DateTo
+    let otherAbove65Population =
+        (Utils.AgePopulationStats.agePopulationStats
+            |> Map.toList
+            |> List.sumBy
+            (fun (key, ag) ->
+                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+                | Some f, _ -> if f >= 65 then ag.Population else 0
+                | _, _ -> 0)) - protectedWithVaccineAbove65
 
-    let getSummaryData (dp: WeeklyEpisariDataPoint) : HospitalizedData =
+    {
+        Date = dp.Date
+        DateTo = dp.DateTo
+        VaccinatedIn =
+            [| vaccinatedIn
+               vaccinatedIn - vaccinatedInAbove65
+               vaccinatedInAbove65 |]
+        OtherIn =
+            [| otherIn
+               otherIn - otherInAbove65
+               otherInAbove65 |]
+        VaccinatedIn100k =
+            [| get100k vaccinatedIn protectedWithVaccine
+               get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - otherAbove65Population)
+               get100k vaccinatedInAbove65 otherAbove65Population |]
+        OtherIn100k =
+            [| get100k otherIn otherPopulation
+               get100k (otherIn - otherInAbove65) (otherPopulation - otherAbove65Population)
+               get100k otherInAbove65 otherAbove65Population |]
+    }
 
-        let vaccinatedIn = dp.CovidInVaccinated |> Option.defaultValue 0 |> float
-        let otherIn = ((dp.CovidIn |> Option.defaultValue 0) |> float) - vaccinatedIn
-        let protectedWithVaccine = averageOnWeek protectedWithVaccineMap dp.Date dp.DateTo
-        let otherPopulation =
-            (Utils.Dictionaries.regions.["si"].Population |> Option.defaultValue 0)
-            - protectedWithVaccine
 
-        let vaccinatedInAbove65 =
-            (dp.PerAge
-             |> List.sumBy
-                (fun ag ->
-                    match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                    | Some f, None -> if f = 65 then (ag.VaccinatedIn |> Option.defaultValue 0) else 0
-                    | _, _ -> 0)) |> float
-        let otherInAbove65 =
-            ((dp.PerAge
-              |> List.sumBy
-                (fun ag ->
-                    match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                    | Some f, _ -> if f >= 65 then (ag.CovidIn |> Option.defaultValue 0) else 0
-                    | _, _ -> 0)) |> float) - vaccinatedInAbove65
-        let protectedWithVaccineAbove65 = averageOnWeek protectedWithVaccineAbove65Map dp.Date dp.DateTo
-        let otherAbove65Population =
-            (Utils.AgePopulationStats.agePopulationStats
-             |> Map.toList
-             |> List.sumBy
-                (fun (key, ag) ->
-                    match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                    | Some f, _ -> if f >= 65 then ag.Population else 0
-                    | _, _ -> 0)) - protectedWithVaccineAbove65
-
-        {
-            Date = dp.Date
-            DateTo = dp.DateTo
-            VaccinatedIn =
-                [| vaccinatedIn - vaccinatedInAbove65
-                   vaccinatedInAbove65
-                   vaccinatedIn |]
-            OtherIn =
-                [| otherIn - otherInAbove65
-                   otherInAbove65
-                   otherIn |]
-            VaccinatedIn100k =
-                [| get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - otherAbove65Population)
-                   get100k vaccinatedInAbove65 otherAbove65Population
-                   get100k vaccinatedIn protectedWithVaccine |]
-            OtherIn100k =
-                [| get100k (otherIn - otherInAbove65) (otherPopulation - otherAbove65Population)
-                   get100k otherInAbove65 otherAbove65Population
-                   get100k otherIn otherPopulation |]
-        }
+let renderChartOptions (state: State) dispatch =
 
     let summaryData =
         state.Data
         |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
-        |> Array.map (fun dp -> getSummaryData dp)
+        |> Array.map (fun dp -> getSummaryData state dp)
         |> Array.sum
 
     let allSeries =
@@ -223,20 +253,29 @@ let renderChartOptions (state: State) dispatch =
                        endDate = summaryData.DateTo |}
 
     label,
-    {| optionsWithOnLoadEvent "covid19-vaccine-effect" with
+    pojo
+      {| optionsWithOnLoadEvent "covid19-vaccine-effect" with
            chart = pojo {| ``type`` = "column" |}
            title = pojo {| text = None |}
-           xAxis =
+           xAxis = pojo
                [| {| ``type`` = "category"
                      categories =
-                         [| chartText "ageBelow65"
-                            chartText "ageAbove65"
-                            chartText "ageAll"|] |} |]
-           yAxis =
+                         [| chartText "ageAll"
+                            chartText "ageBelow65"
+                            chartText "ageAbove65" |] |} |]
+           yAxis = pojo
                [| {| opposite = true
                      title = {| text = null |} |} |]
            series = List.toArray allSeries
-           plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
+           plotOptions =
+               pojo
+                   {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                      series =
+                          {| stacking = None
+                             crisp = false
+                             borderWidth = 0
+                             pointPadding = 0
+                             groupPadding = 0.1 |} |}
            legend =
                pojo
                    {| enabled = true
@@ -263,8 +302,105 @@ let renderChartOptions (state: State) dispatch =
            rangeSelector = pojo {| enabled = false |} |}
 
 
+let renderWeeklyChart state dispatch =
+
+    let label = ""
+
+    let getOtherInData state dp =
+        {| x = jsDatesMiddle dp.Date dp.DateTo
+           y =
+            match state.ChartType with
+            | Absolute -> dp.OtherIn.[state.DisplayType.GetIndex]
+            | Absolute100k -> dp.OtherIn100k.[state.DisplayType.GetIndex]
+           fmtHeader = I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+
+    let getVaccinatedInData state dp =
+        {| x = jsDatesMiddle dp.Date dp.DateTo
+           y =
+            match state.ChartType with
+            | Absolute -> dp.VaccinatedIn.[state.DisplayType.GetIndex]
+            | Absolute100k -> dp.VaccinatedIn100k.[state.DisplayType.GetIndex]
+           fmtHeader = I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+
+    let allSeries =
+          [ yield
+                pojo
+                 {| name = chartText "vaccinatedIn"
+                    ``type`` = "column"
+                    color = "#0e5842"
+                    data =
+                        state.Data
+                        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                        |> Array.map (fun dp -> getSummaryData state dp)
+                        |> Array.map (fun dp -> getVaccinatedInData state dp)
+                        |> Seq.toArray |}
+
+            yield
+                pojo
+                 {| name = chartText "otherIn"
+                    ``type`` = "column"
+                    color = "#de9a5a"
+                    data =
+                        state.Data
+                        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                        |> Array.map (fun dp -> getSummaryData state dp)
+                        |> Array.map (fun dp -> getOtherInData state dp)
+                        |> Seq.toArray |}
+          ]
+
+
+    let onRangeSelectorButtonClick (buttonIndex: int) =
+        let res (_: Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+
+        res
+
+    let baseOptions =
+        basicChartOptions Linear "covid19-vaccine-effect" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    "",
+    pojo
+      {| baseOptions with
+           series = List.toArray allSeries
+           credits = chartCreditsNIJZ
+           plotOptions =
+               pojo
+                   {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                      series =
+                          {| stacking = None
+                             crisp = false
+                             borderWidth = 0
+                             pointPadding = 0
+                             groupPadding = 0 |} |}
+           legend =
+               pojo
+                   {| enabled = true
+                      reversed = false
+                      layout = "horizontal" |}
+           tooltip =
+               pojo
+                   {| // formatter = fun () -> tooltipFormatter state jsThis
+                      headerFormat = "<b>{point.fmtHeader}</b><br>"
+                      valueDecimals =
+                          match state.ChartType with
+                          | Absolute -> 0
+                          | Absolute100k -> 1
+                      shared = true
+                      split = false
+                      useHTML = true |}
+           responsive =
+               pojo
+                   {| rules =
+                          [| {| condition = {| maxWidth = 768 |}
+                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+
+
 let renderChartContainer state dispatch =
-    let label, chart = renderChartOptions state dispatch
+    let label, chart =
+        match state.DisplayType with
+        | Summary -> renderChartOptions state dispatch
+        | _ -> renderWeeklyChart state dispatch
 
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
@@ -286,12 +422,30 @@ let renderChartTypeSelector (activeChartType: ChartType) dispatch =
                |> List.map renderSelector
                |> prop.children ]
 
+let renderDisplaySelectors state dispatch =
+    let renderSelector (displayType: DisplayType) dispatch =
+        Html.div [ let isActive = state.DisplayType = displayType
+                   prop.onClick (fun _ -> DisplayTypeChanged displayType |> dispatch)
+
+                   Utils.classes [ (true, "chart-display-property-selector__item")
+                                   (isActive, "selected") ]
+
+                   prop.text displayType.GetName ]
+
+    Html.div [ prop.className "chart-display-property-selector"
+               prop.children (
+                   DisplayType.All
+                   |> Seq.map (fun dt -> renderSelector dt dispatch)
+               ) ]
+
 let render state dispatch =
     match state.VaccinationData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ Utils.renderChartTopControls [ renderChartTypeSelector state.ChartType (ChartTypeChanged >> dispatch) ]
+        Html.div [ Utils.renderChartTopControls [
+                        renderDisplaySelectors state dispatch
+                        renderChartTypeSelector state.ChartType (ChartTypeChanged >> dispatch) ]
                    renderChartContainer state dispatch ]
 
 let vaccineEffectAgeChart
