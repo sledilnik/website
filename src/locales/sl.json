@@ -1430,7 +1430,7 @@
             "absolute100k": "Na 100.000 oseb v skupini",
             "vaccinatedIn": "Hospitalizirani - zaščiteni s cepljenjem",
             "otherIn": "Hospitalizirani - ostali",
-            "summary": "Primerjava",
+            "toDate": "Skupaj",
             "ageBelow65": "Mlajši od 65 let",
             "ageAbove65": "Starejši od 65 let",
             "ageAll": "Vse starosti",

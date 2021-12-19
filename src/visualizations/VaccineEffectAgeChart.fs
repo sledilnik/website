@@ -17,28 +17,28 @@ open Data.Vaccinations
 let chartText = I18N.chartText "vaccineEffectAge"
 
 type DisplayType =
-    | Summary
+    | ToDate
     | AllAges
     | AgeBelow65
     | AgeAbove65
     static member All =
-        [ Summary
+        [ ToDate
           AllAges
           AgeBelow65
           AgeAbove65 ]
 
-    static member Default = Summary
+    static member Default = ToDate
 
     member this.GetName =
         match this with
-        | Summary -> chartText "summary"
+        | ToDate -> chartText "toDate"
         | AllAges -> chartText "ageAll"
         | AgeBelow65 -> chartText "ageBelow65"
         | AgeAbove65 -> chartText "ageAbove65"
 
     member this.GetIndex =
         match this with
-        | Summary
+        | ToDate
         | AllAges -> 0
         | AgeBelow65 -> 1
         | AgeAbove65 -> 2
@@ -148,7 +148,7 @@ let tooltipFormatter state jsThis =
 
         let header: string =
             match state.DisplayType with
-            | Summary -> jsThis?x
+            | ToDate -> jsThis?x
             | _ -> points.[0]?point?fmtHeader
 
         s.AppendFormat("<b>{0}</b><br/>", header)
@@ -531,7 +531,7 @@ let renderWeeklyChart state dispatch =
 let renderChartContainer state dispatch =
     let label, chart =
         match state.DisplayType with
-        | Summary -> renderChartOptions state dispatch
+        | ToDate -> renderChartOptions state dispatch
         | _ -> renderWeeklyChart state dispatch
 
     Html.div [ Html.div [ prop.style [ style.height 480 ]

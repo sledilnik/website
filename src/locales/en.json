@@ -810,6 +810,22 @@
             "casesOther": "Other (unvaccinated, partially vaccinated)",
             "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
+        "vaccineEffectAge": {
+            "title": "Hospitalizations by Vaccination Status and Age",
+            "titleMenu": "Vaccination, age - effect",
+            "absolute": "Absolute",
+            "absolute100k": "Per 100.000 People in Group",
+            "vaccinatedIn": "Hospitalized - Protected with Vaccination",
+            "otherIn": "Hospitalized - Others",
+            "toDate": "To Date",
+            "ageBelow65": "Below 65 years",
+            "ageAbove65": "Above 65 years",
+            "ageAll": "All ages",
+            "riskRatio": "Risk ratio (factor)",
+            "vaccineEfficiency": "Vaccination Efficiency",
+            "hospitalizedIn": "From {{ startDate, %e. %b %Y  }} to {{ endDate, %e. %b %Y }}.",
+            "disclaimer": "<br>However, due to the differences in vaccination rates between age groups, this interpretation should be treated with caution - read more about the Simpson's paradox in [the article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
+        },
         "schools": {
             "title": "Cases in School and Kindergarten",
             "titleMenu": "School, Kindergarten - cases",
