@@ -403,7 +403,7 @@ let renderChartOptions (state: State) dispatch =
             xAxis =
                 [| {| ``type`` = "category"
                       categories =
-                       pojo [| chartText "ageAll"
+                            [| chartText "ageAll"
                                chartText "ageBelow65"
                                chartText "ageAbove65" |] |} |]
             yAxis =
