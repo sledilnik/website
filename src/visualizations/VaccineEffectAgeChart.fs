@@ -259,7 +259,7 @@ let renderChartOptions (state: State) dispatch =
            title = pojo {| text = None |}
            xAxis =
                [| {| ``type`` = "category"
-                     categories =
+                     categories = pojo
                          [| chartText "ageAll"
                             chartText "ageBelow65"
                             chartText "ageAbove65" |] |} |]
@@ -402,7 +402,7 @@ let renderChartContainer state dispatch =
 
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
-                          prop.children [ chart |> Highcharts.chart ] ]
+                          prop.children [ chart |> Highcharts.chartFromWindow ] ]
                Html.div [ prop.className "disclaimer"
                           prop.children [ Utils.Markdown.render (label + chartText "disclaimer") ] ] ]
 
