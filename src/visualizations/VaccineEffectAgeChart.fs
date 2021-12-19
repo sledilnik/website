@@ -20,7 +20,7 @@ type DisplayType =
     | AgeBelow65
     | AgeAbove65
     static member All = [ Summary; AllAges; AgeBelow65; AgeAbove65 ]
-    static member Default = Summary
+    static member Default = AllAges
 
     member this.GetName =
         match this with
@@ -204,8 +204,8 @@ let getSummaryData (state: State) (dp: WeeklyEpisariDataPoint) : HospitalizedDat
                otherInAbove65 |]
         VaccinatedIn100k =
             [| get100k vaccinatedIn protectedWithVaccine
-               get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - otherAbove65Population)
-               get100k vaccinatedInAbove65 otherAbove65Population |]
+               get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - protectedWithVaccineAbove65)
+               get100k vaccinatedInAbove65 protectedWithVaccineAbove65 |]
         OtherIn100k =
             [| get100k otherIn otherPopulation
                get100k (otherIn - otherInAbove65) (otherPopulation - otherAbove65Population)
@@ -217,7 +217,7 @@ let renderChartOptions (state: State) dispatch =
 
     let summaryData =
         state.Data
-        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+        |> Array.skipWhile (fun dp -> dp.Date < DateTime(2021,8,15))
         |> Array.map (fun dp -> getSummaryData state dp)
         |> Array.sum
 
@@ -254,16 +254,16 @@ let renderChartOptions (state: State) dispatch =
 
     label,
     pojo
-      {| optionsWithOnLoadEvent "covid19-vaccine-effect" with
+      {| optionsWithOnLoadEvent "covid19-vaccine-effect-summary" with
            chart = pojo {| ``type`` = "column" |}
            title = pojo {| text = None |}
-           xAxis = pojo
+           xAxis =
                [| {| ``type`` = "category"
                      categories =
                          [| chartText "ageAll"
                             chartText "ageBelow65"
                             chartText "ageAbove65" |] |} |]
-           yAxis = pojo
+           yAxis =
                [| {| opposite = true
                      title = {| text = null |} |} |]
            series = List.toArray allSeries
@@ -282,8 +282,7 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            tooltip =
                pojo
-                   {| // formatter = fun () -> tooltipFormatter state jsThis
-                      headerFormat = "<b>{point.x}</b><br>"
+                   {| headerFormat = "<b>{point.x}</b><br>"
                       valueDecimals =
                           match state.ChartType with
                           | Absolute -> 0
@@ -348,7 +347,6 @@ let renderWeeklyChart state dispatch =
                         |> Seq.toArray |}
           ]
 
-
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
             RangeSelectionChanged buttonIndex |> dispatch
@@ -357,11 +355,13 @@ let renderWeeklyChart state dispatch =
         res
 
     let baseOptions =
-        basicChartOptions Linear "covid19-vaccine-effect" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+        basicChartOptions Linear "covid19-vaccine-effect-age" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
     "",
     pojo
       {| baseOptions with
+           xAxis = baseOptions.xAxis
+           yAxis = baseOptions.yAxis
            series = List.toArray allSeries
            credits = chartCreditsNIJZ
            plotOptions =
@@ -376,12 +376,10 @@ let renderWeeklyChart state dispatch =
            legend =
                pojo
                    {| enabled = true
-                      reversed = false
                       layout = "horizontal" |}
            tooltip =
                pojo
-                   {| // formatter = fun () -> tooltipFormatter state jsThis
-                      headerFormat = "<b>{point.fmtHeader}</b><br>"
+                   {| headerFormat = "<b>{point.fmtHeader}</b><br>"
                       valueDecimals =
                           match state.ChartType with
                           | Absolute -> 0
