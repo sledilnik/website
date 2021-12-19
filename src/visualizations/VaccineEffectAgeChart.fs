@@ -160,7 +160,7 @@ let tooltipFormatter state jsThis =
         |> Array.iter (fun dp ->
             let label = dp?series?name
             let color = dp?series?color
-            let value: float = Utils.roundTo1Decimal dp?point?y
+            let value: float = dp?point?y
 
             match value with
             | 0. -> ()
@@ -180,7 +180,7 @@ let tooltipFormatter state jsThis =
                 s.Append "<tr>" |> ignore
 
                 let tooltipStr =
-                    String.Format(format, color, label, I18N.NumberFormat.formatNumber (value), percentage)
+                    String.Format(format, color, label, I18N.NumberFormat.formatNumber (Utils.roundTo1Decimal value), percentage)
 
                 s.Append tooltipStr |> ignore
                 s.Append "</tr>" |> ignore)
@@ -218,7 +218,7 @@ let tooltipFormatter state jsThis =
                     String.Format(
                         format,
                         chartText "riskRatio",
-                        Utils.roundTo1Decimal (other / vaccinated)
+                        I18N.NumberFormat.formatNumber (Utils.roundTo1Decimal (other / vaccinated))
                     )
                 s.Append riskRatio |> ignore
 
