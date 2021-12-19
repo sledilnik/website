@@ -435,7 +435,6 @@ let renderChartOptions (state: State) dispatch =
                     {| rules =
                         [| {| condition = {| maxWidth = 768 |}
                               chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
-                |> pojo
             navigator = pojo {| enabled = false |}
             scrollbar = pojo {| enabled = false |}
             rangeSelector = pojo {| enabled = false |} |}
@@ -499,8 +498,11 @@ let renderWeeklyChart state dispatch =
     "",
     pojo
         {| baseOptions with
-            xAxis = baseOptions.xAxis
-            yAxis = baseOptions.yAxis
+            xAxis =
+               baseOptions.xAxis
+               |> Array.map (fun xAxis ->
+                   {| xAxis with categories = None |})
+            // yAxis = baseOptions.yAxis
             series = List.toArray allSeries
             credits = chartCreditsNIJZ
             plotOptions =
