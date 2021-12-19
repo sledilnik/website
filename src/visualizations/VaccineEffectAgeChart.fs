@@ -129,7 +129,7 @@ let tooltipFormatter state jsThis =
 
         let header : string =
             match state.DisplayType with
-            | Summary -> points.[0]?point?y
+            | Summary -> jsThis?x
             | _ -> points.[0]?point?fmtHeader
 
         s.AppendFormat("<b>{0}</b><br/>", header)
@@ -191,14 +191,14 @@ let tooltipFormatter state jsThis =
                 "<tr><td></td>"
                 + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
                 + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
-                + "<td></td></tr>"
+                + "<td style='text-align: left; padding-left: 6px'>{2}</td></tr>"
 
             let riskRatio =
-                String.Format(format, chartText "riskRatio", Utils.roundTo1Decimal (other / vaccinated))
+                String.Format(format, chartText "riskRatio", Utils.roundTo1Decimal (other / vaccinated), chartText "times")
             s.Append riskRatio |> ignore
 
             let vaccineEfficiency =
-                String.Format(format, chartText "vaccineEfficiency", Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))))
+                String.Format(format, chartText "vaccineEfficiency", Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))), "")
             s.Append vaccineEfficiency |> ignore
 
         s.Append "</table>" |> ignore
