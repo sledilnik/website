@@ -212,26 +212,22 @@ let tooltipFormatter state jsThis =
                     "<tr><td></td>"
                     + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
                     + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
-                    + "<td style='text-align: left; padding-left: 6px'>{2}</td></tr>"
+                    + "<td></td></tr>"
 
                 let riskRatio =
                     String.Format(
                         format,
                         chartText "riskRatio",
-                        Utils.roundTo1Decimal (other / vaccinated),
-                        chartText "times"
+                        Utils.roundTo1Decimal (other / vaccinated)
                     )
-
                 s.Append riskRatio |> ignore
 
                 let vaccineEfficiency =
                     String.Format(
                         format,
                         chartText "vaccineEfficiency",
-                        Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))),
-                        ""
+                        Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other)))
                     )
-
                 s.Append vaccineEfficiency |> ignore
 
         s.Append "</table>" |> ignore
@@ -505,6 +501,7 @@ let renderWeeklyChart state dispatch =
             // yAxis = baseOptions.yAxis
             series = List.toArray allSeries
             credits = chartCreditsNIJZ
+            rangeSelector = defaultRangeSelector state.RangeSelectionButtonIndex onRangeSelectorButtonClick
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
