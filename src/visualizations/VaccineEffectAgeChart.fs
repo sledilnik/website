@@ -2,10 +2,12 @@
 module VaccineEffectAgeChart
 
 open System
+open System.Text
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
+open Fable.Core.JsInterop
 
 open Highcharts
 open Types
@@ -113,6 +115,94 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ChartTypeChanged chartType -> { state with ChartType = chartType }, Cmd.none
     | RangeSelectionChanged buttonIndex -> { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
+
+let tooltipFormatter state jsThis =
+    let points: obj [] = jsThis?points
+
+    match points with
+    | [||] -> ""
+    | _ ->
+        let total =
+            points |> Array.sumBy (fun point -> point?point?y)
+
+        let s = StringBuilder()
+
+        let header : string =
+            match state.DisplayType with
+            | Summary -> points.[0]?point?y
+            | _ -> points.[0]?point?fmtHeader
+
+        s.AppendFormat("<b>{0}</b><br/>", header)
+        |> ignore
+
+        s.Append "<table>" |> ignore
+
+        points
+        |> Array.iter
+            (fun dp ->
+                let label = dp?series?name
+                let color = dp?series?color
+                let value: float = Utils.roundTo1Decimal dp?point?y
+
+                match value with
+                | 0. -> ()
+                | _ ->
+                    let format =
+                        "<td style='color: {0}'>●</td>"
+                        + "<td style='text-align: left; padding-left: 6px'>{1}:</td>"
+                        + "<td style='text-align: right; padding-left: 6px'>"
+                        + "<b>{2}</b></td>"
+                        + "<td style='text-align: right; padding-left: 10px'>"
+                        + "{3}</td>"
+
+                    let percentage =
+                        value * 100. / total
+                        |> Utils.percentWith1DecimalFormatter
+
+                    s.Append "<tr>" |> ignore
+
+                    let tooltipStr =
+                        String.Format(format, color, label, I18N.NumberFormat.formatNumber (value), percentage)
+
+                    s.Append tooltipStr |> ignore
+                    s.Append "</tr>" |> ignore)
+
+        match state.ChartType with
+        | Absolute ->       // add total
+            let format =
+                "<td></td>"
+                + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
+                + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
+                + "<td></td>"
+
+            s.Append "<tr>" |> ignore
+
+            let totalTooltip =
+                String.Format(format, I18N.t "charts.common.total", I18N.NumberFormat.formatNumber (total))
+
+            s.Append totalTooltip |> ignore
+            s.Append "</tr>" |> ignore
+        | Absolute100k ->   // add ratios
+            let vaccinated: float = points.[0]?point?y
+            let other: float = points.[1]?point?y
+
+            s.Append "<tr><td></td><td></td><td></td><td></td></tr>" |> ignore
+            let format =
+                "<tr><td></td>"
+                + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
+                + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
+                + "<td></td></tr>"
+
+            let riskRatio =
+                String.Format(format, chartText "riskRatio", Utils.roundTo1Decimal (other / vaccinated))
+            s.Append riskRatio |> ignore
+
+            let vaccineEfficiency =
+                String.Format(format, chartText "vaccineEfficiency", Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))))
+            s.Append vaccineEfficiency |> ignore
+
+        s.Append "</table>" |> ignore
+        s.ToString()
 
 let averageOnWeek (dataMap : Map<DateTime, int>) (date: DateTime) (dateTo: DateTime)=
     match dataMap.TryFind(date), dataMap.TryFind(date) with
@@ -282,11 +372,7 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            tooltip =
                pojo
-                   {| headerFormat = "<b>{point.x}</b><br>"
-                      valueDecimals =
-                          match state.ChartType with
-                          | Absolute -> 0
-                          | Absolute100k -> 1
+                   {| formatter = fun () -> tooltipFormatter state jsThis
                       shared = true
                       split = false
                       useHTML = true |}
@@ -379,11 +465,7 @@ let renderWeeklyChart state dispatch =
                       layout = "horizontal" |}
            tooltip =
                pojo
-                   {| headerFormat = "<b>{point.fmtHeader}</b><br>"
-                      valueDecimals =
-                          match state.ChartType with
-                          | Absolute -> 0
-                          | Absolute100k -> 1
+                   {| formatter = fun () -> tooltipFormatter state jsThis
                       shared = true
                       split = false
                       useHTML = true |}
