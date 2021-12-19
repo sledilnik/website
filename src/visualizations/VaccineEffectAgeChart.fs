@@ -22,7 +22,7 @@ type DisplayType =
     | AgeBelow65
     | AgeAbove65
     static member All = [ Summary; AllAges; AgeBelow65; AgeAbove65 ]
-    static member Default = AllAges
+    static member Default = Summary
 
     member this.GetName =
         match this with
@@ -307,7 +307,7 @@ let renderChartOptions (state: State) dispatch =
 
     let summaryData =
         state.Data
-        |> Array.skipWhile (fun dp -> dp.Date < DateTime(2021,8,15))
+        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
         |> Array.map (fun dp -> getSummaryData state dp)
         |> Array.sum
 
@@ -484,7 +484,7 @@ let renderChartContainer state dispatch =
 
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
-                          prop.children [ chart |> Highcharts.chartFromWindow ] ]
+                          prop.children [ chart |> Highcharts.chart ] ]
                Html.div [ prop.className "disclaimer"
                           prop.children [ Utils.Markdown.render (label + chartText "disclaimer") ] ] ]
 
