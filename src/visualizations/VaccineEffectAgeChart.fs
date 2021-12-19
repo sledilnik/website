@@ -364,7 +364,7 @@ let renderChartOptions (state: State) dispatch =
         |> Array.sum
 
     let allSeries =
-        [ yield
+        [| yield
             pojo
                 {| name = chartText "vaccinatedIn"
                    ``type`` = "column"
@@ -374,7 +374,7 @@ let renderChartOptions (state: State) dispatch =
                     | Absolute -> summaryData.VaccinatedIn
                     | Absolute100k -> summaryData.VaccinatedIn100k
                     |> Array.map (fun dp -> {| y = dp |}) |}
-          yield
+           yield
               pojo
                   {| name = chartText "otherIn"
                      ``type`` = "column"
@@ -383,7 +383,7 @@ let renderChartOptions (state: State) dispatch =
                       match state.ChartType with
                       | Absolute -> summaryData.OtherIn
                       | Absolute100k -> summaryData.OtherIn100k
-                      |> Array.map (fun dp -> {| y = dp |}) |} ]
+                      |> Array.map (fun dp -> {| y = dp |}) |} |]
 
     let label =
         I18N.tOptions
@@ -404,12 +404,12 @@ let renderChartOptions (state: State) dispatch =
                                chartText "ageAbove65" |] |} |]
             yAxis =
                 [| {| opposite = true
-                      title = {| text = null |} |} |]
-            series = List.toArray allSeries
+                      title = {| text = None |} |} |]
+            series = allSeries
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                       series =
+                       series = pojo
                         {| stacking = None
                            crisp = false
                            borderWidth = 0
@@ -457,7 +457,7 @@ let renderWeeklyChart state dispatch =
            fmtHeader = I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
 
     let allSeries =
-        [ yield
+        [| yield
             pojo
                 {| name = chartText "vaccinatedIn"
                    ``type`` = "column"
@@ -469,7 +469,7 @@ let renderWeeklyChart state dispatch =
                     |> Array.map (fun dp -> getVaccinatedInData state dp)
                     |> Seq.toArray |}
 
-          yield
+           yield
               pojo
                   {| name = chartText "otherIn"
                      ``type`` = "column"
@@ -479,7 +479,7 @@ let renderWeeklyChart state dispatch =
                       |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
                       |> Array.map (fun dp -> getSummaryData state dp)
                       |> Array.map (fun dp -> getOtherInData state dp)
-                      |> Seq.toArray |} ]
+                      |> Seq.toArray |} |]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -499,13 +499,13 @@ let renderWeeklyChart state dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with categories = None |})
             // yAxis = baseOptions.yAxis
-            series = List.toArray allSeries
+            series = allSeries
             credits = chartCreditsNIJZ
             rangeSelector = defaultRangeSelector state.RangeSelectionButtonIndex onRangeSelectorButtonClick
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                       series =
+                       series = pojo
                         {| stacking = None
                            crisp = false
                            borderWidth = 0
