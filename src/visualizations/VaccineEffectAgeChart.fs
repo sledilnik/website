@@ -21,7 +21,12 @@ type DisplayType =
     | AllAges
     | AgeBelow65
     | AgeAbove65
-    static member All = [ Summary; AllAges; AgeBelow65; AgeAbove65 ]
+    static member All =
+        [ Summary
+          AllAges
+          AgeBelow65
+          AgeAbove65 ]
+
     static member Default = Summary
 
     member this.GetName =
@@ -33,7 +38,8 @@ type DisplayType =
 
     member this.GetIndex =
         match this with
-        | Summary | AllAges -> 0
+        | Summary
+        | AllAges -> 0
         | AgeBelow65 -> 1
         | AgeAbove65 -> 2
 
@@ -51,32 +57,43 @@ type ChartType =
         | Absolute100k -> chartText "absolute100k"
 
 type HospitalizedData =
-    {
-        Date: DateTime
-        DateTo: DateTime
-        VaccinatedIn: float array
-        OtherIn: float array
-        VaccinatedIn100k: float array
-        OtherIn100k: float array
-    }
-    static member get_Zero () =
-        {
-            Date = DateTime.MaxValue
-            DateTo = DateTime.MinValue
-            VaccinatedIn = [| 0.; 0.; 0. |]
-            OtherIn = [| 0.; 0.; 0. |]
-            VaccinatedIn100k = [| 0.; 0.; 0. |]
-            OtherIn100k = [| 0.; 0.; 0. |]
-        }
-    static member (+) (h1 : HospitalizedData, h2 : HospitalizedData) =
-        {
-            Date = if DateTime.Compare(h1.Date, h2.Date) < 1 then h1.Date else h2.Date
-            DateTo = if DateTime.Compare(h1.DateTo, h2.DateTo) < 1 then h2.DateTo else h1.DateTo
-            VaccinatedIn = h1.VaccinatedIn |> Array.mapi (fun i v -> v + h2.VaccinatedIn.[i])
-            OtherIn = h1.OtherIn |> Array.mapi (fun i v -> v + h2.OtherIn.[i])
-            VaccinatedIn100k = h1.VaccinatedIn100k |> Array.mapi (fun i v -> v + h2.VaccinatedIn100k.[i])
-            OtherIn100k = h1.OtherIn100k |> Array.mapi (fun i v -> v + h2.OtherIn100k.[i])
-        }
+    { Date: DateTime
+      DateTo: DateTime
+      VaccinatedIn: float array
+      OtherIn: float array
+      VaccinatedIn100k: float array
+      OtherIn100k: float array }
+    static member get_Zero() =
+        { Date = DateTime.MaxValue
+          DateTo = DateTime.MinValue
+          VaccinatedIn = [| 0.; 0.; 0. |]
+          OtherIn = [| 0.; 0.; 0. |]
+          VaccinatedIn100k = [| 0.; 0.; 0. |]
+          OtherIn100k = [| 0.; 0.; 0. |] }
+
+    static member (+)(h1: HospitalizedData, h2: HospitalizedData) =
+        { Date =
+            if DateTime.Compare(h1.Date, h2.Date) < 1 then
+                h1.Date
+            else
+                h2.Date
+          DateTo =
+            if DateTime.Compare(h1.DateTo, h2.DateTo) < 1 then
+                h2.DateTo
+            else
+                h1.DateTo
+          VaccinatedIn =
+            h1.VaccinatedIn
+            |> Array.mapi (fun i v -> v + h2.VaccinatedIn.[i])
+          OtherIn =
+            h1.OtherIn
+            |> Array.mapi (fun i v -> v + h2.OtherIn.[i])
+          VaccinatedIn100k =
+            h1.VaccinatedIn100k
+            |> Array.mapi (fun i v -> v + h2.VaccinatedIn100k.[i])
+          OtherIn100k =
+            h1.OtherIn100k
+            |> Array.mapi (fun i v -> v + h2.OtherIn100k.[i]) }
 
 type State =
     { Data: WeeklyEpisariData
@@ -97,6 +114,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let cmd =
         Cmd.OfAsync.either getOrFetch () ConsumeVaccinationData ConsumeServerError
+
     let state =
         { Data = data
           VaccinationData = [||]
@@ -104,6 +122,7 @@ let init data : State * Cmd<Msg> =
           DisplayType = DisplayType.Default
           ChartType = ChartType.Default
           RangeSelectionButtonIndex = 3 }
+
     state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -127,7 +146,7 @@ let tooltipFormatter state jsThis =
 
         let s = StringBuilder()
 
-        let header : string =
+        let header: string =
             match state.DisplayType with
             | Summary -> jsThis?x
             | _ -> points.[0]?point?fmtHeader
@@ -138,37 +157,36 @@ let tooltipFormatter state jsThis =
         s.Append "<table>" |> ignore
 
         points
-        |> Array.iter
-            (fun dp ->
-                let label = dp?series?name
-                let color = dp?series?color
-                let value: float = Utils.roundTo1Decimal dp?point?y
+        |> Array.iter (fun dp ->
+            let label = dp?series?name
+            let color = dp?series?color
+            let value: float = Utils.roundTo1Decimal dp?point?y
 
-                match value with
-                | 0. -> ()
-                | _ ->
-                    let format =
-                        "<td style='color: {0}'>●</td>"
-                        + "<td style='text-align: left; padding-left: 6px'>{1}:</td>"
-                        + "<td style='text-align: right; padding-left: 6px'>"
-                        + "<b>{2}</b></td>"
-                        + "<td style='text-align: right; padding-left: 10px'>"
-                        + "{3}</td>"
+            match value with
+            | 0. -> ()
+            | _ ->
+                let format =
+                    "<td style='color: {0}'>●</td>"
+                    + "<td style='text-align: left; padding-left: 6px'>{1}:</td>"
+                    + "<td style='text-align: right; padding-left: 6px'>"
+                    + "<b>{2}</b></td>"
+                    + "<td style='text-align: right; padding-left: 10px'>"
+                    + "{3}</td>"
 
-                    let percentage =
-                        value * 100. / total
-                        |> Utils.percentWith1DecimalFormatter
+                let percentage =
+                    value * 100. / total
+                    |> Utils.percentWith1DecimalFormatter
 
-                    s.Append "<tr>" |> ignore
+                s.Append "<tr>" |> ignore
 
-                    let tooltipStr =
-                        String.Format(format, color, label, I18N.NumberFormat.formatNumber (value), percentage)
+                let tooltipStr =
+                    String.Format(format, color, label, I18N.NumberFormat.formatNumber (value), percentage)
 
-                    s.Append tooltipStr |> ignore
-                    s.Append "</tr>" |> ignore)
+                s.Append tooltipStr |> ignore
+                s.Append "</tr>" |> ignore)
 
         match state.ChartType with
-        | Absolute ->       // add total
+        | Absolute -> // add total
             let format =
                 "<td></td>"
                 + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
@@ -182,125 +200,163 @@ let tooltipFormatter state jsThis =
 
             s.Append totalTooltip |> ignore
             s.Append "</tr>" |> ignore
-        | Absolute100k ->   // add ratios
-            let vaccinated: float = points.[0]?point?y
-            let other: float = points.[1]?point?y
+        | Absolute100k -> // add ratios
+            if points.Length = 2 then // only if both categories selected
+                let vaccinated: float = points.[0]?point?y
+                let other: float = points.[1]?point?y
 
-            s.Append "<tr><td></td><td></td><td></td><td></td></tr>" |> ignore
-            let format =
-                "<tr><td></td>"
-                + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
-                + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
-                + "<td style='text-align: left; padding-left: 6px'>{2}</td></tr>"
+                s.Append "<tr><td></td><td></td><td></td><td></td></tr>"
+                |> ignore
 
-            let riskRatio =
-                String.Format(format, chartText "riskRatio", Utils.roundTo1Decimal (other / vaccinated), chartText "times")
-            s.Append riskRatio |> ignore
+                let format =
+                    "<tr><td></td>"
+                    + "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"
+                    + "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
+                    + "<td style='text-align: left; padding-left: 6px'>{2}</td></tr>"
 
-            let vaccineEfficiency =
-                String.Format(format, chartText "vaccineEfficiency", Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))), "")
-            s.Append vaccineEfficiency |> ignore
+                let riskRatio =
+                    String.Format(
+                        format,
+                        chartText "riskRatio",
+                        Utils.roundTo1Decimal (other / vaccinated),
+                        chartText "times"
+                    )
+
+                s.Append riskRatio |> ignore
+
+                let vaccineEfficiency =
+                    String.Format(
+                        format,
+                        chartText "vaccineEfficiency",
+                        Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other))),
+                        ""
+                    )
+
+                s.Append vaccineEfficiency |> ignore
 
         s.Append "</table>" |> ignore
         s.ToString()
 
-let averageOnWeek (dataMap : Map<DateTime, int>) (date: DateTime) (dateTo: DateTime)=
+let averageOnWeek (dataMap: Map<DateTime, int>) (date: DateTime) (dateTo: DateTime) =
     match dataMap.TryFind(date), dataMap.TryFind(date) with
-    | Some v1, Some v2 ->
-        Math.Round((((v1 + v2) |> float) / 2.), 0) |> int
+    | Some v1, Some v2 -> Math.Round((((v1 + v2) |> float) / 2.), 0) |> int
     | Some v1, None -> v1
     | None, Some v2 -> v2
     | None, None -> 0
 
-let get100k value population =
-    value * 100000. / (float)population
+let get100k value population = value * 100000. / (float) population
 
 let getSummaryData (state: State) (dp: WeeklyEpisariDataPoint) : HospitalizedData =
 
     let protectedWithVaccineMap =
         state.VaccinationData
         |> Seq.toArray
-        |> Seq.mapi
-            (fun i dp ->
-                let protectedWithVaccine = // protected 14 days after 2nd dose
-                    if i >= 15 then
-                        state.VaccinationData.[i - 15].administered2nd.toDate |> Option.defaultValue 0
-                    else
-                        0
+        |> Seq.mapi (fun i dp ->
+            let protectedWithVaccine = // protected 14 days after 2nd dose
+                if i >= 15 then
+                    state.VaccinationData.[i - 15]
+                        .administered2nd
+                        .toDate
+                    |> Option.defaultValue 0
+                else
+                    0
 
-                dp.Date, protectedWithVaccine)
+            dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
     let protectedWithVaccineAbove65Map =
         state.VaccinationData
         |> Seq.toArray
-        |> Seq.mapi
-            (fun i dp ->
-                let protectedWithVaccine = // protected 14 days after 2nd dose
-                    if i >= 15 then
-                        state.VaccinationData.[i - 15].administeredPerAge
-                        |> List.sumBy
-                            (fun ag ->
-                                match ag.ageFrom, ag.ageTo with
-                                | Some f, _ -> if f >= 65 then (ag.administered2nd |> Option.defaultValue 0) else 0
-                                | _, _ -> 0)
-                    else
-                        0
+        |> Seq.mapi (fun i dp ->
+            let protectedWithVaccine = // protected 14 days after 2nd dose
+                if i >= 15 then
+                    state.VaccinationData.[i - 15].administeredPerAge
+                    |> List.sumBy (fun ag ->
+                        match ag.ageFrom, ag.ageTo with
+                        | Some f, _ ->
+                            if f >= 65 then
+                                (ag.administered2nd |> Option.defaultValue 0)
+                            else
+                                0
+                        | _, _ -> 0)
+                else
+                    0
 
-                dp.Date, protectedWithVaccine)
+            dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
-    let vaccinatedIn = dp.CovidInVaccinated |> Option.defaultValue 0 |> float
-    let otherIn = ((dp.CovidIn |> Option.defaultValue 0) |> float) - vaccinatedIn
-    let protectedWithVaccine = averageOnWeek protectedWithVaccineMap dp.Date dp.DateTo
+    let vaccinatedIn =
+        dp.CovidInVaccinated
+        |> Option.defaultValue 0
+        |> float
+
+    let otherIn =
+        ((dp.CovidIn |> Option.defaultValue 0) |> float)
+        - vaccinatedIn
+
+    let protectedWithVaccine =
+        averageOnWeek protectedWithVaccineMap dp.Date dp.DateTo
+
     let otherPopulation =
-        (Utils.Dictionaries.regions.["si"].Population |> Option.defaultValue 0)
+        (Utils.Dictionaries.regions.["si"].Population
+         |> Option.defaultValue 0)
         - protectedWithVaccine
 
     let vaccinatedInAbove65 =
         (dp.PerAge
-            |> List.sumBy
-            (fun ag ->
-                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                | Some f, None -> if f = 65 then (ag.VaccinatedIn |> Option.defaultValue 0) else 0
-                | _, _ -> 0)) |> float
+         |> List.sumBy (fun ag ->
+             match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+             | Some f, None ->
+                 if f = 65 then
+                     (ag.VaccinatedIn |> Option.defaultValue 0)
+                 else
+                     0
+             | _, _ -> 0))
+        |> float
+
     let otherInAbove65 =
         ((dp.PerAge
-            |> List.sumBy
-            (fun ag ->
-                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                | Some f, _ -> if f >= 65 then (ag.CovidIn |> Option.defaultValue 0) else 0
-                | _, _ -> 0)) |> float) - vaccinatedInAbove65
-    let protectedWithVaccineAbove65 = averageOnWeek protectedWithVaccineAbove65Map dp.Date dp.DateTo
+          |> List.sumBy (fun ag ->
+              match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+              | Some f, _ ->
+                  if f >= 65 then
+                      (ag.CovidIn |> Option.defaultValue 0)
+                  else
+                      0
+              | _, _ -> 0))
+         |> float)
+        - vaccinatedInAbove65
+
+    let protectedWithVaccineAbove65 =
+        averageOnWeek protectedWithVaccineAbove65Map dp.Date dp.DateTo
+
     let otherAbove65Population =
         (Utils.AgePopulationStats.agePopulationStats
-            |> Map.toList
-            |> List.sumBy
-            (fun (key, ag) ->
-                match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
-                | Some f, _ -> if f >= 65 then ag.Population else 0
-                | _, _ -> 0)) - protectedWithVaccineAbove65
+         |> Map.toList
+         |> List.sumBy (fun (key, ag) ->
+             match ag.GroupKey.AgeFrom, ag.GroupKey.AgeTo with
+             | Some f, _ -> if f >= 65 then ag.Population else 0
+             | _, _ -> 0))
+        - protectedWithVaccineAbove65
 
-    {
-        Date = dp.Date
-        DateTo = dp.DateTo
-        VaccinatedIn =
-            [| vaccinatedIn
-               vaccinatedIn - vaccinatedInAbove65
-               vaccinatedInAbove65 |]
-        OtherIn =
-            [| otherIn
-               otherIn - otherInAbove65
-               otherInAbove65 |]
-        VaccinatedIn100k =
-            [| get100k vaccinatedIn protectedWithVaccine
-               get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - protectedWithVaccineAbove65)
-               get100k vaccinatedInAbove65 protectedWithVaccineAbove65 |]
-        OtherIn100k =
-            [| get100k otherIn otherPopulation
-               get100k (otherIn - otherInAbove65) (otherPopulation - otherAbove65Population)
-               get100k otherInAbove65 otherAbove65Population |]
-    }
+    { Date = dp.Date
+      DateTo = dp.DateTo
+      VaccinatedIn =
+        [| vaccinatedIn
+           vaccinatedIn - vaccinatedInAbove65
+           vaccinatedInAbove65 |]
+      OtherIn =
+        [| otherIn
+           otherIn - otherInAbove65
+           otherInAbove65 |]
+      VaccinatedIn100k =
+        [| get100k vaccinatedIn protectedWithVaccine
+           get100k (vaccinatedIn - vaccinatedInAbove65) (protectedWithVaccine - protectedWithVaccineAbove65)
+           get100k vaccinatedInAbove65 protectedWithVaccineAbove65 |]
+      OtherIn100k =
+        [| get100k otherIn otherPopulation
+           get100k (otherIn - otherInAbove65) (otherPopulation - otherAbove65Population)
+           get100k otherInAbove65 otherAbove65Population |] }
 
 
 let renderChartOptions (state: State) dispatch =
@@ -312,79 +368,77 @@ let renderChartOptions (state: State) dispatch =
         |> Array.sum
 
     let allSeries =
-        [
+        [ yield
+            pojo
+                {| name = chartText "vaccinatedIn"
+                   ``type`` = "column"
+                   color = "#0e5842"
+                   data =
+                    match state.ChartType with
+                    | Absolute -> summaryData.VaccinatedIn
+                    | Absolute100k -> summaryData.VaccinatedIn100k
+                    |> Array.map (fun dp -> {| y = dp |}) |}
           yield
-                pojo
-                    {| name = chartText "vaccinatedIn"
-                       ``type`` = "column"
-                       color = "#0e5842"
-                       data =
-                            match state.ChartType with
-                            | Absolute -> summaryData.VaccinatedIn
-                            | Absolute100k -> summaryData.VaccinatedIn100k
-                            |> Array.map
-                                (fun dp -> {| y = dp |}) |}
-          yield
-                pojo
-                    {| name = chartText "otherIn"
-                       ``type`` = "column"
-                       color = "#de9a5a"
-                       data =
-                            match state.ChartType with
-                            | Absolute -> summaryData.OtherIn
-                            | Absolute100k -> summaryData.OtherIn100k
-                            |> Array.map
-                                (fun dp -> {| y = dp |}) |}
-        ]
+              pojo
+                  {| name = chartText "otherIn"
+                     ``type`` = "column"
+                     color = "#de9a5a"
+                     data =
+                      match state.ChartType with
+                      | Absolute -> summaryData.OtherIn
+                      | Absolute100k -> summaryData.OtherIn100k
+                      |> Array.map (fun dp -> {| y = dp |}) |} ]
 
-    let label = I18N.tOptions
-                    "charts.vaccineEffectAge.hospitalizedIn"
-                    {| startDate = summaryData.Date
-                       endDate = summaryData.DateTo |}
+    let label =
+        I18N.tOptions
+            "charts.vaccineEffectAge.hospitalizedIn"
+            {| startDate = summaryData.Date
+               endDate = summaryData.DateTo |}
 
     label,
     pojo
-      {| optionsWithOnLoadEvent "covid19-vaccine-effect-summary" with
-           chart = pojo {| ``type`` = "column" |}
-           title = pojo {| text = None |}
-           xAxis =
-               [| {| ``type`` = "category"
-                     categories = pojo
-                         [| chartText "ageAll"
-                            chartText "ageBelow65"
-                            chartText "ageAbove65" |] |} |]
-           yAxis =
-               [| {| opposite = true
-                     title = {| text = null |} |} |]
-           series = List.toArray allSeries
-           plotOptions =
-               pojo
-                   {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                      series =
-                          {| stacking = None
-                             crisp = false
-                             borderWidth = 0
-                             pointPadding = 0
-                             groupPadding = 0.1 |} |}
-           legend =
-               pojo
-                   {| enabled = true
-                      layout = "horizontal" |}
-           tooltip =
-               pojo
-                   {| formatter = fun () -> tooltipFormatter state jsThis
-                      shared = true
-                      split = false
-                      useHTML = true |}
-           credits = chartCreditsNIJZ
-           responsive =
-               pojo
-                   {| rules =
-                          [| {| condition = {| maxWidth = 768 |}
-                                chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |> pojo
-           navigator = pojo {| enabled = false |}
-           scrollbar = pojo {| enabled = false |}
-           rangeSelector = pojo {| enabled = false |} |}
+        {| optionsWithOnLoadEvent "covid19-vaccine-effect-summary" with
+            chart = pojo {| ``type`` = "column" |}
+            title = pojo {| text = None |}
+            xAxis =
+                [| {| ``type`` = "category"
+                      categories =
+                       pojo [| chartText "ageAll"
+                               chartText "ageBelow65"
+                               chartText "ageAbove65" |] |} |]
+            yAxis =
+                [| {| opposite = true
+                      title = {| text = null |} |} |]
+            series = List.toArray allSeries
+            plotOptions =
+                pojo
+                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                       series =
+                        {| stacking = None
+                           crisp = false
+                           borderWidth = 0
+                           pointPadding = 0
+                           groupPadding = 0.1 |} |}
+            legend =
+                pojo
+                    {| enabled = true
+                       layout = "horizontal" |}
+            tooltip =
+                pojo
+                    {| formatter = fun () -> tooltipFormatter state jsThis
+                       shared = true
+                       split = false
+                       useHTML = true |}
+            credits = chartCreditsNIJZ
+            responsive =
+                pojo
+                    {| rules =
+                        [| {| condition = {| maxWidth = 768 |}
+                              chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
+                |> pojo
+            navigator = pojo {| enabled = false |}
+            scrollbar = pojo {| enabled = false |}
+            rangeSelector = pojo {| enabled = false |} |}
 
 
 let renderWeeklyChart state dispatch =
@@ -408,30 +462,29 @@ let renderWeeklyChart state dispatch =
            fmtHeader = I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
 
     let allSeries =
-          [ yield
-                pojo
-                 {| name = chartText "vaccinatedIn"
-                    ``type`` = "column"
-                    color = "#0e5842"
-                    data =
-                        state.Data
-                        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
-                        |> Array.map (fun dp -> getSummaryData state dp)
-                        |> Array.map (fun dp -> getVaccinatedInData state dp)
-                        |> Seq.toArray |}
+        [ yield
+            pojo
+                {| name = chartText "vaccinatedIn"
+                   ``type`` = "column"
+                   color = "#0e5842"
+                   data =
+                    state.Data
+                    |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                    |> Array.map (fun dp -> getSummaryData state dp)
+                    |> Array.map (fun dp -> getVaccinatedInData state dp)
+                    |> Seq.toArray |}
 
-            yield
-                pojo
-                 {| name = chartText "otherIn"
-                    ``type`` = "column"
-                    color = "#de9a5a"
-                    data =
-                        state.Data
-                        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
-                        |> Array.map (fun dp -> getSummaryData state dp)
-                        |> Array.map (fun dp -> getOtherInData state dp)
-                        |> Seq.toArray |}
-          ]
+          yield
+              pojo
+                  {| name = chartText "otherIn"
+                     ``type`` = "column"
+                     color = "#de9a5a"
+                     data =
+                      state.Data
+                      |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                      |> Array.map (fun dp -> getSummaryData state dp)
+                      |> Array.map (fun dp -> getOtherInData state dp)
+                      |> Seq.toArray |} ]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -445,35 +498,35 @@ let renderWeeklyChart state dispatch =
 
     "",
     pojo
-      {| baseOptions with
-           xAxis = baseOptions.xAxis
-           yAxis = baseOptions.yAxis
-           series = List.toArray allSeries
-           credits = chartCreditsNIJZ
-           plotOptions =
-               pojo
-                   {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                      series =
-                          {| stacking = None
-                             crisp = false
-                             borderWidth = 0
-                             pointPadding = 0
-                             groupPadding = 0 |} |}
-           legend =
-               pojo
-                   {| enabled = true
-                      layout = "horizontal" |}
-           tooltip =
-               pojo
-                   {| formatter = fun () -> tooltipFormatter state jsThis
-                      shared = true
-                      split = false
-                      useHTML = true |}
-           responsive =
-               pojo
-                   {| rules =
-                          [| {| condition = {| maxWidth = 768 |}
-                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+        {| baseOptions with
+            xAxis = baseOptions.xAxis
+            yAxis = baseOptions.yAxis
+            series = List.toArray allSeries
+            credits = chartCreditsNIJZ
+            plotOptions =
+                pojo
+                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                       series =
+                        {| stacking = None
+                           crisp = false
+                           borderWidth = 0
+                           pointPadding = 0
+                           groupPadding = 0 |} |}
+            legend =
+                pojo
+                    {| enabled = true
+                       layout = "horizontal" |}
+            tooltip =
+                pojo
+                    {| formatter = fun () -> tooltipFormatter state jsThis
+                       shared = true
+                       split = false
+                       useHTML = true |}
+            responsive =
+                pojo
+                    {| rules =
+                        [| {| condition = {| maxWidth = 768 |}
+                              chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
 
 
 let renderChartContainer state dispatch =
@@ -523,12 +576,9 @@ let render state dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ Utils.renderChartTopControls [
-                        renderDisplaySelectors state dispatch
-                        renderChartTypeSelector state.ChartType (ChartTypeChanged >> dispatch) ]
+        Html.div [ Utils.renderChartTopControls [ renderDisplaySelectors state dispatch
+                                                  renderChartTypeSelector state.ChartType (ChartTypeChanged >> dispatch) ]
                    renderChartContainer state dispatch ]
 
-let vaccineEffectAgeChart
-    (props: {| data: WeeklyEpisariData |})
-    =
+let vaccineEffectAgeChart (props: {| data: WeeklyEpisariData |}) =
     React.elmishComponent ("VaccineEffectAgeChart", init props.data, update, render)
