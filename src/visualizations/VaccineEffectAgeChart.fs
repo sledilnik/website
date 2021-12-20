@@ -391,11 +391,11 @@ let renderChartOptions (state: State) dispatch =
             {| startDate = summaryData.Date
                endDate = summaryData.DateTo |}
 
-    label,
     pojo
         {| optionsWithOnLoadEvent "covid19-vaccine-effect-summary" with
             chart = pojo {| ``type`` = "column" |}
-            title = pojo {| text = None |}
+            title = pojo {| text = label
+                            style = pojo {| fontSize = "12px" |} |}
             xAxis =
                 [| {| ``type`` = "category"
                       categories =
@@ -437,8 +437,6 @@ let renderChartOptions (state: State) dispatch =
 
 
 let renderWeeklyChart state dispatch =
-
-    let label = ""
 
     let getOtherInData state dp =
         {| x = jsDatesMiddle dp.Date dp.DateTo
@@ -491,17 +489,10 @@ let renderWeeklyChart state dispatch =
     let baseOptions =
         basicChartOptions Linear "covid19-vaccine-effect-age" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    "",
     pojo
         {| baseOptions with
-            xAxis =
-               baseOptions.xAxis
-               |> Array.map (fun xAxis ->
-                   {| xAxis with categories = None |})
-            // yAxis = baseOptions.yAxis
             series = allSeries
             credits = chartCreditsNIJZ
-            rangeSelector = defaultRangeSelector state.RangeSelectionButtonIndex onRangeSelectorButtonClick
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
@@ -529,16 +520,20 @@ let renderWeeklyChart state dispatch =
 
 
 let renderChartContainer state dispatch =
-    let label, chart =
-        match state.DisplayType with
-        | ToDate -> renderChartOptions state dispatch
-        | _ -> renderWeeklyChart state dispatch
-
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
-                          prop.children [ chart |> Highcharts.chart ] ]
+                          prop.children [
+                            match state.DisplayType with
+                            | ToDate ->
+                                React.keyedFragment (1, [
+                                    renderChartOptions state dispatch
+                                    |> Highcharts.chart ] )
+                            | _ ->
+                                React.keyedFragment (2, [
+                                    renderWeeklyChart state dispatch
+                                    |> Highcharts.chartFromWindow ] ) ] ]
                Html.div [ prop.className "disclaimer"
-                          prop.children [ Utils.Markdown.render (label + chartText "disclaimer") ] ] ]
+                          prop.children [ Utils.Markdown.render (chartText "disclaimer") ] ] ]
 
 let renderChartTypeSelector (activeChartType: ChartType) dispatch =
     let renderSelector (chartType: ChartType) =
