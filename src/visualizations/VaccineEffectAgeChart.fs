@@ -430,7 +430,7 @@ let renderChartOptions (state: State) dispatch =
                 pojo
                     {| rules =
                         [| {| condition = {| maxWidth = 768 |}
-                              chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false ; reserveSpace = false |} |} |] |} |} |] |}
+                              chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
             navigator = pojo {| enabled = false |}
             scrollbar = pojo {| enabled = false |}
             rangeSelector = pojo {| enabled = false |} |}
