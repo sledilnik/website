@@ -50,6 +50,7 @@ export default [
             "vaccination-chart",
             "vaccines-chart",
             "vaccine-effect-chart",
+            "vaccine-effect-age-chart",
             "schools-chart",
             "school-status-chart",
             "sewage-chart",

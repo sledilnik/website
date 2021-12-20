@@ -102,7 +102,7 @@ let renderChartOptions state dispatch =
         let ageGroupKey = ageGroupData.AgeGroupKey
         let populationStats = populationStatsForAgeGroup ageGroupKey
 
-        let totalPopulation = populationStats.Male + populationStats.Female |> float
+        let totalPopulation = populationStats.Population |> float
         let malePopulation = populationStats.Male |> float
         let femalePopulation = populationStats.Female |> float
 

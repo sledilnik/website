@@ -1411,7 +1411,7 @@ module Dictionaries =
             "734","387","OS","nm","Osnovna šola Žužemberk Podružnica Dvor"
             "735","387","OS","nm","Osnovna šola Žužemberk, Podružnica Šmihel"
             "25075","25075","OS","lj","Osnovna šola Zagradec"
-            "25015","25015","OS","kr","Osnovna šola Janeza Puharja Kranj - Center"            
+            "25015","25015","OS","kr","Osnovna šola Janeza Puharja Kranj - Center"
             "1089","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA"
             "14049","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA, ENOTA OB HUBLJU"
             "14050","1089","PV","ng","OTROŠKI VRTEC AJDOVŠČINA, ENOTA RIBNIK"
@@ -2962,46 +2962,33 @@ module Dictionaries =
         |> Map.ofArray
 
 module AgePopulationStats =
-    type AgeGroupId = string
 
     type AgeGroupPopulationStats = {
-        Key: AgeGroupId
+        GroupKey: AgeGroupKey
         Male: int
         Female: int
+        Population: int
     }
 
+    // SURS 2021-H1: see dict-age-groups.csv
     let agePopulationStats =
         [
-            "0-4", 53183, 50328
-            "5-14", 106600, 100566
-            "15-24", 100391, 93739
-            "25-34", 133471, 122333
-            "35-44", 162436, 146922
-            "45-54", 153735, 146868
-            "55-64", 147957, 147089
-            "65-74", 101173, 113253
-            "75-84", 54460, 81981
-            "85+", 13635, 36760
+            { AgeFrom = Some 0; AgeTo = Some 4 }, 51230, 48119, 99349
+            { AgeFrom = Some 5; AgeTo = Some 14 }, 112440, 105942, 218382
+            { AgeFrom = Some 15; AgeTo = Some 24 }, 103950, 93655, 197605
+            { AgeFrom = Some 25; AgeTo = Some 34 }, 131969, 114678, 246647
+            { AgeFrom = Some 35; AgeTo = Some 44 }, 165807, 146081, 311888
+            { AgeFrom = Some 45; AgeTo = Some 54 }, 157163, 145404, 302567
+            { AgeFrom = Some 55; AgeTo = Some 64 }, 148797, 148027, 296824
+            { AgeFrom = Some 65; AgeTo = Some 74 }, 116695, 127655, 244350
+            { AgeFrom = Some 75; AgeTo = Some 84 }, 56086, 80704, 136790
+            { AgeFrom = Some 85; AgeTo = None }, 15801, 38774, 54575
         ]
-        |> List.map (fun (ageGroupId,  male,  female) ->
-            ageGroupId, { Key = ageGroupId;  Male = male;  Female = female })
+        |> List.map (fun (ageGroupId, male, female, pop) ->
+            ageGroupId, { GroupKey = ageGroupId; Male = male; Female = female; Population = pop })
         |> Map.ofList
 
-    let parseAgeGroupId (ageGroupId: AgeGroupId): AgeGroupKey =
-        if ageGroupId.Contains('-') then
-            let i = ageGroupId.IndexOf('-')
-            let fromAge = Int32.Parse(ageGroupId.Substring(0, i))
-            let toAge = Int32.Parse(ageGroupId.Substring(i+1))
-            { AgeFrom = Some fromAge; AgeTo =  Some toAge }
-        else if ageGroupId.Contains('+') then
-            let i = ageGroupId.IndexOf('+')
-            let fromAge = Int32.Parse(ageGroupId.Substring(0, i-1))
-            { AgeFrom = Some fromAge; AgeTo = None }
-        else
-            sprintf "Invalid age group ID: %s" ageGroupId
-            |> ArgumentException |> raise
-
-    let toAgeGroupId (groupKey: AgeGroupKey): AgeGroupId =
+    let toAgeGroupId (groupKey: AgeGroupKey) =
         match groupKey.AgeFrom, groupKey.AgeTo with
         | Some fromValue, Some toValue -> sprintf "%d-%d" fromValue toValue
         | Some fromValue, None -> sprintf "%d+" fromValue
@@ -3010,10 +2997,8 @@ module AgePopulationStats =
 
     let populationStatsForAgeGroup (groupKey: AgeGroupKey)
         : AgeGroupPopulationStats =
-        let ageGroupId = toAgeGroupId groupKey
-
-        if agePopulationStats.ContainsKey ageGroupId then
-            agePopulationStats.[ageGroupId]
+        if agePopulationStats.ContainsKey groupKey then
+            agePopulationStats.[groupKey]
         else
-            sprintf "Age group '%s' does not exist." ageGroupId
+            sprintf "Age group '%s' does not exist." (toAgeGroupId groupKey)
             |> ArgumentException |> raise

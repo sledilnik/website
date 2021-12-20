@@ -34,6 +34,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Vaccination" -> Some Vaccination
             | "Vaccines" -> Some Vaccines
             | "VaccineEffect" -> Some VaccineEffect
+            | "VaccineEffectAge" -> Some VaccineEffectAge
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
@@ -451,6 +452,21 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data, Success weeklyData ->
                         lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
 
+    let vaccineEffectAge =
+          { VisualizationType = VaccineEffectAge
+            ClassName = "vaccine-effect-age-chart"
+            ChartTextsGroup = "vaccineEffectAge"
+            ChartEnabled = true
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyEpisariData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView VaccineEffectAgeChart.vaccineEffectAgeChart {| data = data |} }
+
+
     let schools =
           { VisualizationType = Schools
             ClassName = "schools-chart"
@@ -689,7 +705,7 @@ let render (state: State) (_: Msg -> unit) =
           schools; schoolStatus
           sewage; ageGroupsTimeline;
           patients; patientsICU; hospitals; patientsAge; // patientsCare;
-          vaccineEffect; regionMap;
+          vaccineEffectAge; vaccineEffect; regionMap;
           weeklyDemographics; ageGroups;
           sources; europeMap;
           metricsCorrelation; deceased; excessDeaths
@@ -711,7 +727,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources; vaccination; vaccines; vaccineEffect;
+          municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; patientsAge;
           deceased; ratios; ageGroups; regionMap; regionsAbs
