@@ -802,7 +802,7 @@
             "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
             "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
             "icuCasesRatio": "Unvaccinated, recovered and partially vaccinated are admitted in intensive care unit **{{multiple}}** times as many as fully protected with vaccination.",
-            "disclaimer": "<br>However, due to the differences in vaccination rates between age groups, this interpretation should be treated with caution - read more about the Simpson's paradox in [the article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
+            "disclaimer": "<br>Due to the different vaccination rates in the individual age groups, this interpretation should be taken with caution - read more about the Simpson's paradox in [this article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Protected with Vaccination",
             "casesPartiallyVaccinated": "Partially Vaccinated",
             "casesRecovered": "Recovered",
@@ -811,20 +811,20 @@
             "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
         "vaccineEffectAge": {
-            "title": "Hospitalizations by Vaccination Status and Age",
-            "titleMenu": "Vaccination, age - effect",
+            "title": "Hospitalization Rates by Vaccination Status and Age Group",
+            "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
             "vaccinatedIn": "Hospitalized - Protected with Vaccination",
             "otherIn": "Hospitalized - Others",
             "toDate": "To Date",
-            "ageBelow65": "Below 65 years",
-            "ageAbove65": "Above 65 years",
+            "ageBelow65": "Age group <65",
+            "ageAbove65": "Age group 65+",
             "ageAll": "All ages",
             "riskRatio": "Risk ratio (factor)",
             "vaccineEfficiency": "Vaccination Efficiency",
             "hospitalizedIn": "From {{ startDate, %e. %b %Y  }} to {{ endDate, %e. %b %Y }}.",
-            "disclaimer": "However, due to the differences in vaccination rates between age groups, this interpretation should be treated with caution - read more about the Simpson's paradox in [the article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
+            "disclaimer": "Due to the different vaccination rates in the individual age groups, this interpretation should be taken with caution - read more about the Simpson's paradox in [this article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
