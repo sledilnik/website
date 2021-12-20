@@ -180,7 +180,13 @@ let tooltipFormatter state jsThis =
                 s.Append "<tr>" |> ignore
 
                 let tooltipStr =
-                    String.Format(format, color, label, I18N.NumberFormat.formatNumber (Utils.roundTo1Decimal value), percentage)
+                    String.Format(
+                        format,
+                        color,
+                        label,
+                        I18N.NumberFormat.formatNumber (Utils.roundTo1Decimal value),
+                        percentage
+                    )
 
                 s.Append tooltipStr |> ignore
                 s.Append "</tr>" |> ignore)
@@ -220,6 +226,7 @@ let tooltipFormatter state jsThis =
                         chartText "riskRatio",
                         I18N.NumberFormat.formatNumber (Utils.roundTo1Decimal (other / vaccinated))
                     )
+
                 s.Append riskRatio |> ignore
 
                 let vaccineEfficiency =
@@ -228,6 +235,7 @@ let tooltipFormatter state jsThis =
                         chartText "vaccineEfficiency",
                         Utils.percentWith1DecimalFormatter (100. * (1. - (vaccinated / other)))
                     )
+
                 s.Append vaccineEfficiency |> ignore
 
         s.Append "</table>" |> ignore
@@ -375,15 +383,15 @@ let renderChartOptions (state: State) dispatch =
                     | Absolute100k -> summaryData.VaccinatedIn100k
                     |> Array.map (fun dp -> {| y = dp |}) |}
            yield
-              pojo
-                  {| name = chartText "otherIn"
-                     ``type`` = "column"
-                     color = "#de9a5a"
-                     data =
-                      match state.ChartType with
-                      | Absolute -> summaryData.OtherIn
-                      | Absolute100k -> summaryData.OtherIn100k
-                      |> Array.map (fun dp -> {| y = dp |}) |} |]
+               pojo
+                   {| name = chartText "otherIn"
+                      ``type`` = "column"
+                      color = "#de9a5a"
+                      data =
+                       match state.ChartType with
+                       | Absolute -> summaryData.OtherIn
+                       | Absolute100k -> summaryData.OtherIn100k
+                       |> Array.map (fun dp -> {| y = dp |}) |} |]
 
     let label =
         I18N.tOptions
@@ -394,14 +402,16 @@ let renderChartOptions (state: State) dispatch =
     pojo
         {| optionsWithOnLoadEvent "covid19-vaccine-effect-summary" with
             chart = pojo {| ``type`` = "column" |}
-            title = pojo {| text = label
-                            style = pojo {| fontSize = "12px" |} |}
+            title =
+                pojo
+                    {| text = label
+                       style = pojo {| fontSize = "12px" |} |}
             xAxis =
                 [| {| ``type`` = "category"
                       categories =
-                            [| chartText "ageAll"
-                               chartText "ageBelow65"
-                               chartText "ageAbove65" |] |} |]
+                       [| chartText "ageAll"
+                          chartText "ageBelow65"
+                          chartText "ageAbove65" |] |} |]
             yAxis =
                 [| {| opposite = true
                       title = {| text = None |} |} |]
@@ -409,12 +419,13 @@ let renderChartOptions (state: State) dispatch =
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                       series = pojo
-                        {| stacking = None
-                           crisp = false
-                           borderWidth = 0
-                           pointPadding = 0
-                           groupPadding = 0.1 |} |}
+                       series =
+                        pojo
+                            {| stacking = None
+                               crisp = false
+                               borderWidth = 0
+                               pointPadding = 0
+                               groupPadding = 0.1 |} |}
             legend =
                 pojo
                     {| enabled = true
@@ -468,16 +479,16 @@ let renderWeeklyChart state dispatch =
                     |> Seq.toArray |}
 
            yield
-              pojo
-                  {| name = chartText "otherIn"
-                     ``type`` = "column"
-                     color = "#de9a5a"
-                     data =
-                      state.Data
-                      |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
-                      |> Array.map (fun dp -> getSummaryData state dp)
-                      |> Array.map (fun dp -> getOtherInData state dp)
-                      |> Seq.toArray |} |]
+               pojo
+                   {| name = chartText "otherIn"
+                      ``type`` = "column"
+                      color = "#de9a5a"
+                      data =
+                       state.Data
+                       |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                       |> Array.map (fun dp -> getSummaryData state dp)
+                       |> Array.map (fun dp -> getOtherInData state dp)
+                       |> Seq.toArray |} |]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -496,12 +507,13 @@ let renderWeeklyChart state dispatch =
             plotOptions =
                 pojo
                     {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                       series = pojo
-                        {| stacking = None
-                           crisp = false
-                           borderWidth = 0
-                           pointPadding = 0
-                           groupPadding = 0 |} |}
+                       series =
+                        pojo
+                            {| stacking = None
+                               crisp = false
+                               borderWidth = 0
+                               pointPadding = 0
+                               groupPadding = 0 |} |}
             legend =
                 pojo
                     {| enabled = true
@@ -522,16 +534,19 @@ let renderWeeklyChart state dispatch =
 let renderChartContainer state dispatch =
     Html.div [ Html.div [ prop.style [ style.height 480 ]
                           prop.className "highcharts-wrapper"
-                          prop.children [
-                            match state.DisplayType with
-                            | ToDate ->
-                                React.keyedFragment (1, [
-                                    renderChartOptions state dispatch
-                                    |> Highcharts.chart ] )
-                            | _ ->
-                                React.keyedFragment (2, [
-                                    renderWeeklyChart state dispatch
-                                    |> Highcharts.chartFromWindow ] ) ] ]
+                          prop.children [ match state.DisplayType with
+                                          | ToDate ->
+                                              React.keyedFragment (
+                                                  1,
+                                                  [ renderChartOptions state dispatch
+                                                    |> Highcharts.chart ]
+                                              )
+                                          | _ ->
+                                              React.keyedFragment (
+                                                  2,
+                                                  [ renderWeeklyChart state dispatch
+                                                    |> Highcharts.chartFromWindow ]
+                                              ) ] ]
                Html.div [ prop.className "disclaimer"
                           prop.children [ Utils.Markdown.render (chartText "disclaimer") ] ] ]
 
