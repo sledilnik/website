@@ -814,7 +814,7 @@
             "title": "Hospitalization Rates by Vaccination Status and Age Group",
             "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
-            "absolute100k": "Per 100.000 People in Group",
+            "absolute100k": "Per 100,000 People in Group",
             "vaccinatedIn": "Hospitalized - Protected with Vaccination",
             "otherIn": "Hospitalized - Others",
             "toDate": "To Date",
