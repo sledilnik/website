@@ -252,29 +252,6 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttons = buttons
             |}
 
-let defaultRangeSelector selectedRangeSelectionButtonIndex rangeSelectorButtonClickHandler =
-    configureRangeSelector selectedRangeSelectionButtonIndex [|
-                        {|
-                            ``type`` = "month"
-                            count = 2
-                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
-                        |}
-                        {|
-                            ``type`` = "month"
-                            count = 4
-                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
-                        |}
-                        {|
-                            ``type`` = "all"
-                            count = 1
-                            text = I18N.t "charts.common.all"
-                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
-                        |}
-                    |]
-
-
 let chartCreditsNIJZ =
     {|
         enabled = true
@@ -552,5 +529,24 @@ let basicChartOptions
     =
     {| basicChart scaleType className with
 
-        rangeSelector = defaultRangeSelector selectedRangeSelectionButtonIndex rangeSelectorButtonClickHandler
+        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 4
+                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
+                        |}
+                    |]
     |}
