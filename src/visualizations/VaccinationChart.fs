@@ -305,7 +305,7 @@ let renderAgeChart state dispatch =
                 idx)
 
     let ageGroupColors =
-        [| "#FFF4D3"
+        [| "#FFEEBA"
            "#FFDA6B"
            "#E9B825"
            "#AEEFDB"
