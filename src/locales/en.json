@@ -824,7 +824,7 @@
             "riskRatio": "Risk ratio (factor)",
             "vaccineEfficiency": "Vaccination Efficiency",
             "hospitalizedIn": "From {{ startDate, %e. %b %Y  }} to {{ endDate, %e. %b %Y }}.",
-            "disclaimer": "Due to the different vaccination rates in the individual age groups, this interpretation should be taken with caution - read more about the Simpson's paradox in [this article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
+            "disclaimer": "This chart presents so-called [Simpson's paradox](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e) caused by differences in vaccination rates and risk levels in different age groups - more information in [this article](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",

@@ -1437,7 +1437,7 @@
             "riskRatio": "Razmerje tveganj (faktor)",
             "vaccineEfficiency": "Učinkovitost cepljenja",
             "hospitalizedIn": "Od {{ startDate, %e. %b %Y  }} do {{ endDate, %e. %b %Y }}.",
-            "disclaimer": "Zaradi razlik v precepljenosti med starostnimi skupinami moramo biti previdni pri interpretaciji - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
+            "disclaimer": "Prikaz ilustrira t.im. [Simpsonov paradoks](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e), ki nastaja zaradi razlik v precepljenosti in ogroženosti posameznih starostnih skupin - več o tem v članku [Učinek cepljenja](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
         },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
