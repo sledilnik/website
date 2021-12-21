@@ -305,7 +305,8 @@ let renderAgeChart state dispatch =
                 idx)
 
     let ageGroupColors =
-        [| "#FFDA6B"
+        [| "#FFF4D3"
+           "#FFDA6B"
            "#E9B825"
            "#AEEFDB"
            "#80DABF"
@@ -324,22 +325,23 @@ let renderAgeChart state dispatch =
 
     // SURS 2021-H1: see https://docs.google.com/spreadsheets/d/1aBOp6GW7RpUg3GcrHThWb-6Czj8mlgATlHF2dUw9rTU/edit#gid=2092138705
     let ageGroupPopulation =
-        [| 374210
-           141126
-           113005
-           133642
-           150074
-           161814
-           152766
-           149801
-           152352
-           144472
-           136527
-           107823
-           75738
-           61052
-           36642
-           17933 |]
+        [| 253932   // 0-11
+           120278   // 12-17
+           141126   // 18-24
+           113005   // 25-29
+           133642   // 30-34
+           150074   // 35-39
+           161814   // 40-44
+           152766   // 45-49
+           149801   // 50-54
+           152352   // 55-59
+           144472   // 60-64
+           136527   // 65-69
+           107823   // 70-74
+           75738    // 75-79
+           61052    // 80-84
+           36642    // 85-89
+           17933 |] // 90+
 
     let allSeries =
         seq {
