@@ -54,6 +54,7 @@
         <Compile Include="VaccinationChart.fs" />
         <Compile Include="VaccinesChart.fs" />
         <Compile Include="VaccineEffectChart.fs" />
+        <Compile Include="VaccineEffectAgeChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="SewageChart.fs" />
         <Compile Include="HcCasesChart.fs" />

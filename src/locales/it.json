@@ -1057,7 +1057,7 @@
         },
         "europe": {
             "noData": "Nessun dato",
-            "statusRed": "guariti/vaccinati o quarantena di 10 giorni (richiesto test negativo PCR per gli stranieri senza residenza)",
+            "statusRed": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni<br>*presenza confermata della variante omicron",
             "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
@@ -1070,7 +1070,7 @@
             "title": "COVID-19 Situazione in Europa",
             "titleMenu": "Europa - situazione",
             "weeklyIncrease": "Aumento settimanale",
-            "statusDarkRed": "guariti/vaccinati o quarantena di 10 giorni (divieto di ammissione per gli stranieri senza residenza)"
+            "statusDarkRed": "quarantena di 10 giorni e test molecolare il 1°, 5° e 10° giorno, divieto di ammissione per gli stranieri senza residenza<br>*presenza confermata della variante omicron"
         },
         "map": {
             "confirmedCases": "Casi confermati",
@@ -1549,10 +1549,18 @@
             "icuCasesRatio": "Non vaccinati, guariti e parzialmente vaccinati sono ricoverati in unità di terapia intensiva **{{multiple}}** volte tanto quanto quelli completamente protetti con la vaccinazione.",
             "casesPartiallyVaccinated": "Parzialmente vaccinati",
             "disabled": "A causa di errori rilevati nei dati di vaccinazione ottenuti da cepimose.si, abbiamo rimosso temporaneamente questi grafici. Il NIJZ sta risolvendo il problema in via prioritaria e pubblicheremo nuovamente i grafici non appena gli errori saranno eliminati."
+        },
+        "patientsAge": {
+            "icuIn": "Ricoverati in terapia intensiva",
+            "meanAge": "Età media",
+            "hospitalIn": "Ammessi in ospedale",
+            "title": "Ospedalizzazioni per età, settimanale",
+            "titleMenu": "Ospedalizzazioni - età",
+            "deceased": "Deceduti"
         }
     },
     "footer": {
-        "copyright": "© 2020–⁠2021 Sledilnik.org"
+        "copyright": "© 2020–⁠2022 Sledilnik.org"
     },
     "embedMaker": {
         "description": "La visualizzazione specifica può essere adattata alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. Ulteriori <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">informazioni</a>.",

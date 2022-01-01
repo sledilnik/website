@@ -205,7 +205,7 @@
         "regions": {
             "deceased": "Dødsfall",
             "confirmedCases": "Bekreftede tilfeller",
-            "activeCases": "Aktive tilfeller",
+            "activeCases": "Aktiv",
             "allCases": "Alle"
         },
         "weeklyDemographics": {
