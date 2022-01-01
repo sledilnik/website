@@ -30,6 +30,7 @@ let dropdown (viz: Visualization) =
             | Vaccination -> (1140, 720)
             | Vaccines -> (1140, 720)
             | VaccineEffect -> (1140, 720)
+            | VaccineEffectAge -> (1140, 720)
             | Schools -> (1140, 720)
             | SchoolStatus -> (1140, 720)
             | Sources -> (1140, 720)

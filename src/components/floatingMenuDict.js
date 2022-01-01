@@ -67,6 +67,10 @@ export default {
     titleKey: 'charts.vaccineEffect.titleMenu',
     icon: 'column',
   },
+  'vaccine-effect-age-chart': {
+    titleKey: 'charts.vaccineEffectAge.titleMenu',
+    icon: 'column',
+  },
   'schools-chart': {
     titleKey: 'charts.schools.titleMenu',
     icon: 'graph',

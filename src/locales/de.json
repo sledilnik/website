@@ -576,7 +576,7 @@
             "positiveSplit": "Positive PCR und RAT"
         },
         "regions": {
-            "activeCases": "Aktive Fälle",
+            "activeCases": "Aktive",
             "confirmedCases": "Bestätigte Fälle",
             "deceased": "Todesfälle",
             "title": "Fälle nach Gemeinden",
@@ -946,7 +946,7 @@
         "vaccination_administered_todate": "Geimpfte Personen (bis heute)"
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "© 2020-2022 Sledilnik.org"
     },
     "cm": {
         "shops": {

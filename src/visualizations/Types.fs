@@ -233,6 +233,7 @@ type VisualizationType =
     | Vaccination
     | Vaccines
     | VaccineEffect
+    | VaccineEffectAge
     | Schools
     | SchoolStatus
     | Sources

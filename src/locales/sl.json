@@ -957,7 +957,7 @@
             "deceasedHospitals": "Kraj smrti",
             "deceasedByType": "DSO status",
             "deceasedByAge": "Starost",
-            "deceased-rhoccupant": "Oskrbovanci domov za starejše občane",
+            "deceased-rhoccupant": "Stanovalci domov za starejše občane",
             "deceased-other": "Ostali",
             "deceased-icu": "Intenzivna terapija",
             "deceased-acute": "Akutni oddelek",
@@ -1065,7 +1065,7 @@
             "relative": "Relativno",
             "hcStaff": "Zaposleni v zdravstvu",
             "rhStaff": "Zaposleni v domovih za starejše občane",
-            "rhOccupant": "Oskrbovanci domov za starejše občane",
+            "rhOccupant": "Stanovalci domov za starejše občane",
             "allConfirmed": "Vsi potrjeni",
             "otherPersons": "Ostale osebe"
         },
@@ -1151,7 +1151,7 @@
             "healthcareMaleCases": "Zdravstvo - moški",
             "healthcareFemaleCases": "Zdravstvo - ženske",
             "healthcareEmployeesCases": "Zaposleni v zdravstvu",
-            "rhOccupantCases": "Oskrbovanci domov za starejše občane",
+            "rhOccupantCases": "Stanovalci domov za starejše občane",
             "totalConfirmed": "Vsi potrjeni",
             "otherCases": "Ostali potrjeni"
         },
@@ -1220,8 +1220,8 @@
             "statusNone": "-",
             "statusGreen": "brez omejitev",
             "statusOrange": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena",
-            "statusRed": "preboleli/cepljeni ali 10-dnevna karantena (za tujce brez prebivališča zahtevan negativen PCR test)",
-            "statusDarkRed": "preboleli/cepljeni ali 10-dnevna karantena (tujcem brez prebivališča se ne dovoli vstop)",
+            "statusRed": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena<br>*potrjena prisotnost variante omikron",
+            "statusDarkRed": "10-dnevna karantena in PCR na 1., 5. in 10. dan, tujcem brez prebivališča se vstop ne dovoli<br>*potrjena prisotnost variante omikron",
             "noData": "Ni podatkov"
         },
         "world": {
@@ -1423,6 +1423,22 @@
             "administered2nd": "Polno cepljeni",
             "administered3rd": "Dodatni odmerek"
         },
+        "vaccineEffectAge": {
+            "title": "Hospitalizacije - status cepljenja in starost",
+            "titleMenu": "Hospitalizacije - cepljenje, starost",
+            "absolute": "Absolutno",
+            "absolute100k": "Na 100.000 oseb v skupini",
+            "vaccinatedIn": "Hospitalizirani - zaščiteni s cepljenjem",
+            "otherIn": "Hospitalizirani - ostali",
+            "toDate": "Skupaj",
+            "ageBelow65": "Starost <65",
+            "ageAbove65": "Starost 65+",
+            "ageAll": "Vse starosti",
+            "riskRatio": "Razmerje tveganj (faktor)",
+            "vaccineEfficiency": "Učinkovitost cepljenja",
+            "hospitalizedIn": "Od {{ startDate, %e. %b %Y  }} do {{ endDate, %e. %b %Y }}.",
+            "disclaimer": "Prikaz ilustrira t.im. [Simpsonov paradoks](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e), ki nastaja zaradi razlik v precepljenosti in ogroženosti posameznih starostnih skupin - več o tem v članku [Učinek cepljenja](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
+        },
         "vaccineEffect": {
             "title": "Učinek cepljenja",
             "titleMenu": "Cepljenje - učinek",
@@ -1433,10 +1449,10 @@
             "absolute100k": "Na 100.000 oseb v skupini",
             "relative100k": "Relativno na 100.000 oseb v skupini",
             "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
-            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
+            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}). Podatki po dveh starostnih skupinah (<65, 65+) so na voljo na [grafu](/sl/stats#vaccine-effect-age-chart).",
             "icuCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je sprejetih v intenzivno terapijo **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, prebolevniki, delno cepljeni).",
             "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
-            "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
+            "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem. Podatki po dveh starostnih skupinah (<65, 65+) so na voljo na [grafu](/sl/stats#vaccine-effect-age-chart) in pokažejo še višjo učinkovitost.",
             "icuCasesRatio": "Necepljenih, prebolevnikov in delno cepljenih je sprejetih v intenzivno terapijo **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "disclaimer": "<br>Zaradi razlik v precepljenosti med starostnimi skupinami moramo biti previdni pri interpretaciji - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Zaščiteni s cepljenjem",
@@ -1553,7 +1569,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "© 2020-2022 Sledilnik.org"
     },
     "schoolDict": {
         "E": "Zaposleni",
@@ -2117,6 +2133,10 @@
         "vaccine-effect-chart": {
             "question": "Kaj kaže graf \"Učinek cepljenja\"?",
             "answer": "[Graf](/sl/stats#vaccine-effect-chart) prikazuje podatke o potrjenih primerih in hospitalizacijah med osebami s polno zaščito s cepljenjem in ostalimi (necepljenimi in delno cepljenimi). Med osebe s polno zaščito s cepljenjem štejejo posamezniki, ki so cepljeni z vsemi predpisanimi odmerki cepiva in je od zadnjega odmerka cepiva preteklo vsaj 14 dni za vzpostavitev polne zaščite.\n\nOsnovni pogled je *Relativno na 100.000 oseb v skupini*: primeri v vsaki od skupin so uteženi na 100.000 oseb v posamezni skupini. Tako se vidi relativna razlika med deležem primerov med zaščitenimi s cepljenjem in ostalimi, ki zaščite cepiva nimajo (necepljeni, delno cepljeni). Iz tega pogleda je razvidno kolikokrat več je primerov (potrjenih primerov ali hospitalizacij) med osebami brez polne zaščite.\n\nV pogledu *Na 100.000 oseb v skupini* so podatki še vedno uteženi na velikost posamezne skupine, vendar so prikazani z absolutnimi vrednostmi tako da se vidi tudi trend skozi čas.\n\nV pogledu *Absolutno* so prikazane dejanske vrednosti potrjenih primerov in hospitalizacij v posameznem tednu. "
+        },
+        "vaccine-effect-age-chart": {
+            "question": "Kaj kaže graf \"Hospitalizacije glede na status cepljenja in starost\"?",
+            "answer": "[Graf](/sl/stats#vaccine-effect-age-chart) prikazuje podatke hospitaliziranih po cepilnem statusu (polno cepljeni, ostali) in po starostnih skupinah (vse starosti, <65, 65+). Podatki o cepilnem statusu so žal na voljo samo za dve starostni skupini. Osebe s polno zaščito s cepljenjem so tiste, ki so cepljene z vsemi predpisanimi odmerki cepiva in je od zadnjega odmerka cepiva preteklo vsaj 14 dni (*zaščiteni s cepljenjem*). Necepljeni in delno cepljeni se štejejo pod ostale.\n\nOsnovni pogled grafa je izbira *Skupaj*, ki prikazuje hospitalizirane od 1. 3. 2021 naprej in je utežen na 100.000 oseb v vsaki posamezni skupini. Prikaz nazorno kaže relativno razliko deležev primerov med zaščitenimi s cepljenjem in preostalimi, ki zaščite cepljenja nimajo (necepljeni, delno cepljeni) – primerjamo lahko, kolikokrat večje je tveganje za hospitalizacijo med osebami brez polne zaščite v posamezni starostni skupini. Razlog, da je zaščita polno cepljenih pri obeh starostnih skupinah (<65, 65+) konkretno višja od zaščite, izračunane pri vseh starostih skupaj, je v neenaki precepljenosti starostnih skupin in v neenakem tveganju za hujši potek bolezni ([Simpsonov paradoks](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)). Če bi imeli podatke po cepilnem statusu za več starostnih skupin, bi bila izračunana učinkovitost cepljenja lahko še bolj natančna. To še zlasti velja za mlajše od 65 let, ki so zelo nehomogena skupina glede precepljenosti.\n\nDodatni pogledi: *Vse starosti*, *Starost <65* in *Starost 65+* omogočajo tedenski prikaz hospitalizacij po posameznih starostnih skupinah."
         },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolah in vrtcih\"?",
