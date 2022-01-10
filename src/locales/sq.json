@@ -436,7 +436,9 @@
         "links": "Linqe",
         "world": "Bota",
         "animation": "Animacion",
-        "goToGraph": "Kalo në grafikun"
+        "goToGraph": "Kalo në grafikun",
+        "donate": "Mbështet!",
+        "posts": "Postime"
     },
     "country": {
         "DEU": "Gjermani",
@@ -727,7 +729,8 @@
         "active": "Raste aktive",
         "confirmedToDate": "Raste të konfirmuara",
         "tests": "Teste sot",
-        "incidence": "Incidenca 14-ditore"
+        "incidence": "Incidenca 14-ditore",
+        "incidenceInfo": "per 100,000 njerze"
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
