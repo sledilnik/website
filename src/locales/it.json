@@ -1530,10 +1530,10 @@
         "vaccineEffect": {
             "casesOther": "Altri (non vaccinati, parzialmente vaccinati)",
             "casesProtected": "Protetti con la vaccinazione",
-            "hospitalizedCasesRatio": "I non vaccinati e quelli parzialmente vaccinati sono ricoverati **{{multiple}}** volte tanto quanto completamente protetti con la vaccinazione.",
+            "hospitalizedCasesRatio": "I non vaccinati e quelli parzialmente vaccinati sono ricoverati **{{multiple}}** volte tanto quanto i completamente protetti con la vaccinazione. In [questo grafico](/it/stats#vaccine-effect-age-chart) sono disponibili i dati per due gruppi di età (&lt;65, 65+) e indicano un efficienza anche maggiore.",
             "confirmedCasesRatio": "Tra i casi confermati, ci sono **{{multiple}}** volte tanti non vaccinati e parzialmente vaccinati rispetto a quelli completamente protetti con la vaccinazione.",
             "confirmedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, ci sono state tra i casi confermati **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), l'infezione è stata confermata in **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}).",
-            "hospitalizedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, sono state ricoverate **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}) sono stati ricoverati.",
+            "hospitalizedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, sono state ricoverate **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}) sono stati ricoverati. In [questo grafico](/it/stats#vaccine-effect-age-chart) sono disponibili i dati per due gruppi di età (&lt;65, 65+).",
             "relative100k": "Relativo per 100.000 persone nel gruppo",
             "absolute100k": "Per 100.000 persone nel gruppo",
             "absolute": "Assoluto",
@@ -1541,7 +1541,7 @@
             "confirmedCases": "Casi confermati",
             "titleMenu": "Vaccinazione - effetto",
             "title": "Effetto della vaccinazione",
-            "disclaimer": "<br>Tuttavia, a causa delle differenze nei tassi di vaccinazione tra i gruppi di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [l'articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
+            "disclaimer": "<br>A causa delle differenze nei tassi di vaccinazione tra le singole fasce di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [questo articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "icuCasesAbs": "Dal {{ startDate, %b %e }} al {{ endDate, %b %e }} sono state ricoverate in terapia intensiva **{{protectedC}}** ({{protectedPct}}) persone completamente protette con la vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, guarite, parzialmente vaccinate).",
             "icuCases": "Terapia intensiva",
             "casesUnvaccinated": "Non vaccinati",
@@ -1557,6 +1557,22 @@
             "title": "Ospedalizzazioni per età, settimanale",
             "titleMenu": "Ospedalizzazioni - età",
             "deceased": "Deceduti"
+        },
+        "vaccineEffectAge": {
+            "title": "Tassi di ospedalizzazione - stato vaccinale e fascia di età",
+            "absolute": "Assoluto",
+            "absolute100k": "Per 100.000 persone nel gruppo",
+            "vaccinatedIn": "Ricoverati - Protetti con la vaccinazione",
+            "titleMenu": "Ricoveri - vaccinazione, età",
+            "ageBelow65": "Fascia d'età &lt;65",
+            "toDate": "Ad oggi",
+            "otherIn": "Ricoverati - Altri",
+            "ageAbove65": "Fascia d'età 65+",
+            "ageAll": "Tutte le fasce di età",
+            "vaccineEfficiency": "Efficienza vaccinale",
+            "riskRatio": "Fattore di rischio",
+            "disclaimer": "Questo grafico presenta il cosiddetto [paradosso di Simpson's](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e) causato dalle differenze nei tassi di vaccinazione e nei livelli di rischio delle diverse fasce di età - maggiori informazioni in [questo articolo](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179).",
+            "hospitalizedIn": "Dal {{ startDate, %e. %b %Y  }} al {{ endDate, %e. %b %Y }}."
         }
     },
     "footer": {
