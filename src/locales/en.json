@@ -842,7 +842,7 @@
             "attendeesCases": "Attendees - Confirmed",
             "attendeesQuarantine": "Attendees - Quarantine",
             "unitsQuarantine": "Units - Quarantine",
-            "unitsRemote": "Units - Remote"
+            "institutionsRemote": "Institutions - Remote"
         },
         "schoolStatus": {
             "title": "Situation in School and Kindergarten",

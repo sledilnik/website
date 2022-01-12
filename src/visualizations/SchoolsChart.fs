@@ -18,7 +18,7 @@ let chartText = I18N.chartText "schools"
 type MetricType =
     | Active
     | Today
-with    
+with
     static member All = [ Active; Today ]
     static member Default = Active
     static member GetName =
@@ -26,8 +26,8 @@ with
         | Active -> I18N.t "charts.common.showActive"
         | Today -> I18N.t "charts.common.showToday"
 
-let AllSchoolTypes = [ 
-    "kindergarten",         "#ffa600" 
+let AllSchoolTypes = [
+    "kindergarten",         "#ffa600"
     "elementary",           "#70a471"
     "highschool",           "#a05195"
     "elementary_special",   "#457844"
@@ -97,9 +97,9 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
     | ConsumeSchoolsData (Ok data) ->
         { state with SchoolsData = data }, Cmd.none
-    | ConsumeSchoolsData (Error err) -> 
+    | ConsumeSchoolsData (Error err) ->
         { state with Error = Some err }, Cmd.none
-    | ConsumeServerError ex -> 
+    | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
@@ -107,7 +107,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with ChartType = chartType }, Cmd.none
     | MetricTypeChanged metricType ->
         { state with MetricType = metricType }, Cmd.none
-    | ChangeDisplayType dt -> 
+    | ChangeDisplayType dt ->
         { state with DisplayType = dt }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
@@ -161,7 +161,7 @@ let renderPerSchoolChart state dispatch =
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.schoolType.[sType].units.quarantined |> Utils.zeroToNone)) |}
               yield
                 pojo
-                    {| name = chartText "unitsRemote"
+                    {| name = chartText "institutionsRemote"
                        ``type`` = "line"
                        color = "#d559b0"
                        data =
@@ -217,7 +217,7 @@ let renderPerSchoolChart state dispatch =
         series = List.toArray allSeries
         yAxis =
             let showFirstLabel = (scaleType state) <> Linear
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with 
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with
                                                           showFirstLabel = Some showFirstLabel
                                                           labels = pojo {| format = "{value}" |} |})
         plotOptions =
@@ -240,17 +240,17 @@ let renderStackedChart state dispatch =
                        color = sColor
                        data =
                            state.SchoolsData
-                           |> Array.map (fun dp -> (dp.JsDate12h, 
+                           |> Array.map (fun dp -> (dp.JsDate12h,
                                                     match state.DisplayType, state.MetricType with
-                                                    | Attendees, Active -> 
+                                                    | Attendees, Active ->
                                                         dp.schoolType.[sType].attendees.active |> Utils.zeroToNone
-                                                    | Attendees, Today -> 
+                                                    | Attendees, Today ->
                                                         dp.schoolType.[sType].attendees.confirmed |> Utils.zeroToNone
-                                                    | Employees, Active -> 
-                                                        dp.schoolType.[sType].employees.active |> Utils.zeroToNone 
-                                                    | Employees, Today -> 
-                                                        dp.schoolType.[sType].employees.confirmed |> Utils.zeroToNone 
-                                                    | _, _ -> None)) |} 
+                                                    | Employees, Active ->
+                                                        dp.schoolType.[sType].employees.active |> Utils.zeroToNone
+                                                    | Employees, Today ->
+                                                        dp.schoolType.[sType].employees.confirmed |> Utils.zeroToNone
+                                                    | _, _ -> None)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -271,8 +271,8 @@ let renderStackedChart state dispatch =
                 match state.ChartType with
                 | RelativeChart -> "{value} %"
                 | AbsoluteChart -> "{value}"
-            baseOptions.yAxis 
-            |> Array.map (fun ax -> {| ax with 
+            baseOptions.yAxis
+            |> Array.map (fun ax -> {| ax with
                                         showFirstLabel = Some showFirstLabel
                                         labels = pojo {| format = labelFormat |}
                                         reversedStacks = false |})
@@ -280,7 +280,7 @@ let renderStackedChart state dispatch =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series =
-                      {| stacking = 
+                      {| stacking =
                             match state.ChartType with
                             | RelativeChart -> "percent"
                             | AbsoluteChart -> "normal"
@@ -295,7 +295,7 @@ let renderStackedChart state dispatch =
 let renderChartContainer (state: State) dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
-               prop.children [ 
+               prop.children [
                     match state.DisplayType with
                     | Type typ ->
                         renderPerSchoolChart state dispatch |> Highcharts.chartFromWindow
@@ -342,7 +342,7 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ 
+        Html.div [
             Utils.renderChartTopControls [
                 renderMetricTypeSelectors
                     state.MetricType (MetricTypeChanged >> dispatch)

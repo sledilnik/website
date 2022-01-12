@@ -1478,7 +1478,7 @@
             "attendeesCases": "Učenci - potrjeni",
             "attendeesQuarantine": "Učenci - karantena",
             "unitsQuarantine": "Oddelki - karantena",
-            "unitsRemote": "Oddelki - na daljavo"
+            "institutionsRemote": "Zavodi - na daljavo"
         },
         "schoolStatus": {
             "title": "Stanje po šolah in vrtcih",

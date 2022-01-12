@@ -905,7 +905,7 @@
             "disclaimer": "Napomena: škole prijavljuju podatke ministarstvu i možda su nepotpuni."
         },
         "schools": {
-            "unitsRemote": "Jedinice – Udaljene",
+            "institutionsRemote": "Institucije – Udaljeno",
             "unitsQuarantine": "Jedinice – Karantena",
             "attendeesQuarantine": "Sudionici – Karantena",
             "attendeesCases": "Sudionici – Potvrđeno",

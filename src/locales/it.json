@@ -1465,7 +1465,7 @@
             "kindergarten": "Scuola materna",
             "employeeCases": "Dipendenti",
             "attendeeCases": "Alunni",
-            "unitsRemote": "Unità - A distanza",
+            "institutionsRemote": "Istituti - A distanza",
             "unitsQuarantine": "Unità - Quarantena"
         },
         "vaccination": {
