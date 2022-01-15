@@ -395,11 +395,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
                 | Some dRedNote ->
                     chartText "statusDarkRed", "#B23A32", ""
                 | _ ->
-                    match red with
-                    | Some redNote ->
-                        chartText "statusRed", "#FF9057", redNote
-                    | _ ->
-                        chartText "statusOrange", "#FFC65A", ""
+                    chartText "statusOrange", "#FFC65A", ""
                 // match darkRed with
                 // | Some dRedNote ->
                 //     if dRedNote.Length > 0
