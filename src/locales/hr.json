@@ -611,7 +611,7 @@
         },
         "europe": {
             "statusRed": "oporavljeni/cijepljeni ili PCR/RAT test ili desetodnevna karantena<br>*potvrđena prisutnost omikronske varijante",
-            "statusOrange": "oporavljeni/cijepljeni ili negativni PCR/RAT test ili desetodnevna karantena",
+            "statusOrange": "oporavljeni/cijepljeni ili negativni PCR/RAT test ili sedamdnevna karantena",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
             "countryStatus": "Ograničenja",

@@ -1058,7 +1058,7 @@
         "europe": {
             "noData": "Nessun dato",
             "statusRed": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni<br>*presenza confermata della variante omicron",
-            "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni",
+            "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 7 giorni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
             "countryStatus": "Restrizioni",
