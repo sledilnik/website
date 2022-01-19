@@ -203,6 +203,10 @@
         "19": {
             "title": "phase<br>19",
             "description": "rapid antigen tests methodology"
+        },
+        "20": {
+            "title": "phase<br>20",
+            "description": "new testing methodology"
         }
     },
     "charts": {

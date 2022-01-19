@@ -1670,11 +1670,11 @@
             "description": "test rapidi antigenici"
         },
         "15": {
-            "description": "metodologia dei test antigenici rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>15"
         },
         "16": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>16"
         },
         "17": {
@@ -1682,12 +1682,16 @@
             "title": "fase<br>17"
         },
         "18": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>18"
         },
         "19": {
             "title": "fase<br>19",
-            "description": "nuova metodologia dei TAR"
+            "description": "metodologia dei TAR"
+        },
+        "20": {
+            "title": "fase<br>20",
+            "description": "nuova metodologia dei test"
         }
     },
     "weekday": {
