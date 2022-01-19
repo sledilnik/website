@@ -356,6 +356,7 @@ let basicChart
                     {| value=jsTime <| DateTime(2021,6,15); label=Some {| text=I18N.t "phase.17.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,8,23); label=Some {| text=I18N.t "phase.18.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,11,8); label=Some {| text=I18N.t "phase.19.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2022,1,19); label=Some {| text=I18N.t "phase.20.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -449,9 +450,14 @@ let basicChart
                        label=Some {| align="center"; text=I18N.t "phase.18.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2021,11,8);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2022,1,19);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.19.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2022,1,19);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.20.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
