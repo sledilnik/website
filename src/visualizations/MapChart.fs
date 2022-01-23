@@ -670,10 +670,10 @@ let renderMap (state : State) =
                 | Complete -> 40000.
                 | LastDays days ->
                     match days with
-                        | 21 -> 10500.
-                        | 14 -> 8000.
+                        | 21 -> 15000.
+                        | 14 -> 10000.
                         | 7 -> 5000.
-                        | 1 -> 1000.
+                        | 1 -> 1500.
                         | _ -> 200.
             | Vaccinated1st, _ | Vaccinated2nd, _ | Vaccinated3rd, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
