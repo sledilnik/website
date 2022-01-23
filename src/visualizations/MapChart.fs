@@ -667,14 +667,14 @@ let renderMap (state : State) =
             | ConfirmedCases, Bubbles -> maxValue100k()
             | ConfirmedCases, _ ->
                 match state.DataTimeInterval with
-                | Complete -> 20000.
+                | Complete -> 40000.
                 | LastDays days ->
                     match days with
                         | 21 -> 10500.
-                        | 14 -> 7000.
-                        | 7 -> 3500.
-                        | 1 -> 500.
-                        | _ -> 100.
+                        | 14 -> 8000.
+                        | 7 -> 5000.
+                        | 1 -> 1000.
+                        | _ -> 200.
             | Vaccinated1st, _ | Vaccinated2nd, _ | Vaccinated3rd, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 1. else dataMax
