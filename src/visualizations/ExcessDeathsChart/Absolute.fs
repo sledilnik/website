@@ -4,7 +4,6 @@ open Fable.Core.JsInterop
 open Highcharts
 
 open Types
-open Browser
 
 let colors = {|
     Year = "#a0a0a0"
@@ -14,6 +13,10 @@ let colors = {|
 
 let renderChartOptions (data : WeeklyDeathsData) =
     let minYear = 2010 // used to filter out 2009 data tail
+    let lastYear = // used to colour the last year for which the data is available
+        data
+        |> List.map (fun dp -> dp.Year)
+        |> List.max
     let series =
         data
         |> List.groupBy (fun dp -> dp.Year)
@@ -33,7 +36,7 @@ let renderChartOptions (data : WeeklyDeathsData) =
                showInLegend = year >= START_YEAR
                data = seriesData
                color =
-                if year = System.DateTime.Now.Year then
+                if year = lastYear then
                     colors.CurrentYear
                 elif year >= START_YEAR then
                     colors.Year
