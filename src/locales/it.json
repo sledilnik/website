@@ -1136,7 +1136,7 @@
             "hospitalized": "ricoverati",
             "title": "Variazione dei casi confermati",
             "activeCases": "casi attivi",
-            "titleMenu": "Crescita"
+            "titleMenu": "Crescita - casi"
         },
         "common": {
             "shortDateFormat": "%e %b",
@@ -1537,7 +1537,7 @@
             "relative100k": "Relativo per 100.000 persone nel gruppo",
             "absolute100k": "Per 100.000 persone nel gruppo",
             "absolute": "Assoluto",
-            "hospitalizedCases": "Ricoveri",
+            "hospitalizedCases": "Ricoveri (SARI)",
             "confirmedCases": "Casi confermati",
             "titleMenu": "Vaccinazione - effetto",
             "title": "Effetto della vaccinazione",
@@ -1554,12 +1554,13 @@
             "icuIn": "Ricoverati in terapia intensiva",
             "meanAge": "Età media",
             "hospitalIn": "Ammessi in ospedale",
-            "title": "Ospedalizzazioni per età, settimanale",
+            "title": "Ospedalizzazioni (SARI) per età, settimanale",
             "titleMenu": "Ospedalizzazioni - età",
-            "deceased": "Deceduti"
+            "deceased": "Deceduti",
+            "disclaimer": "Questo include solo i ricoveri tracciati nel sistema EPISARI, che esclude i ricoveri COVID-19 senza infezioni respiratorie acute gravi."
         },
         "vaccineEffectAge": {
-            "title": "Tassi di ospedalizzazione - stato vaccinale e fascia di età",
+            "title": "Tassi di ospedalizzazione (SARI) - stato vaccinale e fascia di età",
             "absolute": "Assoluto",
             "absolute100k": "Per 100.000 persone nel gruppo",
             "vaccinatedIn": "Ricoverati - Protetti con la vaccinazione",
@@ -1692,6 +1693,10 @@
         "20": {
             "title": "fase<br>20",
             "description": "nuova metodologia dei test"
+        },
+        "21": {
+            "title": "fase<br>21",
+            "description": "nuova metodologia dei test"
         }
     },
     "weekday": {
@@ -1772,7 +1777,7 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._",
+        "intro": "_Lo scopo del progetto Sledilnik e di tutti i suoi grafici e tabelle/presentazioni statistiche è quello di visualizzare in modo comprensibile tutti i dati esistenti sull'epidemia di COVID-19 in Slovenia. Abbiamo raccolto alcune delle domande più frequenti. L'elenco delle FAQ non è esaustivo, ma viene aggiornato frequentemente, quindi continua a controllare. In caso di domande, non esitate a contattarci: info@slednik.org. (Aspettiamo anche i tuoi complimenti, feedback o suggerimenti!)_",
         "chart-infocard-percent": {
             "question": "Cosa significano le percentuali nelle schede informative nella parte superiore della pagina web?",
             "answer": "Si tratta di un tasso di crescita percentuale in una determinata data del numero di nuovi casi confermati rispetto al giorno precedente. Se, ad esempio, ieri c'erano 16 persone nel reparto di terapia intensiva e oggi ne hanno accettati altri quattro, si tratta del 25% in più rispetto alla situazione di ieri."
@@ -1865,7 +1870,7 @@
             "question": "Cosa rappresenta il grafico \"Per regione\"?"
         },
         "spread-chart": {
-            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
+            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID-19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
             "question": "Cosa rappresenta il grafico \"Variazione di casi confermati\"?"
         },
         "infections-chart": {
@@ -1911,7 +1916,8 @@
             "answer": "Sledilnik si basava su fonti ufficiali (Governo della Repubblica di Slovenia, media) per il numero di persone guarite. Purtroppo, i rapporti su quando una persona è totalmente guarita dal Covid-19 sono scarsi - per ora, abbiamo solo pochi rapporti confermati di \"pazienti guariti\", e non c'è ancora una definizione ufficiale di quando una particolare persona è guarita. Un [sondaggio nazionale COVID-19](https://covid19.biolab.si/) eseguito dall'*Istituto di Microbiologia e Immunologia*, ha mostrato anche, attraverso test a campione volontari, quante persone si siano già ammalate e siano guarite dal COVID-19. Poiché non si sa ancora quali potrebbero essere le potenziali conseguenze del COVID-19 (vari studi si stanno occupando di questa questione e i risultati non saranno noti per molto tempo), e poiché le istituzioni sanitarie parlano anche di pazienti guariti piuttosto che curati, stiamo quindi cambiando sia la terminologia che il metodo di calcolo del numero di guarigioni. Vedi anche [Avete un contatore dei casi attivi e sapete quante persone sono attualmente infette?](#data-active-cases))\n\nIl 14 aprile, il Dipartimento della Salute ha rilasciato [Priporočila za zaključek izolacije in vrnitev na delovno mesto (Raccomandazioni per interrompere l'isolamento e tornare al lavoro)](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) da cui possiamo dedurre quando una persona è guarita dalla malattia e può tornare al lavoro. Per le persone con sintomi, questo è di 14 giorni dopo che i sintomi si sono attenuati, e per gli operatori sanitari, un tampone di controllo è richiesto dopo 14 giorni, che deve essere negativo 2 volte di seguito. Il governo della Repubblica di Slovenia riferisce regolarmente sulle dimissioni dall'ospedale, ma non sappiamo se sono già guariti dalla malattia. Le raccomandazioni pubblicate indicano che questi pazienti hanno bisogno di due tamponi di controllo negativi consecutivi dopo la dimissione all'assistenza domiciliare per essere considerati in grado di tornare al lavoro. [Nel suo rapporto](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) l'ECDC ha dichiarato che *L'incidenza a 14 giorni dei casi di COVID-19 riportati nell'UE/SEE e nel Regno Unito, che fornisce una stima della prevalenza di casi attivi nella popolazione...* - quindi abbiamo scelto il periodo di 14 giorni come il tempo in cui il caso medio confermato può ancora essere considerato un *caso attivo*.\n\nAbbiamo notato che il [Worldometer](https://www.worldometers.info/coronavirus/#countries) riportava il numero di guariti, ma purtroppo non siamo stati in grado di ottenere dati sulla provenienza di queste informazioni. Inoltre, alcune altre fonti combinano semplicemente i sopravvissuti con il numero di pazienti dimessi dagli ospedali. Poiché crediamo che queste due categorie non siano intercambiabili, abbiamo deciso di presentarle separatamente; questi sono gli indicatori *Dimessi dall'ospedale* e *Guariti*.\n\n*Nota: il calcolo dei guariti è stato modificato il 9 maggio 2020. Ora consideriamo che un paziente è guarito 14 giorni dopo che la sua infezione è stata confermata (in precedenza 21 giorni), quindi c'è stato un notevole salto nel numero dei sopravvissuti. Si prega di tenere conto di questa differenza quando si stima il numero di sopravvissuti. Una spiegazione più dettagliata del calcolo modificato è disponibile nell'articolo di Medium [Od potrjeno okuženih do prebolelih (Dal caso confermato alla guarigione )] (https://medium.com/@sledilnik/94c81674718e).*"
         },
         "chart-reality": {
-            "question": "I vostri grafici rappresentano la situazione reale?"
+            "question": "I vostri grafici rappresentano la situazione reale?",
+            "answer": "Sì, per quanto possibile, visti i limiti delle visualizzazioni attuali e dei dati stessi: i grafici di questa pagina mostrano solo ciò che si può dedurre dalle informazioni fornite. Per esempio, il numero totale di test rappresenta il numero di test eseguiti fino ad oggi, ma non riflette il numero totale di persone testate, poiché alcune persone, come gli operatori sanitari e le persone sospettate di essere infette, sono state testate più volte.\n\nTuttavia, il numero di casi confermati dipende esclusivamente dai test. Poiché la maggior parte delle persone infette, che hanno sintomi lievi o assenti, non sono state affatto testate per il COVID-19, il numero di casi confermati è significativamente inferiore al numero effettivo di persone infette (dal 21.12.2020 anche le persone che risultano positive al test rapido dell'antigene (RAT) contano come casi confermati)."
         },
         "countries-chart": {
             "answer": "Il [grafico](/it/stats#countries-chart) mostra un confronto tra la Slovenia e diversi gruppi di paesi in termini di numero di morti per COVID-19 per milione di abitanti. Il grafico è disposto cronologicamente. È possibile cambiare la visualizzazione delle diverse visualizzazioni cronologiche dei confronti tra diversi gruppi di paesi cliccando sulle schede appropriate qui sotto.",
