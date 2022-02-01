@@ -1088,7 +1088,7 @@
         },
         "spread": {
             "title": "Prirast potrjenih primerov",
-            "titleMenu": "Prirast",
+            "titleMenu": "Prirast - primeri",
             "absolute": "Absolutni dnevni prirast",
             "percentage": "Relativni dnevni prirast",
             "doublingRate": "Eksponentna rast v dnevih",
@@ -1433,7 +1433,7 @@
             "administered3rd": "Dodatni odmerek"
         },
         "vaccineEffectAge": {
-            "title": "Hospitalizacije - status cepljenja in starost",
+            "title": "Hospitalizacije (SARI) - status cepljenja in starost",
             "titleMenu": "Hospitalizacije - cepljenje, starost",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
@@ -1452,7 +1452,7 @@
             "title": "Učinek cepljenja",
             "titleMenu": "Cepljenje - učinek",
             "confirmedCases": "Potrjeni primeri",
-            "hospitalizedCases": "Hospitalizirani",
+            "hospitalizedCases": "Hospitalizirani (SARI)",
             "icuCases": "Intenzivna terapija",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",

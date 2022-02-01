@@ -466,7 +466,7 @@
         },
         "spread": {
             "title": "Growth of Confirmed Cases",
-            "titleMenu": "Growth",
+            "titleMenu": "Growth - cases",
             "hospitalized": "hospitalized",
             "inFourWeeks": "In four weeks",
             "inThreeWeeks": "In three weeks",
@@ -800,7 +800,7 @@
             "title": "Vaccination Effect",
             "titleMenu": "Vaccination - effect",
             "confirmedCases": "Confirmed Cases",
-            "hospitalizedCases": "Hospitalized",
+            "hospitalizedCases": "Hospitalized (SARI)",
             "icuCases": "ICU",
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
@@ -820,7 +820,7 @@
             "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
         },
         "vaccineEffectAge": {
-            "title": "Hospitalization Rates by Vaccination Status and Age Group",
+            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group",
             "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
             "absolute100k": "Per 100,000 People in Group",
