@@ -372,12 +372,13 @@
             "titleMenu": "Nursing Hospitals"
         },
         "patientsAge": {
-            "title": "Hospitalizations by Age, weekly",
+            "title": "Hospitalizations (SARI) by Age, weekly",
             "titleMenu": "Hospitalizations - age",
             "meanAge": "Mean Age",
             "hospitalIn": "Admitted to Hospital",
             "icuIn": "Admitted to ICU",
-            "deceased": "Deceased"
+            "deceased": "Deceased",
+            "disclaimer": "This only includes hospitalisations tracked in the EPISARI system, which excludes covid admissions without severe acute respiratory infections."
         },
         "ratios": {
             "title": "Share of Serious Cases",

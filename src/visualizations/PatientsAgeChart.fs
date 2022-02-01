@@ -346,7 +346,12 @@ let render state dispatch =
                                               match state.DisplayType with
                                               | MeanAge -> Html.none
                                               | _ -> Utils.renderBarChartTypeSelector state.ChartType (BarChartTypeChanged >> dispatch) ]
-               renderChartContainer state dispatch ]
+
+               renderChartContainer state dispatch
+
+               Html.div [
+                    prop.className "disclaimer"
+                    prop.children [ Html.text (chartText "disclaimer") ] ] ]
 
 let patientsAgeChart (props: {| data: WeeklyEpisariData |}) =
     React.elmishComponent ("PatientsAgeChart", init props.data, update, render)

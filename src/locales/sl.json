@@ -1143,12 +1143,13 @@
             "data": "Podatki"
         },
         "patientsAge": {
-            "title": "Hospitalizirani po starosti, tedensko",
+            "title": "Hospitalizirani (SARI) po starosti, tedensko",
             "titleMenu": "Hospitalizirani - starost",
             "meanAge": "Povprečna starost",
             "hospitalIn": "Sprejeti v bolnišnico",
             "icuIn": "Sprejeti v intenzivno",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "disclaimer": "Upoštevane so samo hospitalizacije vodene v sistemu EPISARI, kar izključuje sprejeme zaradi covida a brez resne akutne okužbe dihal."
         },
         "hcCases": {
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
