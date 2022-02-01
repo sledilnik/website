@@ -46,7 +46,7 @@ type ContentType =
     static member Default mapToDisplay =
         match mapToDisplay with
         | MunicipalityMap -> ConfirmedCases
-        | RegionMap       -> Vaccinated1st
+        | RegionMap       -> ConfirmedCases
     static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
