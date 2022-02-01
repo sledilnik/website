@@ -70,6 +70,7 @@ COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mo
 Sodelavci projekta:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeliranje, viri
+-   [Aljaž Vindiš](https://vindis.io/) - infografično oblikovanje
 -   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, infrastuktura
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
@@ -78,10 +79,12 @@ Sodelavci projekta:
 -   [Barbara Krajnc](https://twitter.com/bakrajnc) - vsebine, komunikacija
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
 -   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno strganje, komunikacija
+-   [Branko Jevtić](https://www.bananica.com/) — grafično oblikovanje, spletna stran
 -   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
 -   [Demjan Vester](https://github.com/VesterDe) - spletna stran
 -   [Dunja Fabjan](https://twitter.com/denebdulfim) - novičnik
 -   [Eva Matjašič](https://github.com/Blonduos/) - spletna stran
+-   [Eva Zupan Horaček](https://www.instagram.com/evasardinasta/?hl=en) - infografično oblikovanje
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
