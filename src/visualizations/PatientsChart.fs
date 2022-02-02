@@ -62,6 +62,7 @@ and State =
 
 type Series =
     | InHospital
+    | RedZone
     | Acute
     | Icu
     | IcuOther
@@ -83,7 +84,8 @@ module Series =
         match hTypeToDisplay with
         | CareHospitals -> [ Care; CareIn; CareOut; CareDeceased ]
         | CovidHospitals ->
-            [ Acute
+            [ RedZone
+              Acute
               Icu
               InHospitalIn
               InHospitalOut
@@ -101,6 +103,7 @@ module Series =
     let getSeriesInfo =
         function
         | InHospital -> "#de9a5a", "hospitalized", 0
+        | RedZone -> "#d06c5e", "redZone", 0
         | Acute -> "#de9a5a", "acute", 0
         | Icu -> "#de2d26", "icu", 0
         | IcuOther -> "#fb6a4a", "icu-other", 0
@@ -312,7 +315,8 @@ let renderStructureChart (state: State) dispatch =
         let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital -> ps.inHospital.today
-            | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
+            | RedZone -> ps.redZone.today
+            | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today |> Utils.subtractIntOption ps.redZone.today
             | Icu -> ps.icu.today
             | IcuOther ->
                 ps.icu.today

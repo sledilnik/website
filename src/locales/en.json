@@ -348,6 +348,7 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "redZone": "Red Zone",
             "acute": "Acute Unit",
             "care": "Nursing Unit",
             "admitted": "Admitted",
