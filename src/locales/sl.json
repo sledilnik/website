@@ -48,7 +48,7 @@
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "incidenceInfo": "na 100.000 prebivalcev",
-        "newCases7d": "Novi primeri",
+        "newCases7d": "Novi primeri (7d povp.)",
         "newCases7dInfo": "povprečje zadnjih 7 dni",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",

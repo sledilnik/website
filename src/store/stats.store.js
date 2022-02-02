@@ -18,7 +18,7 @@ const infoCardConfig = () => {
     },
     casesAvg7Days: {
       title: i18n.t('infocard.newCases7d'),
-      subTitle: i18n.t('infocard.newCases7dInfo')
+      // subTitle: i18n.t('infocard.newCases7dInfo')
     },
     casesToDateSummary: {
       title: i18n.t('infocard.confirmedToDate'),
