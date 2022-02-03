@@ -62,6 +62,7 @@ and State =
 
 type Series =
     | InHospital
+    | ReasonCovid
     | RedZone
     | Acute
     | Icu
@@ -72,6 +73,7 @@ type Series =
     | InHospitalIn
     | InHospitalOut
     | InHospitalDeceased
+    | IcuReasonCovid
     | IcuIn
     | IcuOut
     | IcuDeceased
@@ -87,6 +89,7 @@ module Series =
             [ RedZone
               Acute
               Icu
+              // ReasonCovid
               InHospitalIn
               InHospitalOut
               InHospitalDeceased ]
@@ -94,6 +97,7 @@ module Series =
             [ IcuOther
               NivVentilator
               InvVentilator
+              // IcuReasonCovid
               IcuIn
               IcuOut
               IcuDeceased ]
@@ -103,8 +107,10 @@ module Series =
     let getSeriesInfo =
         function
         | InHospital -> "#de9a5a", "hospitalized", 0
+        | ReasonCovid -> "#ffd700", "reasonCovid", 0
         | RedZone -> "#d06c5e", "redZone", 0
         | Acute -> "#de9a5a", "acute", 0
+        | IcuReasonCovid -> "#ffd700", "reasonCovid", 0
         | Icu -> "#de2d26", "icu", 0
         | IcuOther -> "#fb6a4a", "icu-other", 0
         | NivVentilator -> "#de2d26", "niVentilator", 0
@@ -315,9 +321,11 @@ let renderStructureChart (state: State) dispatch =
         let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital -> ps.inHospital.today
+            | ReasonCovid -> ps.inHospital.reasonCovid
             | RedZone -> ps.redZone.today
             | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today |> Utils.subtractIntOption ps.redZone.today
             | Icu -> ps.icu.today
+            | IcuReasonCovid -> ps.icu.reasonCovid
             | IcuOther ->
                 ps.icu.today
                 |> Utils.subtractIntOption ps.niv.today
@@ -343,7 +351,12 @@ let renderStructureChart (state: State) dispatch =
 
 
         let color, seriesId, seriesIdx = Series.getSeriesInfo series
-        {| color = color
+        let cType =
+            match series with
+            | ReasonCovid | IcuReasonCovid -> "line"
+            | _ -> "column"
+        {| ``type`` = cType
+           color = color
            name = I18N.tt "charts.patients" seriesId
            yAxis = seriesIdx
            data =
