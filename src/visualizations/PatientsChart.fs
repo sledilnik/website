@@ -266,18 +266,12 @@ let renderStructureChart (state: State) dispatch =
             |> ignore
 
 
-            let title =
-                match state.HTypeToDisplay with
-                | CovidHospitals    -> I18N.t "charts.patients.hospitalized"
-                | CovidHospitalsICU -> I18N.t "charts.patients.icu"
-                | CareHospitals     -> I18N.t "charts.patients.care"
-
             s.Append "<table>" |> ignore
             s.Append "<tr>" |> ignore
             let totalStr =
                 sprintf
                     "<td></td><td><b>%s</b></td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
-                    title
+                    (I18N.t "charts.patients.total")
                     (I18N.NumberFormat.formatNumber total)
 
             s.Append totalStr |> ignore

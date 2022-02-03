@@ -992,6 +992,7 @@
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
+            "total": "Skupaj",
             "reasonCovid": "Vodilna diagnoza COVID-19",
             "redZone": "Rdeča cona",
             "acute": "Akutni oddelek",

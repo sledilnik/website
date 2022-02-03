@@ -348,6 +348,7 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "total": "Total",
             "reasonCovid": "Leading diagnosis COVID-19",
             "redZone": "Red Zone",
             "acute": "Acute Unit",
