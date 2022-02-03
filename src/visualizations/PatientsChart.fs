@@ -189,6 +189,7 @@ let renderByHospitalChart (state: State) dispatch =
             ps.JsDate12h, value
 
         {| visible = true
+           ``type`` = "line"
            name = Utils.Dictionaries.GetFacilityName(fcode)
            color = Utils.Dictionaries.GetFacilityColor(fcode)
            dashStyle = Solid |> DashStyle.toString
