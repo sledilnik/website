@@ -340,7 +340,7 @@ let renderStructureChart (state: State) dispatch =
 
         let getTotal (ps: FacilityPatientStats): int option =
             match state.HTypeToDisplay with
-            | CovidHospitals    -> ps.inHospital.today
+            | CovidHospitals    -> ps.inHospital.today |> Utils.sumIntOption ps.redZone.today
             | CovidHospitalsICU -> ps.icu.today
             | CareHospitals     -> ps.care.today
 
