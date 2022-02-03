@@ -992,6 +992,8 @@
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
+            "reasonCovid": "Vodilna diagnoza COVID-19",
+            "redZone": "Rdeča cona",
             "acute": "Akutni oddelek",
             "care": "Negovalni oddelek",
             "admitted": "Sprejeti",
@@ -1048,7 +1050,7 @@
         "tests": {
             "title": "Testiranje",
             "titleMenu": "Testiranje",
-            "disclaimer": "Opomba: od 3. decembra 2020 ne prejemamo več podatkov po posameznih laboratorijih.",
+            "disclaimer": "Opomba: S 1. 2. 2022 se pozitiven rezultat na PCR ali na HAT testu šteje kot potrjen primer. Osebe, ki so po pozitivnem HAT testu dodatno testirane tudi na PCR testu, v statistiki pozitivnih HAT niso zajete.",
             "positiveSplit": "Pozitivnih PCR in HAT",
             "positiveHAT": "Pozitivnih HAT",
             "positivePCR": "Pozitivnih PCR",
