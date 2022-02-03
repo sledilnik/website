@@ -428,7 +428,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: From 1 February 2022, a positive result on PCR or HAT test is considered a confirmed case. Persons who are additionally tested with the PCR test after a positive HAT test are not included in the statistics of positive HAT.",
+            "disclaimer": "Note: From 1 February 2022, a positive result on PCR or RAT test is considered a confirmed case. Persons who are additionally tested with the PCR test after a positive RAT test are not included in the statistics of positive RAT.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
