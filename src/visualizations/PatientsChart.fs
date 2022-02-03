@@ -406,7 +406,8 @@ let renderStructureChart (state: State) dispatch =
                      visible = true |} |]
            plotOptions =
                pojo
-                   {| column =
+                   {| line = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                      column =
                           pojo
                               {| dataGrouping = pojo {| enabled = false |}
                                  stacking = "normal"
