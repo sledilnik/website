@@ -324,7 +324,7 @@ let renderStructureChart (state: State) dispatch =
             | InHospital -> ps.inHospital.today
             | ReasonCovid -> ps.inHospital.reasonCovid
             | RedZone -> ps.redZone.today
-            | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today |> Utils.subtractIntOption ps.redZone.today
+            | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
             | Icu -> ps.icu.today
             | IcuReasonCovid -> ps.icu.reasonCovid
             | IcuOther ->
