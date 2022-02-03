@@ -342,7 +342,7 @@
             "deceased-rest": "Died"
         },
         "patients": {
-            "title": "Hospitalizations",
+            "title": "Hospitalizations (c19 units and red zones)",
             "titleMenu": "Hospitalizations",
             "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",

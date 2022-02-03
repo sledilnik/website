@@ -89,7 +89,7 @@ module Series =
             [ RedZone
               Acute
               Icu
-              // ReasonCovid
+              ReasonCovid
               InHospitalIn
               InHospitalOut
               InHospitalDeceased ]
@@ -97,7 +97,7 @@ module Series =
             [ IcuOther
               NivVentilator
               InvVentilator
-              // IcuReasonCovid
+              IcuReasonCovid
               IcuIn
               IcuOut
               IcuDeceased ]

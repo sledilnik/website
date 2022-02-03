@@ -986,7 +986,7 @@
             "deceased-rest": "Umrli"
         },
         "patients": {
-            "title": "Hospitalizirani",
+            "title": "Hospitalizirani (c19 oddelki in rdeče cone)",
             "titleMenu": "Hospitalizirani",
             "disclaimerCare": "Opomba: negovalne bolnišnice od 8. aprila 2021 ne poročajo več dnevnega stanja.",
             "byHospital": "Po bolnišnicah",
