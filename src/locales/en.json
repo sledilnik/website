@@ -348,6 +348,7 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "reasonCovid": "Leading diagnosis COVID-19",
             "redZone": "Red Zone",
             "acute": "Acute Unit",
             "care": "Nursing Unit",
@@ -427,7 +428,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: from December 3, 2020, we do not received data per laboratory.",
+            "disclaimer": "Note: From 1 February 2022, a positive result on PCR or HAT test is considered a confirmed case. Persons who are additionally tested with the PCR test after a positive HAT test are not included in the statistics of positive HAT.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
