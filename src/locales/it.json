@@ -867,7 +867,7 @@
             "hospitalizedIn": "Ricoverati in:",
             "byHospital": "Per ospedale",
             "structure": "Struttura",
-            "title": "Ricoveri",
+            "title": "Ricoveri (unità c19 e zone rosse)",
             "titleMenu": "Ricoveri",
             "care": "Unità infermieristica",
             "icu-deceased": "Deceduti",
@@ -876,7 +876,8 @@
             "icu-admitted": "Ammessi in terapia intensiva",
             "niVentilator": "Su ventilatore (non invasivo)",
             "acute": "Unità acuta",
-            "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021."
+            "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021.",
+            "total": "Totale"
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -1601,7 +1602,7 @@
         "confirmedToDate": "Casi confermati",
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
-        "newCases7d": "Casi nuovi",
+        "newCases7d": "Casi nuovi (media 7 giorni)",
         "testsHAT": "Tamponi giornalieri: TAR",
         "vaccinationSummary": "Vaccinazioni completate",
         "incidenceInfo": "per 100.000 persone"
