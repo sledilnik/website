@@ -877,7 +877,9 @@
             "niVentilator": "Su ventilatore (non invasivo)",
             "acute": "Unità acuta",
             "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021.",
-            "total": "Totale"
+            "total": "Totale",
+            "redZone": "Zona rossa",
+            "reasonCovid": "Diagnosi principale COVID-19"
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -977,7 +979,7 @@
         "tests": {
             "ns-apr20": "Ricerca: PCR",
             "regular": "Ordinario: PCR",
-            "title": "Analisi: PCR",
+            "title": "Tamponi",
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
             "negativeTests": "Tamponi negativi",
@@ -985,7 +987,7 @@
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
             "byLab": "Per laboratorio: test PCR",
-            "disclaimer": "Nota: dal 3 dicembre 2020 non riceviamo più i dati per laboratorio.",
+            "disclaimer": "Nota: dal 1° febbraio 2022, un risultato positivo al test PCR o TAR è considerato un caso confermato. Le persone che sono ulteriormente testate con il tampone PCR dopo un test TAR positivo non sono incluse nelle statistiche di TAR positivi.",
             "hagt": "Ordinario: TAR",
             "positiveTotal": "Totale positivi",
             "positivePCR": "PCR positivi",
