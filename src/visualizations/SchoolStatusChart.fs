@@ -115,7 +115,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
                        FilterType = ShowActive }
         newState, cmd
 
-let renderChartOptions state schoolStatus dispatch =
+let renderChartOptions state schoolStatus =
 
     let allSeries =
 
@@ -256,8 +256,8 @@ let renderChartOptions state schoolStatus dispatch =
     {| baseOptions with
            chart = pojo {| ``type`` = "xrange"; animation = false |}
            xAxis = xAxis
-           yAxis = [| {| title = {| text = null |}
-                         labels = {| enabled = false |} |} |]
+           yAxis = [| {| title = {| text = null |} |> pojo
+                         labels = {| enabled = false |} |> pojo |} |]
            series = Seq.toArray allSeries
            plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |}
            tooltip = pojo {| shared = false; split = false
@@ -340,7 +340,7 @@ let renderSchool (state: State) dispatch =
                 prop.className "highcharts-wrapper"
                 prop.style [ style.height 480 ]
                 prop.children [
-                    renderChartOptions state schoolStatus dispatch |> Highcharts.chart
+                    renderChartOptions state schoolStatus |> Highcharts.chart
                 ]
             ]
 
