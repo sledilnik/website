@@ -193,7 +193,7 @@ let renderByLabChart (state: State) dispatch =
                pojo
                    {| rules =
                           [| {| condition = {| maxWidth = 768 |}
-                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 
@@ -323,8 +323,9 @@ let renderTestsChart (state: State) dispatch =
                           [| {| condition = {| maxWidth = 768 |}
                                 chartOptions =
                                     {| yAxis =
-                                           [| {| labels = {| enabled = false |} |}
-                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                           [| {| labels = pojo {| enabled = false |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
+    |}
     |> pojo
 
 
@@ -413,8 +414,8 @@ let renderPositiveChart (state: State) dispatch =
                           [| {| condition = {| maxWidth = 768 |}
                                 chartOptions =
                                     {| yAxis =
-                                           [| {| labels = {| enabled = false |} |}
-                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                           [| {| labels = pojo {| enabled = false |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 
