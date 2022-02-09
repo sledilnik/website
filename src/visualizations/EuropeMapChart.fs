@@ -697,9 +697,9 @@ let renderMap state geoJson _ =
                 credits = {| enabled = false |}
                 xAxis =
                     {|
-                        visible = true
-                        labels = {| enabled = false |}
                         title = {| enabled = false |}
+                        visible = true
+                        labels = pojo {| enabled = false |}
                         tickInterval = 7
                         lineColor = "#696969"
                         tickColor = "#696969"
@@ -720,7 +720,7 @@ let renderMap state geoJson _ =
                         showLastLabel = true
                         gridLineColor = "#000000"
                         gridLineDashStyle = "dot"
-                    |} |> pojo
+                    |}
                 title = {| text = "" |}
                 legend = {| enabled = false |}
                 series =
@@ -732,16 +732,16 @@ let renderMap state geoJson _ =
                             borderColor = columnColors
                             pointWidth = 15 //
                             colorByPoint = true
-                        |} |> pojo
+                        |}
                     |]
-            |} |> pojo
+            |}
         match state.MapToDisplay with
         | Europe ->
             Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-eur", options)) 10 |> ignore
-            """<div id="tooltip-chart-eur"; class="tooltip-chart";></div>"""
+            """<div id="tooltip-chart-eur" class="tooltip-chart"></div>"""
         | World ->
             Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-world", options)) 10 |> ignore
-            """<div id="tooltip-chart-world"; class="tooltip-chart";></div>"""
+            """<div id="tooltip-chart-world" class="tooltip-chart"></div>"""
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
