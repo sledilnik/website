@@ -239,7 +239,7 @@ let renderChartOptions state dispatch =
                 xAxis =
                     {|
                         visible = false
-                        labels = {| enabled = false|}
+                        labels = pojo {| enabled = false|}
                         title = {| enabled = false|}
                         linkedto = Some 0.
                     |} |> pojo
@@ -248,7 +248,7 @@ let renderChartOptions state dispatch =
                         min = minimum
                         max = maximum
                         opposite = true
-                        labels = {| enabled = false|}
+                        labels = pojo {| enabled = false|}
                         visible = true
                         title = {| enabled = false|}
                         allowDecimals = false
@@ -260,7 +260,7 @@ let renderChartOptions state dispatch =
             |}
 
         Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-weekly-demographics", options)) 10 |> ignore
-        """<div id="tooltip-chart-weekly-demographics"; class="tooltip-chart";><div/>"""
+        """<div id="tooltip-chart-weekly-demographics" class="tooltip-chart"><div/>"""
 
 
     let tooltipFormatter
