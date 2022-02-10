@@ -388,8 +388,8 @@ let renderChartOptions state dispatch =
             | Absolute ->
                 let txtId =
                     match state.DisplayType with
-                    | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesAbs"
-                    | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesAbs"
+                    | ConfirmedCases -> "charts.vaccineEffect.disabled" // "charts.vaccineEffect.confirmedCasesAbs"
+                    | HospitalizedCases -> "charts.vaccineEffect.disabled" // "charts.vaccineEffect.hospitalizedCasesAbs"
                     | IcuCases -> "charts.vaccineEffect.icuCasesAbs"
 
                 I18N.tOptions
@@ -406,8 +406,8 @@ let renderChartOptions state dispatch =
             | _ ->
                 let txtId =
                     match state.DisplayType with
-                    | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesRatio"
-                    | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesRatio"
+                    | ConfirmedCases -> "charts.vaccineEffect.disabled" // "charts.vaccineEffect.confirmedCasesRatio"
+                    | HospitalizedCases -> "charts.vaccineEffect.disabled" // "charts.vaccineEffect.hospitalizedCasesRatio"
                     | IcuCases -> "charts.vaccineEffect.icuCasesRatio"
 
                 I18N.tOptions txtId {| multiple = I18N.NumberFormat.formatNumber multiple |}

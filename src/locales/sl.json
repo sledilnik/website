@@ -1472,7 +1472,7 @@
             "casesRecovered": "Prebolevniki",
             "casesOther": "Ostali (necepljeni, delno cepljeni)",
             "casesUnvaccinated": "Necepljeni",
-            "disabled": "Zaradi zaznanih napak v podatkih o cepljenju, ki jih pridobivamo iz cepimose.si, teh podatkov začasno ne prikazujemo. NIJZ napako prioritetno ureja in graf bomo ponovno objavili, ko bodo napake odpravljene."
+            "disabled": "Opomba: Zaradi spremembe poročanja teh podatkov od 17. 1. 2022 ne moremo več osveževati."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
