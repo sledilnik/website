@@ -1551,7 +1551,7 @@
             "casesRecovered": "Guariti",
             "icuCasesRatio": "Non vaccinati, guariti e parzialmente vaccinati sono ricoverati in unità di terapia intensiva **{{multiple}}** volte tanto quanto quelli completamente protetti con la vaccinazione.",
             "casesPartiallyVaccinated": "Parzialmente vaccinati",
-            "disabled": "A causa di errori rilevati nei dati di vaccinazione ottenuti da cepimose.si, abbiamo rimosso temporaneamente questi grafici. Il NIJZ sta risolvendo il problema in via prioritaria e pubblicheremo nuovamente i grafici non appena gli errori saranno eliminati."
+            "disabled": "Nota: Dal 17 gennaio 2022 a causa di un cambiamento nel resoconto non possiamo più aggiornare questi dati ."
         },
         "patientsAge": {
             "icuIn": "Ricoverati in terapia intensiva",
