@@ -444,7 +444,10 @@
             "icu-other": "Bez respiratora",
             "icu-discharged": "Otpušteni s odjela intenzivne njege",
             "icu-admitted": "Prihvaćeni na odjelu intenzivne njege",
-            "disclaimerCare": "Napomena: Od 8. travnja 2021. bolnice za njegu ne izvještavaju o dnevnom stanju."
+            "disclaimerCare": "Napomena: Od 8. travnja 2021. bolnice za njegu ne izvještavaju o dnevnom stanju.",
+            "reasonCovid": "COVID-19 dijagnoza",
+            "redZone": "Crvena zona",
+            "total": "Ukupno"
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
@@ -508,7 +511,7 @@
             "percentage": "Relativan dnevni porast",
             "oneWeek": "Tjedan dana",
             "activeCases": "aktivni slučajevi",
-            "titleMenu": "Porast"
+            "titleMenu": "Porast – slučajevi"
         },
         "hospitals": {
             "projection7": "Projekcija, 7-dnevno udvostručenje",
@@ -964,7 +967,7 @@
             "titleMenu": "Cijepljenje – učinak",
             "title": "Učinak cijepljenja",
             "absolute": "Apsolutno",
-            "hospitalizedCases": "Hospitalizirani",
+            "hospitalizedCases": "Hospitalizirani (SARI)",
             "confirmedCases": "Potvrđeni slučajevi",
             "icuCases": "Odjel intenzivne njege",
             "casesRecovered": "Ozdravili",
@@ -978,7 +981,7 @@
             "meanAge": "Prosječna starost",
             "hospitalIn": "Primljeni u bolnici",
             "icuIn": "Primljeni na odjel intenzivne njege",
-            "title": "Hospitalizacija po starosti, tjedno",
+            "title": "Hospitalizacija (SARI) po starosti, tjedno",
             "titleMenu": "Hospitalizacija – starost"
         }
     },
@@ -1425,6 +1428,10 @@
         "20": {
             "title": "faza<br>20",
             "description": "nova metoda testiranja"
+        },
+        "21": {
+            "description": "nova metoda testiranja",
+            "title": "faza<br>21"
         }
     },
     "embedMaker": {
@@ -1523,7 +1530,7 @@
         "tests": "Testovi danas: Lančana reakcija polimeraze",
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
-        "newCases7d": "Novi slučajevi",
+        "newCases7d": "Novi slučajevi (7-dnevni prosjek)",
         "testsHAT": "Testovi danas: Brzo testiranje antigena",
         "vaccinationSummary": "Potpuno cijepljeni",
         "incidenceInfo": "na 100.000 stanovnika"
