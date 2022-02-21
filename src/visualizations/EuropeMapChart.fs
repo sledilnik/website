@@ -391,7 +391,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             match fixedCode with
             | "SVN" -> chartText "statusNone", "#10829a", ""
             | _ ->
-                chartText "statusOrange", "#FFC65A", ""
+                chartText "statusGreen", "#C4DE6F", ""
                 // match darkRed with
                 // | Some dRedNote ->
                 //     if dRedNote.Length > 0
