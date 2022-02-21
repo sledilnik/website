@@ -1327,7 +1327,15 @@
         "gatherings3": {
             "title": "Gatherings",
             "description": "Prohibition of gathering (except for close family members), no celebrations.<br>Restaurants and bars allowed from 5AM to 10PM (seated service only).<br>Restrictions of culture and sport events (only indoors, seated with free seat between spectators)."
-        }
+        },
+        "liftQuarantineAll": {
+            "title": "Quarantine",
+            "description": "Easing of restrictions: no quarantine after close contact"
+        },
+        "liftPCT": {
+            "title": "RVT",
+            "description": "Easing of restrictions: all restrictions, only masks required indoors.<br>RVT (recovered, vaccinated, tested) condition required only in healthcare, social servicesa and prisons."
+       }
     },
     "days": {
         "in_x_days": "in {{ count }} day",
