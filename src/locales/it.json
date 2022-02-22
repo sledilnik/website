@@ -780,6 +780,14 @@
         "gatherings3": {
             "title": "Assembramenti",
             "description": "Divieto di riunirsi (eccetto per i familiari stretti), nessuna celebrazione.<br>Ristoranti e bar ammessi dalle 5 alle 22 (solo servizio seduto).<br>Restrizioni di eventi culturali e sportivi (solo al chiuso, seduti con posto libero tra gli spettatori)."
+        },
+        "liftQuarantineAll": {
+            "title": "Quarantena",
+            "description": "Allentamento delle restrizioni: nessuna quarantena dopo un contatto stretto"
+        },
+        "liftPCT": {
+            "title": "GVT",
+            "description": "Allentamento delle restrizioni: tutte le restrizioni vengono rimosse, resta l'obbligo di indossare la mascherina nei luoghi chiusi. <br>GVT (guarito, vaccinato, testato) solo per la sanità, gli istituti di protezione sociale e le carceri."
         }
     },
     "tableDict": {
