@@ -324,7 +324,7 @@
             "all": "Sve",
             "showActive": "Aktivni",
             "showToday": "Dnevni",
-            "showToDate": "Do danas",
+            "showToDate": "Na datum",
             "show7DaysAverage": "Sedmodnevni prosjek",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
             "dateFormat": "%A, %e. %B %Y.",
@@ -435,7 +435,7 @@
             "hospitalized": "Hospitalizirani",
             "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
-            "title": "Hospitalizacije",
+            "title": "Hospitalizacije (c19 odjeli i crvene zone)",
             "titleMenu": "Hospitalizacije",
             "care": "Odjel za njegu",
             "icu-deceased": "Umrli",
@@ -835,7 +835,7 @@
             "deceasedHospitals": "Mjesto umiranja",
             "showPercent": "Proporcija",
             "showNormal": "Apsolutno",
-            "showToDate": "Do danas",
+            "showToDate": "Na datum",
             "showToday": "Dnevno"
         },
         "excessDeaths": {
@@ -926,8 +926,8 @@
             "title": "Slučajevi u školama i vrtićima"
         },
         "vaccination": {
-            "titleMenu": "Cjepljenje po dobnim skupinama",
-            "title": "Cjepljenje - dob",
+            "titleMenu": "Cijepljenje – starost",
+            "title": "Cijepljenje po dobnim skupinama",
             "byAge1st": "Prva doza",
             "byAgeAll": "Potpuno cijepljeni",
             "byAge3rd": "Dodatna doza",
@@ -962,8 +962,8 @@
             "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV"
         },
         "vaccineEffect": {
-            "relative100k": "Relativno na 100.000 osoba u grupi",
-            "absolute100k": "Na 100.000 osoba u grupi",
+            "relative100k": "Relativno na 100.000 osoba u skupini",
+            "absolute100k": "Na 100.000 osoba u skupini",
             "titleMenu": "Cijepljenje – učinak",
             "title": "Učinak cijepljenja",
             "absolute": "Apsolutno",
@@ -972,7 +972,7 @@
             "icuCases": "Odjel intenzivne njege",
             "casesRecovered": "Ozdravili",
             "casesProtected": "Zaštićeni cjepivom",
-            "casesPartiallyVaccinated": "Djelomično zaštićeni",
+            "casesPartiallyVaccinated": "Djelomično cijepljeni",
             "casesUnvaccinated": "Necijepljeni",
             "casesOther": "Ostali (necijepljeni, djelomično cijepljeni)"
         },
@@ -983,6 +983,21 @@
             "icuIn": "Primljeni na odjel intenzivne njege",
             "title": "Hospitalizacija (SARI) po starosti, tjedno",
             "titleMenu": "Hospitalizacija – starost"
+        },
+        "vaccineEffectAge": {
+            "absolute": "Apsolutno",
+            "vaccineEfficiency": "Učinkovitost cijepljenja",
+            "vaccinatedIn": "Hospitalizirani – Zaštićeni cijepljenjem",
+            "otherIn": "Hospitalizirani – Ostali",
+            "titleMenu": "Hospitalizacije – cijepljenje, dob",
+            "absolute100k": "Na 100.000 osoba u grupi",
+            "title": "Stope hospitalizacije (SARI) po stanju cijepljenja i dobnoj skupini",
+            "hospitalizedIn": "Od {{ startDate, %e. %b %Y.  }} do {{ endDate, %e. %b %Y. }}.",
+            "toDate": "Na datum",
+            "ageBelow65": "Dobna skupina &lt;65",
+            "ageAbove65": "Dobna skupina 65+",
+            "ageAll": "Sve dobi",
+            "riskRatio": "Omjer rizika (faktor)"
         }
     },
     "shortMonth": {
@@ -1721,7 +1736,7 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Svrha projekta Sledilnik i svih njegovih statističkih dijagrama i tablica/prikaza je prikazati sve postojeće podatke o epidemiji COVID19 u Sloveniji na razumljiv način. Sastavili smo popis često postavljenih pitanja. Popis često postavljenih pitanja trenutačno nije iscrpan, ali se često aktualizira. U slučaju bilo kakvih pitanja, kontaktiraj nas na: info@slednik.org. (Radujemo se pohvalama, povratnim informacijama i prijedlozima!)_",
+        "intro": "_Svrha projekta Sledilnik i svih njegovih statističkih dijagrama i tablica/prikaza je prikazati sve postojeće podatke o epidemiji COVID-19 u Sloveniji na razumljiv način. Sastavili smo popis često postavljenih pitanja. Popis često postavljenih pitanja trenutačno nije iscrpan, ali se često aktualizira. U slučaju bilo kakvih pitanja, kontaktiraj nas na: info@slednik.org. (Radujemo se pohvalama, povratnim informacijama i prijedlozima!)_",
         "searchPlaceholder": "Upiši traženi pojam",
         "what-is-sledilnik": {
             "question": "Što je Sledilnik?",
@@ -1781,7 +1796,13 @@
             "question": "Što znači dijagram „Tjedni slučajevi – demografija”?"
         },
         "chart-cases-by-age-group": {
-            "question": "Što znači dijagram „Potvrđeni slučajevi po starosnim grupama”?"
+            "question": "Što znači dijagram „Potvrđeni slučajevi po starosnim skupinama”?"
+        },
+        "countries-chart": {
+            "question": "Što prikazuje dijagram „Usporedba po zemljama”?"
+        },
+        "age-groups-chart": {
+            "question": "Što prikazuje dijagram „Starosne skupine”?"
         }
     },
     "donation": {
