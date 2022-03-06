@@ -1,5 +1,6 @@
 import ContentApiService from "../services/content-api.service";
 import _ from "lodash";
+import i18next from 'i18next'
 
 const contentApi = new ContentApiService();
 const state = {
@@ -23,7 +24,7 @@ const getters = {
 
 const actions = {
   async fetchPost({ commit }, id) {
-    const post = await contentApi.get(`/posts/${id}/`);
+    const post = await contentApi.get(`/posts/${id}/?lang=${i18next.language}`);
     commit("FRESH_POSTS", [post]);
   },
   async fetchLatestPosts({ dispatch }) {
@@ -33,7 +34,7 @@ const actions = {
     dispatch("fetchPosts", { limit: 30 }, { timeout: 900 }); // When we hit 30, make pagination
   },
   async fetchPosts({ commit }, { limit }) {
-    const { objects } = await contentApi.get(`/posts/?limit=${limit}`);
+    const { objects } = await contentApi.get(`/posts/?limit=${limit}&lang=${i18next.language}`);
     commit("FRESH_POSTS", objects);
   },
 };
