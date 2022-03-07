@@ -184,6 +184,7 @@ let addContainmentMeasuresFlags
         8, 11, 2021, "#FFe6e6", "gatherings3"
         19, 2, 2022, "#ebfaeb", "liftQuarantineAll"
         21, 2, 2022, "#ebfaeb", "liftPCT"
+        7,  3, 2022, "#ebfaeb", "liftMasksSchools"
     |]
     {|
         ``type`` = "flags"

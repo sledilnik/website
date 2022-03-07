@@ -1335,6 +1335,10 @@
         "liftPCT": {
             "title": "RVT",
             "description": "Easing of restrictions: all restrictions removed, only masks required indoors.<br>RVT (recovered, vaccinated, tested) condition required only in healthcare, social protection institutions and prisons."
+       },
+       "liftMasksSchools": {
+            "title": "Masks",
+            "description": "Easing restrictions: masks are no longer mandatorty in schools and colleges."
        }
     },
     "days": {

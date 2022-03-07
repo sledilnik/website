@@ -776,6 +776,10 @@
         "liftPCT": {
             "title": "PCT",
             "description": "Sproščanje ukrepov: ukinitev vseh ukrepov razen mask v zaprtih prostorih.<br>PCT pogoj zahtevan samo v zdravstvu, socialnem varstvu in zaporih."
+        },
+        "liftMasksSchools": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso več obvezne v šolah in fakultetah."
         }
     },
     "phase": {
