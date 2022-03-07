@@ -2052,7 +2052,7 @@
         },
         "data-publish-time": {
             "question": "Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?",
-            "answer": "Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjeni primeri ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.\n\nKo objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih poteh (CSV, REST, spletna stran), o objavi poročamo tudi na družbenih omrežjih ([Facebook](https://www.facebook.com/COVID19Sledilnik) in [Twitter](https://twitter.com/sledilnik))."
+            "answer": "Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjeni primeri ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.\n\nKo objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih poteh (CSV, REST, spletna stran), o objavi poročamo tudi na družbenih omrežjih ([Facebook](https://www.facebook.com/SledilnikOrg) in [Twitter](https://twitter.com/sledilnik))."
         },
         "data-differences": {
             "question": "Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj?",
@@ -2359,7 +2359,7 @@
         },
         "other": {
             "title": "Drugi načini podpore",
-            "description": "Podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, na primer v [angleščini](/en/donate).\n\nVeseli vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/COVID19Sledilnik), [YouTubu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in drugih platformah, pa tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nŠe bolj veseli bomo, če nam omogočite dostop do kakršnih koli odprtih podatkov, primernih za naše analize.\n\nŽelite drugače podpreti Sledilnik ali imate svojo idejo o sodelovanju? Kontaktirajte nas na info@sledilnik.org in z veseljem bomo našli rešitev."
+            "description": "Podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, na primer v [angleščini](/en/donate).\n\nVeseli vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/SledilnikOrg), [YouTubu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in drugih platformah, pa tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nŠe bolj veseli bomo, če nam omogočite dostop do kakršnih koli odprtih podatkov, primernih za naše analize.\n\nŽelite drugače podpreti Sledilnik ali imate svojo idejo o sodelovanju? Kontaktirajte nas na info@sledilnik.org in z veseljem bomo našli rešitev."
         }
     }
 }

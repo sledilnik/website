@@ -1816,7 +1816,7 @@
         },
         "data-publish-time": {
             "question": "When do you publish the data? Why are the dates on the visualizations different?",
-            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases …), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/COVID19Sledilnik) and [Twitter](https://twitter.com/sledilnik))."
+            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases …), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/SledilnikOrg) and [Twitter](https://twitter.com/sledilnik))."
         },
         "data-differences": {
             "question": "Several portals display numbers of infected people that are different from yours. Why?",
@@ -1996,7 +1996,7 @@
         },
         "other": {
             "title": "Other ways of support",
-            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at info@sledilnik.org - we will be happy to find a solution."
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/SledilnikOrg), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at info@sledilnik.org - we will be happy to find a solution."
         }
     }
 }

@@ -10,7 +10,7 @@
         </a>
       </div>
       <div class="social">
-        <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
+        <a href="https://fb.me/SledilnikOrg" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
         <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
