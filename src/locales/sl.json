@@ -1444,6 +1444,7 @@
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
+            "novavax": "Novavax",
             "usedDoses": "Uporabljeni odmerki",
             "unusedDoses": "Neporabljeni odmerki",
             "deliveredDoses": "Dobavljeni odmerki",
