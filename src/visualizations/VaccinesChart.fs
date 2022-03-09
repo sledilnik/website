@@ -51,7 +51,8 @@ type DisplayType =
         | ByWeekSupply -> chartText "byWeekSupply"
 
 let AllVaccinationTypes =
-    [ "janssen", "#019cdc"
+    [ "novavax", "#182958"
+      "janssen", "#019cdc"
       "az", "#ffa600"
       "moderna", "#f95d6a"
       "pfizer", "#73ccd5" ]

@@ -792,6 +792,7 @@
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
+            "novavax": "Novavax",
             "administered": "First Dose",
             "administered2nd": "Fully Vaccinated",
             "administered3rd": "Additional Dose",
