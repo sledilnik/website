@@ -91,7 +91,7 @@ let tooltipFormatter jsThis state =
             | "healthcareEmployeesCases" -> "↳ "
             | "rhOccupantCases" -> "↳ "
             |_ -> ""
-        else    
+        else
             ""
 
     fmtWeekYearFromTo
@@ -185,7 +185,7 @@ let renderChartOptions (state: State) dispatch =
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series = 
+           series =
                 match state.displayType with
                 | Structure -> Series.structure |> renderSeries state |> Seq.toArray
                 | Healthcare -> Series.healthcareSplit |> renderSeries state |> Seq.toArray
@@ -226,6 +226,7 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            plotOptions = pojo {|
                                 column = pojo {|
+                                                dataGrouping = pojo {| enabled = false |}
                                                 stacking = match state.chartType with
                                                            | RelativeChart -> "percent"
                                                            | AbsoluteChart -> "normal" |}

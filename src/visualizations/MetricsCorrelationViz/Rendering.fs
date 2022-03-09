@@ -266,6 +266,7 @@ let renderChartOptions state dispatch =
 
         plotOptions = pojo
             {|
+                column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                 series =
                     match state.DisplayType.ChartType with
                     | LineChart -> pojo {| stacking = ""; |}

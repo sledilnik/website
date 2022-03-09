@@ -256,6 +256,12 @@ let renderChartOptions state dispatch =
 
         plotOptions = pojo
             {|
+                column = pojo
+                    {|
+                        dataGrouping = pojo {| enabled = false |}
+                        groupPadding = 0
+                        pointPadding = 0
+                        borderWidth = 0 |}
                 series =
                     match state.DisplayType.ChartType with
                     | LineChart -> pojo {| stacking = ""; |}

@@ -81,13 +81,6 @@ let defaultSeriesOptions stackType =
        pointPadding = 0
        groupPadding = 0 |}
 
-// Highcharts will sum columns together when there aren't enough pixels to draw them individually
-// As data in some of the vaccination charts is cumulative already, the aggregation method must be "high"
-// instead of the default "sum"
-// Docs: https://api.highcharts.com/highstock/series.column.dataGrouping.approximation
-// This fixes https://github.com/sledilnik/website/issues/927
-let dataGroupingConfigurationForCumulativeData = pojo {| approximation = "high" |}
-
 
 let renderAgeChart state dispatch =
 
