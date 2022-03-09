@@ -117,6 +117,7 @@ Project collaborators:
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
+-   [Kaya Tokohisa](https://www.kayatokuhisa.com) - content
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, data validation, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation, visualisations
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling

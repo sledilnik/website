@@ -97,6 +97,7 @@ Sodelavci projekta:
 -   [Jure Novak](http://jurenovak.org/) - tekstopisje, viri
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
+-   [Kaya Tokohisa](https://www.kayatokuhisa.com) - vsebine
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, validacija podatkov, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija, vizualizacije
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
