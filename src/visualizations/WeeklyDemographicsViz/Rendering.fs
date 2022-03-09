@@ -231,9 +231,13 @@ let renderChartOptions state dispatch =
                 plotOptions =
                     {|
                         column =
-                            match state.Metrics.MetricsType with
-                            | NewCases -> {| stacking = "normal"|} |> pojo
-                            | CasesRatio -> {| stacking = "percent" |} |> pojo
+                            {|
+                                dataGrouping = {| enabled = false |} |> pojo
+                                stacking =
+                                    match state.Metrics.MetricsType with
+                                    | NewCases -> "normal"
+                                    | CasesRatio -> "percent"
+                            |} |> pojo
                     |}|>pojo
 
                 xAxis =

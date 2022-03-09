@@ -223,7 +223,9 @@ let renderChartOptions sex (data : DailyDeathsData) =
        yAxis = {| title = {| text = None |} ; opposite = true ; min = deceasedRelativeMin ; max = deceasedRelativeMax ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
        tooltip = {| valueSuffix = " %" ; xDateFormat = "%B %Y" ; footerFormat = chartText "excessByAgeGroup.totalDeceased" + ": <b>{point.deceasedTotal}</b>" |} |> pojo
        responsive = ChartOptions.responsive
-       plotOptions = {| series = {| pointPadding = 0 ; borderWidth = 0 |} |> pojo |} |> pojo
+       plotOptions = {|
+         column = {| dataGrouping = {| enabled = false |} |> pojo |} |> pojo
+         series = {| pointPadding = 0 ; borderWidth = 0 |} |> pojo |} |> pojo
        series = series
        credits = chartCreditsMNZ
     |} |> pojo
