@@ -788,6 +788,10 @@
         "liftPCT": {
             "title": "GVT",
             "description": "Allentamento delle restrizioni: tutte le restrizioni vengono rimosse, resta l'obbligo di indossare la mascherina nei luoghi chiusi. <br>GVT (guarito, vaccinato, testato) solo per la sanità, gli istituti di protezione sociale e le carceri."
+        },
+        "liftMasksSchools": {
+            "title": "Mascherine",
+            "description": "Allentamento: le mascherine on sono più obbligatorie nelle scuole e università."
         }
     },
     "tableDict": {
@@ -1505,7 +1509,8 @@
             "unusedDoses": "Dosi non utilizzate",
             "unused": "Giacenza",
             "byWeekSupply": "Giacenza (per settimana)",
-            "administered3rd": "Dose aggiuntiva"
+            "administered3rd": "Dose aggiuntiva",
+            "novavax": "Novavax"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
