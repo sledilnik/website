@@ -20,7 +20,7 @@ jobs:
         uses: hmarr/debug-action@v2.0.1
 
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2.1.5
         with:
@@ -36,7 +36,7 @@ jobs:
     needs: test
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -64,7 +64,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Deploy
         uses: sledilnik/action-helm-deploy@v1.0.2
