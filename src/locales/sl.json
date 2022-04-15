@@ -783,7 +783,7 @@
         },
         "liftMasksInside": {
             "title": "Maske",
-            "description": "Sprostitev ukrepov: maske niso več obvezne v notranjih prostorih,<br>razen v zdravstvenih in socialnovarstvenih ustanovah."
+            "description": "Sprostitev ukrepov: maske niso več obvezne v notranjih prostorih.<br>Maske še vedno obvezne v zdravstvenih in socialnovarstvenih ustanovah."
         }
     },
     "phase": {
