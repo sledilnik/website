@@ -780,6 +780,10 @@
         "liftMasksSchools": {
             "title": "Maske",
             "description": "Sprostitev ukrepov: maske niso več obvezne v šolah in fakultetah."
+        },
+        "liftMasksInside": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso več obvezne v notranjih prostorih,<br>razen v zdravstvenih in socialnovarstvenih ustanovah."
         }
     },
     "phase": {

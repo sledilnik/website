@@ -1339,7 +1339,11 @@
        },
        "liftMasksSchools": {
             "title": "Masks",
-            "description": "Easing restrictions: masks are no longer mandatorty in schools and colleges."
+            "description": "Easing restrictions: masks are no longer mandatory in schools and colleges."
+       },
+       "liftMasksInside": {
+            "title": "Masks",
+            "description": "Easing restrictions: masks are no longer mandatory indoors,<br>only required in health and social welfare institutions."
        }
     },
     "days": {

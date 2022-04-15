@@ -185,6 +185,7 @@ let addContainmentMeasuresFlags
         19, 2, 2022, "#ebfaeb", "liftQuarantineAll"
         21, 2, 2022, "#ebfaeb", "liftPCT"
         7,  3, 2022, "#ebfaeb", "liftMasksSchools"
+        14, 4, 2022, "#ebfaeb", "liftMasksInside"
     |]
     {|
         ``type`` = "flags"
