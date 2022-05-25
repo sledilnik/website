@@ -16,6 +16,12 @@ XRange(Highcharts)
 import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");
 
+import HighchartsExporting from 'highcharts/modules/exporting'
+
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts)
+}
+
 window.Highcharts = window.Highcharts || Highcharts;
 
 let bpOptions = {
