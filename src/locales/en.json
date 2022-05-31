@@ -1344,6 +1344,10 @@
        "liftMasksInside": {
             "title": "Masks",
             "description": "Easing restrictions: masks are no longer mandatory indoors.<br>Masks are still mandatory in healthcare and social welfare institutions."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Easing restrictions: termination of all restrictions.<br>Follow recommendations of National Institute of Public Health (NIJZ)."
        }
     },
     "days": {

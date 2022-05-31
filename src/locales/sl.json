@@ -784,6 +784,10 @@
         "liftMasksInside": {
             "title": "Maske",
             "description": "Sprostitev ukrepov: maske niso več obvezne v notranjih prostorih.<br>Maske še vedno obvezne v zdravstvenih in socialnovarstvenih ustanovah."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Sprostitev ukrepov: prenehanje vseh ukrepov.<br>Upoštevajo se priporočila NIJZ."
         }
     },
     "phase": {
