@@ -791,7 +791,15 @@
         },
         "liftMasksSchools": {
             "title": "Mascherine",
-            "description": "Allentamento: le mascherine on sono più obbligatorie nelle scuole e università."
+            "description": "Allentamento: le mascherine non sono più obbligatorie nelle scuole e nelle università."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Allentamento delle restrizioni: cessazione di tutte le restrizioni. <br>Seguire le raccomandazioni dell'Istituto Nazionale per la Sanità Pubblica (NIJZ)."
+        },
+        "liftMasksInside": {
+            "title": "Mascherine",
+            "description": "Allentamento: le mascherine non sono più obbligatorie negli ambienti chiusi.<br>Le mascherine restano obbligatorie nelle istituzioni sanitarie e di assistenza sociale."
         }
     },
     "tableDict": {
