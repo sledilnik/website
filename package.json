@@ -38,7 +38,7 @@
     "vega": "^5.17.0",
     "vega-embed": "^6.12.2",
     "vega-lite": "^4.16.8",
-    "vue": "^2.6.12",
+    "vue": "^2.7.0",
     "vue-clickaway": "^2.2.2",
     "vue-date-fns": "^2.0.1",
     "vue-fuse": "^2.2.1",
@@ -65,7 +65,7 @@
     "sass": "^1.26.11",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
-    "vue-template-compiler": "^2.6.12"
+    "vue-template-compiler": "^2.7.0"
   },
   "eslintConfig": {
     "root": true,
