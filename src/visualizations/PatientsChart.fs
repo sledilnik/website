@@ -62,6 +62,8 @@ and State =
 
 type Series =
     | InHospital
+    | ReasonCovid
+    | RedZone
     | Acute
     | Icu
     | IcuOther
@@ -71,6 +73,7 @@ type Series =
     | InHospitalIn
     | InHospitalOut
     | InHospitalDeceased
+    | IcuReasonCovid
     | IcuIn
     | IcuOut
     | IcuDeceased
@@ -83,8 +86,10 @@ module Series =
         match hTypeToDisplay with
         | CareHospitals -> [ Care; CareIn; CareOut; CareDeceased ]
         | CovidHospitals ->
-            [ Acute
+            [ RedZone
+              Acute
               Icu
+              ReasonCovid
               InHospitalIn
               InHospitalOut
               InHospitalDeceased ]
@@ -92,6 +97,7 @@ module Series =
             [ IcuOther
               NivVentilator
               InvVentilator
+              IcuReasonCovid
               IcuIn
               IcuOut
               IcuDeceased ]
@@ -101,7 +107,10 @@ module Series =
     let getSeriesInfo =
         function
         | InHospital -> "#de9a5a", "hospitalized", 0
+        | ReasonCovid -> "#ffd700", "reasonCovid", 0
+        | RedZone -> "#d06c5e", "redZone", 0
         | Acute -> "#de9a5a", "acute", 0
+        | IcuReasonCovid -> "#ffd700", "reasonCovid", 0
         | Icu -> "#de2d26", "icu", 0
         | IcuOther -> "#fb6a4a", "icu-other", 0
         | NivVentilator -> "#de2d26", "niVentilator", 0
@@ -180,6 +189,7 @@ let renderByHospitalChart (state: State) dispatch =
             ps.JsDate12h, value
 
         {| visible = true
+           ``type`` = "line"
            name = Utils.Dictionaries.GetFacilityName(fcode)
            color = Utils.Dictionaries.GetFacilityColor(fcode)
            dashStyle = Solid |> DashStyle.toString
@@ -230,12 +240,8 @@ let renderByHospitalChart (state: State) dispatch =
                pojo
                    {| enabled = true
                       layout = "horizontal" |}
-           credits =
-               match state.HTypeToDisplay with
-               | CovidHospitalsICU -> chartCreditsHospitals
-               | _ -> chartCreditsMZHospitals |}
-
-    |> pojo
+           credits = chartCreditsMZHospitals
+    |} |> pojo
 
 
 let renderStructureChart (state: State) dispatch =
@@ -256,18 +262,12 @@ let renderStructureChart (state: State) dispatch =
             |> ignore
 
 
-            let title =
-                match state.HTypeToDisplay with
-                | CovidHospitals    -> I18N.t "charts.patients.hospitalized"
-                | CovidHospitalsICU -> I18N.t "charts.patients.icu"
-                | CareHospitals     -> I18N.t "charts.patients.care"
-
             s.Append "<table>" |> ignore
             s.Append "<tr>" |> ignore
             let totalStr =
                 sprintf
                     "<td></td><td><b>%s</b></td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
-                    title
+                    (I18N.t "charts.patients.total")
                     (I18N.NumberFormat.formatNumber total)
 
             s.Append totalStr |> ignore
@@ -312,8 +312,11 @@ let renderStructureChart (state: State) dispatch =
         let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital -> ps.inHospital.today
+            | ReasonCovid -> ps.inHospital.reasonCovid
+            | RedZone -> ps.redZone.today
             | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
             | Icu -> ps.icu.today
+            | IcuReasonCovid -> ps.icu.reasonCovid
             | IcuOther ->
                 ps.icu.today
                 |> Utils.subtractIntOption ps.niv.today
@@ -333,13 +336,18 @@ let renderStructureChart (state: State) dispatch =
 
         let getTotal (ps: FacilityPatientStats): int option =
             match state.HTypeToDisplay with
-            | CovidHospitals    -> ps.inHospital.today
+            | CovidHospitals    -> ps.inHospital.today |> Utils.sumIntOption ps.redZone.today
             | CovidHospitalsICU -> ps.icu.today
             | CareHospitals     -> ps.care.today
 
 
         let color, seriesId, seriesIdx = Series.getSeriesInfo series
-        {| color = color
+        let cType =
+            match series with
+            | ReasonCovid | IcuReasonCovid -> "line"
+            | _ -> "column"
+        {| ``type`` = cType
+           color = color
            name = I18N.tt "charts.patients" seriesId
            yAxis = seriesIdx
            data =
@@ -394,7 +402,8 @@ let renderStructureChart (state: State) dispatch =
                      visible = true |} |]
            plotOptions =
                pojo
-                   {| column =
+                   {| line = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                      column =
                           pojo
                               {| dataGrouping = pojo {| enabled = false |}
                                  stacking = "normal"
@@ -423,12 +432,8 @@ let renderStructureChart (state: State) dispatch =
                                     {| yAxis =
                                            [| {| labels = pojo {| enabled = false |} |}
                                               {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
-           credits =
-               match state.HTypeToDisplay with
-               | CovidHospitalsICU -> chartCreditsHospitals
-               | _ -> chartCreditsMZHospitals |}
-
-    |> pojo
+           credits = chartCreditsMZHospitals
+    |} |> pojo
 
 
 let renderChartContainer state dispatch =

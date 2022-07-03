@@ -46,9 +46,9 @@
         "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
-        "incidence": "14-days incidence",
+        "incidence": "14-days Incidence",
         "incidenceInfo": "per 100,000 people",
-        "newCases7d": "New Cases",
+        "newCases7d": "New Cases (7d average)",
         "newCases7dInfo": "average of last 7 days",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
@@ -203,6 +203,14 @@
         "19": {
             "title": "phase<br>19",
             "description": "rapid antigen tests methodology"
+        },
+        "20": {
+            "title": "phase<br>20",
+            "description": "new testing methodology"
+        },
+        "21": {
+            "title": "phase<br>21",
+            "description": "new testing methodology"
         }
     },
     "charts": {
@@ -334,12 +342,15 @@
             "deceased-rest": "Died"
         },
         "patients": {
-            "title": "Hospitalizations",
+            "title": "Hospitalizations (c19 units and red zones)",
             "titleMenu": "Hospitalizations",
             "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "total": "Total",
+            "reasonCovid": "Leading diagnosis COVID-19",
+            "redZone": "Red Zone",
             "acute": "Acute Unit",
             "care": "Nursing Unit",
             "admitted": "Admitted",
@@ -364,12 +375,13 @@
             "titleMenu": "Nursing Hospitals"
         },
         "patientsAge": {
-            "title": "Hospitalizations by Age, weekly",
+            "title": "Hospitalizations (SARI) by Age, weekly",
             "titleMenu": "Hospitalizations - age",
             "meanAge": "Mean Age",
             "hospitalIn": "Admitted to Hospital",
             "icuIn": "Admitted to ICU",
-            "deceased": "Deceased"
+            "deceased": "Deceased",
+            "disclaimer": "This only includes hospitalisations tracked in the EPISARI system, which excludes COVID-19 admissions without severe acute respiratory infections."
         },
         "ratios": {
             "title": "Share of Serious Cases",
@@ -417,7 +429,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: from December 3, 2020, we do not received data per laboratory.",
+            "disclaimer": "Note: From 1 February 2022, a positive result on PCR or RAT test is considered a confirmed case. Persons who are additionally tested with the PCR test after a positive RAT test are not included in the statistics of positive RAT.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
@@ -457,7 +469,7 @@
         },
         "spread": {
             "title": "Growth of Confirmed Cases",
-            "titleMenu": "Growth",
+            "titleMenu": "Growth - cases",
             "hospitalized": "hospitalized",
             "inFourWeeks": "In four weeks",
             "inThreeWeeks": "In three weeks",
@@ -545,7 +557,7 @@
             "countryStatus": "Restrictions",
             "statusNone": "-",
             "statusGreen": "no restrictions",
-            "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine",
+            "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 7-day quarantine",
             "statusRed": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine<br>*confirmed presence of omicron variant",
             "statusDarkRed": "10-day quarantine and PCR test on 1st, 5th and 10th day, denied entry for foreigners without residence<br>*confirmed presence of omicron variant",
             "noData": "No data"
@@ -780,6 +792,7 @@
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
+            "novavax": "Novavax",
             "administered": "First Dose",
             "administered2nd": "Fully Vaccinated",
             "administered3rd": "Additional Dose",
@@ -791,7 +804,7 @@
             "title": "Vaccination Effect",
             "titleMenu": "Vaccination - effect",
             "confirmedCases": "Confirmed Cases",
-            "hospitalizedCases": "Hospitalized",
+            "hospitalizedCases": "Hospitalized (SARI)",
             "icuCases": "ICU",
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
@@ -808,10 +821,10 @@
             "casesRecovered": "Recovered",
             "casesUnvaccinated": "Unvaccinated",
             "casesOther": "Other (unvaccinated, partially vaccinated)",
-            "disabled": "Due to errors detected in the vaccination data obtained from cepimose.si, we have temporarily removed these charts. NIJZ is fixing the issue as a matter of priority and we will publish the charts again as soon as the errors are corrected."
+            "disabled": "Note: We cannot update this data since January 17, 2022 due to change in reporting."
         },
         "vaccineEffectAge": {
-            "title": "Hospitalization Rates by Vaccination Status and Age Group",
+            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group",
             "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
             "absolute100k": "Per 100,000 People in Group",
@@ -842,7 +855,7 @@
             "attendeesCases": "Attendees - Confirmed",
             "attendeesQuarantine": "Attendees - Quarantine",
             "unitsQuarantine": "Units - Quarantine",
-            "unitsRemote": "Units - Remote"
+            "institutionsRemote": "Institutions - Remote"
         },
         "schoolStatus": {
             "title": "Situation in School and Kindergarten",
@@ -1315,7 +1328,27 @@
         "gatherings3": {
             "title": "Gatherings",
             "description": "Prohibition of gathering (except for close family members), no celebrations.<br>Restaurants and bars allowed from 5AM to 10PM (seated service only).<br>Restrictions of culture and sport events (only indoors, seated with free seat between spectators)."
-        }
+        },
+        "liftQuarantineAll": {
+            "title": "Quarantine",
+            "description": "Easing of restrictions: no quarantine after close contact"
+        },
+        "liftPCT": {
+            "title": "RVT",
+            "description": "Easing of restrictions: all restrictions removed, only masks required indoors.<br>RVT (recovered, vaccinated, tested) condition required only in healthcare, social protection institutions and prisons."
+       },
+       "liftMasksSchools": {
+            "title": "Masks",
+            "description": "Easing restrictions: masks are no longer mandatory in schools and colleges."
+       },
+       "liftMasksInside": {
+            "title": "Masks",
+            "description": "Easing restrictions: masks are no longer mandatory indoors.<br>Masks are still mandatory in healthcare and social welfare institutions."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Easing restrictions: termination of all restrictions.<br>Follow recommendations of National Institute of Public Health (NIJZ)."
+       }
     },
     "days": {
         "in_x_days": "in {{ count }} day",
@@ -1747,7 +1780,7 @@
     "faq": {
         "searchPlaceholder": "Enter search query",
         "pageTitle": "Frequently Asked Questions",
-        "intro": "_The purpose of the Sledilnik project and all its statistical graphs and tables/presentations is to display all existing data about the COVID19 epidemic in Slovenia in an understandable fashion. We've compiled some of the most frequently asked questions. The FAQ list is not exhaustive at this moment, but it is updated frequently so keep checking back. In case of any questions, please contact us: info@slednik.org. (We also look forward to your compliments, feedback, or suggestions!)_",
+        "intro": "_The purpose of the Sledilnik project and all its statistical graphs and tables/presentations is to display all existing data about the COVID-19 epidemic in Slovenia in an understandable fashion. We've compiled some of the most frequently asked questions. The FAQ list is not exhaustive at this moment, but it is updated frequently so keep checking back. In case of any questions, please contact us: info@slednik.org. (We also look forward to your compliments, feedback, or suggestions!)_",
         "section": {
             "general": "General Information",
             "data": "About the data",
@@ -1796,7 +1829,7 @@
         },
         "data-publish-time": {
             "question": "When do you publish the data? Why are the dates on the visualizations different?",
-            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases …), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/COVID19Sledilnik) and [Twitter](https://twitter.com/sledilnik))."
+            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases …), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/SledilnikOrg) and [Twitter](https://twitter.com/sledilnik))."
         },
         "data-differences": {
             "question": "Several portals display numbers of infected people that are different from yours. Why?",
@@ -1876,7 +1909,7 @@
         },
         "spread-chart": {
             "question": "What does the “Growth of Confirmed Cases” graph mean?",
-            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From December 21, 2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
+            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID-19” is followed. From December 21, 2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
             "question": "What does the “By Region” tell us?",
@@ -1976,7 +2009,7 @@
         },
         "other": {
             "title": "Other ways of support",
-            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at info@sledilnik.org - we will be happy to find a solution."
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/SledilnikOrg), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at info@sledilnik.org - we will be happy to find a solution."
         }
     }
 }

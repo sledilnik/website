@@ -72,7 +72,7 @@ let populationOf sexLabel ageGroupLabel =
             let toAge = Int32.Parse(label.Substring(i+1))
             { AgeFrom = Some fromAge; AgeTo =  Some toAge }
         else if label.Contains("+") then
-            let i = label.IndexOf('-')
+            let i = label.IndexOf('+')
             let fromAge = Int32.Parse(label.Substring(0, i))
             { AgeFrom = Some fromAge; AgeTo =  None }
         else
@@ -393,7 +393,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfInfectedPopulation")
-                         (Utils.percentWith2DecimalFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter (abs dataValue))
                          (chartText "populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->

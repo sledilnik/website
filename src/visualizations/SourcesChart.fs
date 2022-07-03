@@ -368,6 +368,7 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            plotOptions = pojo {|
                                 column = pojo {|
+                                                dataGrouping = pojo {| enabled = false |}
                                                 stacking = match state.ChartType with
                                                            | RelativeChart -> "percent"
                                                            | AbsoluteChart -> "normal" |}

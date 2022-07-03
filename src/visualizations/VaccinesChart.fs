@@ -51,7 +51,8 @@ type DisplayType =
         | ByWeekSupply -> chartText "byWeekSupply"
 
 let AllVaccinationTypes =
-    [ "janssen", "#019cdc"
+    [ "novavax", "#182958"
+      "janssen", "#019cdc"
       "az", "#ffa600"
       "moderna", "#f95d6a"
       "pfizer", "#73ccd5" ]
@@ -121,14 +122,6 @@ let calcUnusedDoses delivered used =
     match delivered, used with
     | Some d, Some u -> Some(d - u)
     | _ -> None
-
-
-// Highcharts will sum columns together when there aren't enough pixels to draw them individually
-// As data in some of the vaccination charts is cumulative already, the aggregation method must be "high"
-// instead of the default "sum"
-// Docs: https://api.highcharts.com/highstock/series.column.dataGrouping.approximation
-// This fixes https://github.com/sledilnik/website/issues/927
-let dataGroupingConfigurationForCumulativeData = pojo {| approximation = "high" |}
 
 
 let renderStackedChart state dispatch =

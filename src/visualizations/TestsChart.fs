@@ -13,6 +13,8 @@ open Highcharts
 
 open Data.LabTests
 
+let chartText = I18N.chartText "tests"
+
 type DisplayType =
     | PositiveSplit
     | TotalPCR
@@ -34,11 +36,11 @@ type DisplayType =
     static member Default = Data "regular"
     static member GetName =
         function
-        | PositiveSplit -> I18N.t "charts.tests.positiveSplit"
-        | TotalPCR -> I18N.t "charts.tests.totalPCR"
-        | Data typ -> I18N.tt "charts.tests" typ
-        | ByLab -> I18N.t "charts.tests.byLab"
-        | ByLabPercent -> I18N.t "charts.tests.byLabPercent"
+        | PositiveSplit -> chartText "positiveSplit"
+        | TotalPCR -> chartText "totalPCR"
+        | Data typ -> chartText typ
+        | ByLab -> chartText "byLab"
+        | ByLabPercent -> chartText "byLabPercent"
         | Lab facility -> Utils.Dictionaries.GetFacilityName(facility)
 
 and State =
@@ -191,7 +193,7 @@ let renderByLabChart (state: State) dispatch =
                pojo
                    {| rules =
                           [| {| condition = {| maxWidth = 768 |}
-                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 
@@ -226,7 +228,7 @@ let renderTestsChart (state: State) dispatch =
                          align = "center"
                          x = -15
                          reserveSpace = false |}
-              max = None
+              min = 0
               showFirstLabel = false
               opposite = true
               visible = true
@@ -240,7 +242,7 @@ let renderTestsChart (state: State) dispatch =
                          align = "center"
                          x = 10
                          reserveSpace = false |}
-              max = 64
+              min = 0
               showFirstLabel = false
               opposite = false
               visible = true
@@ -250,7 +252,7 @@ let renderTestsChart (state: State) dispatch =
     let allSeries =
         [ yield
             pojo
-                {| name = I18N.t "charts.tests.performedTests"
+                {| name = chartText "performedTests"
                    ``type`` = "column"
                    color = "#19aebd"
                    yAxis = 0
@@ -261,7 +263,7 @@ let renderTestsChart (state: State) dispatch =
                        |> Seq.toArray |}
           yield
               pojo
-                  {| name = I18N.t "charts.tests.positiveTests"
+                  {| name = chartText "positiveTests"
                      ``type`` = "column"
                      color = "#d5c768"
                      yAxis = 0
@@ -272,7 +274,7 @@ let renderTestsChart (state: State) dispatch =
                          |> Seq.toArray |}
           yield
               pojo
-                  {| name = I18N.t "charts.tests.shareOfPositive"
+                  {| name = chartText "shareOfPositive"
                      ``type`` = "line"
                      color = "#665191"
                      yAxis = 1
@@ -321,8 +323,9 @@ let renderTestsChart (state: State) dispatch =
                           [| {| condition = {| maxWidth = 768 |}
                                 chartOptions =
                                     {| yAxis =
-                                           [| {| labels = {| enabled = false |} |}
-                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                           [| {| labels = pojo {| enabled = false |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
+    |}
     |> pojo
 
 
@@ -346,14 +349,14 @@ let renderPositiveChart (state: State) dispatch =
                     (I18N.NumberFormat.formatNumber(p?point?y : float)))
            |> String.concat "<br>")
         + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>"""
-            (I18N.t "charts.tests.positiveTotal")
+            (chartText "positiveTotal")
             (total |> I18N.NumberFormat.formatNumber)
 
     let allSeries =
         [
           yield
             pojo
-              {| name = I18N.t "charts.tests.positiveHAT"
+              {| name = chartText "positiveHAT"
                  ``type`` = "column"
                  color = "#fae343"
                  data =
@@ -364,7 +367,7 @@ let renderPositiveChart (state: State) dispatch =
                      |> Seq.toArray |}
           yield
             pojo
-                {| name = I18N.t "charts.tests.positivePCR"
+                {| name = chartText "positivePCR"
                    ``type`` = "column"
                    color = "#d5c768"
                    data =
@@ -411,8 +414,8 @@ let renderPositiveChart (state: State) dispatch =
                           [| {| condition = {| maxWidth = 768 |}
                                 chartOptions =
                                     {| yAxis =
-                                           [| {| labels = {| enabled = false |} |}
-                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                           [| {| labels = pojo {| enabled = false |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 
@@ -450,7 +453,13 @@ let render (state: State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [ renderChartContainer state dispatch
-                   renderDisplaySelectors state dispatch ]
+                   renderDisplaySelectors state dispatch
+                   match state.DisplayType with
+                   | Data "hagt" ->
+                        Html.div [
+                            prop.className "disclaimer"
+                            prop.children [ Html.text (chartText "disclaimer") ] ]
+                   | _ -> Html.none ]
 
 let testsChart () =
     React.elmishComponent ("TestsChart", init, update, render)

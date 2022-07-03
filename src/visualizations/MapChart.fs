@@ -46,7 +46,7 @@ type ContentType =
     static member Default mapToDisplay =
         match mapToDisplay with
         | MunicipalityMap -> ConfirmedCases
-        | RegionMap       -> Vaccinated1st
+        | RegionMap       -> ConfirmedCases
     static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
@@ -418,7 +418,7 @@ let seriesData (state : State) =
                 weeklyIncrease = weeklyIncrease
                 population = population
                 dlabel = dlabel
-                dataLabels = {| enabled = true; format = "{point.dlabel}" |}
+                dataLabels = pojo {| enabled = true; format = "{point.dlabel}" |}
                 newCases = newCases
                 z = value
                 name = dlabel
@@ -461,8 +461,8 @@ let sparklineFormatter newCases color state =
             xAxis =
                 {|
                     visible = true
-                    labels = {| enabled = false |}
-                    title = {| enabled = false |}
+                    labels = {| enabled = false |} |> pojo
+                    title = {| enabled = false |} |> pojo
                     tickInterval = 7
                     lineColor = "#696969"
                     tickColor = "#696969"
@@ -483,7 +483,7 @@ let sparklineFormatter newCases color state =
                     showLastLabel = true
                     gridLineColor = "#000000"
                     gridLineDashStyle = "dot"
-                |} |> pojo
+                |}
             title = {| text = "" |}
             legend = {| enabled = false |}
             series =
@@ -503,12 +503,12 @@ let sparklineFormatter newCases color state =
         Fable.Core.JS.setTimeout
             (fun () -> sparklineChart("tooltip-chart-mun", options)) 10
         |> ignore
-        """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
+        """<div id="tooltip-chart-mun" class="tooltip-chart"></div>"""
     | RegionMap ->
         Fable.Core.JS.setTimeout
             (fun () -> sparklineChart("tooltip-chart-reg", options)) 10
         |> ignore
-        """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
+        """<div id="tooltip-chart-reg" class="tooltip-chart"></div>"""
 
 
 
@@ -612,10 +612,10 @@ let renderMap (state : State) =
                borderWidth = 0.2
                minSize = 1
                maxSize = "6%"
-               mapline = {| animation = {| duration = 0 |} |}
+               mapline = pojo {| animation = pojo {| duration = 0 |} |}
                states =
-                {| normal = {| animation = {| duration = 0 |} |}
-                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+                pojo {| normal = pojo {| animation = pojo {| duration = 0 |} |}
+                        hover = pojo {| brightness = 0 ; borderColor = "black" ; animation = pojo {| duration = 0 |} |} |}
                colorAxis =
                    match state.DisplayType with
                    // white-ish background color for municipalities when we use
@@ -639,13 +639,13 @@ let renderMap (state : State) =
                borderWidth = 0.2
                minSize = 0 // minimal size of a bubble - 0 means it won't be shown for 0
                maxSize = "10%"
-               mapline = {| animation = {| duration = 0 |} |}
+               mapline = pojo {| animation = pojo {| duration = 0 |} |}
                states =
-                {| normal = {| animation = {| duration = 0 |} |}
-                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+                pojo {| normal = pojo {| animation = pojo {| duration = 0 |} |}
+                        hover = pojo {| brightness = 0 ; borderColor = "black" ; animation = pojo {| duration = 0 |} |} |}
                colorAxis = 0
                enableMouseTracking = true
-               stickyTracking = false
+               stickyTracking = (state.DisplayType = Bubbles)
            |}
 
         let legend =
@@ -667,14 +667,14 @@ let renderMap (state : State) =
             | ConfirmedCases, Bubbles -> maxValue100k()
             | ConfirmedCases, _ ->
                 match state.DataTimeInterval with
-                | Complete -> 20000.
+                | Complete -> 40000.
                 | LastDays days ->
                     match days with
-                        | 21 -> 10500.
-                        | 14 -> 7000.
-                        | 7 -> 3500.
-                        | 1 -> 500.
-                        | _ -> 100.
+                        | 21 -> 15000.
+                        | 14 -> 10000.
+                        | 7 -> 5000.
+                        | 1 -> 1500.
+                        | _ -> 200.
             | Vaccinated1st, _ | Vaccinated2nd, _ | Vaccinated3rd, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 1. else dataMax

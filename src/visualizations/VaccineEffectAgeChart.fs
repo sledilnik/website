@@ -528,7 +528,7 @@ let renderWeeklyChart state dispatch =
                 pojo
                     {| rules =
                         [| {| condition = {| maxWidth = 768 |}
-                              chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                              chartOptions = {| yAxis = [| {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
 
 
 let renderChartContainer state dispatch =
