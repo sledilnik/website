@@ -89,8 +89,9 @@ COVID-19 Sledilnik in an open source project that would not be possible without 
 
 Project collaborators:
 
--   [Ana Slavec](https://twitter.com/aslavec) - surveys, analysis, content
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeling, sources
+-   [Aljaž Vindiš](https://vindis.io/) - infographics design
+-   [Ana Slavec](https://twitter.com/aslavec) - surveys, analysis, content
 -   [Andraž Vrhovec](https://github.com/overlordtm) - web page, infrastructure
 -   [Andrej Srakar](http://www.ier.si/) - sources, modeling
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeling
@@ -98,10 +99,12 @@ Project collaborators:
 -   [Barbara Krajnc](https://twitter.com/bakrajnc) - content, communication
 -   [Bojan Košir](https://twitter.com/BojanKosir) - data model and validation, sources
 -   [Boštjan Špetič](https://www.igzebedze.com/) - data scraping, communication
+-   [Branko Jevtić](https://www.bananica.com/) — graphics design, web page
 -   [Darja Potočan](http://www.marsowci.net/) - social networks, sources
 -   [Demjan Vester](https://github.com/VesterDe) - web page
 -   [Dunja Fabjan](https://twitter.com/denebdulfim) - newsletter
 -   [Eva Matjašič](https://github.com/Blonduos/) - web page
+-   [Eva Zupan Horaček](https://www.instagram.com/evasardinasta/?hl=en) - infographics design
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
@@ -114,6 +117,7 @@ Project collaborators:
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
+-   [Kaya Tokuhisa](https://www.kayatokuhisa.com) - content
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, data validation, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation, visualisations
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling

@@ -182,6 +182,11 @@ let addContainmentMeasuresFlags
         15, 9, 2021, "#FFe6e6", "pctEverywhere"
         30, 9, 2021, "#ebfaeb", "liftMasksRV"
         8, 11, 2021, "#FFe6e6", "gatherings3"
+        19, 2, 2022, "#ebfaeb", "liftQuarantineAll"
+        21, 2, 2022, "#ebfaeb", "liftPCT"
+        7,  3, 2022, "#ebfaeb", "liftMasksSchools"
+        14, 4, 2022, "#ebfaeb", "liftMasksInside"
+        31, 5, 2022, "#ebfaeb", "liftEverything"
     |]
     {|
         ``type`` = "flags"
@@ -356,6 +361,9 @@ let basicChart
                     {| value=jsTime <| DateTime(2021,6,15); label=Some {| text=I18N.t "phase.17.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,8,23); label=Some {| text=I18N.t "phase.18.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,11,8); label=Some {| text=I18N.t "phase.19.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2022,1,19); label=Some {| text=I18N.t "phase.20.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2022,2,1);  label=Some {| text=I18N.t "phase.21.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2022,2,21); label=Some {| text=I18N.t "phase.22.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -449,9 +457,24 @@ let basicChart
                        label=Some {| align="center"; text=I18N.t "phase.18.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2021,11,8);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2022,1,19);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.19.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2022,1,19);
+                       ``to``=jsTime <| DateTime(2022,2,1);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.20.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2022,2,1);
+                       ``to``=jsTime <| DateTime(2022,2,21);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.21.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2022,2,21);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.22.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

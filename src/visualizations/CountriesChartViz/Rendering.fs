@@ -192,30 +192,30 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                             align = "middle"
                             text = chartData.YAxisTitle
                         |}
-                   plotLines =
-                       match state.MetricToDisplay with
-                       | ActiveCasesPer100k -> [|
-                           {| value=redZoneStart
-                              label={|
-                                       text=t "charts.countriesActiveCasesPer100k.red"
-                                       align="left"
-                                       verticalAlign="bottom"
-                                        |}
-                              color="red"
-                              width=1
-                              dashStyle="longdashdot"
-                              zIndex=9
-                            |}
-                        |]
-                       | _ -> [| |]
-                   plotBands =
-                       match state.MetricToDisplay with
-                       | ActiveCasesPer100k -> [|
-                           {| from=redZoneStart; ``to``=10000.0
-                              color="#FEF8F7"
-                            |}
-                        |]
-                       | _ -> [| |]
+                //    plotLines =
+                //        match state.MetricToDisplay with
+                //        | ActiveCasesPer100k -> [|
+                //            {| value=redZoneStart
+                //               label={|
+                //                        text=t "charts.countriesActiveCasesPer100k.red"
+                //                        align="left"
+                //                        verticalAlign="bottom"
+                //                         |}
+                //               color="red"
+                //               width=1
+                //               dashStyle="longdashdot"
+                //               zIndex=9
+                //             |}
+                //         |]
+                //        | _ -> [| |]
+                //    plotBands =
+                //        match state.MetricToDisplay with
+                //        | ActiveCasesPer100k -> [|
+                //            {| from=redZoneStart; ``to``=10000.0
+                //               color="#FEF8F7"
+                //             |}
+                //         |]
+                //        | _ -> [| |]
             |}
         plotOptions = pojo
             {|

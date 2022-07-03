@@ -48,7 +48,7 @@
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "incidenceInfo": "na 100.000 prebivalcev",
-        "newCases7d": "Novi primeri",
+        "newCases7d": "Novi primeri (7d povp.)",
         "newCases7dInfo": "povprečje zadnjih 7 dni",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
@@ -768,6 +768,26 @@
         "gatherings3": {
             "title": "Zbiranje",
             "description": "Prepoved zbiranja (razen za ožje družinske člane in skupno gospodinjstvo), slavja, poroke.<br>Gostinski obrati samo med 5. in 22. uro (sedeča postrežba).<br>Omejitve športnih in kulturnih prireditev (samo prireditve v zaprtih prostorih s sedišči in prostim sedežem med gledalci)."
+        },
+        "liftQuarantineAll": {
+            "title": "Karantena",
+            "description": "Sprostitev ukrepov: brez napotitve v karanteno ob rizičnem stiku."
+        },
+        "liftPCT": {
+            "title": "PCT",
+            "description": "Sproščanje ukrepov: ukinitev vseh ukrepov razen mask v zaprtih prostorih.<br>PCT pogoj zahtevan samo v zdravstvu, socialnem varstvu in zaporih."
+        },
+        "liftMasksSchools": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso več obvezne v šolah in fakultetah."
+        },
+        "liftMasksInside": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso več obvezne v notranjih prostorih.<br>Maske še vedno obvezne v zdravstvenih in socialnovarstvenih ustanovah."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Sprostitev ukrepov: prenehanje vseh ukrepov.<br>Upoštevajo se priporočila NIJZ."
         }
     },
     "phase": {
@@ -845,6 +865,18 @@
         "19": {
             "title": "faza<br>19",
             "description": "nov režim testiranja HAT"
+        },
+        "20": {
+            "title": "faza<br>20",
+            "description": "nov režim testiranja"
+        },
+        "21": {
+            "title": "faza<br>21",
+            "description": "nov režim testiranja"
+        },
+        "22": {
+            "title": "faza<br>22",
+            "description": "nov režim testiranja"
         }
     },
     "charts": {
@@ -978,12 +1010,15 @@
             "deceased-rest": "Umrli"
         },
         "patients": {
-            "title": "Hospitalizirani",
+            "title": "Hospitalizirani (c19 oddelki in rdeče cone)",
             "titleMenu": "Hospitalizirani",
             "disclaimerCare": "Opomba: negovalne bolnišnice od 8. aprila 2021 ne poročajo več dnevnega stanja.",
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
+            "total": "Skupaj",
+            "reasonCovid": "Vodilna diagnoza COVID-19",
+            "redZone": "Rdeča cona",
             "acute": "Akutni oddelek",
             "care": "Negovalni oddelek",
             "admitted": "Sprejeti",
@@ -1040,7 +1075,7 @@
         "tests": {
             "title": "Testiranje",
             "titleMenu": "Testiranje",
-            "disclaimer": "Opomba: od 3. decembra 2020 ne prejemamo več podatkov po posameznih laboratorijih.",
+            "disclaimer": "Opomba: S 1. 2. 2022 se pozitiven rezultat na PCR ali na HAT testu šteje kot potrjen primer. Osebe, ki so po pozitivnem HAT testu dodatno testirane tudi na PCR testu, v statistiki pozitivnih HAT niso zajete.",
             "positiveSplit": "Pozitivnih PCR in HAT",
             "positiveHAT": "Pozitivnih HAT",
             "positivePCR": "Pozitivnih PCR",
@@ -1080,7 +1115,7 @@
         },
         "spread": {
             "title": "Prirast potrjenih primerov",
-            "titleMenu": "Prirast",
+            "titleMenu": "Prirast - primeri",
             "absolute": "Absolutni dnevni prirast",
             "percentage": "Relativni dnevni prirast",
             "doublingRate": "Eksponentna rast v dnevih",
@@ -1135,12 +1170,13 @@
             "data": "Podatki"
         },
         "patientsAge": {
-            "title": "Hospitalizirani po starosti, tedensko",
+            "title": "Hospitalizirani (SARI) po starosti, tedensko",
             "titleMenu": "Hospitalizirani - starost",
             "meanAge": "Povprečna starost",
             "hospitalIn": "Sprejeti v bolnišnico",
             "icuIn": "Sprejeti v intenzivno",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "disclaimer": "Upoštevane so samo hospitalizacije vodene v sistemu EPISARI, kar izključuje sprejeme zaradi COVID-19 a brez resne akutne okužbe dihal."
         },
         "hcCases": {
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
@@ -1219,7 +1255,7 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusOrange": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena",
+            "statusOrange": "preboleli/cepljeni/negativen test PCR/HAT ali 7-dnevna karantena",
             "statusRed": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena<br>*potrjena prisotnost variante omikron",
             "statusDarkRed": "10-dnevna karantena in PCR na 1., 5. in 10. dan, tujcem brez prebivališča se vstop ne dovoli<br>*potrjena prisotnost variante omikron",
             "noData": "Ni podatkov"
@@ -1416,6 +1452,7 @@
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
+            "novavax": "Novavax",
             "usedDoses": "Uporabljeni odmerki",
             "unusedDoses": "Neporabljeni odmerki",
             "deliveredDoses": "Dobavljeni odmerki",
@@ -1424,7 +1461,7 @@
             "administered3rd": "Dodatni odmerek"
         },
         "vaccineEffectAge": {
-            "title": "Hospitalizacije - status cepljenja in starost",
+            "title": "Hospitalizacije (SARI) - status cepljenja in starost",
             "titleMenu": "Hospitalizacije - cepljenje, starost",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
@@ -1443,7 +1480,7 @@
             "title": "Učinek cepljenja",
             "titleMenu": "Cepljenje - učinek",
             "confirmedCases": "Potrjeni primeri",
-            "hospitalizedCases": "Hospitalizirani",
+            "hospitalizedCases": "Hospitalizirani (SARI)",
             "icuCases": "Intenzivna terapija",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
@@ -1460,7 +1497,7 @@
             "casesRecovered": "Prebolevniki",
             "casesOther": "Ostali (necepljeni, delno cepljeni)",
             "casesUnvaccinated": "Necepljeni",
-            "disabled": "Zaradi zaznanih napak v podatkih o cepljenju, ki jih pridobivamo iz cepimose.si, teh podatkov začasno ne prikazujemo. NIJZ napako prioritetno ureja in graf bomo ponovno objavili, ko bodo napake odpravljene."
+            "disabled": "Opomba: Zaradi spremembe poročanja teh podatkov od 17. 1. 2022 ne moremo več osveževati."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
@@ -1478,7 +1515,7 @@
             "attendeesCases": "Učenci - potrjeni",
             "attendeesQuarantine": "Učenci - karantena",
             "unitsQuarantine": "Oddelki - karantena",
-            "unitsRemote": "Oddelki - na daljavo"
+            "institutionsRemote": "Zavodi - na daljavo"
         },
         "schoolStatus": {
             "title": "Stanje po šolah in vrtcih",
@@ -2028,7 +2065,7 @@
         },
         "data-publish-time": {
             "question": "Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?",
-            "answer": "Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjeni primeri ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.\n\nKo objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih poteh (CSV, REST, spletna stran), o objavi poročamo tudi na družbenih omrežjih ([Facebook](https://www.facebook.com/COVID19Sledilnik) in [Twitter](https://twitter.com/sledilnik))."
+            "answer": "Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjeni primeri ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.\n\nKo objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih poteh (CSV, REST, spletna stran), o objavi poročamo tudi na družbenih omrežjih ([Facebook](https://www.facebook.com/SledilnikOrg) in [Twitter](https://twitter.com/sledilnik))."
         },
         "data-differences": {
             "question": "Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj?",
@@ -2087,8 +2124,8 @@
             "answer": "Vse potrjene primere kaže [graf Potrjeni primeri](/sl/stats#cases-chart). Sicer pa je za spremljanje epidemije pomembno vedeti, koliko je še aktualno okuženih. Zato uporabljamo terminologijo:\n\n**Zaprti primeri** – seštevek vseh potrjenih primerov, ki niso več okuženi z virusom, torej števila prebolelih in mrtvih.\n\n**Aktivni primeri** – pomenijo vse potrjene okužbe z virusom, ki so še vedno aktualne (osebe virus še vedno prebolevajo). Gl. tudi [Katere kazalnike vključuje graf o stanju?](#data-recovered)"
         },
         "chart-phases": {
-            "question": "Kaj pomenijo različne faze (faze 1–faza 19), ki jih vidimo v grafih?",
-            "answer": "Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, spremeba sledenja stikov...).\n\nFaze so prikazane zato, ker se je s spremembo metodologije testiranja ali sledenja stikov spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.\n\n* **Faza 1 (4.–12. marec 2020)**: Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti.\n\n* **Faza 2 (13.–19. marec 2020)**: Spremeni se [metodologija testiranja, razglašena epidemija](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/), uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.\n\n* **Faza 3 (20. marec 2020 – 7. april 2020)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.\n\n* **Faza 4 (8.–15. april 2020)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/145-Dopolnitev-navodil-glede-testiranja-na-COVID-19.pdf) – dodatno se testirajo tudi osebe z blagimi simptomi iz gospodinjstev, v katerih je več oseb z okužbo dihal.\n\n* **Faza 5 (15.–21. april 2020)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.\n\n* **Faza 6 (21. april 2020 – 15. maj 2020)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).\n\n* **Faza 7 (15. maj 2020 – 10. september 2020)**: Vlada [prekliče epidemijo](https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.\n\n* **Faza 8 (10. september 2020 – 9. oktober 2020)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko.\n\n* **Faza 9 (9.–17. oktober 2020)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom prioritetno iskala stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.\n\n* **Faza 10 (17.–19. oktober 2020)**: NIJZ je sporočil da [ne bo več sledil stikom](https://www.nijz.si/spremenjen-protokol-sledenja-stikom-okuzenih-z-novim-koronavirusom-sars-cov-2) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom vzpostavila kontakt z vsako osebo s potrjeno okužbo preko telefona, ji podala informacije o poteku izolacije in izdala kodo za aktivacijo v aplikaciji #OstaniZdrav. Oseba s potrjeno okužbo bo prejela tudi navodila, da sama obvesti vse osebe, s katerimi je bila v stiku. Posledično ne bo podajala predlogov za ukrep karantene.\n\n* **Faza 11 (19.–26. oktober 2020)**: Vlada je razglasila [epidemijo](https://www.gov.si/novice/2020-10-18-vlada-razglasila-epidemijo-nalezljive-bolezni-covid-19-na-obmocju-republike-slovenije/).\n\n* **Faza 12 (26. oktober 2020 – 6. november 2020)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). Testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.\n\n* **Faza 13 (6. november 2020 – 21.december 2020)**: Glede na nedavno vključitev večjega števila mest za odvzem brisov se skladno s priporočili strokovno svetovalne skupine [spremeni metodologija testiranja](https://www.gov.si/novice/2020-11-06-spremenjen-nacin-testiranja-na-covid-19/) – brisi nosno-žrelnega predela ponovno jemljejo pri vseh osebah s sumom na covid-19.\n\n* **Faza 14 (21. december 2020 – 1. februar 2021)**: NIJZ je začel tudi pozitivne na hitrem antigenskem testu (HAT) upoštevati za potrjene primere. Začne se tudi [množično testiranje s hitrimi antigenskimi testi](https://www.gov.si/novice/2020-12-15-zacetek-mnozicnega-testiranja-s-hitrimi-antigenskimi-testi-se-pred-prazniki/).\n\n* **Faza 15 (1.–13. februar 2021)**: NIJZ je 4.2. [izdal navodilo](https://www.gov.si/novice/2021-02-04-nijz-predlaga-potrjevanje-hitrih-pozitivnih-testov-s-pcr-metodo-za-asimptomatske-osebe/) da se asimptomatske osebe pozitivne na hitrem antigenskem testu (HAT) dodatno pošlje na PCR test. V primeru, da je PCR test negativen se popravi tudi rezultat HAT testa. Popravke HAT pozitivnih za nazaj smo zaznali od 1. februarja dalje.\n\n* **Faza 16 (13. februar 2021 – 15. junij 2021)**: Po [navodilu](https://www.gov.si/novice/2021-02-12-najpogostejsa-vprasanja-in-odgovori-glede-hitrega-testiranja/) Ministrstva za zdravje se od 13. 2. 2021 vsi pozitivni hitri testi potrjujejo še s PCR-testi. Oseba mora do rezultata ostati v samoizolaciji. Skladno s tem je NIJZ posodobil opredelitev potrjene okužbe covida-19, za katero pri epidemiološkem spremljanju sedaj šteje le pozitiven PCR-test. Po [navodilu](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Pediatrija/Dopis_novo_priporocilo_za_odvzem_br_P.pdf) Ministrstva za zdravje se od 11. 2. 2021 ponovno testirajo tudi otroci (ne glede na starost).\n\n* **Faza 17 (15. junij 2021 – 23. avgust 2021)**: Vlada [prekliče epidemijo](https://www.gov.si/novice/z-danasnjim-dnem-se-epidemija-izteka/). Epidemiološka služba NIJZ začne s ponovnim [sledenjem visoko tveganih stikov](https://www.rtvslo.si/slovenija/epidemiologi-spet-v-aktivno-sledenje-stikov-fafangel-poudarja-pomen-sodelovanja/584276).\n\n* **Faza 18 (23. avgust 2021 – 7. november 2021)**: Vlada [določi izjeme](https://www.gov.si/novice/2021-08-20-256-dopisna-seja-vlade-republike-slovenije/) za brezplačno presejalno testiranje s hitrimi antigenskimi testi. Med izjemami so zaposleni v zdravstvu, socialnovarstvenih zavodih, dejavnosti vzgoje in izobraževanja, vključno z visokošolsko dejavnostjo, osebe, ki izvajajo storitve ali prodajo blaga, organizirajo prireditve in izvajajo vzgojo in izobraževanje na področju verske svobode, in za katere je z odloki vlade, s katerimi se določajo ukrepi za preprečevanje in obvladovanje posledic nalezljive bolezni COVID-19, določeno obvezno testiranje na virus SARS-CoV-2. Prav tako je določeno, da se bo samotestiranje izvajalo za učence 7., 8. in 9. razreda ter dijake, sredstva pa bodo zagotovljena iz proračuna Republike Slovenije.\n\n* **Faza 19 (7. november 2021 – )**: Vlada ponovno uvede [brezplačno presejalno testiranje](https://www.gov.si/novice/2021-11-10-hitri-antigenski-testi-so-brezplacni-v-vseh-javnih-zdravstvenih-zavodih-in-pri-koncesionarjih/) s hitrimi antigenskimi testi."
+            "question": "Kaj pomenijo različne faze (faza 1–faza 22), ki jih vidimo v grafih?",
+            "answer": "Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, spremeba sledenja stikov...).\n\nFaze so prikazane zato, ker se je s spremembo metodologije testiranja ali sledenja stikov spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.\n\n* **Faza 22 (21.februar 2022 – )**: Vlada je [ukinila](https://www.gov.si/novice/2022-02-19-vlada-izdala-odlok-o-zacasnih-ukrepih-za-preprecevanje-in-obvladovanje-okuzb-z-nalezljivo-boleznijo-covid-19/) brezplačno presejalno hitro antigensko testiranje (HAT) in samotestiranje (HAT).\n\n* **Faza 21 (1. - 21. februar 2022)**: Ministrstvo za zdravje [spremeni protokol testiranja](https://www.gov.si/novice/2022-01-31-izjeme-pri-karanteni-omejitev-veljavnosti-covidnih-potrdil-in-spremembe-protokola-testiranja/): za potrditev okužbe s SARS-CoV-2 bo dovolj pozitivni izvid hitrega antigenskega testa (HAT). PCR testiranje pa bo možno samo na podlagi napotila zdravnika.\n\n* **Faza 20 (19. januar 2022 – 1.februar 2022)**: Ministrstvo za zdravje [spremeni protokol testiranja](https://www.gov.si/novice/2022-01-18-spremembe-protokola-testiranja-oseb-na-covid-19). Namen sprememb je da se kljub strmo naraščajočim okužbam zagotovi vzdržen sistem v laboratoriju, ki zagotavlja prednostno dostopnost do teh preiskav za vse hospitalizirane bolnike in bolnike, ki imajo zdravstvene težave in ki potencialno zahtevajo hospitalizacijo.\n\n* **Faza 19 (7. november 2021 – 19. januar 2022)**: Vlada ponovno uvede [brezplačno presejalno testiranje](https://www.gov.si/novice/2021-11-10-hitri-antigenski-testi-so-brezplacni-v-vseh-javnih-zdravstvenih-zavodih-in-pri-koncesionarjih/) s hitrimi antigenskimi testi. Od 15. novembra 2021 pa se bo obvezno samotestiranje [izvajalo v šolah](https://www.gov.si/novice/2021-11-13-protokol-za-samotestiranje-ucencev-v-prostorih-vzgojno-izobrazevalnih-zavodov/) trikrat tedensko.\n\n* **Faza 18 (23. avgust 2021 – 7. november 2021)**: Vlada [določi izjeme](https://www.gov.si/novice/2021-08-20-256-dopisna-seja-vlade-republike-slovenije/) za brezplačno presejalno testiranje s hitrimi antigenskimi testi. Med izjemami so zaposleni v zdravstvu, socialnovarstvenih zavodih, dejavnosti vzgoje in izobraževanja, vključno z visokošolsko dejavnostjo, osebe, ki izvajajo storitve ali prodajo blaga, organizirajo prireditve in izvajajo vzgojo in izobraževanje na področju verske svobode, in za katere je z odloki vlade, s katerimi se določajo ukrepi za preprečevanje in obvladovanje posledic nalezljive bolezni COVID-19, določeno obvezno testiranje na virus SARS-CoV-2. Prav tako je določeno, da se bo samotestiranje izvajalo za učence 7., 8. in 9. razreda ter dijake, sredstva pa bodo zagotovljena iz proračuna Republike Slovenije.\n\n* **Faza 17 (15. junij 2021 – 23. avgust 2021)**: Vlada [prekliče epidemijo](https://www.gov.si/novice/z-danasnjim-dnem-se-epidemija-izteka/). Epidemiološka služba NIJZ začne s ponovnim [sledenjem visoko tveganih stikov](https://www.rtvslo.si/slovenija/epidemiologi-spet-v-aktivno-sledenje-stikov-fafangel-poudarja-pomen-sodelovanja/584276).\n\n* **Faza 16 (13. februar 2021 – 15. junij 2021)**: Po [navodilu](https://www.gov.si/novice/2021-02-12-najpogostejsa-vprasanja-in-odgovori-glede-hitrega-testiranja/) Ministrstva za zdravje se od 13. 2. 2021 vsi pozitivni hitri testi potrjujejo še s PCR-testi. Oseba mora do rezultata ostati v samoizolaciji. Skladno s tem je NIJZ posodobil opredelitev potrjene okužbe covida-19, za katero pri epidemiološkem spremljanju sedaj šteje le pozitiven PCR-test. Po [navodilu](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Pediatrija/Dopis_novo_priporocilo_za_odvzem_br_P.pdf) Ministrstva za zdravje se od 11. 2. 2021 ponovno testirajo tudi otroci (ne glede na starost).\n\n* **Faza 15 (1.–13. februar 2021)**: NIJZ je 4.2. [izdal navodilo](https://www.gov.si/novice/2021-02-04-nijz-predlaga-potrjevanje-hitrih-pozitivnih-testov-s-pcr-metodo-za-asimptomatske-osebe/) da se asimptomatske osebe pozitivne na hitrem antigenskem testu (HAT) dodatno pošlje na PCR test. V primeru, da je PCR test negativen se popravi tudi rezultat HAT testa. Popravke HAT pozitivnih za nazaj smo zaznali od 1. februarja dalje.\n\n* **Faza 14 (21. december 2020 – 1. februar 2021)**: NIJZ je začel tudi pozitivne na hitrem antigenskem testu (HAT) upoštevati za potrjene primere. Začne se tudi [množično testiranje s hitrimi antigenskimi testi](https://www.gov.si/novice/2020-12-15-zacetek-mnozicnega-testiranja-s-hitrimi-antigenskimi-testi-se-pred-prazniki/).\n\n* **Faza 13 (6. november 2020 – 21.december 2020)**: Glede na nedavno vključitev večjega števila mest za odvzem brisov se skladno s priporočili strokovno svetovalne skupine [spremeni metodologija testiranja](https://www.gov.si/novice/2020-11-06-spremenjen-nacin-testiranja-na-covid-19/) – brisi nosno-žrelnega predela ponovno jemljejo pri vseh osebah s sumom na covid-19.\n\n* **Faza 12 (26. oktober 2020 – 6. november 2020)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). Testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.\n\n* **Faza 11 (19.–26. oktober 2020)**: Vlada je razglasila [epidemijo](https://www.gov.si/novice/2020-10-18-vlada-razglasila-epidemijo-nalezljive-bolezni-covid-19-na-obmocju-republike-slovenije/).\n\n* **Faza 10 (17.–19. oktober 2020)**: NIJZ je sporočil da [ne bo več sledil stikom](https://www.nijz.si/spremenjen-protokol-sledenja-stikom-okuzenih-z-novim-koronavirusom-sars-cov-2) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom vzpostavila kontakt z vsako osebo s potrjeno okužbo preko telefona, ji podala informacije o poteku izolacije in izdala kodo za aktivacijo v aplikaciji #OstaniZdrav. Oseba s potrjeno okužbo bo prejela tudi navodila, da sama obvesti vse osebe, s katerimi je bila v stiku. Posledično ne bo podajala predlogov za ukrep karantene.\n\n* **Faza 9 (9.–17. oktober 2020)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom prioritetno iskala stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.\n\n* **Faza 8 (10. september 2020 – 9. oktober 2020)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko.\n\n* **Faza 7 (15. maj 2020 – 10. september 2020)**: Vlada [prekliče epidemijo](https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.\n\n* **Faza 6 (21. april 2020 – 15. maj 2020)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).\n\n* **Faza 5 (15.–21. april 2020)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.\n\n* **Faza 4 (8.–15. april 2020)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/145-Dopolnitev-navodil-glede-testiranja-na-COVID-19.pdf) – dodatno se testirajo tudi osebe z blagimi simptomi iz gospodinjstev, v katerih je več oseb z okužbo dihal.\n\n* **Faza 3 (20. marec 2020 – 7. april 2020)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.\n\n* **Faza 2 (13.–19. marec 2020)**: Spremeni se [metodologija testiranja, razglašena epidemija](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/), uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.\n\n* **Faza 1 (4.–12. marec 2020)**: Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti."
         },
         "patients-chart": {
             "question": "Kaj nam pove graf \"Hospitalizirani\"?",
@@ -2196,7 +2233,7 @@
         },
         "municipalities-chart": {
             "question": "Kaj kaže prikaz \"Primeri po občinah\"?",
-            "answer": "[Prikaz](/sl/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število primerov po posameznih občinah glede na to, kdaj je bil odkrit *zadnji* primer.\nSicer pa stolpiči kažejo tri kategorije: z rumeno barvo so označeni še vedno <span style=\"color:gold\">*aktivni*</span> primeri, z zeleno so označeni <font color='green'>*preboleli* (ocena)</font> in s črno *umrli* v posamezni občini.\nŠtevilke desno poleg občine kažejo **stanje na današnji dan**, večja rumena številka kaže *trenutno aktivne* primere, manjša kaže *skupno število* vseh prijavljenih primerov, vključno s prebolelimi in umrlimi. *Datum* poleg občine pa kaže, kdaj je bil odkrit zadnji potrjen primer. Na to se navezuje podatek o času od zadnjega primera, zapisan kot *Zadnji primer pred* pod posamezno občino, ki vpliva tudi na razvrstitev občin.\n\nPosebna kategorija med občinami je **TUJINA**, uvedena skladno s poročanjem NIJZ, kjer se naj bi se podatek tujina nanašal na izvor okužbe, pri tem pa ne gre nujno za tuje državljane, je pred časom [pojasnil govorec Vlade RS za Covid19](https://twitter.com/GovorecCOVID19/status/1265226472731664385). Je pa [Žurnal24 o tej kategoriji podal drugačno pojasnilo](https://www.zurnal24.si/slovenija/to-v-resnici-pomeni-stevilo-okuzenih-v-rubriki-tujina-347506), po njihovem navajanju naj bi na NIJZ pojasnili: \"V tabelo \"Po občinah\" se razporejajo pozitivni primeri, ki imajo stalni ali začasni naslov v Republiki Sloveniji, se pravi državljani Slovenije. So pa v tabelo vnešeni tudi tujci (označeno kot TUJINA), ki pa stalnega naslova v Sloveniji nimajo. Torej TUJEC je opredeljen glede na bivališče, ne glede na to, kje se je okužil.\" (Očitno je to kategorija, ki dopušča različne interpretacije.)\n\nKer so občine samodejno razvrščene po preteklem času od zadnjega potrjenega primera, lahko iz tega sklepamo, katere občine so trenutno bolj obremenjene in katere bolj \"zdrave\" kot druge.\n\nPrikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo razvrstitev *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov. Če izberemo *Vsi*, bodo občine razvrščene po največjem *skupnem* številu potrjenih primerov.\nPrikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega spustnega seznama *Vse regije* izberemo določeno regijo in si ogledamo stanje potrjeno primerov po pripadajočih občinah. Občino lahko tudi preprosto poiščemo z vnosom imena v iskalnik *Poišči občino*.\n\n*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih primerov oz. ali veste, koliko je trenutno okuženih oseb?](#data-active-cases)*"
+            "answer": "[Prikaz](/sl/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število primerov po posameznih občinah glede na to, kdaj je bil odkrit *zadnji* primer.\nSicer pa stolpiči kažejo tri kategorije: z rumeno barvo so označeni še vedno <span style=\"color:gold\">*aktivni*</span> primeri, z zeleno so označeni <font color='green'>*preboleli* (ocena)</font> in s črno *umrli* v posamezni občini.\nŠtevilke desno poleg občine kažejo **stanje na današnji dan**, večja rumena številka kaže *trenutno aktivne* primere, manjša kaže *skupno število* vseh prijavljenih primerov, vključno s prebolelimi in umrlimi. *Datum* poleg občine pa kaže, kdaj je bil odkrit zadnji potrjen primer. Na to se navezuje podatek o času od zadnjega primera, zapisan kot *Zadnji primer pred* pod posamezno občino, ki vpliva tudi na razvrstitev občin.\n\nPosebna kategorija med občinami je **TUJINA**, uvedena skladno s poročanjem NIJZ, kjer se naj bi se podatek tujina nanašal na izvor okužbe, pri tem pa ne gre nujno za tuje državljane, je pred časom [pojasnil govorec Vlade RS za COVID-19](https://twitter.com/GovorecCOVID19/status/1265226472731664385). Je pa [Žurnal24 o tej kategoriji podal drugačno pojasnilo](https://www.zurnal24.si/slovenija/to-v-resnici-pomeni-stevilo-okuzenih-v-rubriki-tujina-347506), po njihovem navajanju naj bi na NIJZ pojasnili: \"V tabelo \"Po občinah\" se razporejajo pozitivni primeri, ki imajo stalni ali začasni naslov v Republiki Sloveniji, se pravi državljani Slovenije. So pa v tabelo vnešeni tudi tujci (označeno kot TUJINA), ki pa stalnega naslova v Sloveniji nimajo. Torej TUJEC je opredeljen glede na bivališče, ne glede na to, kje se je okužil.\" (Očitno je to kategorija, ki dopušča različne interpretacije.)\n\nKer so občine samodejno razvrščene po preteklem času od zadnjega potrjenega primera, lahko iz tega sklepamo, katere občine so trenutno bolj obremenjene in katere bolj \"zdrave\" kot druge.\n\nPrikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo razvrstitev *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov. Če izberemo *Vsi*, bodo občine razvrščene po največjem *skupnem* številu potrjenih primerov.\nPrikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega spustnega seznama *Vse regije* izberemo določeno regijo in si ogledamo stanje potrjeno primerov po pripadajočih občinah. Občino lahko tudi preprosto poiščemo z vnosom imena v iskalnik *Poišči občino*.\n\n*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih primerov oz. ali veste, koliko je trenutno okuženih oseb?](#data-active-cases)*"
         },
         "phase-diagram-chart": {
             "question": "Kaj kaže prikaz \"Fazni diagram\"?",
@@ -2335,7 +2372,7 @@
         },
         "other": {
             "title": "Drugi načini podpore",
-            "description": "Podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, na primer v [angleščini](/en/donate).\n\nVeseli vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/COVID19Sledilnik), [YouTubu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in drugih platformah, pa tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nŠe bolj veseli bomo, če nam omogočite dostop do kakršnih koli odprtih podatkov, primernih za naše analize.\n\nŽelite drugače podpreti Sledilnik ali imate svojo idejo o sodelovanju? Kontaktirajte nas na info@sledilnik.org in z veseljem bomo našli rešitev."
+            "description": "Podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, na primer v [angleščini](/en/donate).\n\nVeseli vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/SledilnikOrg), [YouTubu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in drugih platformah, pa tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nŠe bolj veseli bomo, če nam omogočite dostop do kakršnih koli odprtih podatkov, primernih za naše analize.\n\nŽelite drugače podpreti Sledilnik ali imate svojo idejo o sodelovanju? Kontaktirajte nas na info@sledilnik.org in z veseljem bomo našli rešitev."
         }
     }
 }

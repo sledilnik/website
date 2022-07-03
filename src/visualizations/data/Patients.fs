@@ -27,6 +27,7 @@ type DepartmentCounts = {
     out: int option
     today: int option
     toDate: int option
+    reasonCovid: int option
 }
 
 type FacilityPatientStats = {
@@ -34,6 +35,7 @@ type FacilityPatientStats = {
     icu: DepartmentCounts
     niv: DepartmentCounts
     critical: DepartmentCounts
+    redZone: DepartmentCounts
     care: DepartmentCounts
     deceasedCare: DeceasedCounts
     deceased: HDeceasedCounts
@@ -46,6 +48,7 @@ type TotalPatientStats =
         icu: DepartmentCounts
         niv: DepartmentCounts
         critical: DepartmentCounts
+        redZone: DepartmentCounts
         care: DepartmentCounts
         deceasedCare: DeceasedCounts
         deceased: TDeceasedCounts
@@ -55,6 +58,7 @@ type TotalPatientStats =
           icu = this.icu
           niv = this.niv
           critical = this.critical
+          redZone = this.redZone
           care = this.care
           deceasedCare = this.deceasedCare
           deceased = this.deceased.hospital }

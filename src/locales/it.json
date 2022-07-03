@@ -780,6 +780,26 @@
         "gatherings3": {
             "title": "Assembramenti",
             "description": "Divieto di riunirsi (eccetto per i familiari stretti), nessuna celebrazione.<br>Ristoranti e bar ammessi dalle 5 alle 22 (solo servizio seduto).<br>Restrizioni di eventi culturali e sportivi (solo al chiuso, seduti con posto libero tra gli spettatori)."
+        },
+        "liftQuarantineAll": {
+            "title": "Quarantena",
+            "description": "Allentamento delle restrizioni: nessuna quarantena dopo un contatto stretto"
+        },
+        "liftPCT": {
+            "title": "GVT",
+            "description": "Allentamento delle restrizioni: tutte le restrizioni vengono rimosse, resta l'obbligo di indossare la mascherina nei luoghi chiusi. <br>GVT (guarito, vaccinato, testato) solo per la sanità, gli istituti di protezione sociale e le carceri."
+        },
+        "liftMasksSchools": {
+            "title": "Mascherine",
+            "description": "Allentamento: le mascherine non sono più obbligatorie nelle scuole e nelle università."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Allentamento delle restrizioni: cessazione di tutte le restrizioni. <br>Seguire le raccomandazioni dell'Istituto Nazionale per la Sanità Pubblica (NIJZ)."
+        },
+        "liftMasksInside": {
+            "title": "Mascherine",
+            "description": "Allentamento: le mascherine non sono più obbligatorie negli ambienti chiusi.<br>Le mascherine restano obbligatorie nelle istituzioni sanitarie e di assistenza sociale."
         }
     },
     "tableDict": {
@@ -867,7 +887,7 @@
             "hospitalizedIn": "Ricoverati in:",
             "byHospital": "Per ospedale",
             "structure": "Struttura",
-            "title": "Ricoveri",
+            "title": "Ricoveri (unità c19 e zone rosse)",
             "titleMenu": "Ricoveri",
             "care": "Unità infermieristica",
             "icu-deceased": "Deceduti",
@@ -876,7 +896,10 @@
             "icu-admitted": "Ammessi in terapia intensiva",
             "niVentilator": "Su ventilatore (non invasivo)",
             "acute": "Unità acuta",
-            "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021."
+            "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021.",
+            "total": "Totale",
+            "redZone": "Zona rossa",
+            "reasonCovid": "Diagnosi principale COVID-19"
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -976,7 +999,7 @@
         "tests": {
             "ns-apr20": "Ricerca: PCR",
             "regular": "Ordinario: PCR",
-            "title": "Analisi: PCR",
+            "title": "Tamponi",
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
             "negativeTests": "Tamponi negativi",
@@ -984,7 +1007,7 @@
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
             "byLab": "Per laboratorio: test PCR",
-            "disclaimer": "Nota: dal 3 dicembre 2020 non riceviamo più i dati per laboratorio.",
+            "disclaimer": "Nota: dal 1° febbraio 2022, un risultato positivo al test PCR o TAR è considerato un caso confermato. Le persone che sono ulteriormente testate con il tampone PCR dopo un test TAR positivo non sono incluse nelle statistiche di TAR positivi.",
             "hagt": "Ordinario: TAR",
             "positiveTotal": "Totale positivi",
             "positivePCR": "PCR positivi",
@@ -1058,7 +1081,7 @@
         "europe": {
             "noData": "Nessun dato",
             "statusRed": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni<br>*presenza confermata della variante omicron",
-            "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni",
+            "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 7 giorni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
             "countryStatus": "Restrizioni",
@@ -1136,7 +1159,7 @@
             "hospitalized": "ricoverati",
             "title": "Variazione dei casi confermati",
             "activeCases": "casi attivi",
-            "titleMenu": "Crescita"
+            "titleMenu": "Crescita - casi"
         },
         "common": {
             "shortDateFormat": "%e %b",
@@ -1465,7 +1488,7 @@
             "kindergarten": "Scuola materna",
             "employeeCases": "Dipendenti",
             "attendeeCases": "Alunni",
-            "unitsRemote": "Unità - A distanza",
+            "institutionsRemote": "Istituti - A distanza",
             "unitsQuarantine": "Unità - Quarantena"
         },
         "vaccination": {
@@ -1494,7 +1517,8 @@
             "unusedDoses": "Dosi non utilizzate",
             "unused": "Giacenza",
             "byWeekSupply": "Giacenza (per settimana)",
-            "administered3rd": "Dose aggiuntiva"
+            "administered3rd": "Dose aggiuntiva",
+            "novavax": "Novavax"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
@@ -1537,7 +1561,7 @@
             "relative100k": "Relativo per 100.000 persone nel gruppo",
             "absolute100k": "Per 100.000 persone nel gruppo",
             "absolute": "Assoluto",
-            "hospitalizedCases": "Ricoveri",
+            "hospitalizedCases": "Ricoveri (SARI)",
             "confirmedCases": "Casi confermati",
             "titleMenu": "Vaccinazione - effetto",
             "title": "Effetto della vaccinazione",
@@ -1548,18 +1572,19 @@
             "casesRecovered": "Guariti",
             "icuCasesRatio": "Non vaccinati, guariti e parzialmente vaccinati sono ricoverati in unità di terapia intensiva **{{multiple}}** volte tanto quanto quelli completamente protetti con la vaccinazione.",
             "casesPartiallyVaccinated": "Parzialmente vaccinati",
-            "disabled": "A causa di errori rilevati nei dati di vaccinazione ottenuti da cepimose.si, abbiamo rimosso temporaneamente questi grafici. Il NIJZ sta risolvendo il problema in via prioritaria e pubblicheremo nuovamente i grafici non appena gli errori saranno eliminati."
+            "disabled": "Nota: Dal 17 gennaio 2022 a causa di un cambiamento nel resoconto non possiamo più aggiornare questi dati ."
         },
         "patientsAge": {
             "icuIn": "Ricoverati in terapia intensiva",
             "meanAge": "Età media",
             "hospitalIn": "Ammessi in ospedale",
-            "title": "Ospedalizzazioni per età, settimanale",
+            "title": "Ospedalizzazioni (SARI) per età, settimanale",
             "titleMenu": "Ospedalizzazioni - età",
-            "deceased": "Deceduti"
+            "deceased": "Deceduti",
+            "disclaimer": "Questo include solo i ricoveri tracciati nel sistema EPISARI, che esclude i ricoveri COVID-19 senza infezioni respiratorie acute gravi."
         },
         "vaccineEffectAge": {
-            "title": "Tassi di ospedalizzazione - stato vaccinale e fascia di età",
+            "title": "Tassi di ospedalizzazione (SARI) - stato vaccinale e fascia di età",
             "absolute": "Assoluto",
             "absolute100k": "Per 100.000 persone nel gruppo",
             "vaccinatedIn": "Ricoverati - Protetti con la vaccinazione",
@@ -1600,7 +1625,7 @@
         "confirmedToDate": "Casi confermati",
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
-        "newCases7d": "Casi nuovi",
+        "newCases7d": "Casi nuovi (media 7 giorni)",
         "testsHAT": "Tamponi giornalieri: TAR",
         "vaccinationSummary": "Vaccinazioni completate",
         "incidenceInfo": "per 100.000 persone"
@@ -1670,11 +1695,11 @@
             "description": "test rapidi antigenici"
         },
         "15": {
-            "description": "metodologia dei test antigenici rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>15"
         },
         "16": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>16"
         },
         "17": {
@@ -1682,12 +1707,20 @@
             "title": "fase<br>17"
         },
         "18": {
-            "description": "metodologia dei test antigeni rapidi",
+            "description": "metodologia dei TAR",
             "title": "fase<br>18"
         },
         "19": {
             "title": "fase<br>19",
-            "description": "nuova metodologia dei TAR"
+            "description": "metodologia dei TAR"
+        },
+        "20": {
+            "title": "fase<br>20",
+            "description": "nuova metodologia dei test"
+        },
+        "21": {
+            "title": "fase<br>21",
+            "description": "nuova metodologia dei test"
         }
     },
     "weekday": {
@@ -1768,7 +1801,7 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._",
+        "intro": "_Lo scopo del progetto Sledilnik e di tutti i suoi grafici e tabelle/presentazioni statistiche è quello di visualizzare in modo comprensibile tutti i dati esistenti sull'epidemia di COVID-19 in Slovenia. Abbiamo raccolto alcune delle domande più frequenti. L'elenco delle FAQ non è esaustivo, ma viene aggiornato frequentemente, quindi continua a controllare. In caso di domande, non esitate a contattarci: info@slednik.org. (Aspettiamo anche i tuoi complimenti, feedback o suggerimenti!)_",
         "chart-infocard-percent": {
             "question": "Cosa significano le percentuali nelle schede informative nella parte superiore della pagina web?",
             "answer": "Si tratta di un tasso di crescita percentuale in una determinata data del numero di nuovi casi confermati rispetto al giorno precedente. Se, ad esempio, ieri c'erano 16 persone nel reparto di terapia intensiva e oggi ne hanno accettati altri quattro, si tratta del 25% in più rispetto alla situazione di ieri."
@@ -1798,7 +1831,7 @@
             "answer": "Sledilnik utilizza solo i dati convalidati e ufficiali riferiti giornalmente dall'Istituto Nazionale di Sanità Pubblica (NIJZ) e da tutti gli ospedali sloveni che sono impegnati con il COVID-19. I nostri dati provengono quindi direttamente da fonti verificate. Inoltre vengono anche verificati incrociando le informazioni fin dall'inizio (4 marzo 2020). Le discreopanze di solito si verificano perché i dati vengono ottenuti da media e portali diversi in momenti diversi della giornata. Vedi anche [I vostri dati e le vostre visualizzazioni sono affidabili?](#data-reliability)"
         },
         "data-publish-time": {
-            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati …) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/COVID19Sledilnik) e [ Twitter](https://twitter.com/sledilnik)).",
+            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati …) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/SledilnikOrg) e [ Twitter](https://twitter.com/sledilnik)).",
             "question": "Quando pubblicate i dati? Perché le date nelle visualizzazioni sono diverse?"
         },
         "how-to-help": {
@@ -1861,7 +1894,7 @@
             "question": "Cosa rappresenta il grafico \"Per regione\"?"
         },
         "spread-chart": {
-            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
+            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID-19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
             "question": "Cosa rappresenta il grafico \"Variazione di casi confermati\"?"
         },
         "infections-chart": {
@@ -1903,10 +1936,12 @@
             "question": "Avete un contatore sui casi attivi e sapete quante persone sono attualmente infette?"
         },
         "data-recovered": {
-            "question": "Perché avete sostituito il numero di *curati* con il numero di pazienti *guariti*?"
+            "question": "Perché avete sostituito il numero di *curati* con il numero di pazienti *guariti*?",
+            "answer": "Sledilnik si basava su fonti ufficiali (Governo della Repubblica di Slovenia, media) per il numero di persone guarite. Purtroppo, i rapporti su quando una persona è totalmente guarita dal Covid-19 sono scarsi - per ora, abbiamo solo pochi rapporti confermati di \"pazienti guariti\", e non c'è ancora una definizione ufficiale di quando una particolare persona è guarita. Un [sondaggio nazionale COVID-19](https://covid19.biolab.si/) eseguito dall'*Istituto di Microbiologia e Immunologia*, ha mostrato anche, attraverso test a campione volontari, quante persone si siano già ammalate e siano guarite dal COVID-19. Poiché non si sa ancora quali potrebbero essere le potenziali conseguenze del COVID-19 (vari studi si stanno occupando di questa questione e i risultati non saranno noti per molto tempo), e poiché le istituzioni sanitarie parlano anche di pazienti guariti piuttosto che curati, stiamo quindi cambiando sia la terminologia che il metodo di calcolo del numero di guarigioni. Vedi anche [Avete un contatore dei casi attivi e sapete quante persone sono attualmente infette?](#data-active-cases))\n\nIl 14 aprile, il Dipartimento della Salute ha rilasciato [Priporočila za zaključek izolacije in vrnitev na delovno mesto (Raccomandazioni per interrompere l'isolamento e tornare al lavoro)](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) da cui possiamo dedurre quando una persona è guarita dalla malattia e può tornare al lavoro. Per le persone con sintomi, questo è di 14 giorni dopo che i sintomi si sono attenuati, e per gli operatori sanitari, un tampone di controllo è richiesto dopo 14 giorni, che deve essere negativo 2 volte di seguito. Il governo della Repubblica di Slovenia riferisce regolarmente sulle dimissioni dall'ospedale, ma non sappiamo se sono già guariti dalla malattia. Le raccomandazioni pubblicate indicano che questi pazienti hanno bisogno di due tamponi di controllo negativi consecutivi dopo la dimissione all'assistenza domiciliare per essere considerati in grado di tornare al lavoro. [Nel suo rapporto](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) l'ECDC ha dichiarato che *L'incidenza a 14 giorni dei casi di COVID-19 riportati nell'UE/SEE e nel Regno Unito, che fornisce una stima della prevalenza di casi attivi nella popolazione...* - quindi abbiamo scelto il periodo di 14 giorni come il tempo in cui il caso medio confermato può ancora essere considerato un *caso attivo*.\n\nAbbiamo notato che il [Worldometer](https://www.worldometers.info/coronavirus/#countries) riportava il numero di guariti, ma purtroppo non siamo stati in grado di ottenere dati sulla provenienza di queste informazioni. Inoltre, alcune altre fonti combinano semplicemente i sopravvissuti con il numero di pazienti dimessi dagli ospedali. Poiché crediamo che queste due categorie non siano intercambiabili, abbiamo deciso di presentarle separatamente; questi sono gli indicatori *Dimessi dall'ospedale* e *Guariti*.\n\n*Nota: il calcolo dei guariti è stato modificato il 9 maggio 2020. Ora consideriamo che un paziente è guarito 14 giorni dopo che la sua infezione è stata confermata (in precedenza 21 giorni), quindi c'è stato un notevole salto nel numero dei sopravvissuti. Si prega di tenere conto di questa differenza quando si stima il numero di sopravvissuti. Una spiegazione più dettagliata del calcolo modificato è disponibile nell'articolo di Medium [Od potrjeno okuženih do prebolelih (Dal caso confermato alla guarigione )] (https://medium.com/@sledilnik/94c81674718e).*"
         },
         "chart-reality": {
-            "question": "I vostri grafici rappresentano la situazione reale?"
+            "question": "I vostri grafici rappresentano la situazione reale?",
+            "answer": "Sì, per quanto possibile, visti i limiti delle visualizzazioni attuali e dei dati stessi: i grafici di questa pagina mostrano solo ciò che si può dedurre dalle informazioni fornite. Per esempio, il numero totale di test rappresenta il numero di test eseguiti fino ad oggi, ma non riflette il numero totale di persone testate, poiché alcune persone, come gli operatori sanitari e le persone sospettate di essere infette, sono state testate più volte.\n\nTuttavia, il numero di casi confermati dipende esclusivamente dai test. Poiché la maggior parte delle persone infette, che hanno sintomi lievi o assenti, non sono state affatto testate per il COVID-19, il numero di casi confermati è significativamente inferiore al numero effettivo di persone infette (dal 21.12.2020 anche le persone che risultano positive al test rapido dell'antigene (RAT) contano come casi confermati)."
         },
         "countries-chart": {
             "answer": "Il [grafico](/it/stats#countries-chart) mostra un confronto tra la Slovenia e diversi gruppi di paesi in termini di numero di morti per COVID-19 per milione di abitanti. Il grafico è disposto cronologicamente. È possibile cambiare la visualizzazione delle diverse visualizzazioni cronologiche dei confronti tra diversi gruppi di paesi cliccando sulle schede appropriate qui sotto.",
@@ -1966,7 +2001,7 @@
         },
         "other": {
             "title": "Altri modi di supporto",
-            "description": "Per altri modi di sostenerci dalla Slovenia potreste verificare la [traduzione slovena di questa pagina](/sl/donate).\n\nSiamo sempre grati per i suggerimenti e le condivisioni dei nostri post su [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) e altre piattaforme, così come per le nuove funzionalità e le correzioni del codice sorgente su [GitHub](https://github.com/sledilnik).\n\nApprezzeremo ancora di più se potete concederci l'accesso a qualsiasi dato aperto che potrebbe essere rilevante per le nostre analisi.\n\nAvete una proposta diversa su come sostenere le nostre attività o su come potremmo collaborare? Non esitate a contattarci su info@sledilnik.org - saremo felici di trovare insieme una soluzione."
+            "description": "Per altri modi di sostenerci dalla Slovenia potreste verificare la [traduzione slovena di questa pagina](/sl/donate).\n\nSiamo sempre grati per i suggerimenti e le condivisioni dei nostri post su [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/SledilnikOrg), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) e altre piattaforme, così come per le nuove funzionalità e le correzioni del codice sorgente su [GitHub](https://github.com/sledilnik).\n\nApprezzeremo ancora di più se potete concederci l'accesso a qualsiasi dato aperto che potrebbe essere rilevante per le nostre analisi.\n\nAvete una proposta diversa su come sostenere le nostre attività o su come potremmo collaborare? Non esitate a contattarci su info@sledilnik.org - saremo felici di trovare insieme una soluzione."
         },
         "companies": {
             "description": "Si prega di contattarci su drustvo@sledilnik.org per preparare un contratto di donazione e/o altra documentazione necessaria come richiesto.",
