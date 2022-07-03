@@ -50,7 +50,11 @@ Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz viro
 
 Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike sodelovanja nas kontaktirajte na info@sledilnik.org.
 
-Uporaba Sledilnika ne bi bila možna brez spletnega servisa CloudFlare, preko katerega pretakamo podatke in ki za svoje nemoteno delovanje na vaš računalnik vstavi en sam piškotek, ki tam ostane največ 30 dni. Več informacij o varovanju zasebnosti [najdete na njihovi spletni strani](https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies).
+Uporaba Sledilnika ne bi bila možna brez nekaterih zunanjih spletnih storitev:
+
+- CloudFlare, preko katerega zanesljivo in varno pretakamo podatke k uporabnikom za svoje delovanje uporablja tudi piškotke kot je [opisano na njihovi spletni strani](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/), upoštevajoč [politiko zasebnosti](https://www.cloudflare.com/privacypolicy/).
+- Stripe, preko katerega [zbiramo donacije](/sl/donate) s kreditnimi karticami. Glej [Stripe politiko zasebnosti](https://stripe.com/privacy) in [piškotkov](https://stripe.com/legal/cookies-policy).
+- Google fonts API, ki sicer ne uporablja piškotkov, a ima lahko [vpliv na zasebnost uporabnikov](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
 
 ## Varstvo osebnih podatkov
 Znanstveno društvo Sledilnik si prizadeva, da objavlja zgolj takšne informacije, ki niso povezane z določenim ali določljivim posameznikom oziroma so bile predhodno anonimizirane na tak način, da posameznik, na katerega se nanašajo, več ni določen ali določljiv (ti. anonimizirane informacije). Zato objavljamo zgolj informacije, ki izvirajo iz javno dostopnih uradnih virov, za katere je pristojni državni organ (npr. NIJZ, MZ, MIZŠ idr.) predhodno že presodil, da so zadostno anonimizirane, da so primerne za javno objavo. Poleg tega pa pri posameznih grafih in vizualizacijah izvajamo še dodatne anonimizacijske ukrepe, kot sta združevanje podatkov v večje skupine ali prikazovanje povprečij. Zato smo prepričani, da objavljene informacije ne predstavljajo osebnih podatkov.

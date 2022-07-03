@@ -72,6 +72,12 @@ Do you have a suggestion, would like to help with organising the data or contrib
 Use and collaboration are desired: the data is collected from sources in the public domain and can be freely used, edited, processed or incorporated into any non-marketable content if citing the source – covid-19.sledilnik.org.
 To export data to other formats, or use for visualization use please contact us at info@sledilnik.org.
 
+Use of Sledilnik would not be possible without some external web services:
+
+- CloudFlare, which helps us deliver the data to our users reliably and securely, using cookies as [described on their website](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/) and respecting the [privacy policy](https://www.cloudflare.com/privacypolicy/).
+- Stripe, which we use to collect [donations](/en/donate) using credit cards. See [Stripe's privacy](https://stripe.com/privacy) and [cookie policy](https://stripe.com/legal/cookies-policy).
+- Google fonts API, which is not using cookies, but [may affect user privacy](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
+
 ## Protection of personal data
 The Tracker Slovenia Scientific Society (Znanstveno društvo Sledilnik) endeavours to publish only information that cannot be linked to a specific or identifiable person or that has been previously anonymised in such a way that the data subject is no longer specific or identifiable (so-called anonymised information). We strive to achieve this by only publishing information that originates from publicly available official sources and that has previously been assessed by the relevant public authority (e.g. NIJZ, MZ, MIZŠ, etc.) as sufficiently anonymised to be suitable for public release. Furthermore, additional anonymisation measures are applied to certain graphs and visualisations, such as grouping data into larger groups or presenting average values. We believe that the published information does not constitute personal data.
 
