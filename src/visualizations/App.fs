@@ -703,7 +703,7 @@ let render (state: State) (_: Msg -> unit) =
           patients; patientsICU; // patientsCare;
           tests; ageGroupsTimeline;
           map; municipalities; regionMap; regions100k;
-          schools; schoolStatus
+          //schools; schoolStatus
           sewage;
           vaccination; vaccines;
           vaccineEffectAge; vaccineEffect;
