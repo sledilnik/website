@@ -666,7 +666,7 @@
             "icuAdmitted": "Primljeni na odjel intenzivne njege",
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
-            "positivePctHAT": "Udio pozitivnih: RAT (%)",
+            "positivePctHAT": "Udio pozitivnih: Brzi antigenski testovi (%)",
             "testsHAT": "Provedeni testovi: Brzi antigenski testovi",
             "vaccineDosesAdministered": "Primijenjene doze cjepiva"
         },
