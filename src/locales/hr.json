@@ -950,7 +950,8 @@
             "unusedDoses": "Nekorištene doze",
             "unused": "Opskrba",
             "byWeekSupply": "Opskrba (tjedno)",
-            "administered3rd": "Dodatna doza"
+            "administered3rd": "Dodatna doza",
+            "novavax": "Novavax"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
