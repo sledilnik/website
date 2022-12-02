@@ -130,7 +130,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = {| stacking = stacking; crisp = true
+                series = {| stacking = stacking; crisp = true; turboThreshold = 0
                             borderWidth = 0
                             pointPadding = 0; groupPadding = 0
                             |}
