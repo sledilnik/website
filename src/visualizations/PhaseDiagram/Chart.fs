@@ -85,11 +85,13 @@ let totalVsWeekChartOptions state =
                color = state.Metric.GetColor.Light
                marker = pojo {| symbol = "circle" ; radius = 2 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+               turboThreshold = 0
             |} |> pojo
             {| data = [| data.[state.Day] |]
                color = state.Metric.GetColor.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+               turboThreshold = 0
             |} |> pojo
         |]
 
@@ -134,11 +136,13 @@ let weekVsWeekBeforeOptions state =
                color = state.Metric.GetColor.Light
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+               turboThreshold = 0
             |} |> pojo
             {| data = [| data.[state.Day] |]
                color = state.Metric.GetColor.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+               turboThreshold = 0
             |} |> pojo
         |]
     |} |> pojo

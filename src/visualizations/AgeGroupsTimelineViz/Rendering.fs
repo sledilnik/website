@@ -88,8 +88,8 @@ let renderChartOptions state dispatch =
                           borderWidth = 0 |}
                 series =
                     match state.ChartType with
-                    | AbsoluteChart -> pojo {| stacking = "normal" |}
-                    | RelativeChart -> pojo {| stacking = "percent" |}
+                    | AbsoluteChart -> pojo {| stacking = "normal"; turboThreshold = 0 |}
+                    | RelativeChart -> pojo {| stacking = "percent"; turboThreshold = 0 |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
