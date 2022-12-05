@@ -407,6 +407,7 @@ let renderStructureChart (state: State) dispatch =
                           pojo
                               {| dataGrouping = pojo {| enabled = false |}
                                  stacking = "normal"
+                                 turboThreshold = 0
                                  crisp = false
                                  borderWidth = 0
                                  pointPadding = 0
