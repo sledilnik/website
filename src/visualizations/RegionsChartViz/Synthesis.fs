@@ -122,6 +122,7 @@ let allSeries state =
             name = I18N.tt "region" regionConfig.Key
             color = regionConfig.Color
             data = seriesValuesHc2nStep
+            turboThreshold = 0
         |}
         |> pojo
     )
