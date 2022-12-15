@@ -123,6 +123,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         |}
                         )
                 marker = pojo {| enabled = false |}
+                turboThreshold = 0
                 |}
             )
 
