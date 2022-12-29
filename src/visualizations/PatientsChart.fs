@@ -402,7 +402,7 @@ let renderStructureChart (state: State) dispatch =
                      visible = true |} |]
            plotOptions =
                pojo
-                   {| line = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                   {| line = pojo {| dataGrouping = pojo {| enabled = false |}; turboThreshold = 0 |}
                       column =
                           pojo
                               {| dataGrouping = pojo {| enabled = false |}
