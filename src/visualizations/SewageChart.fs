@@ -146,14 +146,14 @@ let connectedMunicipalitiesNewCasesAsXYSeries (municipalitiesData: Municipalitie
 
 
 
-let plantCovN1AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
-    sewageData
-    |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
-    |> Array.map (fun (dp: SewageStats) ->
-        dp.Date |> jsTimeMidnight,
-        (Map.find wastewaterTreatmentPlantKey dp.plants)
-            .covN1Compensated)
-    |> chooseWithSomeYValue
+// let plantCovN1AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
+//     sewageData
+//     |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
+//     |> Array.map (fun (dp: SewageStats) ->
+//         dp.Date |> jsTimeMidnight,
+//         (Map.find wastewaterTreatmentPlantKey dp.plants)
+//             .covN1Compensated)
+//     |> chooseWithSomeYValue
 
 let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
     sewageData
@@ -258,17 +258,17 @@ let renderChartOptions (state: State) dispatch =
                               state.MunicipalitiesData
                               wastewaterTreatmentPlantKey |}
 
-               pojo
-                   {| name = chartText "concentrationGen1"
-                      ``type`` = "line"
-                      color = "#d45087"
-                      yAxis = 0
-                      lineWidth = 0
-                      marker = pojo {|
-                                      symbol = "circle"
-                                      radius = 4
-                                      enabled = true |}
-                      data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
+            //    pojo
+            //        {| name = chartText "concentrationGen1"
+            //           ``type`` = "line"
+            //           color = "#d45087"
+            //           yAxis = 0
+            //           lineWidth = 0
+            //           marker = pojo {|
+            //                           symbol = "circle"
+            //                           radius = 4
+            //                           enabled = true |}
+            //           data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
                pojo
                    {| name = chartText "concentrationGen2"
