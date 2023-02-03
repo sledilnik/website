@@ -935,7 +935,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020–⁠2022 Sledilnik.org"
+        "copyright": "© 2020–⁠2023 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1336,19 +1336,19 @@
         "liftPCT": {
             "title": "RVT",
             "description": "Easing of restrictions: all restrictions removed, only masks required indoors.<br>RVT (recovered, vaccinated, tested) condition required only in healthcare, social protection institutions and prisons."
-       },
-       "liftMasksSchools": {
+        },
+        "liftMasksSchools": {
             "title": "Masks",
             "description": "Easing restrictions: masks are no longer mandatory in schools and colleges."
-       },
-       "liftMasksInside": {
+        },
+        "liftMasksInside": {
             "title": "Masks",
             "description": "Easing restrictions: masks are no longer mandatory indoors.<br>Masks are still mandatory in healthcare and social welfare institutions."
         },
         "liftEverything": {
             "title": "🏳️",
             "description": "Easing restrictions: termination of all restrictions.<br>Follow recommendations of National Institute of Public Health (NIJZ)."
-       }
+        }
     },
     "days": {
         "in_x_days": "in {{ count }} day",
@@ -1929,7 +1929,7 @@
         },
         "age-groups-chart": {
             "question": "What does the “Age Groups” graph show?",
-            "answer": null
+            "answer": "None"
         },
         "countries-chart": {
             "question": "What does the “Comparison by Country” graph show?",
