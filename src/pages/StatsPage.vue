@@ -70,10 +70,10 @@ export default {
         // 'casesActive',
         'casesAvg7Days',
         'casesActive100k',
-        'vaccinationSummary',
-        'hospitalizedCurrent',
-        'icuCurrent',
-        'deceasedToDate'
+        // 'vaccinationSummary',
+        // 'hospitalizedCurrent',
+        // 'icuCurrent',
+        // 'deceasedToDate'
       ]
     };
   },
