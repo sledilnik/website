@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module SewageChart
 
+open System
 open System.Collections.Generic
 open Browser
 open Fable.Core.JsInterop
@@ -92,6 +93,8 @@ let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (
         |> Set.ofArray
 
     municipalitiesData
+    |> List.filter (fun municipalityData ->
+        municipalityData.Date < DateTime(2023,3,1)) // we have sewage data from NIB only until end 28.2.2023
     |> List.map (fun municipalityData ->
         municipalityData.Date |> jsTimeMidnight,
         (municipalityData.Regions
