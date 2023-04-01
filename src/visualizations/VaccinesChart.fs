@@ -80,7 +80,7 @@ let init: State * Cmd<Msg> =
           Error = None
           DisplayType = DisplayType.Default
           MetricType = MetricType.Default
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 } // all to show history
 
     state, cmd
 
