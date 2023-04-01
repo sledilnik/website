@@ -1481,7 +1481,7 @@
             "ageAll": "Vse starosti",
             "riskRatio": "Razmerje tveganj (faktor)",
             "vaccineEfficiency": "Učinkovitost cepljenja",
-            "hospitalizedIn": "Od {{ startDate, %e. %b %Y  }} do {{ endDate, %e. %b %Y }}.",
+            "hospitalizedIn": "Od {{ startDate, %e. %b %Y }} do {{ endDate, %e. %b %Y }}.",
             "disclaimer": "Prikaz ilustrira t.im. [Simpsonov paradoks](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e), ki nastaja zaradi razlik v precepljenosti in ogroženosti posameznih starostnih skupin - več o tem v članku [Učinek cepljenja](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
         },
         "vaccineEffect": {
@@ -1493,9 +1493,9 @@
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
             "relative100k": "Relativno na 100.000 oseb v skupini",
-            "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
-            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}). Podatki po dveh starostnih skupinah (<65, 65+) so na voljo na [grafu](/sl/stats#vaccine-effect-age-chart).",
-            "icuCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je sprejetih v intenzivno terapijo **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, prebolevniki, delno cepljeni).",
+            "confirmedCasesAbs": "Od {{ startDate, %e. %b %Y }} do {{ endDate, %e. %b %Y }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
+            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b %Y }} do {{ endDate, %e. %b %Y }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}). Podatki po dveh starostnih skupinah (<65, 65+) so na voljo na [grafu](/sl/stats#vaccine-effect-age-chart).",
+            "icuCasesAbs": "Od {{ startDate, %e. %b %Y }} do {{ endDate, %e. %b %Y }} je sprejetih v intenzivno terapijo **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, prebolevniki, delno cepljeni).",
             "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem. Podatki po dveh starostnih skupinah (<65, 65+) so na voljo na [grafu](/sl/stats#vaccine-effect-age-chart) in pokažejo še višjo učinkovitost.",
             "icuCasesRatio": "Necepljenih, prebolevnikov in delno cepljenih je sprejetih v intenzivno terapijo **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
