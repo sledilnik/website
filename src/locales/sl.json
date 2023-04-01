@@ -990,6 +990,7 @@
             "title": "Umrli",
             "titleMenu": "Umrli",
             "disclaimer": "Opomba: podatke o umrlih po starosti in v DSO prejemamo tedensko, zato so za zadnja dva tedna nepopolni.",
+            "disclaimerHospitals": "Opomba: podatki o umrlih v bolnišnicah so se poročali samo do 31. 3. 2023.",
             "showToday": "Na dan",
             "showToDate": "Skupaj",
             "showNormal": "Absolutno",

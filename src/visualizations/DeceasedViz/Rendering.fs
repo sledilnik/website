@@ -241,7 +241,8 @@ let render (state: DeceasedVizState) dispatch =
                     match state.Page with
                     | AgeGroupsPage | PersonTypePage ->
                         Html.text (chartText "disclaimer")
-                    | _ -> Html.none
+                    | HospitalsPage ->
+                        Html.text (chartText "disclaimerHospitals")
                     Utils.Markdown.render (I18N.t "charts.note.deceasedReporting")
                 ]
             ]

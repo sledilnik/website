@@ -31,8 +31,8 @@ type PageType =
     | PersonTypePage
     | AgeGroupsPage
 with
-    static member Default = HospitalsPage
-    static member All = [ HospitalsPage; PersonTypePage; AgeGroupsPage; ]
+    static member Default = AgeGroupsPage
+    static member All = [ AgeGroupsPage; PersonTypePage; HospitalsPage; ]
     member this.GetName =
         match this with
         | HospitalsPage  -> chartText "deceasedHospitals"
