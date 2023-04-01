@@ -40,7 +40,7 @@ type DisplayType =
           ByWeekUsage
           ByWeekSupply ]
 
-    static member Default = Used
+    static member Default = ByWeekUsage
 
     static member GetName =
         function
