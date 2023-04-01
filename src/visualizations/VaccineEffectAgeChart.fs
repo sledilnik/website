@@ -368,6 +368,7 @@ let renderChartOptions (state: State) dispatch =
     let summaryData =
         state.Data
         |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+        |> Array.filter (fun dp -> dp.DateTo < DateTime(2022,7,5))  // FILTER: no vaccinated data after that date
         |> Array.map (fun dp -> getSummaryData state dp)
         |> Array.sum
 

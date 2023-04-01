@@ -712,7 +712,7 @@ let render (state: State) (_: Msg -> unit) =
           regionsAbs
           phaseDiagram;
           sewage;
-          vaccineEffect; vaccineEffectAge;
+          vaccineEffectAge; vaccineEffect;
           vaccination; vaccines;
           schools; schoolStatus
           patientsCare;
