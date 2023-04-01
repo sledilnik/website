@@ -380,7 +380,7 @@
             "titleMenu": "Intensive Care"
         },
         "carePatients": {
-            "title": "Nursing Hospitals [until 3/31/2023]",
+            "title": "Nursing Hospitals [until 4/8/2021]",
             "titleMenu": "Nursing Hospitals"
         },
         "patientsAge": {
@@ -833,7 +833,7 @@
             "disabled": "Note: We cannot update this data since January 17, 2022 due to change in reporting."
         },
         "vaccineEffectAge": {
-            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group",
+            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group [until 7/5/2022]",
             "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
             "absolute100k": "Per 100,000 People in Group",
@@ -849,7 +849,7 @@
             "disclaimer": "This chart presents so-called [Simpson's paradox](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e) caused by differences in vaccination rates and risk levels in different age groups - more information in [this article](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
         },
         "schools": {
-            "title": "Cases in School and Kindergarten",
+            "title": "Cases in School and Kindergarten [until 4/5/2022]",
             "titleMenu": "School, Kindergarten - cases",
             "attendeeCases": "Attendees",
             "employeeCases": "Employees",
@@ -867,9 +867,9 @@
             "institutionsRemote": "Institutions - Remote"
         },
         "schoolStatus": {
-            "title": "Situation in School and Kindergarten",
+            "title": "Situation in School and Kindergarten [until 4/5/2022]",
             "titleMenu": "School, Kindergarten - situation",
-            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete.",
+            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete. Data collected until 4/5/2022.",
             "search": "Search by name of school",
             "showActive": "Active",
             "showAll": "All",
@@ -897,8 +897,8 @@
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
-            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
-            "disclaimer": "Note: from October 17, 2020, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
+            "disclaimerGeneral": "Note: from February 21, 2022 epidemiologists do not trace all individual contacts.",
+            "disclaimer": "Note: from October 17, 2020, epidemiologists do not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",

@@ -474,6 +474,7 @@ let renderWeeklyChart state dispatch =
                    data =
                     state.Data
                     |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                    |> Array.filter (fun dp -> dp.DateTo < DateTime(2022,7,5)) // FILTER: vaccinated data only until 7.5.2022
                     |> Array.map (fun dp -> getSummaryData state dp)
                     |> Array.map (fun dp -> getVaccinatedInData state dp)
                     |> Seq.toArray |}
@@ -486,6 +487,7 @@ let renderWeeklyChart state dispatch =
                       data =
                        state.Data
                        |> Array.skipWhile (fun dp -> dp.CovidInVaccinated.IsNone)
+                       |> Array.filter (fun dp -> dp.DateTo < DateTime(2022,7,5)) // FILTER: vaccinated data only until 7.5.2022
                        |> Array.map (fun dp -> getSummaryData state dp)
                        |> Array.map (fun dp -> getOtherInData state dp)
                        |> Seq.toArray |} |]

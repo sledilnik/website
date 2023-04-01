@@ -58,7 +58,7 @@ and State =
           AllFacilities = []
           HTypeToDisplay = hTypeToDisplay
           Breakdown = Breakdown.Default
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 } // all to show history
 
 type Series =
     | InHospital
@@ -177,7 +177,10 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 let renderByHospitalChart (state: State) dispatch =
 
-    let startDate = DateTime(2020, 3, 10)
+    let startDate =
+        match state.HTypeToDisplay with
+        | CareHospitals -> DateTime(2020,9,17) // FILTER: care hospital tracked from 17.9.2020
+        | _ -> DateTime(2020, 3, 10)
 
     let renderSources fcode =
         let renderPoint ps: (JsTimestamp * int option) =
@@ -197,6 +200,10 @@ let renderByHospitalChart (state: State) dispatch =
            data =
                state.PatientsData
                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+               |> Seq.filter (fun dp ->
+                    match state.HTypeToDisplay with
+                    | CareHospitals -> dp.Date < DateTime(2021,4,8) // FILTER: care hospital tracked only until 8.4.2021
+                    | _ -> true)
                |> Seq.map renderPoint
                |> Array.ofSeq
            showInLegend = true |}
@@ -246,7 +253,10 @@ let renderByHospitalChart (state: State) dispatch =
 
 let renderStructureChart (state: State) dispatch =
 
-    let startDate = DateTime(2020, 3, 10)
+    let startDate =
+        match state.HTypeToDisplay with
+        | CareHospitals -> DateTime(2020,9,17) // FILTER: care hospital tracked from 17.9.2020
+        | _ -> DateTime(2020, 3, 10)
 
     let tooltipFormatter jsThis =
         let points: obj [] = jsThis?points
@@ -299,11 +309,19 @@ let renderStructureChart (state: State) dispatch =
         | Facility fcode ->
             state.PatientsData
             |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+            |> Seq.filter (fun dp ->
+                match state.HTypeToDisplay with
+                | CareHospitals -> dp.Date < DateTime(2021,4,8) // FILTER: care hospital tracked only until 8.4.2021
+                | _ -> true)
             |> Seq.map (fun ps -> (ps.Date, ps.facilities |> Map.find fcode))
             |> Seq.toArray
         | _ ->
             state.PatientsData
             |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+            |> Seq.filter (fun dp ->
+                match state.HTypeToDisplay with
+                | CareHospitals -> dp.Date < DateTime(2021,4,8) // FILTER: care hospital tracked only until 8.4.2021
+                | _ -> true)
             |> Seq.map (fun ps -> (ps.Date, ps.total.ToFacilityStats))
             |> Seq.toArray
 

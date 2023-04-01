@@ -1048,7 +1048,7 @@
             "titleMenu": "Intenzivna terapija"
         },
         "carePatients": {
-            "title": "Negovalne bolnišnice [do 31.3.2023]",
+            "title": "Negovalne bolnišnice [do 8.4.2021]",
             "titleMenu": "Negovalne bolnišnice"
         },
         "ratios": {
@@ -1070,7 +1070,7 @@
             "hospitalDeceasedShare": "Delež smrti v bolnišnici"
         },
         "hCenters": {
-            "title": "Obravnava v ZD",
+            "title": "Obravnava v ZD [do 25.10.2020]",
             "titleMenu": "ZD - obravnava",
             "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 25. oktobra 2020 nam Ministrstvo za zdravje ne posreduje več podatkov iz zdravstvenih domov, ker jih ne zbirajo več.",
             "allRegions": "Vse regije",
@@ -1470,7 +1470,7 @@
             "administered3rd": "Dodatni odmerek"
         },
         "vaccineEffectAge": {
-            "title": "Hospitalizacije (SARI) - status cepljenja in starost",
+            "title": "Hospitalizacije (SARI) - status cepljenja in starost [do 5.7.2022]",
             "titleMenu": "Hospitalizacije - cepljenje, starost",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
@@ -1509,7 +1509,7 @@
             "disabled": "Opomba: Zaradi spremembe poročanja teh podatkov od 17. 1. 2022 ne moremo več osveževati."
         },
         "schools": {
-            "title": "Primeri v šolah in vrtcih",
+            "title": "Primeri v šolah in vrtcih [do 5.4.2022]",
             "titleMenu": "Šole, vrtci - primeri",
             "attendeeCases": "Učenci",
             "employeeCases": "Zaposleni",
@@ -1527,9 +1527,9 @@
             "institutionsRemote": "Zavodi - na daljavo"
         },
         "schoolStatus": {
-            "title": "Stanje po šolah in vrtcih",
+            "title": "Stanje po šolah in vrtcih [do 5.4.2022]",
             "titleMenu": "Šole, vrtci - stanje",
-            "disclaimer": "Opomba: prikazani so samo podatki, ki jih šole posredujejo MIZŠ, zato so lahko nepopolni.",
+            "disclaimer": "Opomba: prikazani so samo podatki, ki jih šole posredujejo MIZŠ, zato so lahko nepopolni. Podatki so se zbirali do 5. 4. 2022.",
             "search": "Išči po imenu šole ali vrtca",
             "showActive": "Aktivni",
             "showAll": "Vsi",
@@ -1557,7 +1557,7 @@
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
             "titleMenu": "Viri in lokacije okužb",
-            "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato je posamezno število primerov lahko manjše kot dejansko.",
+            "disclaimerGeneral": "Opomba: epidemiološka služba od 21. februarja 2022 ne sledi več vsem stikom.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra 2020 ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
