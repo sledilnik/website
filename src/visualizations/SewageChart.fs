@@ -41,11 +41,7 @@ let init municipalitiesData: State * Cmd<Msg> =
       MunicipalitiesData = municipalitiesData
       Error = None
       ShownWastewaterTreatmentPlants = Set.singleton "ljubljana"
-      (* Utils.Dictionaries.wastewaterTreatmentPlants
-          |> Map.toSeq
-          |> Seq.map fst
-          |> Set.ofSeq*)
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 3 }, // all to show history
     cmd
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =

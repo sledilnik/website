@@ -704,7 +704,6 @@ let render (state: State) (_: Msg -> unit) =
           map; municipalities; regionMap; regions100k;
           patientsAge;
           patients; patientsICU; hospitals;
-          sewage;
           weeklyDemographics; ageGroups;
           sources; europeMap;
           metricsCorrelation; deceased; excessDeaths
@@ -712,6 +711,7 @@ let render (state: State) (_: Msg -> unit) =
           cases;
           regionsAbs
           phaseDiagram;
+          sewage;
           vaccineEffect; vaccineEffectAge;
           vaccination; vaccines;
           schools; schoolStatus
