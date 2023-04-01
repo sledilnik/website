@@ -211,6 +211,14 @@
         "21": {
             "title": "phase<br>21",
             "description": "new testing methodology"
+        },
+        "22": {
+            "title": "phase<br>22",
+            "description": "new testing methodology"
+        },
+        "23": {
+            "title": "phase<br>23",
+            "description": "limited data collection"
         }
     },
     "charts": {
@@ -342,7 +350,7 @@
             "deceased-rest": "Died"
         },
         "patients": {
-            "title": "Hospitalizations (c19 units and red zones)",
+            "title": "Hospitalizations (c19 units and red zones) [until 3/31/2023]",
             "titleMenu": "Hospitalizations",
             "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",
@@ -367,11 +375,11 @@
             "allHospitals": "All Hospitals"
         },
         "icuPatients": {
-            "title": "Intensive Care",
+            "title": "Intensive Care [until 3/31/2023]",
             "titleMenu": "Intensive Care"
         },
         "carePatients": {
-            "title": "Nursing Hospitals",
+            "title": "Nursing Hospitals [until 3/31/2023]",
             "titleMenu": "Nursing Hospitals"
         },
         "patientsAge": {
@@ -459,7 +467,7 @@
             "otherPersons": "Other Persons"
         },
         "metricsCorrelation": {
-            "title": "Correlation between cases, hospitalized and deceased",
+            "title": "Correlation between cases, hospitalized and deceased [until 3/31/2023]",
             "titleMenu": "Correlation",
             "averageByDay": "By Day (average)",
             "all": "Total",
@@ -719,7 +727,7 @@
             "projection14": "Projection, 14-day doubling",
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
-            "title": "Hospital Capacity",
+            "title": "Hospital Capacity [until 3/31/2023]",
             "titleMenu": "Hospital - capacity"
         },
         "ostanizdrav": {
@@ -772,7 +780,7 @@
             }
         },
         "vaccination": {
-            "title": "Vaccination by Age Groups",
+            "title": "Vaccination by Age Groups [until 7/5/2022]",
             "titleMenu": "Vaccination - age",
             "byAgeAll": "Fully Vaccinated",
             "byAge1st": "First Dose",
@@ -781,7 +789,7 @@
             "disclaimer": "Note: the chart shows the share of the population that was fully vaccinated in the previous 6 months or have received an additional dose of the vaccine. Protection is considered to be effective 14 days after receiving this dose and lasts 6 months from that date."
         },
         "vaccines": {
-            "title": "Vaccines",
+            "title": "Vaccines [until 7/5/2022]",
             "titleMenu": "Vaccines",
             "used": "Used",
             "byManufacturer": "Delivered",
@@ -801,7 +809,7 @@
             "deliveredDoses": "Delivered Doses"
         },
         "vaccineEffect": {
-            "title": "Vaccination Effect",
+            "title": "Vaccination Effect [until 3/31/2023]",
             "titleMenu": "Vaccination - effect",
             "confirmedCases": "Confirmed Cases",
             "hospitalizedCases": "Hospitalized (SARI)",
@@ -877,7 +885,7 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage",
+            "title": "Virus in Sewage [until 2/28/2023]",
             "titleMenu": "Sewage",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
@@ -1348,6 +1356,10 @@
         "liftEverything": {
             "title": "🏳️",
             "description": "Easing restrictions: termination of all restrictions.<br>Follow recommendations of National Institute of Public Health (NIJZ)."
+        },
+        "noHospitalData": {
+            "title": "🏥",
+            "description": "Cessation of data collection on hospitalized patients.<br>Stopping the #OstaniZdrav app."
         }
     },
     "days": {

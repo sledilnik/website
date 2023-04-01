@@ -187,6 +187,7 @@ let addContainmentMeasuresFlags
         7,  3, 2022, "#ebfaeb", "liftMasksSchools"
         14, 4, 2022, "#ebfaeb", "liftMasksInside"
         31, 5, 2022, "#ebfaeb", "liftEverything"
+        1,  4, 2023, "#ebfaeb", "noHospitalData"
     |]
     {|
         ``type`` = "flags"
@@ -364,6 +365,7 @@ let basicChart
                     {| value=jsTime <| DateTime(2022,1,19); label=Some {| text=I18N.t "phase.20.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2022,2,1);  label=Some {| text=I18N.t "phase.21.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2022,2,21); label=Some {| text=I18N.t "phase.22.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2023,4,1);  label=Some {| text=I18N.t "phase.23.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -472,9 +474,14 @@ let basicChart
                        label=Some {| align="center"; text=I18N.t "phase.21.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2022,2,21);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2023,4,1);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.22.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2023,4,1);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.23.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
