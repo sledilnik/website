@@ -258,13 +258,16 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttons = buttons
             |}
 
+let urlNijzCovid = "https://nijz.si/nalezljive-bolezni/koronavirus/spremljanje-okuzb-s-sars-cov-2-covid-19/"
+let urlMinistrstvoZaZdravje = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
+
 let chartCreditsNIJZ =
     {|
         enabled = true
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+        href = urlNijzCovid
     |} |> pojo
 
 let chartCreditsNIJZMZHospitals =
@@ -274,7 +277,7 @@ let chartCreditsNIJZMZHospitals =
             (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
             (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
             (I18N.tOptions ("charts.common.dsHospitals") {| context = localStorage.getItem ("contextCountry") |})
-       href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+       href = urlNijzCovid
     |} |> pojo
 
 let chartCreditsMZ =
@@ -283,7 +286,7 @@ let chartCreditsMZ =
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
+        href = urlMinistrstvoZaZdravje
     |} |> pojo
 
 let chartCreditsMZHospitals =
@@ -292,7 +295,7 @@ let chartCreditsMZHospitals =
             (I18N.t "charts.common.dataSource")
             (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
             (I18N.tOptions ("charts.common.dsHospitals") {| context = localStorage.getItem ("contextCountry") |})
-       href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
+       href = urlMinistrstvoZaZdravje
     |} |> pojo
 
 let chartCreditsHospitals =

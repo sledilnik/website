@@ -9,6 +9,7 @@ open Fable.Core.JsInterop
 open Feliz
 open Feliz.ElmishComponents
 
+open Highcharts
 open Types
 
 let barMaxHeight = 65
@@ -595,7 +596,7 @@ let render (state : State) dispatch =
                 prop.className "credits"
                 prop.children [
                     Html.a [
-                        prop.href "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                        prop.href urlNijzCovid
                         prop.text (sprintf "%s: %s"
                             (I18N.t "charts.common.dataSource")
                             (I18N.t "charts.common.dsNIJZ"))

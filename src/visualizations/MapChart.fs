@@ -882,7 +882,7 @@ let renderMap (state : State) =
                             (I18N.t "charts.common.dsNIJZ")
                     mapTextFull = ""
                     mapText = ""
-                    href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                    href = urlNijzCovid
                     position = {| align = "right" ; verticalAlign = "bottom" ; x = -10 ; y = -5 |}
                     style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "9px" |}
                 |}
