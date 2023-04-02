@@ -90,7 +90,7 @@ let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (
 
     municipalitiesData
     |> List.filter (fun municipalityData ->
-        municipalityData.Date < DateTime(2023,3,1)) // we have sewage data from NIB only until end 28.2.2023
+        municipalityData.Date < DateTime(2023,3,1)) // FILTER: we have sewage data from NIB only until end 28.2.2023
     |> List.map (fun municipalityData ->
         municipalityData.Date |> jsTimeMidnight,
         (municipalityData.Regions
