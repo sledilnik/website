@@ -43,6 +43,7 @@ You can also inspect the data directly on the [Tables page](/en/tables).
 - **Obsolete - not updated anymore**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
+- [ostanizdrav.csv](https://github.com/sledilnik/data/blob/master/csv/ostanizdrav.csv)
 - **Dictionaries**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
