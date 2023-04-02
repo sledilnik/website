@@ -11902,10 +11902,10 @@ vue-coerce-props@^1.0.0:
   resolved "https://registry.yarnpkg.com/vue-coerce-props/-/vue-coerce-props-1.0.0.tgz#af3d00aa419f0de79c2b020824c6c0387070d66e"
   integrity sha512-4fdRMXO6FHzmE7H4soAph6QmPg3sL/RiGdd+axuxuU07f02LNMns0jMM88fmt1bvSbN+2Wyd8raho6p6nXUzag==
 
-vue-date-fns@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vue-date-fns/-/vue-date-fns-2.0.1.tgz#a2a0d42552badd57f9ffd9a7a09d75331933495a"
-  integrity sha512-j2G97bVOKO0mVfFEnzCu5dQU0dgD8jLAAVU0dGRDqxZzzNXqep7d3WEGuuJ6mNOP5PM7GE+UqpKYfkL/LNmDKQ==
+vue-date-fns@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-date-fns/-/vue-date-fns-2.0.2.tgz#dc548041e85e49582ac429df1a44834bfa29ba55"
+  integrity sha512-XHd2oYZY0AfWJohCwREhvfziJdiUHit6HYKUPTyvx5wDUaFA4TWDdkFp78IIrn0nl86oTGM1/5yXtNvqYXL5ew==
   dependencies:
     date-fns "^2.0.0"
 
