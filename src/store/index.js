@@ -60,7 +60,6 @@ const store = new Vuex.Store({
     patients: patientsStore,
     municipalities: municipalitiesStore,
     healthCenters: healthCentersStore,
-    ostanizdrav: ostanizdravStore,
     posts: postsStore,
     faqVaccines: faqVaccinesStore,
     restrictions: restrictionsStore,
