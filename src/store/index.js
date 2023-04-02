@@ -10,7 +10,6 @@ import { postsStore } from './posts.store'
 import { tableData } from './tables.store'
 import restrictionsStore from './restrictions.store'
 import faqVaccinesStore from './faq-vaccines.store'
-import ostanizdravStore from './ostanizdrav.store'
 
 Vue.use(Vuex)
 
