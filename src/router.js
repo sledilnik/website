@@ -123,10 +123,6 @@ const routes = [
     redirect: `/${i18next.language}/embed`,
   },
   {
-    path: '/ostanizdrav',
-    redirect: `/${i18next.language}/ostanizdrav`,
-  },
-  {
     path: '/podpri', // Friendly redirect
     redirect: `/${i18next.language}/donate`,
   },
@@ -183,11 +179,6 @@ const routes = [
         path: 'stats',
         name: 'stats',
         component: StatsPage,
-      },
-      {
-        path: 'ostanizdrav',
-        name: 'ostanizdrav',
-        component: () => import(/* webpackChunkName: "OstaniZdrav.route" */ './pages/OstaniZdravPage.vue'),
       },
       {
         path: 'world',
