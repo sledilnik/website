@@ -21,7 +21,6 @@
       <router-link :to="{ name: 'data' }" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
       <router-link :to="{ name: 'models' }" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
       <router-link :to="{ name: 'posts' }" class="router-link"><span>{{ $t('navbar.posts') }}</span></router-link>
-      <router-link :to="{ name: 'ostanizdrav' }" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link :to="{ name: 'faq' }" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link :to="{ name: 'about' }" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
       <router-link :to="{ name: 'donate' }" class="router-link"><span>{{ $t('navbar.donate') }}</span></router-link>
