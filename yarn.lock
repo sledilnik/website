@@ -6269,9 +6269,9 @@ hex-color-regex@^1.1.0:
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
 highcharts-react-official@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/highcharts-react-official/-/highcharts-react-official-3.1.0.tgz#921e5614f9e8580bc99a1e3b531d51a70f396500"
-  integrity sha512-CkWJHrVMOc6CT8KFu1dR+a0w5OxCVKKgZUNWtEi5TmR0xqBDIDe+RyM652MAN/jBYppxMo6TCUVlRObCyWAn0Q==
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/highcharts-react-official/-/highcharts-react-official-3.2.0.tgz#42f8f237d73eec6791318efb41237067000cf815"
+  integrity sha512-71IJZsLmEboYFjONpwC3NRsg6JKvtKYtS5Si3e6s6MLRSOFNOY8KILTkzvO36kjpeR/A0X3/kvvewE+GMPpkjw==
 
 highcharts@^10.3.3:
   version "10.3.3"
