@@ -796,6 +796,7 @@ let renderMap state geoJson _ =
         |> pojo
 
     {| optionsWithOnLoadEvent "covid19-europe-map" with
+           chart = {| animation = false |} |> pojo
            title = null
            series = [| series geoJson |]
            colorAxis = colorAxis

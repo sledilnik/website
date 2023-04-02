@@ -857,6 +857,7 @@ let renderMap (state : State) =
         let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
 
         {| optionsWithOnLoadEvent "covid19-map" with
+            chart = {| animation = false |} |> pojo
             title = null
             subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
             series =
