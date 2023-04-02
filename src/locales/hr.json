@@ -993,7 +993,7 @@
             "titleMenu": "Hospitalizacije – cijepljenje, dob",
             "absolute100k": "Na 100.000 osoba u grupi",
             "title": "Stope hospitalizacije (SARI) po stanju cijepljenja i dobnoj skupini",
-            "hospitalizedIn": "Od {{ startDate, %e. %b %Y.  }} do {{ endDate, %e. %b %Y. }}.",
+            "hospitalizedIn": "Od {{ startDate, %e. %b %Y. }} do {{ endDate, %e. %b %Y. }}.",
             "toDate": "Na datum",
             "ageBelow65": "Dobna skupina &lt;65",
             "ageAbove65": "Dobna skupina 65+",

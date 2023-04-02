@@ -1,5 +1,6 @@
 module SourcesChart
 
+open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -215,7 +216,9 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
                                                                       showInLegend = Set.contains countryCode countriesToShowInLegend
-                                                                      data = state.Data |> Seq.map (fun dp -> {|
+                                                                      data = state.Data
+                                                                            |> Seq.filter (fun dp-> dp.DateTo < DateTime(2022,2,21)) // FILTER: NIJZ does not track source country anymore
+                                                                            |> Seq.map (fun dp -> {|
                                                                                                                x = jsDatesMiddle dp.Date dp.DateTo
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
@@ -287,7 +290,11 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        legendIndex = legendIndex
        data =
            state.Data
-           |> Seq.map (fun dp ->
+           |> Seq.filter (fun dp ->
+                match state.DisplayType with
+                | Quarantine -> dp.DateTo < DateTime(2020,10,17) // FILTER: NIJZ does not issue quarantines after that date
+                | _ -> true)
+           |> Seq.map (fun dp->
                {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string

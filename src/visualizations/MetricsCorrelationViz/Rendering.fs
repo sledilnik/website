@@ -117,6 +117,7 @@ let renderChartOptions state dispatch =
             |> List.rev
 
         state.Data
+        |> List.filter (fun dp -> dp.Date < DateTime(2023,4,1)) // FILTER: no hospital data after that, no correlation
         |> List.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
         |> skipLeadingMissing
         |> skipTrailingMissing

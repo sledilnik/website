@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module SewageChart
 
+open System
 open System.Collections.Generic
 open Browser
 open Fable.Core.JsInterop
@@ -40,11 +41,7 @@ let init municipalitiesData: State * Cmd<Msg> =
       MunicipalitiesData = municipalitiesData
       Error = None
       ShownWastewaterTreatmentPlants = Set.singleton "ljubljana"
-      (* Utils.Dictionaries.wastewaterTreatmentPlants
-          |> Map.toSeq
-          |> Seq.map fst
-          |> Set.ofSeq*)
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 3 }, // all to show history
     cmd
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
@@ -92,6 +89,8 @@ let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (
         |> Set.ofArray
 
     municipalitiesData
+    |> List.filter (fun municipalityData ->
+        municipalityData.Date < DateTime(2023,3,1)) // FILTER: we have sewage data from NIB only until end 28.2.2023
     |> List.map (fun municipalityData ->
         municipalityData.Date |> jsTimeMidnight,
         (municipalityData.Regions

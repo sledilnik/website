@@ -35,7 +35,7 @@ type State = {
             error = None
             facilities = []
             scope = Totals
-            RangeSelectionButtonIndex = 1
+            RangeSelectionButtonIndex = 3 // all to show history
         }
     static member switchBreakdown breakdown state = { state with scope = breakdown }
 

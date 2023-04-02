@@ -210,6 +210,14 @@
         "21": {
             "title": "phase<br>21",
             "description": "new testing methodology"
+        },
+        "22": {
+            "title": "phase<br>22",
+            "description": "new testing methodology"
+        },
+        "23": {
+            "title": "phase<br>23",
+            "description": "limited data collection"
         }
     },
     "charts": {
@@ -313,6 +321,7 @@
             "title": "Deaths",
             "titleMenu": "Deaths",
             "disclaimer": "Note: deceased by age and retirement homes data is provided weekly, therefore it is not complete for last two weeks.",
+            "disclaimerHospitals": "Note: data about deceased in hospitals was reported until 3/31/2023.",
             "showToday": "Daily",
             "showToDate": "To Date",
             "showNormal": "Absolute",
@@ -341,7 +350,7 @@
             "deceased-rest": "Died"
         },
         "patients": {
-            "title": "Hospitalizations (c19 units and red zones)",
+            "title": "Hospitalizations (c19 units and red zones) [until 3/31/2023]",
             "titleMenu": "Hospitalizations",
             "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",
@@ -366,11 +375,11 @@
             "allHospitals": "All Hospitals"
         },
         "icuPatients": {
-            "title": "Intensive Care",
+            "title": "Intensive Care [until 3/31/2023]",
             "titleMenu": "Intensive Care"
         },
         "carePatients": {
-            "title": "Nursing Hospitals",
+            "title": "Nursing Hospitals [until 4/8/2021]",
             "titleMenu": "Nursing Hospitals"
         },
         "patientsAge": {
@@ -458,7 +467,7 @@
             "otherPersons": "Other Persons"
         },
         "metricsCorrelation": {
-            "title": "Correlation between cases, hospitalized and deceased",
+            "title": "Correlation between cases, hospitalized and deceased [until 3/31/2023]",
             "titleMenu": "Correlation",
             "averageByDay": "By Day (average)",
             "all": "Total",
@@ -718,7 +727,7 @@
             "projection14": "Projection, 14-day doubling",
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
-            "title": "Hospital Capacity",
+            "title": "Hospital Capacity [until 3/31/2023]",
             "titleMenu": "Hospital - capacity"
         },
         "ostanizdrav": {
@@ -771,7 +780,7 @@
             }
         },
         "vaccination": {
-            "title": "Vaccination by Age Groups",
+            "title": "Vaccination by Age Groups [until 7/5/2022]",
             "titleMenu": "Vaccination - age",
             "byAgeAll": "Fully Vaccinated",
             "byAge1st": "First Dose",
@@ -780,7 +789,7 @@
             "disclaimer": "Note: the chart shows the share of the population that was fully vaccinated in the previous 6 months or have received an additional dose of the vaccine. Protection is considered to be effective 14 days after receiving this dose and lasts 6 months from that date."
         },
         "vaccines": {
-            "title": "Vaccines",
+            "title": "Vaccines [until 7/5/2022]",
             "titleMenu": "Vaccines",
             "used": "Used",
             "byManufacturer": "Delivered",
@@ -800,7 +809,7 @@
             "deliveredDoses": "Delivered Doses"
         },
         "vaccineEffect": {
-            "title": "Vaccination Effect",
+            "title": "Vaccination Effect [until 3/31/2023]",
             "titleMenu": "Vaccination - effect",
             "confirmedCases": "Confirmed Cases",
             "hospitalizedCases": "Hospitalized (SARI)",
@@ -808,9 +817,9 @@
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
             "relative100k": "Relative per 100.000 People in Group",
-            "confirmedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
-            "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}). Data by two age groups (<65, 65+) are available in [this chart](/en/stats#vaccine-effect-age-chart).",
-            "icuCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, recovered, partially vaccinated) were addmitted in intensive care unit.",
+            "confirmedCasesAbs": "From {{ startDate, %b %e %Y }} to {{ endDate, %b %e %Y }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
+            "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e %Y }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}). Data by two age groups (<65, 65+) are available in [this chart](/en/stats#vaccine-effect-age-chart).",
+            "icuCasesAbs": "From {{ startDate, %b %e %Y }} to {{ endDate, %b %e %Y }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, recovered, partially vaccinated) were addmitted in intensive care unit.",
             "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
             "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination. Data by two age groups (<65, 65+) are available in [this chart](/en/stats#vaccine-effect-age-chart) and they show even higher efficiency.",
             "icuCasesRatio": "Unvaccinated, recovered and partially vaccinated are admitted in intensive care unit **{{multiple}}** times as many as fully protected with vaccination.",
@@ -823,7 +832,7 @@
             "disabled": "Note: We cannot update this data since January 17, 2022 due to change in reporting."
         },
         "vaccineEffectAge": {
-            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group",
+            "title": "Hospitalization Rates (SARI) by Vaccination Status and Age Group [until 7/5/2022]",
             "titleMenu": "Hospitalizations - vaccination, age",
             "absolute": "Absolute",
             "absolute100k": "Per 100,000 People in Group",
@@ -835,11 +844,11 @@
             "ageAll": "All ages",
             "riskRatio": "Risk ratio (factor)",
             "vaccineEfficiency": "Vaccination Efficiency",
-            "hospitalizedIn": "From {{ startDate, %e. %b %Y  }} to {{ endDate, %e. %b %Y }}.",
+            "hospitalizedIn": "From {{ startDate, %e. %b %Y }} to {{ endDate, %e. %b %Y }}.",
             "disclaimer": "This chart presents so-called [Simpson's paradox](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e) caused by differences in vaccination rates and risk levels in different age groups - more information in [this article](https://medium.com/sledilnik/ucinek-cepljenja-8167a2e2b179)."
         },
         "schools": {
-            "title": "Cases in School and Kindergarten",
+            "title": "Cases in School and Kindergarten [until 4/5/2022]",
             "titleMenu": "School, Kindergarten - cases",
             "attendeeCases": "Attendees",
             "employeeCases": "Employees",
@@ -857,9 +866,9 @@
             "institutionsRemote": "Institutions - Remote"
         },
         "schoolStatus": {
-            "title": "Situation in School and Kindergarten",
+            "title": "Situation in School and Kindergarten [until 4/5/2022]",
             "titleMenu": "School, Kindergarten - situation",
-            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete.",
+            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete. Data collected until 4/5/2022.",
             "search": "Search by name of school",
             "showActive": "Active",
             "showAll": "All",
@@ -876,7 +885,7 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage",
+            "title": "Virus in Sewage [until 2/28/2023]",
             "titleMenu": "Sewage",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
@@ -887,8 +896,8 @@
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
-            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
-            "disclaimer": "Note: from October 17, 2020, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
+            "disclaimerGeneral": "Note: from February 21, 2022 epidemiologists do not trace all individual contacts.",
+            "disclaimer": "Note: from October 17, 2020, epidemiologists do not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -1347,6 +1356,10 @@
         "liftEverything": {
             "title": "🏳️",
             "description": "Easing restrictions: termination of all restrictions.<br>Follow recommendations of National Institute of Public Health (NIJZ)."
+        },
+        "noHospitalData": {
+            "title": "🏥",
+            "description": "Cessation of data collection on hospitalized patients.<br>Stopping the #OstaniZdrav app."
         }
     },
     "days": {

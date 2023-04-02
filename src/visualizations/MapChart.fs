@@ -925,14 +925,15 @@ let renderContentTypeSelector state dispatch =
     let contentTypes =
         if state.MapToDisplay = RegionMap then
             [("ConfirmedCases", ContentType.ConfirmedCases)
-             ("Vaccinated2nd", ContentType.Vaccinated2nd)
-             ("Vaccinated1st", ContentType.Vaccinated1st)
-             ("Vaccinated3rd", ContentType.Vaccinated3rd)
+             // ("Vaccinated2nd", ContentType.Vaccinated2nd)
+             // ("Vaccinated1st", ContentType.Vaccinated1st)
+             // ("Vaccinated3rd", ContentType.Vaccinated3rd)
              ("Deceased", ContentType.Deceased)]
          else
             [("ConfirmedCases", ContentType.ConfirmedCases)
-             ("Vaccinated2nd", ContentType.Vaccinated2nd)
-             ("Vaccinated1st", ContentType.Vaccinated1st)] // no 3rd dose for municipality yet
+             // ("Vaccinated2nd", ContentType.Vaccinated2nd)
+             // ("Vaccinated1st", ContentType.Vaccinated1st)
+            ] // no 3rd dose for municipality yet
 
     let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
         Html.option [

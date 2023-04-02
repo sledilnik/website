@@ -37,11 +37,12 @@ type DisplayType =
           PositivePctPCR
           TestsHAT
           PositivePctHAT
-          VacDosesAdministered
-          HospitalAdmitted
-          HospitalDischarged
-          ICUAdmitted
-          Deceased ]
+          // VacDosesAdministered
+          // HospitalAdmitted
+          // HospitalDischarged
+          // ICUAdmitted
+          // Deceased
+        ]
 
     static member Default = New
 

@@ -24,7 +24,7 @@ type FilterType =
     | ShowAll
   with
     static member All = [ ShowActive; ShowAll ]
-    static member Default = ShowActive
+    static member Default = ShowAll
     member this.GetName =
         match this with
         | ShowActive  -> chartText "showActive"
@@ -77,7 +77,7 @@ let init (queryObj: obj): State * Cmd<Msg> =
                 { defaultState with
                     SchoolStatus = Loading
                     SelectedSchool = Some school
-                    FilterType = ShowActive }
+                    FilterType = FilterType.Default }
             state, Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         | _ -> defaultState, defaultCmd
     | _ -> defaultState, defaultCmd
@@ -100,7 +100,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with SchoolStatusMap = Loading
                      SchoolStatus = NotAsked
                      SelectedSchool = None
-                     FilterType = ShowActive }, defaultCmd
+                     FilterType = FilterType.Default }, defaultCmd
     | ChangedSchoolSelected id ->
         let cmd =
             match Utils.Dictionaries.schools.TryFind(id) with
@@ -112,7 +112,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         let newState = {
             state with SchoolStatus = Loading
                        SelectedSchool = Some school
-                       FilterType = ShowActive }
+                       FilterType = FilterType.Default }
         newState, cmd
 
 let renderChartOptions state schoolStatus =
@@ -203,7 +203,11 @@ let renderChartOptions state schoolStatus =
                      (schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
                       |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
                       |> Array.reduce min)
-        let endTime = DateTime.Today |> jsTime12h
+        let endTime = // DateTime.Today |> jsTime12h     // We only show historic data
+                     (schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
+                      |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
+                      |> Array.reduce max)
+
 
         let personStr =
             match state.SelectedSchool with
@@ -255,7 +259,7 @@ let renderChartOptions state schoolStatus =
                                                           color = "red" |} |> pojo |] |} )
     {| baseOptions with
            chart = pojo {| ``type`` = "xrange"; animation = false |}
-           xAxis = xAxis
+           // xAxis = xAxis   // Do not show current date, as chart has only historic data
            yAxis = [| {| title = {| text = null |} |> pojo
                          labels = {| enabled = false |} |> pojo |} |]
            series = Seq.toArray allSeries
@@ -429,9 +433,9 @@ let render (state: State) dispatch =
                 (match state.SelectedSchool with
                  | None -> Html.none
                  | Some school -> renderSchoolControls school dispatch)
-                (match state.SelectedSchool with
-                 | None -> Html.none
-                 | Some school -> renderFilterTypes state.FilterType dispatch)
+                // (match state.SelectedSchool with                        // Only historical data, no selector
+                // | None -> Html.none
+                // | Some school -> renderFilterTypes state.FilterType dispatch)
             ]
             Html.div [
                 prop.className "school"

@@ -89,7 +89,7 @@ let init: State * Cmd<Msg> =
           ChartType = AbsoluteChart
           MetricType = MetricType.Default
           DisplayType = DisplayType.Default
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 } // all to show history
 
     state, cmd
 
