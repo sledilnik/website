@@ -44,6 +44,7 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 - **Zastarelo - se ne osvežuje več**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
+- [ostanizdrav.csv](https://github.com/sledilnik/data/blob/master/csv/ostanizdrav.csv)
 - **Slovarji**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)

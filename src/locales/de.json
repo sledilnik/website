@@ -654,55 +654,6 @@
             "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
             "testsHAT": "Durchgeführte Tests: RAT"
         },
-        "ostanizdrav": {
-            "userPublishedByCount": {
-                "count": "(durchschnittliche) Anzahl Schlüssel pro Benutzer",
-                "tooltip": "datum.user_count + ' Benutzer schickte ' + datum.key_count + ' Schlüssel'",
-                "title": "Anzahl Schlüssel pro Benutzer und Tag",
-                "users": "Anzahl Benutzer",
-                "date": "Datum",
-                "description": "Die Tabelle zeigt die Anzahl der Tagesschlüssel, die von jedem Benutzer veröffentlicht wurden, der an diesem Tag seinen positiven Testbestätigungscode eingegeben hat. Jeder Punkt im Diagramm repräsentiert eine Gruppe von Benutzern, die an einem bestimmten Tag die gleiche Anzahl von Tagesschlüsseln veröffentlicht haben. Die dunkelblaue Linie gibt die durchschnittliche Anzahl der pro Benutzer veröffentlichten Schlüssel an. Die App veröffentlicht maximal 13 Schlüssel pro Benutzer. Wenn sie jedoch nicht während des gesamten Zeitraums aktiv war, ist die Anzahl der veröffentlichten Schlüssel entsprechend geringer."
-            },
-            "usercount": {
-                "runningTotal": "Gesamtanzahl Benutzer die Schlüssel veröffentlichen",
-                "users": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen",
-                "title": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen, pro Tag",
-                "date": "Datum",
-                "description": "Die Tabelle zeigt unsere Schätzung über die Anzahl der Benutzer, die die Bestätigung ihres positiven Tests in die App eingegeben haben (blaue Balken), und über die laufende Gesamtzahl der Benutzer, die dies bisher getan haben (rote Linie). Nur die Anzahl der veröffentlichten Tagesschlüssel ist sicher bekannt (siehe Diagramm [$t(charts.ostanizdrav.published.title)](#published-chart)), aber aufgrund der typischen Reihenfolge der zugehörigen Übertragungsrisikostufen können wir eine gute Einschätzung darüber abgeben, wie viele Benutzer an diesem Tag ihre Schlüssel hochgeladen haben."
-            },
-            "publishedByRisk": {
-                "risk": "Risikostufe",
-                "published": "Anzahl veröffentlichter Schlüssel",
-                "tooltip": "datum.published + ' Schlüssel mit Risikostufe ' + datum.risk",
-                "title": "Anzahl veröffentlichter Schlüssel pro Tag nach Risikostufe",
-                "date": "Datum",
-                "description": "Jedem veröffentlichten Tagesschlüssel ist ein Übertragungsrisiko zugeordnet. Die Tabelle zeigt ihre Zahlen für jeden Tag. Je dunkler die Farbe, desto höher das Risiko. Wenn ein Benutzer die App installiert hat und während des gesamten Zeitraums arbeitet, haben die Schlüssel die folgende Reihenfolge von Risikostufen: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Es wird daher erwartet, dass Schlüssel mit einem Übertragungsrisiko von 1 am häufigsten sind und das zweithäufigste Übertragungsrisiko 8 ist."
-            },
-            "validByRisk": {
-                "valid": "Anzahl gültiger Schlüssel pro Tag",
-                "tooltip": "datum.valid + ' Schlüssel mit Risikostufe ' +datum.risk",
-                "title": "Anzahl gültiger Schlüssel pro Tag nach Risikostufe",
-                "date": "Datum",
-                "risk": "Risiko",
-                "description": "Das Diagramm zeigt die Übertragungsrisikostufen der Schlüssel, die für diesen Tag gültig sind - im Gegensatz zur Veröffentlichung an diesem Tag (siehe Diagramm [$t(charts.ostanizdrav.publishedByRisk.title)](#publishedByRisk-chart)). Wenn ein positives Testergebnis in der App bestätigt wird, werden alle Tagesschlüssel am selben Tag veröffentlicht, aber jeder von ihnen ist für einen der vorherigen Tage gültig. Dies bedeutet, dass das Diagramm in den letzten 13 Tagen immer einen Abwärtstrend zeigt, unabhängig von der Anzahl der Benutzer, die ihre Schlüssel hochladen. Dies liegt daran, dass die meisten Tagesschlüssel, die für diesen Zeitraum gültig sind, erst in Zukunft veröffentlicht werden."
-            },
-            "published": {
-                "runningTotal": "Gesamtzahl veröffentlichter Tagesschlüssel",
-                "perDay": "Anzahl veröffentlichter Tagesschlüssel",
-                "title": "Anzahl veröffentlichter Tagesschlüssel pro Tag",
-                "date": "Datum",
-                "description": "Dieses Diagramm zeigt die tägliche Anzahl der veröffentlichten Schlüssel (blaue Balken) und die Gesamtzahl der bisher veröffentlichten Schlüssel (rote Linie). Der durchschnittliche Benutzer veröffentlicht zwischen 10 und 12 tägliche Schlüssel (siehe Diagramm [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)) und wir können diese Informationen verwenden, um die Anzahl der Benutzer zu schätzen, die nach einem positivem Test ihren Bestätigungscode eingegeben haben."
-            },
-            "valid": {
-                "perDay": "Anzahl gültiger Schlüssel",
-                "title": "Anzahl gültiger Schlüssel pro Tag",
-                "date": "Datum",
-                "description": "Die Grafik zeigt die Anzahl der Schlüssel, die an einem bestimmten Tag gültig sind (im Gegensatz zu den an einem einzelnen Tag veröffentlichten Schlüsseln - siehe Grafik [$t(charts.ostanizdrav.published.title)](#published-chart)). Nach Bestätigung der Infektion in der App werden alle Schlüssel der letzten 13 Tage am gleichzeitig veröffentlicht. Jeder von ihnen ist für einen der letzten 13 Tage gültig. Dies bedeutet, dass dieses Diagramm unabhängig von der Änderung der Anzahl der positiv getesteten Benutzer immer für die letzten 13 Tage abfällt, weil die meisten Schlüssel für diesen Zeitraum erst in der Zukunft veröffentlicht werden."
-            },
-            "title": "Die #OstaniZdrav Benachrichtigungs-App",
-            "footer": "Die Analyse ist das Ergebnis der Anpassung des deutschen Projekts [Corona Tracker Tracker](https://ctt.pfstr.de/) an das slowenische #OstaniZdrav. [Quellcode des Projekts](https://github.com/janpf/ctt) verwendet [Analysetools für Diagnoseschlüssel](https://github.com/mh-/diagnosis-keys).",
-            "description": "Die [mobile App #OstaniZdrav](https://www.gov.si/en/ostanizdrav) reduziert die Ausbreitung von Infektionen mit dem SARS-CoV-2-Coronavirus, indem Benutzende benachrichtigt werden, dass sie mit einer bestätigt infizierten Person in Kontakt war. **Hauptmerkmale der App sind der Schutz der Anonymität der Benutzer und die dezentrale Verarbeitung ihrer Daten.** Dies bedeutet, dass niemand – nicht einmal MPA und NIPH – auf Daten über die Kontakte einzelner Benutzer oder auf Informationen darüber zugreifen kann, ob ein Benutzer eine bestätigte Infektion hat.\n\nAufgrund dieser Einschränkungen basiert [unsere Analyse der Leistung der App](#published-chart) ausschließlich auf den Daten, auf die die Apps selbst zugreifen können. Um die folgenden Diagramme zu interpretieren, ist es wichtig zu verstehen, wie die App funktioniert, welche Bedeutung Begriffe wie Tagesschlüssel und Übertragungsrisikostufen haben und was der Unterschied zwischen veröffentlichten und gültigen Schlüsseln ist.\n\nAn jeden Tag, an dem die App auf Ihrem Telefon installiert wird, wird ein zufälliger, eindeutiger und anonymer Schlüssel generiert. Dieser Tagesschlüssel wird von der App verwendet, um Identifikationscodes an Telefone in der Nähe zu senden, auf denen die App ebenfalls installiert ist. Gleichzeitig empfängt und speichert die App die Identifikationscodes anderer in der Nähe befindlicher Telefone. Wenn ein Benutzer positiv auf den SARS-CoV-2-Virus testet, gibt er den teleTAN-Bestätigungscode in die App ein. Diese Aktion lädt ihre täglichen Schlüssel für die letzten 14 Tage auf den Server hoch, da dies der Zeitraum ist, in dem Kontakte am riskantesten sind.\n\nJeden Tag lädt die App die neu veröffentlichten Tagesschlüssel vom Server herunter und prüft, ob sie den auf ihrem Telefon gespeicherten Identifikationscodes entsprechen. Außerdem weiß sie, wie lange und wie nah diese Kontakte waren und wie hoch das Übertragungsrisiko für jeden Tag ist. Die 14 täglichen Schlüssel haben unterschiedliche Übertragungsrisikostufen im Verhältnis zu dem Tag, an dem der Bestätigungscode eingegeben wurde: Das Risiko ist vor 14 Tagen am niedrigsten und steigt dann an, wobei die höchsten Werte an den Tagen zwei, drei und vier vor der Eingabe des positiven Tests erreicht werden. Die App berechnet anhand dieser drei Faktoren, ob das Übertragungsrisiko hoch genug ist, um Sie zu benachrichtigen.\n\nDas Übertragungsrisiko reicht von 1 (niedrigste Risikostufe) bis 8 (höchste Risikostufe). Wenn der Benutzer die App während des gesamten Zeitraums installiert hat und funktioniert, werden den Schlüsseln in der folgenden Weise Risikostufen angehängt: Tag 1: 1, Tag 2: 1, Tag 3: 1, Tag 4: 1, Tag 5: 1, Tag 6: 1, Tag 7: 1, Tag 8: 3, Tag 9: 5, Tag 10: 8, Tag 11: 8, Tag 12: 8, Tag 13: 6, Tag 14: 5. Der Server veröffentlicht sofort nach Melden der Infektion die ersten 13 Schlüssel, während der letzte Schlüssel, der am Tag der Meldung gültig ist, erst am folgenden Tag veröffentlicht wird, um eine größere Anonymität zu gewährleisten. Wenn der Benutzer die App zu Beginn dieses Zeitraums nicht installiert oder zwischendurch deaktiviert hatte, fehlen in der Sequenz die Schlüssel. Im Durchschnitt fehlen den Sequenzen drei Schlüssel.\n\n**Um die Anonymität der Benutzer zu gewährleisten, kann nicht festgestellt werden, welche Schlüssel zu einem einzelnen Benutzer gehören. Da wir jedoch die typische Reihenfolge der zugehörigen Übertragungsrisikostufen kennen, können wir Zahlen über die Sequenzen mit einem hohen Maß an Genauigkeit rekonstruieren. Wir können nicht sicher sein, ob die Zahl genau korrekt ist. Unsere Schätzung ist nur eine gut begründete Vermutung.**\n\nJeden Tag veröffentlicht der Server eine Reihe von täglichen Schlüsseln und die damit verbundenen Übertragungsrisikostufen, die für die letzten 13 Tage gültig sind. Dies sind die Daten, auf die die Apps zugreifen können, und dies sind auch die Daten, die in unserer Analyse hier verwendet werden.\n\n**Warnung: Die Daten für den aktuellen Tag sind nicht unbedingt vollständig.**"
-        },
         "sources": {
             "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
             "confirmedCases": "Bestätigte Fälle",
