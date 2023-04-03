@@ -31,16 +31,18 @@ You can also inspect the data directly on the [Tables page](/en/tables).
     - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
     - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
     - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
-- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
-    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
-    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
-- [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
+- [sewage-cases.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-cases.csv)
+- [sewage-genomes.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-genomes.csv)
+- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
+- **Obsolete - not updated anymore**:
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
 - [sewage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
-- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
-- **Obsolete - not updated anymore**:
+- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
+    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
+    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
+- [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
 - [ostanizdrav.csv](https://github.com/sledilnik/data/blob/master/csv/ostanizdrav.csv)
@@ -152,6 +154,5 @@ To ensure the precision and reliability of our data, we collect and cross-check 
 | [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)              |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
 | [Register prostorskih enot, Geodetska uprava RS](https://www.e-prostor.gov.si/zbirke-prostorskih-podatkov/nepremicnine/register-prostorskih-enot/)                           |     |
- 
+
  --->
- 
