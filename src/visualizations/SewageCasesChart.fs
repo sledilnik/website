@@ -12,6 +12,31 @@ open Types
 open Data.SewageCases
 open Data.SewageGenomes
 
+let useColors =
+    [ "#f95d6a"
+      "#d45087"
+      "#a05195"
+      "#665191"
+      "#10829a"
+      "#024a66"
+      "#f95d6a"
+      "#a05195"
+      "#024a66"
+      "#665191"
+      "#10829a"
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844"
+      "#ffa600"
+      "#d45087"
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844" ]
+
 let chartText = I18N.chartText "sewageCases"
 
 type DisplayType =
@@ -19,7 +44,7 @@ type DisplayType =
     | GenomesRatio
 
     static member All = [ EstimatedCases; GenomesRatio ]
-    static member Default = GenomesRatio // EstimatedCases
+    static member Default = EstimatedCases
 
     member this.GetName =
         match this with
@@ -29,6 +54,7 @@ type DisplayType =
 type State =
     { DisplayType: DisplayType
       Station: string
+      GenomeColors: Map<string, string>
       SewageStations: string list
       SewageCasesData: SewageCases array
       SewageGenomesData: SewageGenomes array
@@ -53,6 +79,7 @@ let init: State * Cmd<Msg> =
 
     { DisplayType = DisplayType.Default
       Station = "CČN Ljubljana"
+      GenomeColors = Map.empty
       SewageStations = []
       SewageCasesData = [||]
       SewageGenomesData = [||]
@@ -67,6 +94,14 @@ let GetStations (data: SewageCases array) =
     |> Array.sortBy (fun str -> str.Substring(str.IndexOf(' ')))
     |> Array.toList
 
+let GetGenomeColors (data: SewageGenomes array) =
+    data
+    |> Array.map (fun dp -> dp.genome)
+    |> Array.distinct
+    |> Array.sort
+    |> Array.mapi (fun idx genome -> (genome, useColors.[idx % useColors.Length]))
+    |> Map.ofArray
+
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeSewageCasesData(Ok data) ->
@@ -75,7 +110,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             SewageStations = GetStations data },
         Cmd.none
     | ConsumeSewageCasesData(Error err) -> { state with Error = Some err }, Cmd.none
-    | ConsumeSewageGenomesData(Ok data) -> { state with SewageGenomesData = data }, Cmd.none
+    | ConsumeSewageGenomesData(Ok data) ->
+        { state with
+            SewageGenomesData = data
+            GenomeColors = GetGenomeColors data },
+        Cmd.none
     | ConsumeSewageGenomesData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
     | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
@@ -91,21 +130,24 @@ let renderGenomesChart (state: State) dispatch =
     let className = "covid-19-sewage-genomes"
 
     let renderGenomeSeries =
+
         let foundGenomes =
             state.SewageGenomesData
-            |> Seq.filter (fun dp -> dp.station = state.Station)
-            |> Seq.map (fun dp -> dp.genome)
-            |> Seq.distinct
-            |> Seq.sort
-            |> Seq.toList
+            |> Array.filter (fun dp -> dp.station = state.Station)
+            |> Array.map (fun dp -> dp.genome)
+            |> Array.distinct
+            |> Array.sort
+            |> Array.toList
 
-        let genomeToSeries genome =
-            {| stack = 0
+        let genomeToSeries genomeName =
+            {| ``type`` = "column"
+               name = genomeName
+               color = state.GenomeColors.[genomeName]
+               stack = 0
                animation = false
-               name = genome
                data =
                 state.SewageGenomesData
-                |> Array.filter (fun dp -> (dp.station = state.Station && dp.genome = genome))
+                |> Array.filter (fun dp -> (dp.station = state.Station && dp.genome = genomeName))
                 |> Array.map (fun dp -> (dp.JsDate12h, dp.ratio)) |}
             |> pojo
 
