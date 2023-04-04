@@ -846,7 +846,7 @@
             "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
         "sewageCases": {
-            "title": "Virus in Sewage",
+            "title": "Virus and Mutations in Sewage",
             "titleMenu": "Sewage - mutations",
             "casesPer100k": "Cases per 100,000 people",
             "genomesRatio": "Ratio of Gene Mutations",
