@@ -5,7 +5,7 @@ open Fable.Core
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-let url = "https://api-stage.sledilnik.org/api/sewage-genomes"
+let url = "https://api.sledilnik.org/api/sewage-genomes"
 
 type SewageGenomes = {
     year: int
