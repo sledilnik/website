@@ -837,7 +837,7 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage [until 2/28/2023]",
+            "title": "Virus in Sewage (NIB) [until 2/28/2023]",
             "titleMenu": "Sewage",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
