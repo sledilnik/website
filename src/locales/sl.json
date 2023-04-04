@@ -1497,7 +1497,7 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus v odpadnih vodah (NIB)[do 28.2.2023]",
+            "title": "Virus v odpadnih vodah (NIB) [do 28.2.2023]",
             "titleMenu": "Odpadne vode",
             "activeCases": "Aktivni primeri",
             "newCases7dAve": "Novi primeri (7-dnevno povprečje)",
