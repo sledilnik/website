@@ -148,7 +148,7 @@ let renderGenomesChart (state: State) dispatch =
                data =
                 state.SewageGenomesData
                 |> Array.filter (fun dp -> (dp.station = state.Station && dp.genome = genomeName))
-                |> Array.map (fun dp -> (dp.JsDate12h, dp.ratio)) |}
+                |> Array.map (fun dp -> (dp.JsDate12h, dp.ratio * 100.)) |}
             |> pojo
 
         foundGenomes |> Seq.map genomeToSeries |> Seq.toArray
@@ -185,6 +185,16 @@ let renderGenomesChart (state: State) dispatch =
             pojo
                 {| enabled = true
                    layout = "horizontal" |}
+
+        tooltip =
+            pojo
+                {| shared = true
+                   split = false
+                   formatter = None
+                   snap = 50
+                   valueSuffix = "%"
+                   valueDecimals = 1
+                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
 
         plotOptions =
             pojo
@@ -261,6 +271,7 @@ let renderCasesChart (state: State) dispatch =
                    formatter = None
                    snap = 50
                    valueSuffix = ""
+                   valueDecimals = 1
                    xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |} |}
     |> pojo
 
