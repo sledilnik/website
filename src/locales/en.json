@@ -226,6 +226,7 @@
             "dataSource": "data source",
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
+            "dsNLZOH": "National Laboratory for Health, Environment and Food",
             "dsMZ": "Ministry of Health",
             "dsHospitals": "hospitals",
             "dsSURS": "SURS",
@@ -836,7 +837,7 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage [until 2/28/2023]",
+            "title": "Virus in Sewage (NIB) [until 2/28/2023]",
             "titleMenu": "Sewage",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
@@ -844,6 +845,16 @@
             "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
             "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
+        "sewageCases": {
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage - mutations",
+            "casesPer100k": "Cases per 100,000 people",
+            "genomesRatio": "Ratio of Gene Mutations",
+            "estimatedCases": "Estimated Cases",
+            "activeCases": "Active Cases",
+            "other": "Other"
+        },
+
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",

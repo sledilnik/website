@@ -270,6 +270,15 @@ let chartCreditsNIJZ =
         href = urlNijzCovid
     |} |> pojo
 
+let chartCreditsNIJZNLZOH =
+    {| enabled = true
+       text = sprintf "%s: %s, %s"
+            (I18N.t "charts.common.dataSource")
+            (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+            (I18N.tOptions ("charts.common.dsNLZOH") {| context = localStorage.getItem ("contextCountry") |})
+       href = "https://modeliranje.nijz.si/epivode/epivode-c19.html#metodologija-in-interpretacija"
+    |} |> pojo
+
 let chartCreditsNIJZMZHospitals =
     {| enabled = true
        text = sprintf "%s: %s, %s, %s"

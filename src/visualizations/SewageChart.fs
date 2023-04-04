@@ -319,7 +319,7 @@ let renderChartOptions (state: State) dispatch =
                               ("charts.common.dsNIJZ")
                                {| context = localStorage.getItem ("contextCountry") |})
                   href =
-                      "https://www.nib.si/aktualno/novice/1474-sporocilo-za-javnost-merjenje-prisotnosti-sars-cov-2-v-odpadni-vodi-slovenskih-cistilnih-naprav-je-lahko-ucinkovito-orodje-za-spremljanje-epidemije" |}
+                      "https://www.nib.si/aktualno/novice/1500-monitoring-sars-cov-2-v-odpadnih-vodah" |}
                |> pojo
            responsive =
                pojo
