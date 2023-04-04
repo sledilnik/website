@@ -30,7 +30,9 @@
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="data/DailyDeaths.fs" />
         <Compile Include="data/MonthlyDeaths.fs" />
-        <Compile Include="data\Sewage.fs" />
+        <Compile Include="data/Sewage.fs" />
+        <Compile Include="data/SewageCases.fs" />
+        <Compile Include="data/SewageGenomes.fs" />
         <Compile Include="DataAnalysis/DatedTypes.fs" />
         <Compile Include="DataAnalysis/AgeGroupsTimeline.fs" />
         <Compile Include="DataVisualization/ChartingTypes.fs" />
@@ -57,6 +59,7 @@
         <Compile Include="VaccineEffectAgeChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="SewageChart.fs" />
+        <Compile Include="SewageCasesChart.fs" />
         <Compile Include="HcCasesChart.fs" />
         <Compile Include="PhaseDiagram/Types.fs" />
         <Compile Include="PhaseDiagram/Data.fs" />

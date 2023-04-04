@@ -158,6 +158,11 @@ export default {
           text: this.$t('charts.sewage.title'),
           dimensions: [1140, 720]
         },
+        "SewageCasesGenomes": {
+          value: "SewageCasesGenomes",
+          text: this.$t('charts.sewageCases.title'),
+          dimensions: [1140, 720]
+        },
         "Regions": {
           value: "Regions",
           text: this.$t('charts.regions.title'),

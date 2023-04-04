@@ -1504,6 +1504,14 @@
             "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
             "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):"
         },
+        "sewageCases": {
+            "title": "Virus v odpadnih vodah",
+            "titleMenu": "Odpadne vode - primeri",
+            "estimatedCases": "Primeri na 100.000 prebivalcev",
+            "genomesRatio": "Deleži mutacij genoma",
+            "estimatedCases": "Ocenjeno število primerov",
+            "activeCases": "Aktivni primeri"
+        },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
             "titleMenu": "Viri in lokacije okužb",

@@ -87,6 +87,10 @@ export default {
     titleKey: 'charts.sewage.titleMenu',
     icon: 'graph',
   },
+  'sewage-cases-chart': {
+    titleKey: 'charts.sewageCases.titleMenu',
+    icon: 'graph',
+  },
   'hcenters-chart': {
     titleKey: 'charts.hCenters.titleMenu',
     icon: 'graph',

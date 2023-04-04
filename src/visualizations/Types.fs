@@ -238,6 +238,7 @@ type VisualizationType =
     | SchoolStatus
     | Sources
     | Sewage
+    | SewageCasesGenomes
     | Municipalities
     | AgeGroups
     | AgeGroupsTimeline
