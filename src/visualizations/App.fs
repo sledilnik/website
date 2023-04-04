@@ -38,7 +38,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
-            | "SewageCasesGenomes" -> Some SewageCasesGenomes
+            | "SewageCases" -> Some SewageCasesGenomes
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -741,7 +741,7 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+        [ sewage; sewageCases; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; patientsAge;
