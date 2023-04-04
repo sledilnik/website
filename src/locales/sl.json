@@ -1511,7 +1511,8 @@
             "cases100k": "Primeri na 100.000 prebivalcev",
             "genomesRatio": "Deleži mutacij genoma",
             "estimatedCases": "Ocenjeno število primerov",
-            "activeCases": "Aktivni primeri"
+            "activeCases": "Aktivni primeri",
+            "other": "Drugo"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",

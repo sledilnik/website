@@ -851,7 +851,8 @@
             "casesPer100k": "Cases per 100,000 people",
             "genomesRatio": "Ratio of Gene Mutations",
             "estimatedCases": "Estimated Cases",
-            "activeCases": "Active Cases"
+            "activeCases": "Active Cases",
+            "other": "Other"
         },
 
         "sources": {

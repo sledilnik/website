@@ -102,6 +102,16 @@ let GetGenomeColors (data: SewageGenomes array) =
     |> Array.mapi (fun idx genome -> (genome, useColors.[idx % useColors.Length]))
     |> Map.ofArray
 
+let FixGenomeNames data =
+    data
+    |> Array.map (fun dp ->
+        match dp.genome with
+        | "Omikron" ->
+            { dp with
+                genome = dp.genome + " " + chartText "other" }
+        | "Drugo" -> { dp with genome = chartText "other" }
+        | _ -> dp)
+
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeSewageCasesData(Ok data) ->
@@ -111,9 +121,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         Cmd.none
     | ConsumeSewageCasesData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeSewageGenomesData(Ok data) ->
+        let fixdata = FixGenomeNames data
+
         { state with
-            SewageGenomesData = data
-            GenomeColors = GetGenomeColors data },
+            SewageGenomesData = fixdata
+            GenomeColors = GetGenomeColors fixdata },
         Cmd.none
     | ConsumeSewageGenomesData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
