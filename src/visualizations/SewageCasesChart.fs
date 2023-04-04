@@ -172,6 +172,7 @@ let renderGenomesChart (state: State) dispatch =
                    zoomType = "x"
                    className = className
                    events = pojo {| load = onLoadEvent (className) |} |}
+
         series = renderGenomeSeries
 
         yAxis =
@@ -181,6 +182,7 @@ let renderGenomesChart (state: State) dispatch =
                     min = None
                     labels = pojo {| format = "{value} %" |}
                     reversedStacks = true |})
+
         legend =
             pojo
                 {| enabled = true
@@ -263,10 +265,18 @@ let renderCasesChart (state: State) dispatch =
 
     {| baseOptions with
         series = allSeries
+
+        yAxis =
+            baseOptions.yAxis
+            |> Array.map (fun yAxis ->
+                {| yAxis with
+                    labels = pojo {| format = "{value}" |} |})
+
         legend =
             pojo
                 {| enabled = true
                    layout = "horizontal" |}
+
         tooltip =
             pojo
                 {| shared = true
@@ -276,6 +286,7 @@ let renderCasesChart (state: State) dispatch =
                    valueSuffix = ""
                    valueDecimals = 1
                    xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+
         credits = chartCreditsNIJZNLZOH |}
     |> pojo
 
