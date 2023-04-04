@@ -53,7 +53,7 @@ let init: State * Cmd<Msg> =
       SewageCasesData = [||]
       SewageGenomesData = [||]
       Error = None
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 3 },
     (cmdC @ cmdG)
 
 let GetStations (data : SewageCases array) =
