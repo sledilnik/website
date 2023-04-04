@@ -226,6 +226,7 @@
             "dataSource": "data source",
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
+            "dsNLZOH": "National Laboratory for Health, Environment and Food",
             "dsMZ": "Ministry of Health",
             "dsHospitals": "hospitals",
             "dsSURS": "SURS",
@@ -844,6 +845,15 @@
             "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
             "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
+        "sewageCases": {
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage - mutations",
+            "casesPer100k": "Cases per 100,000 people",
+            "genomesRatio": "Ratio of Gene Mutations",
+            "estimatedCases": "Estimated Cases",
+            "activeCases": "Active Cases"
+        },
+
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",

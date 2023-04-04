@@ -892,6 +892,7 @@
             "dataSource": "vir podatkov",
             "dsNIB": "Nacionalni inštitut za biologijo",
             "dsNIJZ": "NIJZ",
+            "dsNLZOH": "Nacionalni laboratorij za zdravje, okolje in hrano",
             "dsMZ": "Ministrstvo za zdravje",
             "dsHospitals": "bolnišnice",
             "dsSURS": "SURS",
@@ -1506,8 +1507,8 @@
         },
         "sewageCases": {
             "title": "Virus v odpadnih vodah",
-            "titleMenu": "Odpadne vode - primeri",
-            "estimatedCases": "Primeri na 100.000 prebivalcev",
+            "titleMenu": "Odpadne vode - mutacije",
+            "cases100k": "Primeri na 100.000 prebivalcev",
             "genomesRatio": "Deleži mutacij genoma",
             "estimatedCases": "Ocenjeno število primerov",
             "activeCases": "Aktivni primeri"

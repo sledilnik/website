@@ -40,15 +40,15 @@ let useColors =
 let chartText = I18N.chartText "sewageCases"
 
 type DisplayType =
-    | EstimatedCases
+    | Cases100k
     | GenomesRatio
 
-    static member All = [ EstimatedCases; GenomesRatio ]
-    static member Default = EstimatedCases
+    static member All = [ Cases100k; GenomesRatio ]
+    static member Default = GenomesRatio
 
     member this.GetName =
         match this with
-        | EstimatedCases -> chartText "estimatedCases"
+        | Cases100k -> chartText "cases100k"
         | GenomesRatio -> chartText "genomesRatio"
 
 type State =
@@ -212,7 +212,10 @@ let renderGenomesChart (state: State) dispatch =
         // See:
         //  - https://api.highcharts.com/highcharts/boost.seriesThreshold
         //  - https://assets.highcharts.com/errors/12/
-        boost = pojo {| enabled = false |} |}
+        boost = pojo {| enabled = false |}
+
+        credits = chartCreditsNIJZNLZOH |}
+
 
 
 let renderCasesChart (state: State) dispatch =
@@ -272,7 +275,8 @@ let renderCasesChart (state: State) dispatch =
                    snap = 50
                    valueSuffix = ""
                    valueDecimals = 1
-                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |} |}
+                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+        credits = chartCreditsNIJZNLZOH |}
     |> pojo
 
 let renderChartContainer state dispatch =
@@ -281,7 +285,7 @@ let renderChartContainer state dispatch =
           prop.className "highcharts-wrapper"
           prop.children
               [ match state.DisplayType with
-                | EstimatedCases -> renderCasesChart state dispatch |> chartFromWindow
+                | Cases100k -> renderCasesChart state dispatch |> chartFromWindow
                 | GenomesRatio -> renderGenomesChart state dispatch |> chartFromWindow ] ]
 
 
