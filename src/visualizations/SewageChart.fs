@@ -407,7 +407,7 @@ let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlan
 
 
 let renderMeasurementNIBChart (state: State) dispatch =
-    let className = "sewage-chart"
+    let className = "covid19-sewage-nib"
     let scaleType = ScaleType.Linear
 
     let allYAxis =
