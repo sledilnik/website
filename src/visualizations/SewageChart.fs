@@ -556,8 +556,15 @@ let renderMeasurementNIBChart (state: State) dispatch =
 let renderStationSelector state dispatch =
 
     let renderedStations =
-        state.SewageStations
-        |> List.map (fun station -> Html.option [ prop.text station; prop.value station ])
+        match state.DisplayType with
+        | MeasurementsNIB ->
+            Utils.Dictionaries.wastewaterTreatmentPlants
+            |> Map.toList
+            |> List.sortBy (fun (key, wp) -> wp.Name.Substring(wp.Name.IndexOf(' ')))
+            |> List.map (fun (key, wp) -> Html.option [ prop.text wp.Name; prop.value key ])
+        | _ ->
+            state.SewageStations
+            |> List.map (fun station -> Html.option [ prop.text station; prop.value station ])
 
     Html.select
         [ prop.value (state.Station)
