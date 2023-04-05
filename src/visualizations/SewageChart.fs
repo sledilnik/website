@@ -172,7 +172,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             | Cases100k, MeasurementsNIB
             | GenomesRatio, MeasurementsNIB -> StationNameToKey(state.Station) // NLZOH name -> NIB key
             | MeasurementsNIB, Cases100k
-            | MeasurementsNIB, GenomesRatio -> StationKeyToName(state.Station)  // NIB key -> to NLZOH name
+            | MeasurementsNIB, GenomesRatio -> StationKeyToName(state.Station) // NIB key -> to NLZOH name
             | _, _ -> state.Station
 
         { state with
@@ -206,6 +206,7 @@ let renderGenomesChart (state: State) dispatch =
                color = state.GenomeColors.[genomeName]
                stack = 0
                animation = false
+               yAxis = 0
                data =
                 state.SewageGenomesData
                 |> Array.filter (fun dp -> (dp.station = state.Station && dp.genome = genomeName))
@@ -296,6 +297,7 @@ let renderCasesChart (state: State) dispatch =
                        {| symbol = "diamond"
                           radius = 5
                           enabled = true |}
+                  yAxis = 0
                   data =
                    state.SewageCasesData
                    |> Array.filter (fun dp -> dp.station = state.Station)
@@ -308,6 +310,7 @@ let renderCasesChart (state: State) dispatch =
                   color = "#dba51d"
                   dashStyle = "Dot"
                   marker = pojo {| enabled = false |}
+                  yAxis = 0
                   data =
                    state.SewageCasesData
                    |> Array.filter (fun dp -> dp.station = state.Station)
@@ -460,19 +463,6 @@ let renderMeasurementNIBChart (state: State) dispatch =
               opposite = false
               visible = true
               crosshair = true |}
-           |> pojo
-           {| index = 2
-              title = {| text = null |}
-              labels =
-               pojo
-                   {| format = "{value}"
-                      align = "center"
-                      x = -10
-                      reserveSpace = false |}
-              showFirstLabel = false
-              opposite = true
-              visible = true
-              crosshair = true |}
            |> pojo |]
 
     let allSeries =
@@ -498,7 +488,7 @@ let renderMeasurementNIBChart (state: State) dispatch =
                       ``type`` = "line"
                       color = "#dba51d"
                       dashStyle = "Dot"
-                      yAxis = 2
+                      yAxis = 1
                       data =
                        connectedMunicipalitiesActiveCasesAsXYSeries
                            state.MunicipalitiesData
@@ -531,6 +521,7 @@ let renderMeasurementNIBChart (state: State) dispatch =
                    formatter = None
                    snap = 50
                    valueSuffix = ""
+                   valueDecimals = None
                    xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
         credits =
             {| enabled = true
