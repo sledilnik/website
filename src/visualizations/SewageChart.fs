@@ -458,25 +458,14 @@ let renderMeasurementNIBChart (state: State) dispatch =
         |> Array.filter (fun (key, wp) -> key = state.Station) // TODO
         |> Array.map (fun (wastewaterTreatmentPlantKey, wastewaterTreatmentPlant) ->
             [|
-               pojo
-                   {| name = chartText "newCases7dAve"
-                      ``type`` = "line"
-                      color = "#bda506"
-                      dashStyle = "ShortDot"
-                      yAxis = 1
-                      data =
-                          connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
-
-               pojo
-                   {| name = chartText "activeCases"
-                      ``type`` = "line"
-                      color = "#dba51d"
-                      dashStyle = "Dot"
-                      yAxis = 2
-                      data =
-                          connectedMunicipalitiesActiveCasesAsXYSeries
-                              state.MunicipalitiesData
-                              wastewaterTreatmentPlantKey |}
+            //    pojo
+            //        {| name = chartText "newCases7dAve"
+            //           ``type`` = "line"
+            //           color = "#bda506"
+            //           dashStyle = "ShortDot"
+            //           yAxis = 1
+            //           data =
+            //               connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
 
             //    pojo
             //        {| name = chartText "concentrationGen1"
@@ -500,7 +489,19 @@ let renderMeasurementNIBChart (state: State) dispatch =
                                       radius = 5
                                       enabled = true |}
                       yAxis = 0
-                      data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
+                      data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
+
+               pojo
+                   {| name = chartText "activeCases"
+                      ``type`` = "line"
+                      color = "#dba51d"
+                      dashStyle = "Dot"
+                      yAxis = 2
+                      data =
+                          connectedMunicipalitiesActiveCasesAsXYSeries
+                              state.MunicipalitiesData
+                              wastewaterTreatmentPlantKey |}  |] )
+
         |> Array.concat
 
 
