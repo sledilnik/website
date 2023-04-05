@@ -1509,15 +1509,6 @@
             "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):",
             "other": "Drugo"
         },
-        "sewageCases": {
-            "title": "Virus in različice v odpadnih vodah",
-            "titleMenu": "Odpadne vode - mutacije",
-            "cases100k": "Primeri na 100.000 prebivalcev",
-            "genomesRatio": "Deleži mutacij genoma",
-            "estimatedCases": "Ocenjeno število primerov",
-            "activeCases": "Aktivni primeri",
-            "other": "Drugo"
-        },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
             "titleMenu": "Viri in lokacije okužb",

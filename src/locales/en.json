@@ -837,24 +837,19 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage (NIB) [until 2/28/2023]",
+            "title": "Virus and Mutations in Sewage",
             "titleMenu": "Sewage",
+            "casesPer100k": "Cases per 100,000 people",
+            "genomesRatio": "Ratio of Gene Mutations",
+            "measurementsNIB": "NIB Measurements [until 2/28/2023]",
+            "estimatedCases": "Estimated Cases",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
             "concentrationGen1": "Ratio of SARS-CoV-2 Gene N1 and PMMoV",
             "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
-            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
-        },
-        "sewageCases": {
-            "title": "Virus and Mutations in Sewage",
-            "titleMenu": "Sewage - mutations",
-            "casesPer100k": "Cases per 100,000 people",
-            "genomesRatio": "Ratio of Gene Mutations",
-            "estimatedCases": "Estimated Cases",
-            "activeCases": "Active Cases",
+            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:",
             "other": "Other"
         },
-
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",

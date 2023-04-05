@@ -38,7 +38,6 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
-            | "SewageCases" -> Some SewageCasesGenomes
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -513,14 +512,6 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView SewageChart.chart {| data = data |} }
 
-    let sewageCases =
-          { VisualizationType = SewageCasesGenomes
-            ClassName = "sewage-cases-chart"
-            ChartTextsGroup = "sewageCases"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView SewageCasesChart.sewageCasesChart () }
-
     let hcCases =
           { VisualizationType = HcCases
             ClassName = "hc-cases-chart"
@@ -711,7 +702,7 @@ let render (state: State) (_: Msg -> unit) =
         [ metricsComparison;
           dailyComparison;
           patientsAge;
-          sewageCases;
+          sewage;
           spread;
           tests; ageGroupsTimeline;
           map; municipalities; regionMap; regions100k;
@@ -723,7 +714,6 @@ let render (state: State) (_: Msg -> unit) =
           cases;
           regionsAbs
           phaseDiagram;
-          sewage;
           vaccineEffectAge; vaccineEffect;
           vaccination; vaccines;
           schools; schoolStatus
@@ -741,7 +731,7 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ sewage; sewageCases; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+        [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; patientsAge;
