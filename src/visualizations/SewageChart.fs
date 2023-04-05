@@ -56,7 +56,6 @@ type DisplayType =
         | GenomesRatio -> chartText "genomesRatio"
         | MeasurementsNIB -> chartText "measurementsNIB"
 
-
 type State =
     { DisplayType: DisplayType
       Station: string
@@ -78,6 +77,26 @@ type Msg =
     | DisplayTypeChanged of DisplayType
     | RangeSelectionChanged of int
 
+
+let DefaultStation = "CČN Ljubljana"
+let DefaultKey = "ljubljana"
+
+let StationNameToKey name : string = // convert from station name (NLZOH) to key (NIB)
+    let found =
+        Utils.Dictionaries.wastewaterTreatmentPlants
+        |> Map.toArray
+        |> Array.tryFind (fun (key, wp) -> wp.Name = name)
+
+    match found with
+    | Some(key, _) -> key
+    | _ -> DefaultKey
+
+let StationKeyToName key = // convert from station key (NIB) to name (NLZOH)
+    let found = Utils.Dictionaries.wastewaterTreatmentPlants |> Map.tryFind key
+
+    match found with
+    | Some wp -> wp.Name
+    | _ -> DefaultStation
 
 let GetStations (data: SewageCases array) =
     data
@@ -117,7 +136,7 @@ let init municipalitiesData : State * Cmd<Msg> =
 
 
     { DisplayType = DisplayType.Default
-      Station = "CČN Ljubljana"
+      Station = DefaultStation
       GenomeColors = Map.empty
       SewageStations = []
       SewageCasesData = [||]
@@ -147,7 +166,19 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ConsumeSewageData(Ok data) -> { state with SewageData = data }, Cmd.none
     | ConsumeSewageData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
-    | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
+    | DisplayTypeChanged displayType ->
+        let station =
+            match state.DisplayType, displayType with
+            | Cases100k, MeasurementsNIB
+            | GenomesRatio, MeasurementsNIB -> StationNameToKey(state.Station) // NLZOH name -> NIB key
+            | MeasurementsNIB, Cases100k
+            | MeasurementsNIB, GenomesRatio -> StationKeyToName(state.Station)  // NIB key -> to NLZOH name
+            | _, _ -> state.Station
+
+        { state with
+            DisplayType = displayType
+            Station = station },
+        Cmd.none
     | StationChanged station -> { state with Station = station }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with
