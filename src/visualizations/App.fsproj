@@ -93,7 +93,7 @@
         <PackageReference Include="Fable.Browser.Dom" Version="1.2.0" />
         <PackageReference Include="Fable.Browser.Event" Version="1.0.0" />
         <PackageReference Include="Fable.DateFunctions" Version="3.2.0" />
-        <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
+        <PackageReference Include="Fable.Elmish.Debugger" Version="4.0.0" />
         <PackageReference Include="Fable.Elmish.HMR" Version="4.0.1" />
         <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
         <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
