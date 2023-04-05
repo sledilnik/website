@@ -4,67 +4,321 @@ module SewageChart
 open System
 open System.Collections.Generic
 open Browser
-open Fable.Core.JsInterop
 open Elmish
 open Feliz
 open Feliz.UseElmish
 
-open Components.Slider
 open Highcharts
 open Types
 open Data.Sewage
+open Data.SewageCases
+open Data.SewageGenomes
 open Utils.Dictionaries
 
 let chartText = I18N.chartText "sewage"
 
+let useColors =
+    [ "#f95d6a"
+      "#d45087"
+      "#a05195"
+      "#665191"
+      "#10829a"
+      "#024a66"
+      "#f95d6a"
+      "#a05195"
+      "#024a66"
+      "#665191"
+      "#10829a"
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844"
+      "#ffa600"
+      "#d45087"
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844" ]
+
+type DisplayType =
+    | Cases100k
+    | GenomesRatio
+    | MeasurementsNIB
+
+    static member All = [ Cases100k; GenomesRatio; MeasurementsNIB ]
+    static member Default = GenomesRatio
+
+    member this.GetName =
+        match this with
+        | Cases100k -> chartText "cases100k"
+        | GenomesRatio -> chartText "genomesRatio"
+        | MeasurementsNIB -> chartText "measurementsNIB"
+
+
 type State =
-    { SewageData: SewageStats array
+    { DisplayType: DisplayType
+      Station: string
+      GenomeColors: Map<string, string>
+      SewageStations: string list
+      SewageCasesData: SewageCases array
+      SewageGenomesData: SewageGenomes array
+      SewageData: SewageStats array
       MunicipalitiesData: MunicipalitiesData
       Error: string option
-      ShownWastewaterTreatmentPlants: Set<string>
       RangeSelectionButtonIndex: int }
 
 type Msg =
+    | ConsumeSewageCasesData of Result<SewageCases array, string>
+    | ConsumeSewageGenomesData of Result<SewageGenomes array, string>
     | ConsumeSewageData of Result<SewageStats array, string>
     | ConsumeServerError of exn
-    | ShowWastewaterTreatmentPlant of string
-    | HideWastewaterTreatmentPlant of string
+    | StationChanged of string
+    | DisplayTypeChanged of DisplayType
     | RangeSelectionChanged of int
 
 
+let GetStations (data: SewageCases array) =
+    data
+    |> Array.map (fun dp -> dp.station)
+    |> Array.distinct
+    |> Array.sortBy (fun str -> str.Substring(str.IndexOf(' ')))
+    |> Array.toList
+
+let GetGenomeColors (data: SewageGenomes array) =
+    data
+    |> Array.map (fun dp -> dp.genome)
+    |> Array.distinct
+    |> Array.sort
+    |> Array.mapi (fun idx genome -> (genome, useColors.[idx % useColors.Length]))
+    |> Map.ofArray
+
+let FixGenomeNames data =
+    data
+    |> Array.map (fun dp ->
+        match dp.genome with
+        | "Omikron" ->
+            { dp with
+                genome = dp.genome + " " + chartText "other" }
+        | "Drugo" -> { dp with genome = chartText "other" }
+        | _ -> dp)
+
 
 let init municipalitiesData: State * Cmd<Msg> =
-    let cmd =
-        Cmd.OfAsync.either getOrFetch () ConsumeSewageData ConsumeServerError
+    let cmdS =
+        Cmd.OfAsync.either Data.Sewage.getOrFetch () ConsumeSewageData ConsumeServerError
 
-    { SewageData = [||]
+    let cmdC =
+        Cmd.OfAsync.either Data.SewageCases.getOrFetch () ConsumeSewageCasesData ConsumeServerError
+
+    let cmdG =
+        Cmd.OfAsync.either Data.SewageGenomes.getOrFetch () ConsumeSewageGenomesData ConsumeServerError
+
+
+    { DisplayType = DisplayType.Default
+      Station = "CČN Ljubljana"
+      GenomeColors = Map.empty
+      SewageStations = []
+      SewageCasesData = [||]
+      SewageGenomesData = [||]
+      SewageData = [||]
       MunicipalitiesData = municipalitiesData
       Error = None
-      ShownWastewaterTreatmentPlants = Set.singleton "ljubljana"
       RangeSelectionButtonIndex = 3 }, // all to show history
-    cmd
+    (cmdS @ cmdC @ cmdG)
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
+    | ConsumeSewageCasesData(Ok data) ->
+        { state with
+            SewageCasesData = data
+            SewageStations = GetStations data },
+        Cmd.none
+    | ConsumeSewageCasesData(Error err) -> { state with Error = Some err }, Cmd.none
+    | ConsumeSewageGenomesData(Ok data) ->
+        let fixdata = FixGenomeNames data
+
+        { state with
+            SewageGenomesData = fixdata
+            GenomeColors = GetGenomeColors fixdata },
+        Cmd.none
+    | ConsumeSewageGenomesData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeSewageData (Ok data) -> { state with SewageData = data }, Cmd.none
     | ConsumeSewageData (Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
-    | ShowWastewaterTreatmentPlant key ->
-        { state with
-              ShownWastewaterTreatmentPlants = Set.singleton key },
-        Cmd.none
-    //        { state with
-//              ShownWastewaterTreatmentPlants = Set.add key state.ShownWastewaterTreatmentPlants },
-//        Cmd.none
-    | HideWastewaterTreatmentPlant key -> state, Cmd.none
-    //{ state with
-    //      ShownWastewaterTreatmentPlants = Set.remove key state.ShownWastewaterTreatmentPlants },
-    //Cmd.none
+    | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
+    | StationChanged station -> { state with Station = station }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with
               RangeSelectionButtonIndex = buttonIndex },
         Cmd.none
 
+
+let renderGenomesChart (state: State) dispatch =
+
+    let className = "covid-19-sewage-genomes"
+
+    let renderGenomeSeries =
+
+        let foundGenomes =
+            state.SewageGenomesData
+            |> Array.filter (fun dp -> dp.station = state.Station)
+            |> Array.map (fun dp -> dp.genome)
+            |> Array.distinct
+            |> Array.sort
+            |> Array.toList
+
+        let genomeToSeries genomeName =
+            {| ``type`` = "column"
+               name = genomeName
+               color = state.GenomeColors.[genomeName]
+               stack = 0
+               animation = false
+               data =
+                state.SewageGenomesData
+                |> Array.filter (fun dp -> (dp.station = state.Station && dp.genome = genomeName))
+                |> Array.map (fun dp -> (dp.JsDate12h, dp.ratio * 100.)) |}
+            |> pojo
+
+        foundGenomes |> Seq.map genomeToSeries |> Seq.toArray
+
+
+    let onRangeSelectorButtonClick (buttonIndex: int) =
+        let res (_: Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+
+        res
+
+    let baseOptions =
+        basicChartOptions ScaleType.Linear className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    {| baseOptions with
+        chart =
+            pojo
+                {| animation = false
+                   ``type`` = "column"
+                   zoomType = "x"
+                   className = className
+                   events = pojo {| load = onLoadEvent (className) |} |}
+
+        series = renderGenomeSeries
+
+        yAxis =
+            baseOptions.yAxis
+            |> Array.map (fun yAxis ->
+                {| yAxis with
+                    min = None
+                    labels = pojo {| format = "{value} %" |}
+                    reversedStacks = true |})
+
+        legend =
+            pojo
+                {| enabled = true
+                   layout = "horizontal" |}
+
+        tooltip =
+            pojo
+                {| shared = true
+                   split = false
+                   formatter = None
+                   snap = 50
+                   valueSuffix = "%"
+                   valueDecimals = 1
+                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+
+        plotOptions =
+            pojo
+                {| column =
+                    pojo
+                        {| dataGrouping = pojo {| enabled = false |}
+                           stacking = "percent" |}
+
+                |}
+        // As number of data points grow over time, HighCharts will kick into boost mode.
+        // For boost mode to work correctly, data points must be [x, y] pairs.
+        // Right now are data points are objects in order to shove in extra data for tooltips
+        // When performance without boost mode becomes a problem refactor tooltip formatting and use data points in [x, y] form.
+        //
+        // See:
+        //  - https://api.highcharts.com/highcharts/boost.seriesThreshold
+        //  - https://assets.highcharts.com/errors/12/
+        boost = pojo {| enabled = false |}
+
+        credits = chartCreditsNIJZNLZOH |}
+
+
+
+let renderCasesChart (state: State) dispatch =
+
+    let className = "covid19-sewage-cases"
+
+    let allSeries =
+        [| yield
+               {| name = chartText "estimatedCases"
+                  ``type`` = "line"
+                  color = "#a05195"
+                  lineWidth = 0
+                  marker =
+                   pojo
+                       {| symbol = "diamond"
+                          radius = 5
+                          enabled = true |}
+                  data =
+                   state.SewageCasesData
+                   |> Array.filter (fun dp -> dp.station = state.Station)
+                   |> Array.map (fun dp -> (dp.JsDate12h, dp.cases.estimated)) |}
+               |> pojo
+
+           yield
+               {| name = chartText "activeCases"
+                  ``type`` = "line"
+                  color = "#dba51d"
+                  dashStyle = "Dot"
+                  marker = pojo {| enabled = false |}
+                  data =
+                   state.SewageCasesData
+                   |> Array.filter (fun dp -> dp.station = state.Station)
+                   |> Array.map (fun dp -> (dp.JsDate12h, dp.cases.active100k)) |}
+               |> pojo |]
+
+    let onRangeSelectorButtonClick (buttonIndex: int) =
+        let res (_: Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions Linear className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    {| baseOptions with
+        series = allSeries
+
+        yAxis =
+            baseOptions.yAxis
+            |> Array.map (fun yAxis ->
+                {| yAxis with
+                    labels = pojo {| format = "{value}" |} |})
+
+        legend =
+            pojo
+                {| enabled = true
+                   layout = "horizontal" |}
+
+        tooltip =
+            pojo
+                {| shared = true
+                   split = false
+                   formatter = None
+                   snap = 50
+                   valueSuffix = ""
+                   valueDecimals = 1
+                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+
+        credits = chartCreditsNIJZNLZOH |}
+    |> pojo
 
 
 let chooseWithSomeYValue (xy: (JsTimestamp * float option) []): (JsTimestamp * float) [] =
@@ -74,8 +328,6 @@ let chooseWithSomeYValue (xy: (JsTimestamp * float option) []): (JsTimestamp * f
         | t, Some v -> Some(t, v)
         | _ -> None)
 
-
-//let chooseWithSomeYValue = id
 
 let valueOrZero (dict: Dictionary<string, int>) (key: string): int =
     if dict.ContainsKey key then dict.[key] else 0
@@ -144,16 +396,6 @@ let connectedMunicipalitiesNewCasesAsXYSeries (municipalitiesData: Municipalitie
         |> Statistics.calcRunningAverage
 
 
-
-// let plantCovN1AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
-//     sewageData
-//     |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
-//     |> Array.map (fun (dp: SewageStats) ->
-//         dp.Date |> jsTimeMidnight,
-//         (Map.find wastewaterTreatmentPlantKey dp.plants)
-//             .covN1Compensated)
-//     |> chooseWithSomeYValue
-
 let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
     sewageData
     |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
@@ -163,29 +405,8 @@ let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlan
             .covN2Compensated)
     |> chooseWithSomeYValue
 
-let renderSelector (state: State) (wastewaterTreatmentPlant: WastewaterTreatmentPlant) dispatch =
-    Html.div [ let isActive =
-                   state.ShownWastewaterTreatmentPlants.Contains wastewaterTreatmentPlant.Key
 
-               prop.onClick (fun _ ->
-                   (match isActive with
-                    | true -> HideWastewaterTreatmentPlant
-                    | false -> ShowWastewaterTreatmentPlant) wastewaterTreatmentPlant.Key
-                   |> dispatch)
-
-               Utils.classes [ (true, "btn btn-sm metric-selector")
-                               (isActive, "metric-selector--selected") ]
-
-               prop.text (wastewaterTreatmentPlant.Name) ]
-
-let renderDisplaySelectors state dispatch =
-    Html.div [ prop.className "metrics-selectors"
-               prop.children
-                   (Utils.Dictionaries.wastewaterTreatmentPlants
-                    |> Map.toSeq
-                    |> Seq.map (fun dt -> renderSelector state (snd dt) dispatch)) ]
-
-let renderChartOptions (state: State) dispatch =
+let renderMeasurementNIBChart (state: State) dispatch =
     let className = "sewage-chart"
     let scaleType = ScaleType.Linear
 
@@ -234,7 +455,7 @@ let renderChartOptions (state: State) dispatch =
     let allSeries =
         Utils.Dictionaries.wastewaterTreatmentPlants
         |> Map.toArray
-        |> Array.filter (fun (key, _) -> state.ShownWastewaterTreatmentPlants.Contains key)
+        |> Array.filter (fun (key, wp) -> key = state.Station) // TODO
         |> Array.map (fun (wastewaterTreatmentPlantKey, wastewaterTreatmentPlant) ->
             [|
                pojo
@@ -332,37 +553,57 @@ let renderChartOptions (state: State) dispatch =
                                               {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
+let renderStationSelector state dispatch =
+
+    let renderedStations =
+        state.SewageStations
+        |> List.map (fun station -> Html.option [ prop.text station; prop.value station ])
+
+    Html.select
+        [ prop.value (state.Station)
+          prop.className "form-control form-control-sm filters__type"
+          prop.children renderedStations
+          prop.onChange (StationChanged >> dispatch) ]
+
+let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
+    let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
+        let active = displayTypeToRender = activeDisplayType
+
+        Html.div
+            [ prop.onClick (fun _ -> dispatch displayTypeToRender)
+              Utils.classes [ (true, "chart-display-property-selector__item"); (active, "selected") ]
+              prop.text displayTypeToRender.GetName ]
+
+    Html.div
+        [ prop.className "chart-display-property-selector"
+          DisplayType.All |> List.map renderDisplayTypeSelector |> prop.children ]
+
+
 let renderChartContainer state dispatch =
-    Html.div [ prop.style [ style.height 480 ]
-               prop.className "highcharts-wrapper"
-               prop.children [ renderChartOptions state dispatch
-                               |> chartFromWindow ] ]
+    Html.div
+        [ prop.style [ style.height 480 ]
+          prop.className "highcharts-wrapper"
+          prop.children
+              [ match state.DisplayType with
+                | Cases100k -> renderCasesChart state dispatch |> chartFromWindow
+                | GenomesRatio -> renderGenomesChart state dispatch |> chartFromWindow
+                | MeasurementsNIB -> renderMeasurementNIBChart state dispatch |> chartFromWindow] ]
 
 let renderChart state dispatch =
-    Html.div [ prop.children [ renderChartContainer state dispatch ] ]
-
+    Html.div
+        [ Utils.renderChartTopControls
+              [ renderStationSelector state dispatch
+                renderDisplaySelectors state.DisplayType (DisplayTypeChanged >> dispatch) ]
+          renderChartContainer state dispatch ]
 
 let render (state: State) dispatch =
-    match state.SewageData, state.Error with
-    | [||], None -> Html.div [ Utils.renderLoading ]
-    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
-    | _, None ->
-        Html.div [ renderChartContainer state dispatch
-                   renderDisplaySelectors state dispatch
-                   Html.div [ Html.text (chartText "muncipalitiesIncluded")
-                              Html.ul
-                                  (state.ShownWastewaterTreatmentPlants
-                                   |> Set.toSeq
-                                   |> Seq.map (fun treatmentPlantKey ->
-                                       Utils.Dictionaries.wastewaterTreatmentPlants.[treatmentPlantKey]
-                                           .Municipalities
-                                       |> Array.toSeq
-                                       |> Seq.map (fun municipality ->
-                                           Html.li [ prop.text
-                                                         ((municipality |> snd |> Map.find)
-                                                             Utils.Dictionaries.municipalities)
-                                                             .Name ]))
-                                   |> Seq.concat) ] ]
+    match state.SewageData, state.SewageCasesData, state.SewageGenomesData, state.Error with
+    | [||], _, _, None -> Html.div [ Utils.renderLoading ]
+    | _, [||], _, None -> Html.div [ Utils.renderLoading ]
+    | _, _, [||], None -> Html.div [ Utils.renderLoading ]
+    | _, _, _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, _, _, None -> Html.div [ renderChart state dispatch ]
+
 
 let chart =
     React.functionComponent (fun (props: {| data: MunicipalitiesData |}) ->
@@ -370,5 +611,3 @@ let chart =
             React.useElmish (init props.data, update, [||])
 
         render state dispatch)
-
-// TODO: convert bulleted list of municipalities to simple enumeration with commas?
