@@ -105,7 +105,7 @@ let FixGenomeNames data =
         | _ -> dp)
 
 
-let init municipalitiesData: State * Cmd<Msg> =
+let init municipalitiesData : State * Cmd<Msg> =
     let cmdS =
         Cmd.OfAsync.either Data.Sewage.getOrFetch () ConsumeSewageData ConsumeServerError
 
@@ -128,7 +128,7 @@ let init municipalitiesData: State * Cmd<Msg> =
       RangeSelectionButtonIndex = 3 }, // all to show history
     (cmdS @ cmdC @ cmdG)
 
-let update (msg: Msg) (state: State): State * Cmd<Msg> =
+let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeSewageCasesData(Ok data) ->
         { state with
@@ -144,14 +144,14 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
             GenomeColors = GetGenomeColors fixdata },
         Cmd.none
     | ConsumeSewageGenomesData(Error err) -> { state with Error = Some err }, Cmd.none
-    | ConsumeSewageData (Ok data) -> { state with SewageData = data }, Cmd.none
-    | ConsumeSewageData (Error err) -> { state with Error = Some err }, Cmd.none
+    | ConsumeSewageData(Ok data) -> { state with SewageData = data }, Cmd.none
+    | ConsumeSewageData(Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
     | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
     | StationChanged station -> { state with Station = station }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with
-              RangeSelectionButtonIndex = buttonIndex },
+            RangeSelectionButtonIndex = buttonIndex },
         Cmd.none
 
 
@@ -321,7 +321,7 @@ let renderCasesChart (state: State) dispatch =
     |> pojo
 
 
-let chooseWithSomeYValue (xy: (JsTimestamp * float option) []): (JsTimestamp * float) [] =
+let chooseWithSomeYValue (xy: (JsTimestamp * float option)[]) : (JsTimestamp * float)[] =
     xy
     |> Array.choose (fun v ->
         match v with
@@ -329,7 +329,7 @@ let chooseWithSomeYValue (xy: (JsTimestamp * float option) []): (JsTimestamp * f
         | _ -> None)
 
 
-let valueOrZero (dict: Dictionary<string, int>) (key: string): int =
+let valueOrZero (dict: Dictionary<string, int>) (key: string) : int =
     if dict.ContainsKey key then dict.[key] else 0
 
 let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (wastewaterTreatmentPlantKey: string) =
@@ -337,12 +337,10 @@ let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (
         Utils.Dictionaries.wastewaterTreatmentPlants.Item wastewaterTreatmentPlantKey
 
     let municipalityNames =
-        Array.map snd wastewaterTreatmentPlant.Municipalities
-        |> Set.ofArray
+        Array.map snd wastewaterTreatmentPlant.Municipalities |> Set.ofArray
 
     municipalitiesData
-    |> List.filter (fun municipalityData ->
-        municipalityData.Date < DateTime(2023,3,1)) // FILTER: we have sewage data from NIB only until end 28.2.2023
+    |> List.filter (fun municipalityData -> municipalityData.Date < DateTime(2023, 3, 1)) // FILTER: we have sewage data from NIB only until end 28.2.2023
     |> List.map (fun municipalityData ->
         municipalityData.Date |> jsTimeMidnight,
         (municipalityData.Regions
@@ -354,55 +352,49 @@ let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (
     |> Array.sortBy fst
 
 
-let connectedMunicipalitiesActiveCasesAsXYSeries (municipalitiesData: MunicipalitiesData)
-                                                 (wastewaterTreatmentPlantKey: string)
-                                                 =
+let connectedMunicipalitiesActiveCasesAsXYSeries
+    (municipalitiesData: MunicipalitiesData)
+    (wastewaterTreatmentPlantKey: string)
+    =
     let lastSeenActiveCasesByMunicipality = new Dictionary<string, int>()
 
     connectedMunicipalitiesDataPoints municipalitiesData wastewaterTreatmentPlantKey
     |> Array.map (fun (ts, dps) ->
         for dp in dps do
-            lastSeenActiveCasesByMunicipality.[dp.Name] <- (Option.defaultValue
-                                                                (valueOrZero lastSeenActiveCasesByMunicipality dp.Name)
-                                                                dp.ActiveCases)
+            lastSeenActiveCasesByMunicipality.[dp.Name] <-
+                (Option.defaultValue (valueOrZero lastSeenActiveCasesByMunicipality dp.Name) dp.ActiveCases)
 
 
-        ts,
-        lastSeenActiveCasesByMunicipality.Values
-        |> Seq.sum)
+        ts, lastSeenActiveCasesByMunicipality.Values |> Seq.sum)
 
-let connectedMunicipalitiesNewCasesAsXYSeries (municipalitiesData: MunicipalitiesData)
-                                              (wastewaterTreatmentPlantKey: string)
-                                              =
+let connectedMunicipalitiesNewCasesAsXYSeries
+    (municipalitiesData: MunicipalitiesData)
+    (wastewaterTreatmentPlantKey: string)
+    =
     let lastSeenConfirmedCasesByMunicipality = new Dictionary<string, int>()
     let mutable before = 0
 
     connectedMunicipalitiesDataPoints municipalitiesData wastewaterTreatmentPlantKey
     |> Array.map (fun (ts, dps) ->
         for dp in dps do
-            lastSeenConfirmedCasesByMunicipality.[dp.Name] <- max
-                                                                  (Option.defaultValue 0 dp.ConfirmedToDate)
-                                                                  (valueOrZero
-                                                                      lastSeenConfirmedCasesByMunicipality
-                                                                       dp.Name)
+            lastSeenConfirmedCasesByMunicipality.[dp.Name] <-
+                max
+                    (Option.defaultValue 0 dp.ConfirmedToDate)
+                    (valueOrZero lastSeenConfirmedCasesByMunicipality dp.Name)
 
-        let now =
-            lastSeenConfirmedCasesByMunicipality.Values
-            |> Seq.sum
+        let now = lastSeenConfirmedCasesByMunicipality.Values |> Seq.sum
 
         let diff = now - before
         before <- now
         ts, float diff)
-        |> Statistics.calcRunningAverage
+    |> Statistics.calcRunningAverage
 
 
 let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
     sewageData
     |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
     |> Array.map (fun (dp: SewageStats) ->
-        dp.Date |> jsTimeMidnight,
-        (Map.find wastewaterTreatmentPlantKey dp.plants)
-            .covN2Compensated)
+        dp.Date |> jsTimeMidnight, (Map.find wastewaterTreatmentPlantKey dp.plants).covN2Compensated)
     |> chooseWithSomeYValue
 
 
@@ -414,11 +406,11 @@ let renderMeasurementNIBChart (state: State) dispatch =
         [| {| index = 0
               title = {| text = null |}
               labels =
-                  pojo
-                      {| format = "{value}"
-                         align = "center"
-                         x = -15
-                         reserveSpace = false |}
+               pojo
+                   {| format = "{value}"
+                      align = "center"
+                      x = -15
+                      reserveSpace = false |}
               showFirstLabel = false
               opposite = true
               visible = false
@@ -428,11 +420,11 @@ let renderMeasurementNIBChart (state: State) dispatch =
            {| index = 1
               title = {| text = null |}
               labels =
-                  pojo
-                      {| format = "{value}"
-                         align = "center"
-                         x = 10
-                         reserveSpace = false |}
+               pojo
+                   {| format = "{value}"
+                      align = "center"
+                      x = 10
+                      reserveSpace = false |}
               showFirstLabel = false
               opposite = false
               visible = true
@@ -441,11 +433,11 @@ let renderMeasurementNIBChart (state: State) dispatch =
            {| index = 2
               title = {| text = null |}
               labels =
-                  pojo
-                      {| format = "{value}"
-                         align = "center"
-                         x = -10
-                         reserveSpace = false |}
+               pojo
+                   {| format = "{value}"
+                      align = "center"
+                      x = -10
+                      reserveSpace = false |}
               showFirstLabel = false
               opposite = true
               visible = true
@@ -457,37 +449,16 @@ let renderMeasurementNIBChart (state: State) dispatch =
         |> Map.toArray
         |> Array.filter (fun (key, wp) -> key = state.Station) // TODO
         |> Array.map (fun (wastewaterTreatmentPlantKey, wastewaterTreatmentPlant) ->
-            [|
-            //    pojo
-            //        {| name = chartText "newCases7dAve"
-            //           ``type`` = "line"
-            //           color = "#bda506"
-            //           dashStyle = "ShortDot"
-            //           yAxis = 1
-            //           data =
-            //               connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
-
-            //    pojo
-            //        {| name = chartText "concentrationGen1"
-            //           ``type`` = "line"
-            //           color = "#d45087"
-            //           yAxis = 0
-            //           lineWidth = 0
-            //           marker = pojo {|
-            //                           symbol = "circle"
-            //                           radius = 4
-            //                           enabled = true |}
-            //           data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
-
-               pojo
+            [| pojo
                    {| name = chartText "concentrationGen2"
                       ``type`` = "line"
                       color = "#a05195"
                       lineWidth = 0
-                      marker = pojo {|
-                                      symbol = "diamond"
-                                      radius = 5
-                                      enabled = true |}
+                      marker =
+                       pojo
+                           {| symbol = "diamond"
+                              radius = 5
+                              enabled = true |}
                       yAxis = 0
                       data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
@@ -498,9 +469,9 @@ let renderMeasurementNIBChart (state: State) dispatch =
                       dashStyle = "Dot"
                       yAxis = 2
                       data =
-                          connectedMunicipalitiesActiveCasesAsXYSeries
-                              state.MunicipalitiesData
-                              wastewaterTreatmentPlantKey |}  |] )
+                       connectedMunicipalitiesActiveCasesAsXYSeries
+                           state.MunicipalitiesData
+                           wastewaterTreatmentPlantKey |} |])
 
         |> Array.concat
 
@@ -516,42 +487,39 @@ let renderMeasurementNIBChart (state: State) dispatch =
         Highcharts.basicChartOptions scaleType className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
     {| baseOptions with
-           yAxis = allYAxis
-           series = allSeries
-           legend =
-               pojo
-                   {| enabled = true
-                      layout = "horizontal" |}
-           tooltip =
-               pojo
-                   {| shared = true
-                      split = false
-                      formatter = None
-                      snap = 50
-                      valueSuffix = ""
-                      xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
-           credits =
-               {| enabled = true
-                  text =
-                      sprintf
-                          "%s: %s, %s"
-                          (I18N.t "charts.common.dataSource")
-                          (I18N.tOptions ("charts.common.dsNIB") {| context = localStorage.getItem ("contextCountry") |})
-                          (I18N.tOptions
-                              ("charts.common.dsNIJZ")
-                               {| context = localStorage.getItem ("contextCountry") |})
-                  href =
-                      "https://www.nib.si/aktualno/novice/1500-monitoring-sars-cov-2-v-odpadnih-vodah" |}
-               |> pojo
-           responsive =
-               pojo
-                   {| rules =
-                          [| {| condition = {| maxWidth = 768 |}
-                                chartOptions =
-                                    {| yAxis =
-                                           [| {| labels = pojo {| enabled = false |} |}
-                                              {| labels = pojo {| enabled = false |} |}
-                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
+        yAxis = allYAxis
+        series = allSeries
+        legend =
+            pojo
+                {| enabled = true
+                   layout = "horizontal" |}
+        tooltip =
+            pojo
+                {| shared = true
+                   split = false
+                   formatter = None
+                   snap = 50
+                   valueSuffix = ""
+                   xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+        credits =
+            {| enabled = true
+               text =
+                sprintf
+                    "%s: %s, %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsNIB") {| context = localStorage.getItem ("contextCountry") |})
+                    (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+               href = "https://www.nib.si/aktualno/novice/1500-monitoring-sars-cov-2-v-odpadnih-vodah" |}
+            |> pojo
+        responsive =
+            pojo
+                {| rules =
+                    [| {| condition = {| maxWidth = 768 |}
+                          chartOptions =
+                           {| yAxis =
+                               [| {| labels = pojo {| enabled = false |} |}
+                                  {| labels = pojo {| enabled = false |} |}
+                                  {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 let renderStationSelector state dispatch =
@@ -595,7 +563,7 @@ let renderChartContainer state dispatch =
               [ match state.DisplayType with
                 | Cases100k -> renderCasesChart state dispatch |> chartFromWindow
                 | GenomesRatio -> renderGenomesChart state dispatch |> chartFromWindow
-                | MeasurementsNIB -> renderMeasurementNIBChart state dispatch |> chartFromWindow] ]
+                | MeasurementsNIB -> renderMeasurementNIBChart state dispatch |> chartFromWindow ] ]
 
 let renderChart state dispatch =
     Html.div
@@ -615,7 +583,6 @@ let render (state: State) dispatch =
 
 let chart =
     React.functionComponent (fun (props: {| data: MunicipalitiesData |}) ->
-        let state, dispatch =
-            React.useElmish (init props.data, update, [||])
+        let state, dispatch = React.useElmish (init props.data, update, [||])
 
         render state dispatch)
