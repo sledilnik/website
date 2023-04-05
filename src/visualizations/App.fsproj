@@ -96,7 +96,7 @@
         <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
         <PackageReference Include="Fable.Elmish.HMR" Version="4.0.1" />
         <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
-        <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
+        <PackageReference Include="Fable.SimpleHttp" Version="3.5.0" />
         <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
         <PackageReference Include="Fable.Extras" Version="0.1.0" />
         <PackageReference Include="Feliz" Version="1.61.0" />
