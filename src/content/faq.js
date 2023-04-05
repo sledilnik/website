@@ -54,7 +54,6 @@ export default [
             "schools-chart",
             "school-status-chart",
             "sewage-chart",
-            "sewage-cases-chart",
             "sources-chart",
             "ratios-chart",
             "hcenters-chart",

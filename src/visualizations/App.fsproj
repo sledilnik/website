@@ -59,7 +59,6 @@
         <Compile Include="VaccineEffectAgeChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="SewageChart.fs" />
-        <Compile Include="SewageCasesChart.fs" />
         <Compile Include="HcCasesChart.fs" />
         <Compile Include="PhaseDiagram/Types.fs" />
         <Compile Include="PhaseDiagram/Data.fs" />
