@@ -612,7 +612,7 @@ module Dictionaries =
     }
     let wastewaterTreatmentPlants =
         [
-            "ljubljana", "OČN Ljubljana", "#457844", [|"lj", "ljubljana"|]
+            "ljubljana", "CČN Ljubljana", "#457844", [|"lj", "ljubljana"|]
             "domzale", "ČN Domžale - Kamnik", "#10829a", [|"lj", "domžale"; "lj", "kamnik"; "lj", "mengeš"; "lj", "trzin"; "lj", "komenda"; "kr", "cerklje_na_gorenjskem"|]
             "celje", "ČN Celje", "#665191", [|"ce", "celje"; "ce", "štore"; "ce", "žalec"|] // Žalec: only Levec, part of Žalec
             "velenje", "OČN Šaleške doline", "#777c29", [|"ce", "velenje"; "ce", "šoštanj"|]
