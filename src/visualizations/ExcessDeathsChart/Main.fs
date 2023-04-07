@@ -43,7 +43,7 @@ let renderDisplayTypeSelectors state dispatch =
         |> List.map (fun dt ->
             let selected =
                 match state.DisplayType, dt with
-                // | ExcessDeathsByAgeGroup _, ExcessDeathsByAgeGroup _ -> true
+                | ExcessDeathsByAgeGroup _, ExcessDeathsByAgeGroup _ -> true
                 | ExcessDeaths, ExcessDeaths -> true
                 | AbsoluteDeaths, AbsoluteDeaths -> true
                 | _ -> false
@@ -136,17 +136,17 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                                     prop.href "https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2"
                                     prop.children [ Html.text "Zakaj razlike v številu umrlih?"] ]
                             ] ] ] )
-                // | ExcessDeathsByAgeGroup sex ->
-                //     React.keyedFragment (3, [
-                //         Html.div [
-                //             prop.style [ style.height 420 ]
-                //             prop.children [
-                //                 renderRemoteData state.DailyDeathsData (RelativeByAgeGroup.renderChartOptions sex >> Highcharts.chart) ] ]
-                //         renderDisplayTypeOptions Sex.All sex (ExcessDeathsByAgeGroup >> DisplayTypeChanged >> dispatch)
-                //         Html.div [
-                //             prop.className "disclaimer"
-                //             prop.children [
-                //                 Html.text (I18N.chartText "excessDeaths" "excessByAgeGroup.disclaimer") ] ] ] )
+                | ExcessDeathsByAgeGroup sex ->
+                    React.keyedFragment (3, [
+                        Html.div [
+                            prop.style [ style.height 420 ]
+                            prop.children [
+                                renderRemoteData state.DailyDeathsData (RelativeByAgeGroup.renderChartOptions sex >> Highcharts.chart) ] ]
+                        renderDisplayTypeOptions Sex.All sex (ExcessDeathsByAgeGroup >> DisplayTypeChanged >> dispatch)
+                        Html.div [
+                            prop.className "disclaimer"
+                            prop.children [
+                                Html.text (I18N.chartText "excessDeaths" "excessByAgeGroup.disclaimer") ] ] ] )
             ]
         ]
     ]

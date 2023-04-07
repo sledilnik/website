@@ -39,10 +39,9 @@ type WeeklyDeathsData = WeeklyDeaths list
 type DisplayType =
     | AbsoluteDeaths
     | ExcessDeaths
-    // | ExcessDeathsByAgeGroup of Sex
+    | ExcessDeathsByAgeGroup of Sex
 with
-    // static member All = [ AbsoluteDeaths ; ExcessDeaths ;  ExcessDeathsByAgeGroup Both ]
-    static member All = [ AbsoluteDeaths ; ExcessDeaths ]
+    static member All = [ AbsoluteDeaths ; ExcessDeaths ;  ExcessDeathsByAgeGroup Both ]
 
     static member Default = AbsoluteDeaths
 
@@ -50,7 +49,7 @@ with
         match this with
         | AbsoluteDeaths -> I18N.t "charts.excessDeaths.absolute.title"
         | ExcessDeaths -> I18N.t "charts.excessDeaths.excess.title"
-        // | ExcessDeathsByAgeGroup _ -> I18N.t "charts.excessDeaths.excessByAgeGroup.title"
+        | ExcessDeathsByAgeGroup _ -> I18N.t "charts.excessDeaths.excessByAgeGroup.title"
 
 type State = {
     DisplayType : DisplayType
