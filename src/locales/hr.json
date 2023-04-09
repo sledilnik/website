@@ -435,7 +435,7 @@
             "hospitalized": "Hospitalizirani",
             "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
-            "title": "Hospitalizacije (c19 odjeli i crvene zone)",
+            "title": "Hospitalizacije (c19 odjeli i crvene zone) [do 31.&nbsp;3.&nbsp;2023.]",
             "titleMenu": "Hospitalizacije",
             "care": "Odjel za njegu",
             "icu-deceased": "Umrli",
@@ -532,7 +532,7 @@
             "bedsICU70": "Kreveti intenzivne njege, 70 %",
             "all": "Sve",
             "full": "Popunjene",
-            "title": "Kapacitet bolnice",
+            "title": "Kapacitet bolnice [do 31.&nbsp;3.&nbsp;2023.]",
             "allHospitals": "Sve bolnice",
             "bedsICUFull": "Kreveti intenzivne njege, popunjeni",
             "bedsICUShort": "Kreveti intenzivne njege",
@@ -739,7 +739,7 @@
         },
         "carePatients": {
             "titleMenu": "Bolnice za njegu",
-            "title": "Bolnice za njegu"
+            "title": "Bolnice za njegu [do 8.&nbsp;4.&nbsp;2021.]"
         },
         "countriesNewDeathsPer100k": {
             "title": "Države: Novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -818,7 +818,7 @@
         },
         "metricsCorrelation": {
             "titleMenu": "Korelacija",
-            "title": "Korelacija između slučajeva, hospitaliziranih i umrlih",
+            "title": "Korelacija između slučajeva, hospitaliziranih i umrlih [do 31.&nbsp;3.&nbsp;2023.]",
             "deceased": "Umrli",
             "hospitalized": "Hospitalizirani",
             "cases": "Potvrđeni slučajevi",
@@ -837,7 +837,7 @@
         },
         "icuPatients": {
             "titleMenu": "Intenzivna njega",
-            "title": "Intenzivna njega"
+            "title": "Intenzivna njega [do 31.&nbsp;3.&nbsp;2023.]"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
@@ -852,11 +852,11 @@
             "regimeChange": "Razred – promijenjen raspored",
             "search": "Pretraži po imenu škole",
             "titleMenu": "Škole, vrtići – slučajevi",
-            "title": "Slučajevi u školama i vrtićima",
+            "title": "Slučajevi u školama i vrtićima [do 5.&nbsp;4.&nbsp;2022.]",
             "regionsWithChanges": "Mijenja raspored u školama ili vrtićima u prošlom tjednu po regijama:",
             "showAll": "Svi",
             "showActive": "Aktivni",
-            "disclaimer": "Napomena: škole prijavljuju podatke ministarstvu i možda su nepotpuni."
+            "disclaimer": "Napomena: škole prijavljuju podatke ministarstvu i možda su nepotpuni. Prikupljeni podaci do 5.&nbsp;3.&nbsp;2022."
         },
         "schools": {
             "institutionsRemote": "Institucije – Udaljeno",
@@ -874,11 +874,11 @@
             "employeeCases": "Zaposlenici",
             "attendeeCases": "Sudionici",
             "titleMenu": "Škole, vrtići – slučajevi",
-            "title": "Slučajevi u školama i vrtićima"
+            "title": "Slučajevi u školama i vrtićima [do 5.&nbsp;4.&nbsp;2022.]"
         },
         "vaccination": {
             "titleMenu": "Cijepljenje – starost",
-            "title": "Cijepljenje po dobnim skupinama",
+            "title": "Cijepljenje po dobnim skupinama [do 5.&nbsp;7.&nbsp;2022.]",
             "byAge1st": "Prva doza",
             "byAgeAll": "Potpuno cijepljeni",
             "byAge3rd": "Dodatna doza",
@@ -895,7 +895,7 @@
             "byManufacturer": "Isporučeno",
             "used": "Korišteno",
             "titleMenu": "Cjepivo",
-            "title": "Cjepivo",
+            "title": "Cjepivo [do 5.&nbsp;7.&nbsp;2022.]",
             "janssen": "Janssen",
             "byWeek": "Korištenje (tjedno)",
             "unusedDoses": "Nekorištene doze",
@@ -917,7 +917,7 @@
             "relative100k": "Relativno na 100.000 osoba u skupini",
             "absolute100k": "Na 100.000 osoba u skupini",
             "titleMenu": "Cijepljenje – učinak",
-            "title": "Učinak cijepljenja",
+            "title": "Učinak cijepljenja [do 31.&nbsp;3.&nbsp;2023.]",
             "absolute": "Apsolutno",
             "hospitalizedCases": "Hospitalizirani (SARI)",
             "confirmedCases": "Potvrđeni slučajevi",
@@ -943,7 +943,7 @@
             "otherIn": "Hospitalizirani – Ostali",
             "titleMenu": "Hospitalizacije – cijepljenje, dob",
             "absolute100k": "Na 100.000 osoba u grupi",
-            "title": "Stope hospitalizacije (SARI) po stanju cijepljenja i dobnoj skupini",
+            "title": "Stope hospitalizacije (SARI) po stanju cijepljenja i dobnoj skupini [do 5.&nbsp;7.&nbsp;2022.]",
             "hospitalizedIn": "Od {{ startDate, %e. %b %Y. }} do {{ endDate, %e. %b %Y. }}.",
             "toDate": "Na datum",
             "ageBelow65": "Dobna skupina &lt;65",
@@ -1101,7 +1101,7 @@
         },
         "movement": {
             "description": "Ograničeno kretanje između 21:00 i 6:00. Ograničeno kretanje na vlastitu regiju.<br>Skupine do 10 ljudi. Ograničenje svih događaja.",
-            "title": "🚫21 – 6 h"
+            "title": "🚫21&nbsp;–&nbsp;6&nbsp;h"
         },
         "schools6+": {
             "description": "Nastava na daljinu za 6. razrede osnovne škole, srednje škole i muzičke škole",
@@ -1192,7 +1192,7 @@
             "description": "Zatvoreni vrtići i osnovne škole do 3. razreda u Obalno-kraškoj regiji i Zasavlju.<br>U trgovinama je dozvoljena je prodaja 🧦 i 🩲."
         },
         "liftMunicipality2": {
-            "description": "Ublažavanje ograničenja: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2 metra.",
+            "description": "Ublažavanje ograničenja: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2&nbsp;metra.",
             "title": "Općine"
         },
         "liftBorders": {
