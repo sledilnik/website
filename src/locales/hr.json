@@ -1398,6 +1398,14 @@
         "21": {
             "description": "nova metoda testiranja",
             "title": "faza<br>21"
+        },
+        "22": {
+            "title": "faza<br>22",
+            "description": "nova metoda testiranja"
+        },
+        "23": {
+            "title": "faza<br>23",
+            "description": "ograničeno sakupljanje podataka"
         }
     },
     "embedMaker": {
