@@ -1,5 +1,5 @@
-# [Choice] .NET Core version: 3.1, 2.1
-ARG VARIANT=3.1
+# [Choice] .NET Core version: 7.0
+ARG VARIANT=7.0
 FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-${VARIANT}
 
 # [Option] Install Node.js
