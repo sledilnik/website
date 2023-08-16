@@ -7,30 +7,35 @@
 			"VARIANT": "3.1",
 			// Options
 			"INSTALL_NODE": "true",
-			"NODE_VERSION": "lts/*",
+			"NODE_VERSION": "14.0",
 			"INSTALL_AZURE_CLI": "false",
 			"UPGRADE_PACKAGES": "false"
 		}
 	},
 
-	// Set container specific defaults for F# in .NET Core 2.1+
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
-		"FSharp.fsacRuntime": "netcore",
-		"FSharp.useSdkScripts": true
+	"customizations": {
+		"vscode": {
+			// Set container specific defaults for F# in .NET Core 2.1+
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash",
+				"FSharp.fsacRuntime": "netcore",
+				"FSharp.useSdkScripts": true
+			},
+
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"Ionide.Ionide-fsharp",
+				"ms-dotnettools.csharp",
+				"octref.vetur",
+				"editorconfig.editorconfig",
+				"syler.sass-indented",
+				"ms-azuretools.vscode-docker",
+				"redhat.vscode-yaml",
+				"eamodio.gitlens"
+			]
+		}
 	},
 
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"Ionide.Ionide-fsharp",
-		"ms-dotnettools.csharp",
-		"octref.vetur",
-		"editorconfig.editorconfig",
-		"syler.sass-indented",
-		"ms-azuretools.vscode-docker",
-		"redhat.vscode-yaml",
-		"eamodio.gitlens"
-	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
