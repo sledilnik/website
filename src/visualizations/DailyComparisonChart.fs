@@ -114,7 +114,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 let renderChartOptions (state: State) dispatch =
 
-    let weeksShown = 4
+    let weeksShown = 6
 
     let percentageFormatter value =
         let valueF = float value / 100.0
