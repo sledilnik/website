@@ -11,7 +11,7 @@ import CardEmbed from '@/embed/Card'
 import ChartEmbed from '@/embed/Chart'
 
 import '@/main.js'
-import 'style/embed.scss'
+import './style/embed.scss'
 
 Vue.use(VueRouter)
 

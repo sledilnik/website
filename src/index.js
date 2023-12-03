@@ -7,7 +7,7 @@ import App from './App.vue'
 import store from './store/index'
 import plugins from './plugins/index'
 import './main.js'
-import 'style/index.scss'
+import './style/index.scss'
 import VueDateFns from "vue-date-fns";
 import VueFuse from 'vue-fuse';
 
