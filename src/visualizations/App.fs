@@ -42,7 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
-            | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
+ //         | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
             | "HCenters" -> Some HCenters
             | "Hospitals" -> Some Hospitals
             | "Infections" -> Some Infections
@@ -51,10 +51,10 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesNewDeathsPer100k" -> Some CountriesNewDeathsPer100k
             | "CountriesTotalDeathsPer100k" -> Some CountriesTotalDeathsPer100k
             | "PhaseDiagram" -> Some PhaseDiagram
-            | "Deceased" -> Some Deceased
+ //         | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
-            | "WeeklyDemographics" -> Some WeeklyDemographics
+//          | "WeeklyDemographics" -> Some WeeklyDemographics
             | _ -> None
             |> Embedded
 
@@ -246,21 +246,21 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.World; data = data |} }
 
-    let ageGroupsTimeline =
-          { VisualizationType = AgeGroupsTimeline
-            ClassName = "age-groups-trends-chart"
-            ChartTextsGroup = "ageGroupsTimeline"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView AgeGroupsTimelineViz.Rendering.renderChart
-                            {| data = data |} }
+    // let ageGroupsTimeline =
+    //       { VisualizationType = AgeGroupsTimeline
+    //         ClassName = "age-groups-trends-chart"
+    //         ChartTextsGroup = "ageGroupsTimeline"
+    //         ChartEnabled = true
+    //         Explicit = false
+    //         Renderer =
+    //             fun state ->
+    //                 match state.StatsData with
+    //                 | NotAsked -> Html.none
+    //                 | Loading -> Utils.renderLoading
+    //                 | Failure error -> Utils.renderErrorLoading error
+    //                 | Success data ->
+    //                     lazyView AgeGroupsTimelineViz.Rendering.renderChart
+    //                         {| data = data |} }
 
     let tests =
           { VisualizationType = Tests
@@ -526,21 +526,21 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
 
-    let deceased =
-          { VisualizationType = Deceased
-            ClassName = "deceased-chart"
-            ChartTextsGroup = "deceased"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success statsData ->
-                        lazyView DeceasedViz.Rendering.renderChart statsData
-          }
+    // let deceased =
+    //       { VisualizationType = Deceased
+    //         ClassName = "deceased-chart"
+    //         ChartTextsGroup = "deceased"
+    //         ChartEnabled = true
+    //         Explicit = false
+    //         Renderer =
+    //             fun state ->
+    //                 match state.StatsData with
+    //                 | NotAsked -> Html.none
+    //                 | Loading -> Utils.renderLoading
+    //                 | Failure error -> Utils.renderErrorLoading error
+    //                 | Success statsData ->
+    //                     lazyView DeceasedViz.Rendering.renderChart statsData
+    //       }
 
     let countriesCasesPer100k =
           { VisualizationType = CountriesCasesPer100k
@@ -684,19 +684,19 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MetricsCorrelationViz.Rendering.renderChart
                             {| data = data |} }
 
-    let weeklyDemographics =
-          { VisualizationType = WeeklyDemographics
-            ClassName = "weekly-demographics-chart"
-            ChartTextsGroup = "weeklyDemographics"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
+    // let weeklyDemographics =
+    //       { VisualizationType = WeeklyDemographics
+    //         ClassName = "weekly-demographics-chart"
+    //         ChartTextsGroup = "weeklyDemographics"
+    //         ChartEnabled = true
+    //         Explicit = false
+    //         Renderer =
+    //             fun state ->
+    //                 match state.StatsData with
+    //                 | NotAsked -> Html.none
+    //                 | Loading -> Utils.renderLoading
+    //                 | Failure error -> Utils.renderErrorLoading error
+    //                 | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
         [ metricsComparison;
@@ -704,12 +704,12 @@ let render (state: State) (_: Msg -> unit) =
           patientsAge;
           sewage;
           spread;
-          tests; ageGroupsTimeline;
+          tests; (*ageGroupsTimeline;*)
           map; municipalities; regionMap; regions100k;
           patients; patientsICU; hospitals;
-          weeklyDemographics; ageGroups;
+          (*weeklyDemographics;*) ageGroups;
           sources; europeMap;
-          metricsCorrelation; deceased; excessDeaths
+          metricsCorrelation; (*deceased;*) excessDeaths
           infections; hcCases;
           cases;
           regionsAbs
@@ -733,9 +733,9 @@ let render (state: State) (_: Msg -> unit) =
     let allVisualizations =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
-          europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
+          europeMap; worldMap; (*ageGroupsTimeline;*) tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; patientsAge;
-          deceased; ratios; ageGroups; regionMap; regionsAbs
+          (*deceased;*) ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; schoolStatus; hcCases
           countriesCasesPer100k
           countriesActiveCasesPer100k
@@ -743,7 +743,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesTotalDeathsPer100k
           phaseDiagram
           excessDeaths
-          weeklyDemographics
+          (*weeklyDemographics*)
         ]
 
     let embedded, visualizations =
