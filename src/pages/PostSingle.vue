@@ -24,8 +24,8 @@
 
 <script>
 import _ from "lodash";
-import Loader from "components/Loader";
-import ReadingTime from "components/ReadingTime";
+import Loader from "@/components/Loader";
+import ReadingTime from "@/components/ReadingTime";
 import { mapGetters } from 'vuex';
 
 export default {

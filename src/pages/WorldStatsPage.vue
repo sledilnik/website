@@ -14,10 +14,10 @@
 
 <script>
 import { mapState } from "vuex";
-import TimeStamp from "components/TimeStamp";
-import FloatingMenu from "components/FloatingMenu";
-import { Visualizations } from "visualizations/App.fsproj";
-import chartsFloatMenu from "components/floatingMenuDict";
+import TimeStamp from "@/components/TimeStamp";
+import FloatingMenu from "@/components/FloatingMenu";
+import { Visualizations } from "@/visualizations/App.fsproj";
+import chartsFloatMenu from "@/components/floatingMenuDict";
 import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {

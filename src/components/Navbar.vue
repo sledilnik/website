@@ -47,8 +47,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
-import LanguageSwitcher from './LanguageSwitcher'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export default {
   name: 'Navbar',

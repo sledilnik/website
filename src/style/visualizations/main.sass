@@ -395,7 +395,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       justify-content: center
 
   .metric-selector
-    margin: 0 $gap/6 $gap/3 0
+    margin: 0 calc($gap/6) calc($gap/3) 0
     font-size: $font-size
     border-color: $inactive-button-color
 
@@ -403,7 +403,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $button-color
 
   .metric-2-selector
-    margin: 0 $gap/6 $gap/3 $gap/6
+    margin: 0 calc($gap/6) calc($gap/3) calc($gap/6)
     font-size: $font-size
     border-color: $inactive-button-color
 
@@ -458,7 +458,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__type
       width: 15rem
-      margin-bottom: $gap / 6
+      margin-bottom: calc($gap / 6)
 
   .regions-chart, .regions-chart-100k
     min-height: 694px
@@ -469,7 +469,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__type
       width: 10rem
-      margin-bottom: $gap / 6
+      margin-bottom: calc($gap / 6)
 
   .countries-active-chart, .countries-cases-chart, .countries-total-deaths-chart, .countries-new-deaths-chart
     min-height: 703px
@@ -531,7 +531,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__type
       width: 10.5rem
-      margin-bottom: $gap / 6
+      margin-bottom: calc($gap / 6)
 
     @include media-breakpoint-down(sm)
       .map
@@ -609,14 +609,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       font-size: 14px
       font-weight: bold
       background: #fff
-      margin-top: $gap / 2
+      margin-top: calc($gap / 2)
 
     .changes
       width: 95%
       margin: 0 auto
 
     .changes__region
-      margin-bottom: $gap / 2
+      margin-bottom: calc($gap / 2)
 
     .highcharts-legend-item.highcharts-series-0 .highcharts-point
       fill: #f4b2e0 !important
@@ -659,9 +659,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       flex-wrap: wrap
 
     .filters__query
-      margin-left: $gap/2
+      margin-left: calc($gap/2)
       width: 15rem
-      margin-bottom: $gap / 2
+      margin-bottom: calc($gap / 2)
 
       @include media-breakpoint-down(sm)
         margin-left: 0
@@ -678,31 +678,31 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       .municipality
         width: calc(25% - #{$gap * 2})
-        margin: $gap/2 $gap
+        margin: calc($gap/2) $gap
 
         @include media-breakpoint-down(md)
           width: calc(50% - #{$gap * 2})
 
         @include media-breakpoint-down(sm)
           width: 100%
-          margin: $gap/4 0
+          margin: calc($gap/4) 0
 
     .name
       color: $gray-700
-      padding-right: $gap/2
+      padding-right: calc($gap/2)
       font-size: 1.1rem
       text-overflow: ellipsis
       white-space: nowrap
       overflow: hidden
 
     .positive-tests
-      padding-top: $gap/4
+      padding-top: calc($gap/4)
       display: flex
       align-items: flex-start
       justify-content: flex-end
 
     .total-and-date
-      padding-left: $gap/4
+      padding-left: calc($gap/4)
 
       .active
         font-size: $font-size-lg

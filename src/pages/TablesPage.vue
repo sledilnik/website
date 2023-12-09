@@ -28,11 +28,11 @@
 </template>
 
 <script>
-import TestsInfectionsTable from '../components/tables/TestsInfections';
-import RegionalOverviewTable from '../components/tables/RegionalOverview';
-import AgeGroupsMalesTable from '../components/tables/AgeGroupsMales';
-import AgeGroupsFemalesTable from '../components/tables/AgeGroupsFemales';
-import Loader from '../components/Loader';
+import TestsInfectionsTable from '@/components/tables/TestsInfections';
+import RegionalOverviewTable from '@/components/tables/RegionalOverview';
+import AgeGroupsMalesTable from '@/components/tables/AgeGroupsMales';
+import AgeGroupsFemalesTable from '@/components/tables/AgeGroupsFemales';
+import Loader from '@/components/Loader';
 
 export default {
   components: {
@@ -63,6 +63,7 @@ export default {
 };
 </script>
 <style scopped lang="sass">
+@import '@/style/variables'
 $white-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 80%, rgba(255,255,255,0) 100%, rgba(255,255,255,1) 100%)
 $table-text-c: rgba(0, 0, 0, 0.75)
 $table-border: rgb(222,222 ,222)

@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import '@/style/variables'
 .post__teaser
   .card-title
     font-size: 18px

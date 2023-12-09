@@ -37,15 +37,13 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import InfoCard from "components/cards/InfoCard";
-import PostTeaser from "components/cards/PostTeaser";
-import PostTeaserSkeleton from "components/cards/PostTeaserSkeleton";
-import TimeStamp from "components/TimeStamp";
-import Notice from "components/Notice";
-import Youtube from "components/Youtube";
-import FloatingMenu from "components/FloatingMenu";
-import { Visualizations } from "visualizations/App.fsproj";
-import chartsFloatMenu from "components/floatingMenuDict";
+import InfoCard from "@/components/cards/InfoCard";
+import PostTeaser from "@/components/cards/PostTeaser";
+import PostTeaserSkeleton from "@/components/cards/PostTeaserSkeleton";
+import TimeStamp from "@/components/TimeStamp";
+import FloatingMenu from "@/components/FloatingMenu";
+import { Visualizations } from "@/visualizations/App.fsproj";
+import chartsFloatMenu from "@/components/floatingMenuDict";
 import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {

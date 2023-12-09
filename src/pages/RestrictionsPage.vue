@@ -75,7 +75,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import TimeStamp from "components/TimeStamp";
+import TimeStamp from "@/components/TimeStamp";
 
 export default {
   name: "RestrictionsPage",

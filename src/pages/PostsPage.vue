@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import PostTeaser from "components/cards/PostTeaser";
-import Loader from "components/Loader";
+import PostTeaser from "@/components/cards/PostTeaser";
+import Loader from "@/components/Loader";
 import { mapState } from 'vuex';
 
 export default {
