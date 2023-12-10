@@ -42,7 +42,7 @@ import PostTeaser from "@/components/cards/PostTeaser";
 import PostTeaserSkeleton from "@/components/cards/PostTeaserSkeleton";
 import TimeStamp from "@/components/TimeStamp";
 import FloatingMenu from "@/components/FloatingMenu";
-import { Visualizations } from "@/visualizations/App.fsproj";
+import { Visualizations } from "@/visualizations/Main";
 import chartsFloatMenu from "@/components/floatingMenuDict";
 import { API_ENDPOINT_BASE } from '../services/api.service';
 

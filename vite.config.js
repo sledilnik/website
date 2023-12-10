@@ -15,7 +15,7 @@ export default defineConfig({
         },
       },
     resolve: {
-        extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+        extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue', '.fs.js'],
         alias: [
             {
                 find: '@',
