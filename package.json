@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vite",
-    "build": "vite build",
+    "serve": "dotnet fable watch src/visualizations/ --runFast vite",
+    "build": "dotnet fable watch src/visualizations/ --run vite build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
