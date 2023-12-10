@@ -171,3 +171,7 @@ sketch
 
 # End of https://www.gitignore.io/api/firebase
 .Rproj.user
+
+
+# ignore fable built code
+*.fs.js

@@ -7,6 +7,12 @@
       "commands": [
         "dotnet-fsharplint"
       ]
+    },
+    "fable": {
+      "version": "4.7.0",
+      "commands": [
+        "fable"
+      ]
     }
   }
 }

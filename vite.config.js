@@ -23,7 +23,7 @@ export default defineConfig({
             }
         ]
     },
-    assetsInclude: ['**/*.md'],
+    assetsInclude: ['**/*.md', '**/*.fsproj'],
     css: {
         preprocessorOptions: {
             scss: {

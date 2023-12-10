@@ -11,6 +11,8 @@ import './style/index.scss'
 import VueDateFns from "vue-date-fns";
 import VueFuse from 'vue-fuse';
 
+console.log("test");
+
 Vue.use(plugins);
 Vue.use(VueScrollTo, { offset: 60 });
 Vue.use(VScrollLock);
