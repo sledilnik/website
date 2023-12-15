@@ -160,8 +160,8 @@ let renderChartOptions (state: State) dispatch =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
-        | VacDosesAdministered -> dp.Vaccination.Used.Today
         | Deceased -> dp.Deceased
+        | VacDosesAdministered -> dp.Vaccination.Used.Today
         | _ -> None
 
     let getTestsValue (dp: LabTestsStats) =
@@ -183,7 +183,7 @@ let renderChartOptions (state: State) dispatch =
         | HospitalAdmitted -> dp.total.inHospital.``in``
         | HospitalDischarged -> dp.total.inHospital.out
         | ICUAdmitted -> dp.total.icu.``in``
-        // We do not used hospital data anymore for deceased
+        // We do not use hospital data anymore for deceased
         // | Deceased -> dp.total.deceased.today
         | _ -> None
 
