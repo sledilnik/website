@@ -1007,7 +1007,7 @@
             "deceased-total": "Umrli skupaj"
         },
         "cases": {
-            "title": "Potrjeni primeri",
+            "title": "Potrjeni primeri [do 31.3.2023]",
             "titleMenu": "Primeri",
             "active": "Aktivni",
             "hospitalized": "Hospitalizirani",
@@ -1188,7 +1188,7 @@
             "disclaimer": "Upoštevane so samo hospitalizacije vodene v sistemu EPISARI, kar izključuje sprejeme zaradi COVID-19 a brez resne akutne okužbe dihal."
         },
         "hcCases": {
-            "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
+            "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko [do 26.3.2023]",
             "titleMenu": "Zdravstvo in DSO - primeri",
             "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
             "structure": "Struktura",

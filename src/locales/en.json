@@ -339,7 +339,7 @@
             "deceased-total": "Deaths Total"
         },
         "cases": {
-            "title": "Confirmed Cases",
+            "title": "Confirmed Cases [until 3/31/2023]",
             "titleMenu": "Cases",
             "active": "Active",
             "hospitalized": "Hospitalized",
@@ -411,7 +411,7 @@
             "hospitalDeceasedShare": "Share of Hospital Deaths"
         },
         "hCenters": {
-            "title": "Healthcare Center Treatment",
+            "title": "Healthcare Center Treatment [until 10/25/2020]",
             "titleMenu": "HC - treatment",
             "disclaimer": "Note: this chart is not up-to-date. From October 25, 2020, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
@@ -423,7 +423,7 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Cases in Health Care and Retirement Homes, weekly",
+            "title": "Cases in Health Care and Retirement Homes, weekly [until 3/26/2023]",
             "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
             "structure": "Structure",
