@@ -70,6 +70,7 @@ type Metric =
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
              ConfirmedCasesToDate; ActiveCases; RecoveredToDate
+             DeceasedToday; DeceasedToDate;
              VacAdministeredToday; VacAdministeredToDate;
              VacAdministered2Today; VacAdministered2ToDate;
              VacAdministered3Today; VacAdministered3ToDate ]
@@ -199,6 +200,8 @@ let statsDataGenerator metric =
         | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
         | ActiveCases -> point.Cases.Active
         | RecoveredToDate -> point.Cases.RecoveredToDate
+        | DeceasedToday -> point.DeceasedToday |> Utils.zeroToNone
+        | DeceasedToDate -> point.DeceasedToDate
         | VacAdministeredToday -> point.Vaccination.Administered.Today
         | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
         | VacAdministered2Today -> point.Vaccination.Administered2nd.Today
@@ -224,8 +227,9 @@ let patientsDataGenerator metric =
         | VentilatorIn -> point.total.critical.``in``
         | VentilatorOut -> point.total.critical.out
         | VentilatorToDate -> point.total.critical.toDate
-        | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
-        | DeceasedToDate -> point.total.deceased.toDate
+        // From Hospital data - not used anymore
+        // | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
+        // | DeceasedToDate -> point.total.deceased.toDate
         | _ -> None
 
 
