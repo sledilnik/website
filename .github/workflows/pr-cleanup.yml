@@ -16,11 +16,11 @@ jobs:
     steps:
       - name: Check if PR is labeled
         id: label
-        run: echo ::set-output name=has_label::${{ contains(github.event.pull_request.labels.*.name, 'deploy-preview') }}
+        run: echo "has_label=${{ contains(github.event.pull_request.labels.*.name, 'deploy-preview') }}" >> $GITHUB_OUTPUT
 
       - name: Check if PR is deployed
         id: http
-        run: echo ::set-output name=status_code::$(curl -o /dev/null -s -k -w "%{http_code}\n" https://pr-${{ github.event.pull_request.number }}.preview.sledilnik.org)
+        run: echo "status_code=$(curl -o /dev/null -s -k -w "%{http_code}\n" https://pr-${{ github.event.pull_request.number }}.preview.sledilnik.org)" >> $GITHUB_OUTPUT
     outputs:
       status_code: ${{ steps.http.outputs.status_code }}
       has_label: ${{ steps.label.outputs.has_label }}
@@ -35,7 +35,7 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v3
-      
+
       - name: Undeploy
         uses: sledilnik/action-helm-deploy@v1.0.2
         with:
