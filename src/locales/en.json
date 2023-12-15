@@ -319,7 +319,7 @@
             "deceased": "Deaths"
         },
         "deceased": {
-            "title": "Deaths",
+            "title": "Deaths [until 3/26/2023]",
             "titleMenu": "Deaths",
             "disclaimer": "Note: deceased by age and retirement homes data is provided weekly, therefore it is not complete for last two weeks.",
             "disclaimerHospitals": "Note: data about deceased in hospitals was reported until 3/31/2023.",
@@ -617,7 +617,7 @@
             "disclaimer": "Note: demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
-            "title": "Confirmed Cases by Age Groups",
+            "title": "Confirmed Cases by Age Groups [until 4/2/2023]",
             "titleMenu": "Age - share"
         },
         "countriesActiveCasesPer100k": {
@@ -889,7 +889,7 @@
             "locationUnknown": "Unknown"
         },
         "weeklyDemographics": {
-            "title": "Weekly Cases – Demographics",
+            "title": "Weekly Cases – Demographics [until 3/26/2023]",
             "titleMenu": "Age Groups – Weekly",
             "ageGroup": "Age Group",
             "male": "Male",

@@ -987,7 +987,7 @@
             "deceased": "Umrli"
         },
         "deceased": {
-            "title": "Umrli",
+            "title": "Umrli [do 26.3.2023]",
             "titleMenu": "Umrli",
             "disclaimer": "Opomba: podatke o umrlih po starosti in v DSO prejemamo tedensko, zato so za zadnja dva tedna nepopolni.",
             "disclaimerHospitals": "Opomba: podatki o umrlih v bolnišnicah so se poročali samo do 31. 3. 2023.",
@@ -1315,7 +1315,7 @@
             "disclaimer": "Opomba: Demografske podatke (spol, starost) o umrlih NIJZ poroča tedensko. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na tem grafu."
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah",
+            "title": "Potrjeni primeri po starostnih skupinah [do 2.4.2023]",
             "titleMenu": "Starost – delež"
         },
         "countriesActiveCasesPer100k": {
@@ -1548,7 +1548,7 @@
             "locationUnknown": "neznano"
         },
         "weeklyDemographics": {
-            "title": "Demografija potrjenih primerov, tedensko",
+            "title": "Demografija potrjenih primerov, tedensko [do 26.3.2023]",
             "titleMenu": "Starost – po tednih",
             "ageGroup": "Starostna skupina",
             "male": "Moški",
