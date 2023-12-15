@@ -66,8 +66,8 @@ export default {
       displayedInfoCards: [
         'testsToday',
         'testsTodayHAT',
-        'casesToDateSummary',
-        'casesActive',
+        // 'casesToDateSummary',
+        // 'casesActive',
         'casesAvg7Days',
         'casesActive100k',
         // 'vaccinationSummary',
