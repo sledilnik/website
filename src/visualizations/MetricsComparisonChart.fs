@@ -331,6 +331,16 @@ let renderChartOptions state dispatch =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
         credits = chartCreditsNIJZMZHospitals
+
+        // As number of data points grow over time, HighCharts will kick into boost mode.
+        // For boost mode to work correctly, data points must be [x, y] pairs.
+        // Right now are data points are objects in order to shove in extra data for tooltips
+        // When performance without boost mode becomes a problem refactor tooltip formatting and use data points in [x, y] form.
+        //
+        // See:
+        //  - https://api.highcharts.com/highcharts/boost.seriesThreshold
+        //  - https://assets.highcharts.com/errors/12/
+        boost = pojo {| enabled = false |}
     |}
 
 let renderChartContainer state dispatch =
