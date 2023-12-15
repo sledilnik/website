@@ -51,7 +51,7 @@ let init data : State * Cmd<Msg> =
         { DisplayType = DisplayType.Default
           ChartType = AbsoluteChart
           Data = data
-          RangeSelectionButtonIndex = 2 }
+          RangeSelectionButtonIndex = 1 }
 
     state, Cmd.none
 
