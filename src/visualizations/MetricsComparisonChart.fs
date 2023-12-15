@@ -333,10 +333,7 @@ let renderChartOptions state dispatch =
         credits = chartCreditsNIJZMZHospitals
 
         plotOptions = pojo
-            {| series = pojo
-                {| dataGrouping = "false" |}
-                turboThreshold = 0
-            |}
+            {| series = pojo {| dataGrouping = pojo {| enabled = false |}; turboThreshold = 0 |} |}
 
         // As number of data points grow over time, HighCharts will kick into boost mode.
         // For boost mode to work correctly, data points must be [x, y] pairs.
