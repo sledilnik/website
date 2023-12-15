@@ -1101,7 +1101,7 @@
             "shareOfPositive": "Delež pozitivnih testov (%)"
         },
         "infections": {
-            "title": "Struktura potrjenih primerov",
+            "title": "Struktura potrjenih primerov [do 31.3.2023]",
             "titleMenu": "Primeri – struktura",
             "disclaimer": "Opomba: Od 11. oktobra 2020 nam NIJZ ne posreduje več podatkov za zaposlene v zdravstvu in DSO.",
             "averageByDay": "Po dnevih (povprečno)",
@@ -1201,7 +1201,7 @@
             "otherCases": "Ostali potrjeni"
         },
         "regions": {
-            "title": "Po regijah",
+            "title": "Po regijah [do 1.4.2023]",
             "titleMenu": "Regije – primeri",
             "allCases": "Vsi",
             "activeCases": "Aktivni",
@@ -1216,7 +1216,7 @@
             "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
-            "title": "Po regijah (na 100.000 prebivalcev)",
+            "title": "Po regijah (na 100.000 prebivalcev) [do 1.4.2023]",
             "titleMenu": "Regije – primerjava",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
@@ -1224,7 +1224,7 @@
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "map": {
-            "title": "Zemljevid po občinah",
+            "title": "Zemljevid po občinah [do 2.4.2023]",
             "titleMenu": "Občine – zemljevid",
             "confirmedCases": "Potrjeni primeri",
             "vaccinated1st": "Cepljeni - prvi odmerek",
@@ -1249,7 +1249,7 @@
             "disclaimer": "Opomba: Podatkov o umrlih po občinah od 12. decembra 2020 ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
-            "title": "Zemljevid po regijah",
+            "title": "Zemljevid po regijah [do 2.4.2023]",
             "titleMenu": "Regije – zemljevid"
         },
         "europe": {
@@ -1274,7 +1274,7 @@
             "titleMenu": "Svet - stanje"
         },
         "municipalities": {
-            "title": "Primeri po občinah",
+            "title": "Primeri po občinah [do 2.4.2023]",
             "titleMenu": "Občine – primeri",
             "lastCase": "Zadnji primer: ",
             "today": "danes",
@@ -1298,7 +1298,7 @@
             "viewLast": "Zadnji"
         },
         "ageGroups": {
-            "title": "Po starostnih skupinah",
+            "title": "Po starostnih skupinah [do 26.3.2023]",
             "titleMenu": "Starost, spol",
             "male": "Moški",
             "female": "Ženske",
@@ -1510,7 +1510,7 @@
             "other": "Drugo"
         },
         "sources": {
-            "title": "Viri in lokacije okužb, tedensko",
+            "title": "Viri in lokacije okužb, tedensko [do 26.3.2023]",
             "titleMenu": "Viri in lokacije okužb",
             "disclaimerGeneral": "Opomba: epidemiološka služba od 21. februarja 2022 ne sledi več vsem stikom.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra 2020 ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
