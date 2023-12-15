@@ -332,6 +332,12 @@ let renderChartOptions state dispatch =
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
         credits = chartCreditsNIJZMZHospitals
 
+        plotOptions = pojo
+            {| series = pojo
+                {| dataGrouping = "false" |}
+                turboThreshold = 0
+            |}
+
         // As number of data points grow over time, HighCharts will kick into boost mode.
         // For boost mode to work correctly, data points must be [x, y] pairs.
         // Right now are data points are objects in order to shove in extra data for tooltips
