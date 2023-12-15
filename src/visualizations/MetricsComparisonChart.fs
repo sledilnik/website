@@ -200,7 +200,7 @@ let statsDataGenerator metric =
         | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
         | ActiveCases -> point.Cases.Active
         | RecoveredToDate -> point.Cases.RecoveredToDate
-        | DeceasedToday -> point.DeceasedToday |> Utils.zeroToNone
+        | DeceasedToday -> point.Deceased |> Utils.zeroToNone
         | DeceasedToDate -> point.DeceasedToDate
         | VacAdministeredToday -> point.Vaccination.Administered.Today
         | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
