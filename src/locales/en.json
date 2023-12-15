@@ -455,7 +455,7 @@
             "shareOfPositive": "Share of Positive Tests (%)"
         },
         "infections": {
-            "title": "Structure of Confirmed Cases",
+            "title": "Structure of Confirmed Cases [until 3/31/2023]",
             "titleMenu": "Cases - structure",
             "disclaimer": "Note: from October 11, 2020, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
             "averageByDay": "By Day (average)",
@@ -505,7 +505,7 @@
             "absolute": "Absolute Daily Growth"
         },
         "regions": {
-            "title": "By Region",
+            "title": "By Region [until 4/2/2023]",
             "titleMenu": "Region - cases",
             "activeCases": "Active",
             "allCases": "All",
@@ -520,7 +520,7 @@
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
-            "title": "By Region (per 100,000 people)",
+            "title": "By Region (per 100,000 people) [until 4/2/2023]",
             "titleMenu": "Region - comparison",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
@@ -528,7 +528,7 @@
             "red": "criteria for red list"
         },
         "map": {
-            "title": "Municipality Map",
+            "title": "Municipality Map [until 4/2/2023]",
             "titleMenu": "Municipality - map",
             "mortalityOfConfirmedCases": "Mortality of Confirmed Cases",
             "yesterday": "Yesterday",
@@ -551,7 +551,7 @@
             "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
-            "title": "Region Map",
+            "title": "Region Map [until 4/2/2023]",
             "titleMenu": "Region - map"
         },
         "europe": {
@@ -576,7 +576,7 @@
             "titleMenu": "World - situation"
         },
         "municipalities": {
-            "title": "Cases by Municipalities",
+            "title": "Cases by Municipalities [until 4/2/2023]",
             "titleMenu": "Municipalities - cases",
             "viewLast": "Last",
             "viewDoublingTime": "Doubling time",
@@ -600,7 +600,7 @@
             "lastCase": "Last case: "
         },
         "ageGroups": {
-            "title": "Age Groups",
+            "title": "Age Groups [until 3/26/2023]",
             "titleMenu": "Age, Gender",
             "male": "Male",
             "female": "Female",
@@ -851,7 +851,7 @@
             "other": "Other"
         },
         "sources": {
-            "title": "Sources and Locations of Infection, weekly",
+            "title": "Sources and Locations of Infection, weekly [until 3/26/2023]",
             "titleMenu": "Sources and Locations of Infection",
             "disclaimerGeneral": "Note: from February 21, 2022 epidemiologists do not trace all individual contacts.",
             "disclaimer": "Note: from October 17, 2020, epidemiologists do not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
