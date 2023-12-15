@@ -1201,7 +1201,7 @@
             "otherCases": "Ostali potrjeni"
         },
         "regions": {
-            "title": "Po regijah [do 1.4.2023]",
+            "title": "Po regijah [do 2.4.2023]",
             "titleMenu": "Regije – primeri",
             "allCases": "Vsi",
             "activeCases": "Aktivni",
@@ -1216,7 +1216,7 @@
             "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
-            "title": "Po regijah (na 100.000 prebivalcev) [do 1.4.2023]",
+            "title": "Po regijah (na 100.000 prebivalcev) [do 2.4.2023]",
             "titleMenu": "Regije – primerjava",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",

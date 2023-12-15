@@ -505,7 +505,7 @@
             "absolute": "Absolute Daily Growth"
         },
         "regions": {
-            "title": "By Region [until 4/1/2023]",
+            "title": "By Region [until 4/2/2023]",
             "titleMenu": "Region - cases",
             "activeCases": "Active",
             "allCases": "All",
@@ -520,7 +520,7 @@
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
-            "title": "By Region (per 100,000 people) [until 4/1/2023]",
+            "title": "By Region (per 100,000 people) [until 4/2/2023]",
             "titleMenu": "Region - comparison",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
