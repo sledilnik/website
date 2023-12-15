@@ -764,7 +764,7 @@ let render (state: State) (_: Msg -> unit) =
                 allVisualizations
                 |> List.filter
                        (fun viz -> viz.VisualizationType = visualizationType)
-        | _ -> invalidOp "BUG: this should never happen."
+        | _ -> invalidOp "BUG: visualisation not properly configured"
 
     let brandLink =
         match state.RenderingMode with

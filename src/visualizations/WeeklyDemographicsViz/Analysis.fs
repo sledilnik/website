@@ -138,7 +138,7 @@ let calculateCasesByAgeTimeline
                         calcCasesByAgeForDay (Some prevDay) currentDay
                     | None, Some currentDay ->
                         calcCasesByAgeForDay None currentDay
-                    | _ -> invalidOp "BUG: this should never happen"
+                    | _ -> invalidOp "BUG: age group cases None for current day - weekly"
                 )
 
     { StartDate = totalCasesByAgeGroups.StartDate
