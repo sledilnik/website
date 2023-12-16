@@ -1,66 +1,76 @@
 <template>
-  <div>
-    <div class="table-container">
-      <div class="table-wrapper">
-        <h1>{{ $t("tables.title") }}</h1>
-        <b-tabs>
-          <b-tab :title="$t('tables.tabSummary')" active>
-            <tests-infections-table :tableHeight="tableHeight"></tests-infections-table>
-          </b-tab>
-          <b-tab :title="$t('tables.tabByRegion')">
-            <regional-overview-table :tableHeight="tableHeight"></regional-overview-table>
-          </b-tab>
-          <b-tab :title="$t('tables.tabByAgeMale')">
-            <age-groups-males-table :table-height="tableHeight"></age-groups-males-table>
-          </b-tab>
-          <b-tab :title="$t('tables.tabByAgeFemale')">
-            <age-groups-females-table :table-height="tableHeight"></age-groups-females-table>
-          </b-tab>
-        </b-tabs>
-        <Loader v-if="!loaded" />
-        <div class="footnote">
-          {{ $t("tables.source") }}:
-          <router-link to="datasources">{{ $t("tables.sourceLink") }}</router-link>
+    <div>
+        <div class="table-container">
+            <div class="table-wrapper">
+                <h1>{{ $t('tables.title') }}</h1>
+                <b-tabs>
+                    <b-tab :title="$t('tables.tabSummary')" active>
+                        <tests-infections-table
+                            :tableHeight="tableHeight"
+                        ></tests-infections-table>
+                    </b-tab>
+                    <b-tab :title="$t('tables.tabByRegion')">
+                        <regional-overview-table
+                            :tableHeight="tableHeight"
+                        ></regional-overview-table>
+                    </b-tab>
+                    <b-tab :title="$t('tables.tabByAgeMale')">
+                        <age-groups-males-table
+                            :table-height="tableHeight"
+                        ></age-groups-males-table>
+                    </b-tab>
+                    <b-tab :title="$t('tables.tabByAgeFemale')">
+                        <age-groups-females-table
+                            :table-height="tableHeight"
+                        ></age-groups-females-table>
+                    </b-tab>
+                </b-tabs>
+                <Loader v-if="!loaded" />
+                <div class="footnote">
+                    {{ $t('tables.source') }}:
+                    <router-link to="datasources">{{
+                        $t('tables.sourceLink')
+                    }}</router-link>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
-import TestsInfectionsTable from '@/components/tables/TestsInfections';
-import RegionalOverviewTable from '@/components/tables/RegionalOverview';
-import AgeGroupsMalesTable from '@/components/tables/AgeGroupsMales';
-import AgeGroupsFemalesTable from '@/components/tables/AgeGroupsFemales';
-import Loader from '@/components/Loader';
+import TestsInfectionsTable from '@/components/tables/TestsInfections'
+import RegionalOverviewTable from '@/components/tables/RegionalOverview'
+import AgeGroupsMalesTable from '@/components/tables/AgeGroupsMales'
+import AgeGroupsFemalesTable from '@/components/tables/AgeGroupsFemales'
+import Loader from '@/components/Loader'
 
 export default {
-  components: {
-    TestsInfectionsTable,
-    RegionalOverviewTable,
-    AgeGroupsMalesTable,
-    AgeGroupsFemalesTable,
-    Loader
-  },
-  data: function() {
-    return {
-      tableHeight: '100%',
-      loaded: false
-    };
-  },
-  created() {
-    this.dispatch()
-  },
-  mounted() {
-    this.$store.dispatch("tableData/refreshDataEvery", 1200);
-  },
-  methods: {
-    async dispatch() {
-      await this.$store.dispatch("tableData/fetchData");
-      this.loaded = true;
-    }
-  }
-};
+    components: {
+        TestsInfectionsTable,
+        RegionalOverviewTable,
+        AgeGroupsMalesTable,
+        AgeGroupsFemalesTable,
+        Loader,
+    },
+    data: function () {
+        return {
+            tableHeight: '100%',
+            loaded: false,
+        }
+    },
+    created() {
+        this.dispatch()
+    },
+    mounted() {
+        this.$store.dispatch('tableData/refreshDataEvery', 1200)
+    },
+    methods: {
+        async dispatch() {
+            await this.$store.dispatch('tableData/fetchData')
+            this.loaded = true
+        },
+    },
+}
 </script>
 <style scopped lang="sass">
 @import '@/style/variables'

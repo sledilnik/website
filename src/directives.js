@@ -1,8 +1,8 @@
-import Vue from "vue"
-import { marked } from "marked"
+import Vue from 'vue'
+import { marked } from 'marked'
 
-Vue.directive("htmlMd", {
+Vue.directive('htmlMd', {
     bind(el, binding) {
         el.innerHTML = marked(binding.value || '')
-    }
+    },
 })

@@ -1,16 +1,24 @@
 <template>
-  <div class="wrapper">
-    <div class="loader-container">
-      <img class="logo-part1" src="../assets/svg/covid-animation-1.svg" alt="logo" />
-      <img class="logo-part2" src="../assets/svg/covid-animation-2.svg" alt="logo" />
+    <div class="wrapper">
+        <div class="loader-container">
+            <img
+                class="logo-part1"
+                src="../assets/svg/covid-animation-1.svg"
+                alt="logo"
+            />
+            <img
+                class="logo-part2"
+                src="../assets/svg/covid-animation-2.svg"
+                alt="logo"
+            />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'Loader',
-};
+    name: 'Loader',
+}
 </script>
 
 <style scopped lang="sass">

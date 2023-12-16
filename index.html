@@ -1,38 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <title><%= VUE_APP_TITLE %></title>
+        <meta
+            data-vmid="description"
+            name="description"
+            content="<%= VUE_APP_DESC %>"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@sledilnik" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="/" />
+        <meta
+            data-vmid="og:title"
+            property="og:title"
+            content="<%= VUE_APP_TITLE %>"
+        />
+        <meta
+            data-vmid="og:description"
+            property="og:description"
+            content="<%= VUE_APP_DESC %>"
+        />
+        <meta property="og:image" content="/covid-19-logo.png" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/images/add-to-home-192.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/images/site.webmanifest" />
+        <meta name="theme-color" content="#ffd922" />
+        <meta name="msapplication-TileColor" content="#ffd922" />
+        <meta name="msapplication-config" content="/images/browserconfig.xml" />
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.NumberFormat.~locale.sl%2CIntl.NumberFormat.~locale.hr%2CIntl.NumberFormat.~locale.en%2CIntl.NumberFormat.~locale.it%2CIntl.NumberFormat.~locale.de%2CIntersectionObserver"></script>
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <title><%= VUE_APP_TITLE %></title>
-  <meta data-vmid="description" name="description" content="<%= VUE_APP_DESC %>" />
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@sledilnik" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="/" />
-  <meta data-vmid="og:title" property="og:title" content="<%= VUE_APP_TITLE %>" />
-  <meta data-vmid="og:description" property="og:description" content="<%= VUE_APP_DESC %>" />
-  <meta property="og:image" content="/covid-19-logo.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/images/add-to-home-192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="manifest" href="/images/site.webmanifest">
-  <meta name="theme-color" content="#ffd922">
-  <meta name="msapplication-TileColor" content="#ffd922">
-  <meta name="msapplication-config" content="/images/browserconfig.xml">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.NumberFormat.~locale.sl%2CIntl.NumberFormat.~locale.hr%2CIntl.NumberFormat.~locale.en%2CIntl.NumberFormat.~locale.it%2CIntl.NumberFormat.~locale.de%2CIntersectionObserver"></script>
-</head>
-
-<body>
-  <noscript>
-    <strong>We're sorry but page doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <script src="src/index.js" type="module"></script>
-</body>
-
+    <body>
+        <noscript>
+            <strong
+                >We're sorry but page doesn't work properly without JavaScript
+                enabled. Please enable it to continue.</strong
+            >
+        </noscript>
+        <div id="app"></div>
+        <script src="src/index.js" type="module"></script>
+    </body>
 </html>

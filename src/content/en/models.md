@@ -3,11 +3,13 @@
 The [COVID-19 Sledilnik](https://covid-19.sledilnik.org/en/) community includes experts in statistical modeling and computer simulations. This page includes a selection of some Slovenian models, analyses and contributions prepared by experts using publicly available data published on the [GitHub](https://github.com/sledilnik/data) repository.
 
 ## <a id="limitations"></a>Limitations of epidemiological modeling
+
 Uncertainties enter the models and analyses of the COVID-19 epidemic in different ways:
-- the spread of SARS-CoV-2 virus is unpredictable, as the infectious period occurs before the onset of symptoms,
-- there is uncertainty about the impact of measures taken by the public and the government,
-- we lack more accurate, deeper and machine readable data, and
-- any change in testing methodology can completely change the assumptions on which the models and analyses were based on.
+
+-   the spread of SARS-CoV-2 virus is unpredictable, as the infectious period occurs before the onset of symptoms,
+-   there is uncertainty about the impact of measures taken by the public and the government,
+-   we lack more accurate, deeper and machine readable data, and
+-   any change in testing methodology can completely change the assumptions on which the models and analyses were based on.
 
 All of these are reasons why the uncertainty associated with the models is relatively large, and, the further we look to the future, the larger it becomes.
 
@@ -18,16 +20,18 @@ All of these are reasons why the uncertainty associated with the models is relat
 <!-- *Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* -->
 
 ## <a id="tableOfContent"></a>Content
-- [Upgraded SEIR models](#seir)
-- [Social Network Model](#social_network)
-- [Evaluating the Reproduction Rate](#reproduction-rate)
-- [Daily data analyses](#observable)
-- [Determining alarms](#alarms)
-- [Interesting Articles](#articles)
+
+-   [Upgraded SEIR models](#seir)
+-   [Social Network Model](#social_network)
+-   [Evaluating the Reproduction Rate](#reproduction-rate)
+-   [Daily data analyses](#observable)
+-   [Determining alarms](#alarms)
+-   [Interesting Articles](#articles)
 
 <!--# Models-->
 
 ## <a id="seir"></a>Upgraded SEIR models
+
 [Prof. Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) from the Faculty of Medicine, University of Ljubljana, developed an [upgraded SEIR model](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) with compartments for modeling hospitalizations, intensive care units, and deaths.
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
@@ -41,6 +45,7 @@ More detailed projections of the model are to be found [at this link](https://ap
 <img alt="Model IJS-R4" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
 
 ## <a id="social_network"></a>The Social Network Model
+
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
 
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) from the Faculty of Mathematics and Physics of the University of Ljubljana developed a probabilistic Model of virus transmission via the Social Network of Slovenia, which was published in the scientific journal [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
@@ -60,7 +65,8 @@ The history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~z
 <!--# Analysis-->
 
 ## <a id="reproduction-rate"></a>Evaluating the Reproduction Rate
-The University of Ljubljana Medical Faculty’s [Institute for Biostatistics and Medical Informatics](https://ibmi.mf.uni-lj.si/en) team, led by Prof. Maja Pohar Perme, is [estimating the reproduction rate](https://oblak8.mf.uni-lj.si/covid19/),  i.e. the rate of spread of the infection. To create their model, they used Bayesian statistics, allowing the estimation of complex parameters with only a limited amount of data.
+
+The University of Ljubljana Medical Faculty’s [Institute for Biostatistics and Medical Informatics](https://ibmi.mf.uni-lj.si/en) team, led by Prof. Maja Pohar Perme, is [estimating the reproduction rate](https://oblak8.mf.uni-lj.si/covid19/), i.e. the rate of spread of the infection. To create their model, they used Bayesian statistics, allowing the estimation of complex parameters with only a limited amount of data.
 
 <a href="https://oblak8.mf.uni-lj.si/covid19/" class="img-link">
 <img alt="R_t model" src="https://oblak8.mf.uni-lj.si/covid19/rt_graph.svg" width=600>
@@ -71,33 +77,34 @@ The University of Ljubljana Medical Faculty’s [Institute for Biostatistics and
 More about the methodology and results can be found in the articles in the [Zdravniški vestnik](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([summary](https://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf)) and the scientific journal [Mathematical Biosciences](https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
 
 ## <a id="observable"></a>Daily data analyses
+
 [Miha Kadunc](https://twitter.com/miha_kadunc), a member of the Sledilnik team, prepared [scripts on the Observable web portal](https://observablehq.com/collection/@mkadunc/covid-19-sledilnik-org) for daily data analysis. There you can find: [Municipalities phase diagrams](https://observablehq.com/@mkadunc/municipalities-phase-diagram-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [Incidences by age groups](https://observablehq.com/@mkadunc/relativna-incidenca-po-starostnih-skupinah-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [EU color coding](https://observablehq.com/@mkadunc/eu-proposed-color-coding-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [Maps of 14-days incidence](https://observablehq.com/@mkadunc/map-of-14-days-incidence-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [Ratios and offsets between confirmed cases, hospitalised, ICU and deceased](https://observablehq.com/@mkadunc/sledilnik-covid-19-delez-hospitaliziranih-na-intenzivni-n?collection=@mkadunc/covid-19-sledilnik-org), etc.
 
 <iframe class="observable" src="https://observablehq.com/embed/@mkadunc/municipalities-phase-diagram-sledilnik-org?cells=regions" frameborder="0"></iframe>
 
 ## <a id="alarms"></a>Determining alarms
-Dr. Janez Stare and dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/)) in the analysis [Determining alarms in the COVID-19 epidemic in Slovenia](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) assess the extent to which the epidemic has been restarted. The results are particularly relevant for periods of low virus incidence in the population. In the calculations the ratios of confirmed cases among all tested cases are used.
 
+Dr. Janez Stare and dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/)) in the analysis [Determining alarms in the COVID-19 epidemic in Slovenia](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) assess the extent to which the epidemic has been restarted. The results are particularly relevant for periods of low virus incidence in the population. In the calculations the ratios of confirmed cases among all tested cases are used.
 
 ## <a id="articles"></a>Interesting Articles
 
-- Via short simulations prof. Janez Žibert describes some [key factors in the spread of the virus](https://rpubs.com/janezz/), including: [the impact of vaccination](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [intergenerational mixing and opening of schools](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev), and [the presence of a new version of the virus](https://rpubs.com/janezz/sir_dva_seva). (2021/1/26)
+-   Via short simulations prof. Janez Žibert describes some [key factors in the spread of the virus](https://rpubs.com/janezz/), including: [the impact of vaccination](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [intergenerational mixing and opening of schools](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev), and [the presence of a new version of the virus](https://rpubs.com/janezz/sir_dva_seva). (2021/1/26)
 
-- IBMI researchers, led by Dr. Nina Ružić Gorenjec, in their analysis, [From the story of success to the disaster](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1), emphasized the importance of the reduced public mobility and epidemiological contact tracing for a successful response to the epidemic. (2021/1/13)
+-   IBMI researchers, led by Dr. Nina Ružić Gorenjec, in their analysis, [From the story of success to the disaster](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1), emphasized the importance of the reduced public mobility and epidemiological contact tracing for a successful response to the epidemic. (2021/1/13)
 
-- [What has math to do with epidemic?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) The article introduces you to basic ideas and mathematics behind the modeling. Written based on the lecture of prof. Janez Žibert. (2020/12/17)
+-   [What has math to do with epidemic?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) The article introduces you to basic ideas and mathematics behind the modeling. Written based on the lecture of prof. Janez Žibert. (2020/12/17)
 
-- [Statistics - the basis for understanding the epidemic](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). The following people took part in the conversation hosted by STAznanost: prof. dr. Leon Cizelj, Head of the Reactor Engineering Department at the Jožef Stefan Institute; Dr. Zarja Muršič, representative of Sledilnik; Dr. Mario Fafangel, head of the Center for Infectious Diseases of the National Institute of Public Health. 
+-   [Statistics - the basis for understanding the epidemic](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). The following people took part in the conversation hosted by STAznanost: prof. dr. Leon Cizelj, Head of the Reactor Engineering Department at the Jožef Stefan Institute; Dr. Zarja Muršič, representative of Sledilnik; Dr. Mario Fafangel, head of the Center for Infectious Diseases of the National Institute of Public Health.
 
-- In the article ["Two Slovenias - are we really standing still?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) we drew attention to local differences in the spread of the virus and that a simultaneous response across the country is important to reduce the epidemic. (2020/12/2)
+-   In the article ["Two Slovenias - are we really standing still?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) we drew attention to local differences in the spread of the virus and that a simultaneous response across the country is important to reduce the epidemic. (2020/12/2)
 
-- Members of the COVID-19 Sledilnik presented [the importance of data and modeling for decision-makers](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898) in the Slovenian Parliament. (2020/11/12)
+-   Members of the COVID-19 Sledilnik presented [the importance of data and modeling for decision-makers](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898) in the Slovenian Parliament. (2020/11/12)
 
-- ["Epidemic and Models - Fundamentals of Epidemiological Modeling"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) introduces you to the basic concepts that are most necessary for understanding the epidemic in numbers. Watch short clips. (2020/11/3)
+-   ["Epidemic and Models - Fundamentals of Epidemiological Modeling"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) introduces you to the basic concepts that are most necessary for understanding the epidemic in numbers. Watch short clips. (2020/11/3)
 
-- In the editorial of the Zdravstveno varstvo journal, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the [current findings and key challenges in modeling the COVID-19 epidemic](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract). (2020/6/25)
+-   In the editorial of the Zdravstveno varstvo journal, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the [current findings and key challenges in modeling the COVID-19 epidemic](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract). (2020/6/25)
 
-- Meeting of Slovenian Scientists on the Topic of COVID-19 Measures: the Young Statistician Section of the [Statistical Society of Slovenia](https://stat-d.si/) organized an online interview hosted by the Institute of Biostatistics and Medical Informatics (IBMI) of the Ljubljana University’s Medical Faculty. The conversation was anchored by Dr. Andrej Srakar and Dr. Ana Slavec. The Slovenian Press Agency, STA, broadcasted the event live to more than 850 participants. You can view the recording and lectures [here](https://medium.com/sledilnik/64233b35580c). (2020/4/21)
+-   Meeting of Slovenian Scientists on the Topic of COVID-19 Measures: the Young Statistician Section of the [Statistical Society of Slovenia](https://stat-d.si/) organized an online interview hosted by the Institute of Biostatistics and Medical Informatics (IBMI) of the Ljubljana University’s Medical Faculty. The conversation was anchored by Dr. Andrej Srakar and Dr. Ana Slavec. The Slovenian Press Agency, STA, broadcasted the event live to more than 850 participants. You can view the recording and lectures [here](https://medium.com/sledilnik/64233b35580c). (2020/4/21)
 
--  [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) wrote an excellent review article,
- [An Introduction to Modeling and Statistical Aspects of the COVID-19 Epidemic](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/), about the first models related to the COVID-19 epidemic that were developed in Slovenia. (2020/4/20)
+-   [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) wrote an excellent review article,
+    [An Introduction to Modeling and Statistical Aspects of the COVID-19 Epidemic](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/), about the first models related to the COVID-19 epidemic that were developed in Slovenia. (2020/4/20)

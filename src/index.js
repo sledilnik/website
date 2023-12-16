@@ -8,20 +8,20 @@ import store from './store/index'
 import plugins from './plugins/index'
 import './main.js'
 import './style/index.scss'
-import VueDateFns from "vue-date-fns";
-import VueFuse from 'vue-fuse';
+import VueDateFns from 'vue-date-fns'
+import VueFuse from 'vue-fuse'
 
-console.log("test");
+console.log('test')
 
-Vue.use(plugins);
-Vue.use(VueScrollTo, { offset: 60 });
-Vue.use(VScrollLock);
-Vue.use(VueDateFns);
-Vue.use(VueFuse);
+Vue.use(plugins)
+Vue.use(VueScrollTo, { offset: 60 })
+Vue.use(VScrollLock)
+Vue.use(VueDateFns)
+Vue.use(VueFuse)
 
 new Vue({
-  render: (h) => h(App),
-  router,
-  store,
-  i18n,
+    render: (h) => h(App),
+    router,
+    store,
+    i18n,
 }).$mount('#app')

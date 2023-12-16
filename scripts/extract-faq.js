@@ -1,26 +1,34 @@
-const fs = require('fs');
+const fs = require('fs')
 
 const sectionRegex = /^##(.*)/ms
 const questionRegex = /<summary id=([^>]+)>([^<]+)/ms
 const answerRegex = /<\/summary>([^<>]+)<\/details>/ms
 
 function camelize(str) {
-    return str.toLowerCase().replace("č", "c").replace("ž", "z").replace("š", "s").replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
-      return index === 0 ? word.toLowerCase() : word.toUpperCase();
-    }).replace(/\s+/g, '');
-  }
+    return str
+        .toLowerCase()
+        .replace('č', 'c')
+        .replace('ž', 'z')
+        .replace('š', 's')
+        .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase()
+        })
+        .replace(/\s+/g, '')
+}
 
 function extract(filename) {
     const content = fs.readFileSync(filename, 'utf-8').split('<details>')
 
-    var currentSection = null;
+    var currentSection = null
     const locales = {}
     const faq = {}
 
     for (var i = 0; i < content.length; i++) {
         line = content[i]
 
-        var id, question, answer = null
+        var id,
+            question,
+            answer = null
 
         section = line.match(sectionRegex)
         if (section) {
@@ -42,7 +50,7 @@ function extract(filename) {
         if (ans) {
             answer = ans[1].trim()
         }
-        
+
         if (locales[id]) {
             throw new Error(`Duplicated ${id}`)
         }

@@ -8,26 +8,26 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 20
+    - package-ecosystem: 'npm' # See documentation for possible values
+      directory: '/' # Location of package manifests
+      schedule:
+          interval: 'monthly'
+      open-pull-requests-limit: 20
 
-  - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 10
+    - package-ecosystem: 'docker' # See documentation for possible values
+      directory: '/' # Location of package manifests
+      schedule:
+          interval: 'monthly'
+      open-pull-requests-limit: 10
 
-  # Note: tests/Visualizations.Tests/Visualizations.Tests.fsproj includes src/visualizations/App.fsproj via ProjectReference
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/tests/Visualizations.Tests" # Location of package manifests
-    schedule:
-      interval: "monthly"
-    open-pull-requests-limit: 10
+    # Note: tests/Visualizations.Tests/Visualizations.Tests.fsproj includes src/visualizations/App.fsproj via ProjectReference
+    - package-ecosystem: 'nuget' # See documentation for possible values
+      directory: '/tests/Visualizations.Tests' # Location of package manifests
+      schedule:
+          interval: 'monthly'
+      open-pull-requests-limit: 10
 
-  - package-ecosystem: "github-actions" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-      interval: "monthly"
+    - package-ecosystem: 'github-actions' # See documentation for possible values
+      directory: '/' # Location of package manifests
+      schedule:
+          interval: 'monthly'

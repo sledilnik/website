@@ -1,12 +1,12 @@
 # Podatki o širjenju bolezni COVID-19 v Sloveniji
 
-*Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2, ki povzroča bolezen COVID-19 v Sloveniji. Javnosti želimo omogočiti čim boljši pregled nad razsežnostjo težave in pravilno oceno tveganja.*
+_Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2, ki povzroča bolezen COVID-19 v Sloveniji. Javnosti želimo omogočiti čim boljši pregled nad razsežnostjo težave in pravilno oceno tveganja._
 
 ## Zakaj?
 
 Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah držav, kjer jim je virus uspelo najbolj zajeziti, kritičnega pomena za učinkovit odziv sistemov javnega zdravja. Šele tako objavljeni podatki so temelj za razumevanje dogajanja, aktivno samozaščitno ravnanje ljudi ter sprejemanje nujnosti ukrepov.
 
-Podatke zbiramo iz različnih javno dostopnih virov, od sobote, 28. marca dalje pa imamo vzpostavljeno tudi direktno povezavo z zdravstvenimi zavodi in [NIJZ](https://www.nijz.si/). Ti nam pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujemo v obliko, primerno za vizualizacije in  predstavitev javnosti, kakor tudi za nadaljne delo pri razvoju modelov in napovedi. Ker so podatki iz medijev in nekaterih drugih virov kdaj tudi nejasni in nedosledni, [preglednica](https://tinyurl.com/sledilnik-gdocs) vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
+Podatke zbiramo iz različnih javno dostopnih virov, od sobote, 28. marca dalje pa imamo vzpostavljeno tudi direktno povezavo z zdravstvenimi zavodi in [NIJZ](https://www.nijz.si/). Ti nam pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujemo v obliko, primerno za vizualizacije in predstavitev javnosti, kakor tudi za nadaljne delo pri razvoju modelov in napovedi. Ker so podatki iz medijev in nekaterih drugih virov kdaj tudi nejasni in nedosledni, [preglednica](https://tinyurl.com/sledilnik-gdocs) vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
 ## Pomagajte tudi vi – nam, sebi in drugim
 
@@ -14,21 +14,19 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 Imaš idejo za nov prikaz, bi urejal/a podatke ali pomagal/a pri kodiranju vizualizacij? Javi se nam na [info@sledilnik.org](mailto:info@sledilnik.org) pa se pridruži naši [Slack skupnosti](https://sledilnik.slack.com). Pridruži se in pomagaj!
 
-
 ## Zbrani podatki
 
 Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](/sl/data):
 
-- število opravljenih testov in število potrjeno okuženih
-- število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
-- evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, v intenzivni enoti, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
-- spremljanje posameznih primerov, še zlasti v kritičnih dejavnostih: zaposleni v zdravstvu, domovih starejših občanov, civilni zaščiti
-- zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, respiratorjev za predihavanje ...
+-   število opravljenih testov in število potrjeno okuženih
+-   število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
+-   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, v intenzivni enoti, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
+-   spremljanje posameznih primerov, še zlasti v kritičnih dejavnostih: zaposleni v zdravstvu, domovih starejših občanov, civilni zaščiti
+-   zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, respiratorjev za predihavanje ...
 
 Sproti se trudimo dodajati tudi nove pomembne kategorije.
 
 Vsi podatki so na voljo v obliki [**CSV datotek, REST API-ja in Google Docs preglednic**](/sl/data).
-
 
 ## Uporaba podatkov
 
@@ -36,13 +34,11 @@ Naše podatke že uporabljajo tudi drugi portali; veseli bomo, če se jim boste 
 
 **Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde.
 Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo.
- Kljub temu ne moremo 100 % oz. v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
-
+Kljub temu ne moremo 100 % oz. v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
 
 ## Uporaba grafov in vizualizacij
 
 [Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani.
-
 
 ## Pogoji uporabe
 
@@ -52,20 +48,22 @@ Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike so
 
 Uporaba Sledilnika ne bi bila možna brez nekaterih zunanjih spletnih storitev:
 
-- CloudFlare, preko katerega zanesljivo in varno pretakamo podatke k uporabnikom za svoje delovanje uporablja tudi piškotke kot je [opisano na njihovi spletni strani](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/), upoštevajoč [politiko zasebnosti](https://www.cloudflare.com/privacypolicy/).
-- Stripe, preko katerega [zbiramo donacije](/sl/donate) s kreditnimi karticami. Glej [Stripe politiko zasebnosti](https://stripe.com/privacy) in [piškotkov](https://stripe.com/legal/cookies-policy).
-- Google fonts API, ki sicer ne uporablja piškotkov, a ima lahko [vpliv na zasebnost uporabnikov](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
+-   CloudFlare, preko katerega zanesljivo in varno pretakamo podatke k uporabnikom za svoje delovanje uporablja tudi piškotke kot je [opisano na njihovi spletni strani](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/), upoštevajoč [politiko zasebnosti](https://www.cloudflare.com/privacypolicy/).
+-   Stripe, preko katerega [zbiramo donacije](/sl/donate) s kreditnimi karticami. Glej [Stripe politiko zasebnosti](https://stripe.com/privacy) in [piškotkov](https://stripe.com/legal/cookies-policy).
+-   Google fonts API, ki sicer ne uporablja piškotkov, a ima lahko [vpliv na zasebnost uporabnikov](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
 
 ## Varstvo osebnih podatkov
+
 Znanstveno društvo Sledilnik si prizadeva, da objavlja zgolj takšne informacije, ki niso povezane z določenim ali določljivim posameznikom oziroma so bile predhodno anonimizirane na tak način, da posameznik, na katerega se nanašajo, več ni določen ali določljiv (ti. anonimizirane informacije). Zato objavljamo zgolj informacije, ki izvirajo iz javno dostopnih uradnih virov, za katere je pristojni državni organ (npr. NIJZ, MZ, MIZŠ idr.) predhodno že presodil, da so zadostno anonimizirane, da so primerne za javno objavo. Poleg tega pa pri posameznih grafih in vizualizacijah izvajamo še dodatne anonimizacijske ukrepe, kot sta združevanje podatkov v večje skupine ali prikazovanje povprečij. Zato smo prepričani, da objavljene informacije ne predstavljajo osebnih podatkov.
 
 Če menite, da posamezne objavljene informacije vseeno predstavljajo vaše osebne podatke, predlagamo, da nas kontaktirate po e-pošti na info@sledilnik.org ter v skladu z določbami Poglavja III Splošne uredbe o varstvu podatkov (GDPR) zahtevate ustrezni popravek ali izbris vaših osebnih podatkov oziroma omejitev njihove obdelave, ugovarjate njihovi obdelavi oziroma zahtevate dostop do vaših osebnih podatkov. Prosimo, da pri tem čim bolj natančno navedete, na kateri graf ali vizualizacijo oziroma na katere informacije se vaša zahteva nanaša. Hkrati vas obveščamo, da imate v tem primeru pravico vložitve pritožbe pri Informacijskem pooblaščencu, ki je dosegljiv po pošti na naslovu Dunajska cesta 22, 1000 Ljubljana, oziroma po e-pošti na naslovu gp.ip@ip-rs.si.
 
 Dodatno:
-- Kontaktni podatki: Znanstveno društvo Sledilnik, Celovška cesta 111, 1000 Ljubljana, info@sledilnik.org
-- Nameni objave informacij: kot navedeno na vrhu strani, pod odsekom »Zakaj«.
-- Pravna podlaga: Svoboda izražanja ter širjenja vesti in mnenj iz 39. člena Ustave Republike Slovenije.
-- Vir podatkov: javno dostopne objave posameznih javnih institucij, kot navedeno pri posameznem grafu ali vizualizaciji.
+
+-   Kontaktni podatki: Znanstveno društvo Sledilnik, Celovška cesta 111, 1000 Ljubljana, info@sledilnik.org
+-   Nameni objave informacij: kot navedeno na vrhu strani, pod odsekom »Zakaj«.
+-   Pravna podlaga: Svoboda izražanja ter širjenja vesti in mnenj iz 39. člena Ustave Republike Slovenije.
+-   Vir podatkov: javno dostopne objave posameznih javnih institucij, kot navedeno pri posameznem grafu ali vizualizaciji.
 
 ## Ekipa
 
@@ -93,7 +91,7 @@ Sodelavci projekta:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
 -   [Igor Kolar](https://twitter.com/igorkolar) - podatkovni model, odprti podatki
--   [Jaka Daneu](https://github.com/jalezi) -  podatkovno strganje, spletna stran
+-   [Jaka Daneu](https://github.com/jalezi) - podatkovno strganje, spletna stran
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - vsebine, viri
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model, modeliranje

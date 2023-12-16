@@ -5,6 +5,4 @@ let createIntersectionObserver = (targetElementId, callback, options) => {
     return observer
 }
 
-export {
-    createIntersectionObserver
-}
+export { createIntersectionObserver }

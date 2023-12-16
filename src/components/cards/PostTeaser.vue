@@ -1,54 +1,74 @@
 <template>
-  <div class="post__teaser">
-    <b-card no-body class="card overflow-hidden">
-      <div class="d-flex h-100 flex-column flex-lg-row h-100">
-        <div class="col-lg-4 h-100 d-block py-2 pl-2 pr-0">
-          <a class="h-100" v-if="post.link_to" :href="post.link_to" target="_blank">
-            <div
-              class="teaser__image"
-              v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
-            ></div>
-          </a>
-          <router-link v-else :to="postLink">
-            <div
-              class="teaser__image"
-              v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
-            ></div>
-          </router-link>
-        </div>
-        <div class="col-lg-8 p-0">
-          <b-card-body :title="post.title">
-            <div
-              class="text-muted card-text"
-              v-html="$options.filters.marked(post.blurb)"
-            ></div>
-            <div class="link small">
-              <a v-if="post.link_to" class="stretched-link" :href="post.link_to" target="_blank">Preberi več</a>
-              <router-link v-else class="stretched-link" :to="postLink">Preberi več</router-link>
+    <div class="post__teaser">
+        <b-card no-body class="card overflow-hidden">
+            <div class="d-flex h-100 flex-column flex-lg-row h-100">
+                <div class="col-lg-4 h-100 d-block py-2 pl-2 pr-0">
+                    <a
+                        class="h-100"
+                        v-if="post.link_to"
+                        :href="post.link_to"
+                        target="_blank"
+                    >
+                        <div
+                            class="teaser__image"
+                            v-bind:style="{
+                                'background-image': `url(${post.image_thumb})`,
+                            }"
+                        ></div>
+                    </a>
+                    <router-link v-else :to="postLink">
+                        <div
+                            class="teaser__image"
+                            v-bind:style="{
+                                'background-image': `url(${post.image_thumb})`,
+                            }"
+                        ></div>
+                    </router-link>
+                </div>
+                <div class="col-lg-8 p-0">
+                    <b-card-body :title="post.title">
+                        <div
+                            class="text-muted card-text"
+                            v-html="$options.filters.marked(post.blurb)"
+                        ></div>
+                        <div class="link small">
+                            <a
+                                v-if="post.link_to"
+                                class="stretched-link"
+                                :href="post.link_to"
+                                target="_blank"
+                                >Preberi več</a
+                            >
+                            <router-link
+                                v-else
+                                class="stretched-link"
+                                :to="postLink"
+                                >Preberi več</router-link
+                            >
+                        </div>
+                    </b-card-body>
+                </div>
             </div>
-          </b-card-body>
-        </div>
-      </div>
-    </b-card>
-  </div>
+        </b-card>
+    </div>
 </template>
 
 <script>
 export default {
-  props: {
-    post: Object,
-  },
-  computed: {
-    postLink() {
-      return {
-        name: "post",
-        params: {
-          postId: this.post.id,
-        },
-      };
+    props: {
+        post: Object,
     },
-  },
-};
+    computed: {
+        postLink() {
+            return {
+                name: 'post',
+                params: {
+                    postId: this.post.id,
+                },
+            }
+        },
+    },
+}
 </script>
 
 <style lang="sass">
@@ -113,5 +133,4 @@ export default {
   background-size: cover
   background-repeat: no-repeat
   background-position: bottom center
-
 </style>

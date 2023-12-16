@@ -1,39 +1,79 @@
 <template>
-  <footer>
-    <div class="content-wrapper">
-      <div class="copy">
-        <span>{{ $t('footer.copyright') }}</span>
-      </div>
-      <div class="email">
-        <a href="mailto:info@sledilnik.org">
-          <span>info@sledilnik.org</span>
-        </a>
-      </div>
-      <div class="social">
-        <a href="https://fb.me/SledilnikOrg" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/fb-icon.svg" alt="Facebook" />
-        </a>
-        <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/tw-icon.svg" alt="Twitter" />
-        </a>
-        <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/medium-icon.svg" alt="Medium" />
-        </a>
-        <a href="https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/youtube.svg" alt="YouTube" />
-        </a>
-        <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" />
-        </a>
-      </div>
-    </div>
-  </footer>
+    <footer>
+        <div class="content-wrapper">
+            <div class="copy">
+                <span>{{ $t('footer.copyright') }}</span>
+            </div>
+            <div class="email">
+                <a href="mailto:info@sledilnik.org">
+                    <span>info@sledilnik.org</span>
+                </a>
+            </div>
+            <div class="social">
+                <a
+                    href="https://fb.me/SledilnikOrg"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        loading="lazy"
+                        src="../assets/svg/fb-icon.svg"
+                        alt="Facebook"
+                    />
+                </a>
+                <a
+                    href="https://twitter.com/sledilnik"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        loading="lazy"
+                        src="../assets/svg/tw-icon.svg"
+                        alt="Twitter"
+                    />
+                </a>
+                <a
+                    href="https://medium.com/sledilnik"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        loading="lazy"
+                        src="../assets/svg/medium-icon.svg"
+                        alt="Medium"
+                    />
+                </a>
+                <a
+                    href="https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        loading="lazy"
+                        src="../assets/svg/youtube.svg"
+                        alt="YouTube"
+                    />
+                </a>
+                <a
+                    href="https://github.com/sledilnik"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        loading="lazy"
+                        src="../assets/svg/gh-icon.svg"
+                        alt="GitHub"
+                    />
+                </a>
+            </div>
+        </div>
+    </footer>
 </template>
 
 <script>
 export default {
-  name: "Footer"
-};
+    name: 'Footer',
+}
 </script>
 
 <style scopped lang="sass">

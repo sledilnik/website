@@ -1,55 +1,124 @@
 <html>
-  <head>
-    <title>Embed example</title>
-  </head>
-  <script type="text/javascript">
+    <head>
+        <title>Embed example</title>
+    </head>
+    <script type="text/javascript">
+        window.baseUrl = 'https://covid-19.sledilnik.org/embed.html#/'
 
-    window.baseUrl = "https://covid-19.sledilnik.org/embed.html#/"
-
-    window.addEventListener("message", function(event) {
-      if (event.data.type === "embed-size") {
-        var iframe = document.querySelector("iframe[name='" + event.data.name + "']");
-        console.log("resize event recieved", event.data, iframe)
-        if (iframe) {
-          iframe.style.height = event.data.height + "px";
+        window.addEventListener(
+            'message',
+            function (event) {
+                if (event.data.type === 'embed-size') {
+                    var iframe = document.querySelector(
+                        "iframe[name='" + event.data.name + "']"
+                    )
+                    console.log('resize event recieved', event.data, iframe)
+                    if (iframe) {
+                        iframe.style.height = event.data.height + 'px'
+                    }
+                }
+            },
+            true
+        )
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
         }
-      }
-    }, true);
-
-  </script>
-  <style>
-    body {
-      margin:0;
-      padding: 0;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-    }
-  </style>
-  <body>
-    <iframe name="MetricsComparison" src="https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison"></iframe>
-    <iframe name="DailyComparison" src="https://covid-19.sledilnik.org/embed.html#/chart/DailyComparison"></iframe>
-    <iframe name="Cases" src="https://covid-19.sledilnik.org/embed.html#/chart/Cases"></iframe>
-    <iframe name="Patients" src="https://covid-19.sledilnik.org/embed.html#/chart/Patients"></iframe>
-    <iframe name="IcuPatients" src="https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients"></iframe>
-    <iframe name="CarePatients" src="https://covid-19.sledilnik.org/embed.html#/chart/CarePatients"></iframe>
-    <iframe name="Hospitals" src="https://covid-19.sledilnik.org/embed.html#/chart/Hospitals"></iframe>
-    <iframe name="PatientsAge" src="https://covid-19.sledilnik.org/embed.html#/chart/PatientsAge"></iframe>
-    <iframe name="Ratios" src="https://covid-19.sledilnik.org/embed.html#/chart/Ratios"></iframe>
-    <iframe name="Tests" src="https://covid-19.sledilnik.org/embed.html#/chart/Tests"></iframe>
-    <iframe name="HCenters" src="https://covid-19.sledilnik.org/embed.html#/chart/HCenters"></iframe>
-    <iframe name="Infections" src="https://covid-19.sledilnik.org/embed.html#/chart/Infections"></iframe>
-    <iframe name="Spread" src="https://covid-19.sledilnik.org/embed.html#/chart/Spread"></iframe>
-    <iframe name="Regions" src="https://covid-19.sledilnik.org/embed.html#/chart/Regions"></iframe>
-    <iframe name="Map" src="https://covid-19.sledilnik.org/embed.html#/chart/Map"></iframe>
-    <iframe name="RegionMap" src="https://covid-19.sledilnik.org/embed.html#/chart/RegionMap"></iframe>
-    <iframe name="EuropeMap" src="https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap"></iframe>
-    <iframe name="WorldMap" src="https://covid-19.sledilnik.org/embed.html#/chart/WorldMap"></iframe>
-    <iframe name="Municipalities" src="https://covid-19.sledilnik.org/embed.html#/chart/Municipalities"></iframe>
-    <iframe name="AgeGroups" src="https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups"></iframe>
-    <iframe name="AgeGroupsTimeline" src="https://covid-19.sledilnik.org/embed.html#/chart/AgeGroupsTimeline"></iframe>
-    <iframe name="Countries" src="https://covid-19.sledilnik.org/embed.html#/chart/Countries"></iframe>
-
-  </body>
+        iframe {
+            width: 100%;
+            border: none;
+        }
+    </style>
+    <body>
+        <iframe
+            name="MetricsComparison"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison"
+        ></iframe>
+        <iframe
+            name="DailyComparison"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/DailyComparison"
+        ></iframe>
+        <iframe
+            name="Cases"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Cases"
+        ></iframe>
+        <iframe
+            name="Patients"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Patients"
+        ></iframe>
+        <iframe
+            name="IcuPatients"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients"
+        ></iframe>
+        <iframe
+            name="CarePatients"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/CarePatients"
+        ></iframe>
+        <iframe
+            name="Hospitals"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Hospitals"
+        ></iframe>
+        <iframe
+            name="PatientsAge"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/PatientsAge"
+        ></iframe>
+        <iframe
+            name="Ratios"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Ratios"
+        ></iframe>
+        <iframe
+            name="Tests"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Tests"
+        ></iframe>
+        <iframe
+            name="HCenters"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/HCenters"
+        ></iframe>
+        <iframe
+            name="Infections"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Infections"
+        ></iframe>
+        <iframe
+            name="Spread"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Spread"
+        ></iframe>
+        <iframe
+            name="Regions"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Regions"
+        ></iframe>
+        <iframe
+            name="Map"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Map"
+        ></iframe>
+        <iframe
+            name="RegionMap"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/RegionMap"
+        ></iframe>
+        <iframe
+            name="EuropeMap"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap"
+        ></iframe>
+        <iframe
+            name="WorldMap"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/WorldMap"
+        ></iframe>
+        <iframe
+            name="Municipalities"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Municipalities"
+        ></iframe>
+        <iframe
+            name="AgeGroups"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups"
+        ></iframe>
+        <iframe
+            name="AgeGroupsTimeline"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/AgeGroupsTimeline"
+        ></iframe>
+        <iframe
+            name="Countries"
+            src="https://covid-19.sledilnik.org/embed.html#/chart/Countries"
+        ></iframe>
+    </body>
 </html>

@@ -1,162 +1,162 @@
 export default {
-  'metrics-comparison-chart': {
-    titleKey: 'charts.metricsComparison.titleMenu_SVN',
-    icon: 'graph',
-  },
-  'spread-chart': {
-    titleKey: 'charts.spread.titleMenu',
-    icon: 'graph',
-  },
-  'daily-comparison-chart': {
-    titleKey: 'charts.dailyComparison.titleMenu',
-    icon: 'column',
-  },
-  'patients-chart': {
-    titleKey: 'charts.patients.titleMenu',
-    icon: 'column',
-  },
-  'icu-patients-chart': {
-    titleKey: 'charts.icuPatients.titleMenu',
-    icon: 'column',
-  },
-  'care-patients-chart': {
-    titleKey: 'charts.carePatients.titleMenu',
-    icon: 'column',
-  },
-  'hospitals-chart': {
-    titleKey: 'charts.hospitals.titleMenu',
-    icon: 'graph',
-  },
-  'patients-age-chart': {
-    titleKey: 'charts.patientsAge.titleMenu',
-    icon: 'column',
-  },
-  'map-chart': {
-    titleKey: 'charts.map.titleMenu',
-    icon: 'map',
-  },
-  'municipalities-chart': {
-    titleKey: 'charts.municipalities.titleMenu',
-    icon: 'column',
-  },
-  'europe-chart': {
-    titleKey: 'charts.europe.titleMenu',
-    icon: 'map',
-  },
-  'age-groups-trends-chart': {
-    titleKey: 'charts.ageGroupsTimeline.titleMenu',
-    icon: 'column',
-  },
-  'tests-chart': {
-    titleKey: 'charts.tests.titleMenu',
-    icon: 'column',
-  },
-  'hc-cases-chart': {
-    titleKey: 'charts.hcCases.titleMenu',
-    icon: 'graph',
-  },
-  'vaccination-chart': {
-    titleKey: 'charts.vaccination.titleMenu',
-    icon: 'column',
-  },
-  'vaccines-chart': {
-    titleKey: 'charts.vaccines.titleMenu',
-    icon: 'column',
-  },
-  'vaccine-effect-chart': {
-    titleKey: 'charts.vaccineEffect.titleMenu',
-    icon: 'column',
-  },
-  'vaccine-effect-age-chart': {
-    titleKey: 'charts.vaccineEffectAge.titleMenu',
-    icon: 'column',
-  },
-  'schools-chart': {
-    titleKey: 'charts.schools.titleMenu',
-    icon: 'graph',
-  },
-  'school-status-chart': {
-    titleKey: 'charts.schoolStatus.titleMenu',
-    icon: 'column',
-  },
-  'sources-chart': {
-    titleKey: 'charts.sources.titleMenu',
-    icon: 'column',
-  },
-  'sewage-chart': {
-    titleKey: 'charts.sewage.titleMenu',
-    icon: 'graph',
-  },
-  'hcenters-chart': {
-    titleKey: 'charts.hCenters.titleMenu',
-    icon: 'graph',
-  },
-  'infections-chart': {
-    titleKey: 'charts.infections.titleMenu',
-    icon: 'graph',
-  },
-  'cases-chart': {
-    titleKey: 'charts.cases.titleMenu',
-    icon: 'column',
-  },
-  'age-groups-chart': {
-    titleKey: 'charts.ageGroups.titleMenu',
-    icon: 'column',
-  },
-  'rmap-chart': {
-    titleKey: 'charts.rmap.titleMenu',
-    icon: 'map',
-  },
-  'regions-chart': {
-    titleKey: 'charts.regions.titleMenu',
-    icon: 'graph',
-  },
-  'regions-chart-100k': {
-    titleKey: 'charts.regions100k.titleMenu',
-    icon: 'graph',
-  },
-  'world-chart': {
-    titleKey: 'charts.world.titleMenu',
-    icon: 'map',
-  },
-  'countries-active-chart': {
-    titleKey: 'charts.countriesActiveCasesPer100k.titleMenu',
-    icon: 'graph',
-  },
-  'countries-cases-chart': {
-    titleKey: 'charts.countriesNewCasesPer100k.titleMenu',
-    icon: 'graph',
-  },
-  'countries-new-deaths-chart': {
-    titleKey: 'charts.countriesNewDeathsPer100k.titleMenu',
-    icon: 'graph',
-  },
-  'countries-total-deaths-chart': {
-    titleKey: 'charts.countriesTotalDeathsPer100k.titleMenu',
-    icon: 'graph',
-  },
-  'phase-diagram-chart': {
-    titleKey: 'charts.phaseDiagram.titleMenu',
-    icon: 'graph',
-  },
-  'deceased-chart': {
-    titleKey: 'charts.deceased.titleMenu',
-    icon: 'column',
-  },
-  'excess-deaths-chart': {
-    titleKey: 'charts.excessDeaths.titleMenu',
-    icon: 'graph',
-  },
-  youtube: {
-    titleKey: 'youtube.titleMenu',
-    icon: 'map',
-  },
-  'metrics-correlation-chart': {
-    titleKey: 'charts.metricsCorrelation.titleMenu',
-    icon: 'graph',
-  },
-  'weekly-demographics-chart': {
-    titleKey: 'charts.weeklyDemographics.titleMenu',
-    icon: 'map',
-  }
+    'metrics-comparison-chart': {
+        titleKey: 'charts.metricsComparison.titleMenu_SVN',
+        icon: 'graph',
+    },
+    'spread-chart': {
+        titleKey: 'charts.spread.titleMenu',
+        icon: 'graph',
+    },
+    'daily-comparison-chart': {
+        titleKey: 'charts.dailyComparison.titleMenu',
+        icon: 'column',
+    },
+    'patients-chart': {
+        titleKey: 'charts.patients.titleMenu',
+        icon: 'column',
+    },
+    'icu-patients-chart': {
+        titleKey: 'charts.icuPatients.titleMenu',
+        icon: 'column',
+    },
+    'care-patients-chart': {
+        titleKey: 'charts.carePatients.titleMenu',
+        icon: 'column',
+    },
+    'hospitals-chart': {
+        titleKey: 'charts.hospitals.titleMenu',
+        icon: 'graph',
+    },
+    'patients-age-chart': {
+        titleKey: 'charts.patientsAge.titleMenu',
+        icon: 'column',
+    },
+    'map-chart': {
+        titleKey: 'charts.map.titleMenu',
+        icon: 'map',
+    },
+    'municipalities-chart': {
+        titleKey: 'charts.municipalities.titleMenu',
+        icon: 'column',
+    },
+    'europe-chart': {
+        titleKey: 'charts.europe.titleMenu',
+        icon: 'map',
+    },
+    'age-groups-trends-chart': {
+        titleKey: 'charts.ageGroupsTimeline.titleMenu',
+        icon: 'column',
+    },
+    'tests-chart': {
+        titleKey: 'charts.tests.titleMenu',
+        icon: 'column',
+    },
+    'hc-cases-chart': {
+        titleKey: 'charts.hcCases.titleMenu',
+        icon: 'graph',
+    },
+    'vaccination-chart': {
+        titleKey: 'charts.vaccination.titleMenu',
+        icon: 'column',
+    },
+    'vaccines-chart': {
+        titleKey: 'charts.vaccines.titleMenu',
+        icon: 'column',
+    },
+    'vaccine-effect-chart': {
+        titleKey: 'charts.vaccineEffect.titleMenu',
+        icon: 'column',
+    },
+    'vaccine-effect-age-chart': {
+        titleKey: 'charts.vaccineEffectAge.titleMenu',
+        icon: 'column',
+    },
+    'schools-chart': {
+        titleKey: 'charts.schools.titleMenu',
+        icon: 'graph',
+    },
+    'school-status-chart': {
+        titleKey: 'charts.schoolStatus.titleMenu',
+        icon: 'column',
+    },
+    'sources-chart': {
+        titleKey: 'charts.sources.titleMenu',
+        icon: 'column',
+    },
+    'sewage-chart': {
+        titleKey: 'charts.sewage.titleMenu',
+        icon: 'graph',
+    },
+    'hcenters-chart': {
+        titleKey: 'charts.hCenters.titleMenu',
+        icon: 'graph',
+    },
+    'infections-chart': {
+        titleKey: 'charts.infections.titleMenu',
+        icon: 'graph',
+    },
+    'cases-chart': {
+        titleKey: 'charts.cases.titleMenu',
+        icon: 'column',
+    },
+    'age-groups-chart': {
+        titleKey: 'charts.ageGroups.titleMenu',
+        icon: 'column',
+    },
+    'rmap-chart': {
+        titleKey: 'charts.rmap.titleMenu',
+        icon: 'map',
+    },
+    'regions-chart': {
+        titleKey: 'charts.regions.titleMenu',
+        icon: 'graph',
+    },
+    'regions-chart-100k': {
+        titleKey: 'charts.regions100k.titleMenu',
+        icon: 'graph',
+    },
+    'world-chart': {
+        titleKey: 'charts.world.titleMenu',
+        icon: 'map',
+    },
+    'countries-active-chart': {
+        titleKey: 'charts.countriesActiveCasesPer100k.titleMenu',
+        icon: 'graph',
+    },
+    'countries-cases-chart': {
+        titleKey: 'charts.countriesNewCasesPer100k.titleMenu',
+        icon: 'graph',
+    },
+    'countries-new-deaths-chart': {
+        titleKey: 'charts.countriesNewDeathsPer100k.titleMenu',
+        icon: 'graph',
+    },
+    'countries-total-deaths-chart': {
+        titleKey: 'charts.countriesTotalDeathsPer100k.titleMenu',
+        icon: 'graph',
+    },
+    'phase-diagram-chart': {
+        titleKey: 'charts.phaseDiagram.titleMenu',
+        icon: 'graph',
+    },
+    'deceased-chart': {
+        titleKey: 'charts.deceased.titleMenu',
+        icon: 'column',
+    },
+    'excess-deaths-chart': {
+        titleKey: 'charts.excessDeaths.titleMenu',
+        icon: 'graph',
+    },
+    youtube: {
+        titleKey: 'youtube.titleMenu',
+        icon: 'map',
+    },
+    'metrics-correlation-chart': {
+        titleKey: 'charts.metricsCorrelation.titleMenu',
+        icon: 'graph',
+    },
+    'weekly-demographics-chart': {
+        titleKey: 'charts.weeklyDemographics.titleMenu',
+        icon: 'map',
+    },
 }

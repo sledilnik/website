@@ -1,18 +1,14 @@
 {
-  "version": 1,
-  "isRoot": true,
-  "tools": {
-    "dotnet-fsharplint": {
-      "version": "0.16.5",
-      "commands": [
-        "dotnet-fsharplint"
-      ]
-    },
-    "fable": {
-      "version": "4.7.0",
-      "commands": [
-        "fable"
-      ]
+    "version": 1,
+    "isRoot": true,
+    "tools": {
+        "dotnet-fsharplint": {
+            "version": "0.16.5",
+            "commands": ["dotnet-fsharplint"]
+        },
+        "fable": {
+            "version": "4.7.0",
+            "commands": ["fable"]
+        }
     }
-  }
 }

@@ -1,6 +1,6 @@
 # Tracking data on the COVID-19 spread in Slovenia
 
-*The **"Covid-19 Tracker Slovenia"** project collects, analyses and publishes data on the spread of the SARS-CoV-2 coronavirus, the cause of COVID-19, in Slovenia. We wish to give the public a better overview of the magnitude of the issue and a proper assessment of the risk.*
+_The **"Covid-19 Tracker Slovenia"** project collects, analyses and publishes data on the spread of the SARS-CoV-2 coronavirus, the cause of COVID-19, in Slovenia. We wish to give the public a better overview of the magnitude of the issue and a proper assessment of the risk._
 
 ## Why are we collecting this data?
 
@@ -25,7 +25,6 @@ The following data from the NIJZ and various public sources is included in datab
     We are also constantly striving to add new important categories.
     All data is collected and available in the form of [CSV files, REST API and Google Docs Sheets](/en/data).
 
-
 <details>
   <summary>How is the data edited and verified?</summary>
 
@@ -46,7 +45,6 @@ Updating the hospital care data – the Patients table process:
 
 -   The data is compared with the summary data on hospitalized patients and patients in intensive care published daily by the Government of the Republic of Slovenia at 11:59 pm.
 
-
 </details>
 
 ## Use of the data
@@ -57,7 +55,7 @@ Our data is also freely avaliable and is already used by other portals and proje
 <details>
   <summary>Disclaimer of responsibility (click for more)</summary>
 
-**Please note: The information published on our site, including links to models and other sites to which we are not directly connected, is prepared with the utmost care, using available sources of data, knowledge, methodologies and technologies, in accordance with scientific standards. We believe that the visualizations and models can help explain the various factors behind the spread of the virus, including the impact of the safety measures taken and of possible future measures. Through this, we wish to emphasize that we all play an important role in this pandemic. Nonetheless, we cannot fully guarantee the accuracy, completeness or usefulness of the information on these sites, and we explicitly disclaim any responsibility for further interpretations and simulations which cite our visualizations as a source.*
+\*_Please note: The information published on our site, including links to models and other sites to which we are not directly connected, is prepared with the utmost care, using available sources of data, knowledge, methodologies and technologies, in accordance with scientific standards. We believe that the visualizations and models can help explain the various factors behind the spread of the virus, including the impact of the safety measures taken and of possible future measures. Through this, we wish to emphasize that we all play an important role in this pandemic. Nonetheless, we cannot fully guarantee the accuracy, completeness or usefulness of the information on these sites, and we explicitly disclaim any responsibility for further interpretations and simulations which cite our visualizations as a source._
 
 </details>
 
@@ -74,20 +72,22 @@ To export data to other formats, or use for visualization use please contact us 
 
 Use of Sledilnik would not be possible without some external web services:
 
-- CloudFlare, which helps us deliver the data to our users reliably and securely, using cookies as [described on their website](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/) and respecting the [privacy policy](https://www.cloudflare.com/privacypolicy/).
-- Stripe, which we use to collect [donations](/en/donate) using credit cards. See [Stripe's privacy](https://stripe.com/privacy) and [cookie policy](https://stripe.com/legal/cookies-policy).
-- Google fonts API, which doesn't use cookies, but [may affect user privacy](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
+-   CloudFlare, which helps us deliver the data to our users reliably and securely, using cookies as [described on their website](https://developers.cloudflare.com/fundamentals/get-started/reference/cloudflare-cookies/) and respecting the [privacy policy](https://www.cloudflare.com/privacypolicy/).
+-   Stripe, which we use to collect [donations](/en/donate) using credit cards. See [Stripe's privacy](https://stripe.com/privacy) and [cookie policy](https://stripe.com/legal/cookies-policy).
+-   Google fonts API, which doesn't use cookies, but [may affect user privacy](https://developers.google.com/fonts/faq#what_does_using_the_google_fonts_api_mean_for_the_privacy_of_my_users).
 
 ## Protection of personal data
+
 The Tracker Slovenia Scientific Society (Znanstveno društvo Sledilnik) endeavours to publish only information that cannot be linked to a specific or identifiable person or that has been previously anonymised in such a way that the data subject is no longer specific or identifiable (so-called anonymised information). We strive to achieve this by only publishing information that originates from publicly available official sources and that has previously been assessed by the relevant public authority (e.g. NIJZ, MZ, MIZŠ, etc.) as sufficiently anonymised to be suitable for public release. Furthermore, additional anonymisation measures are applied to certain graphs and visualisations, such as grouping data into larger groups or presenting average values. We believe that the published information does not constitute personal data.
 
 If you believe that the published information nevertheless constitutes personal data about you, we encourage you to contact us by email at info@sledilnik.org and in accordance with the provisions of Section III - Rectification and erasure of the General Data Protection Regulation (GDPR), to request the rectification, erasure or restriction of the processing of your personal data, to object to processing or to request access to your personal data. When doing so, please indicate as precisely as possible to which graph or visualisation or to which information your request relates. We would also like to inform you that in this case you have the right to submit a complaint with the Information Commissioner, who can be contacted by e-mail at gp.ip@ip-rs.si.
 
 More information
-- Contact details: Znanstveno društvo Sledilnik, Celovška cesta 111, 1000 Ljubljana, info@sledilnik.org
-- Purpose of publishing information: As stated at the top of the page, under the section "Why".
-- Legal basis: Article 39 (Freedom of Expression) of the Constitution of the Republic of Slovenia (Freedom of expression of thought, freedom of speech and public appearance, freedom of the press, and other forms of public communication and expression shall be guaranteed. Everyone may freely collect, receive, and disseminate information and opinions. Except in such cases as are provided by law, everyone has the right to obtain information of a public nature in which he has a well founded legal interest under law.)
-- Data source: publicly available information provided by public institutions, as indicated in each graph or visualisation.
+
+-   Contact details: Znanstveno društvo Sledilnik, Celovška cesta 111, 1000 Ljubljana, info@sledilnik.org
+-   Purpose of publishing information: As stated at the top of the page, under the section "Why".
+-   Legal basis: Article 39 (Freedom of Expression) of the Constitution of the Republic of Slovenia (Freedom of expression of thought, freedom of speech and public appearance, freedom of the press, and other forms of public communication and expression shall be guaranteed. Everyone may freely collect, receive, and disseminate information and opinions. Except in such cases as are provided by law, everyone has the right to obtain information of a public nature in which he has a well founded legal interest under law.)
+-   Data source: publicly available information provided by public institutions, as indicated in each graph or visualisation.
 
 ## Covid-19 Tracker Team
 
@@ -115,7 +115,7 @@ Project collaborators:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
 -   [Igor Kolar](https://twitter.com/igorkolar) - data model, open data
--   [Jaka Daneu](https://github.com/jalezi) -  data scraping, web page
+-   [Jaka Daneu](https://github.com/jalezi) - data scraping, web page
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model, modeling

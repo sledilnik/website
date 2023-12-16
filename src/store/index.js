@@ -14,57 +14,57 @@ import faqVaccinesStore from './faq-vaccines.store'
 Vue.use(Vuex)
 
 export function exportTime(x) {
-  return new Date(x * 1000)
+    return new Date(x * 1000)
 }
 
 // loads csv, converts dates to Date objects, string values to numberical
 export async function loadCsv(url) {
-  const data = await d3.csv(url)
-  data.forEach((row) => {
-    data.columns.forEach((col) => {
-      if (col != 'date') {
-        row[col] = row[col] === '' ? null : +row[col]
-      } else {
-        row['date'] = new Date(row['date'])
-      }
+    const data = await d3.csv(url)
+    data.forEach((row) => {
+        data.columns.forEach((col) => {
+            if (col != 'date') {
+                row[col] = row[col] === '' ? null : +row[col]
+            } else {
+                row['date'] = new Date(row['date'])
+            }
+        })
     })
-  })
-  return data
+    return data
 }
 
 const general = {
-  namespaced: true,
-  state: {
-    navMenuOpened: false,
-  },
-  getters: {
-    isMenuOpened(state) {
-      return state.navMenuOpened
+    namespaced: true,
+    state: {
+        navMenuOpened: false,
     },
-  },
-  mutations: {
-    openMenu(state) {
-      state.navMenuOpened = true
+    getters: {
+        isMenuOpened(state) {
+            return state.navMenuOpened
+        },
     },
-    closeMenu(state) {
-      state.navMenuOpened = false
+    mutations: {
+        openMenu(state) {
+            state.navMenuOpened = true
+        },
+        closeMenu(state) {
+            state.navMenuOpened = false
+        },
     },
-  },
 }
 
 const store = new Vuex.Store({
-  modules: {
-    general: general,
-    stats: statsStore,
-    hospitals: hospitalsStore,
-    patients: patientsStore,
-    municipalities: municipalitiesStore,
-    healthCenters: healthCentersStore,
-    posts: postsStore,
-    faqVaccines: faqVaccinesStore,
-    restrictions: restrictionsStore,
-    tableData,
-  }
+    modules: {
+        general: general,
+        stats: statsStore,
+        hospitals: hospitalsStore,
+        patients: patientsStore,
+        municipalities: municipalitiesStore,
+        healthCenters: healthCentersStore,
+        posts: postsStore,
+        faqVaccines: faqVaccinesStore,
+        restrictions: restrictionsStore,
+        tableData,
+    },
 })
 
 export default store

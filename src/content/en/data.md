@@ -1,6 +1,6 @@
 # Data
 
-In order to ensure a maximum accuracy and reliability of the data, Sledilnik community uses (cross-checked) publicly available data from __official governemnt sources__, such as the NIJZ, the Government of the Republic of Slovenia, the Ministry of Health, etc., from __health system sources__, such as UKC Ljubljana, UKC Maribor, UK Golnik and others, __Civil protection services__ and from the __national and local media__.
+In order to ensure a maximum accuracy and reliability of the data, Sledilnik community uses (cross-checked) publicly available data from **official governemnt sources**, such as the NIJZ, the Government of the Republic of Slovenia, the Ministry of Health, etc., from **health system sources**, such as UKC Ljubljana, UKC Maribor, UK Golnik and others, **Civil protection services** and from the **national and local media**.
 
 <div class="logos">
     <a href="https://nijz.si"><img src="/images/logo-NIJZ.jpeg" alt="NIJZ"/></a>
@@ -16,80 +16,76 @@ Collected and cross-checked data is available in the form of **CSV files**, **RE
 <img alt="Sledilnik - data flow" src="/images/data-pipelines.png"></a>
 
 ## Table
+
 You can also inspect the data directly on the [Tables page](/en/tables).
 
 ## CSV files
 
-- [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
-- [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
-- [lab-tests.csv](https://github.com/sledilnik/data/blob/master/csv/lab-tests.csv)
-- [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
-    - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
-    - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
-    - [region-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/region-deceased.csv)
-- [municipality-cases.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-cases.csv)
-    - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
-    - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
-    - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
-- [sewage-cases.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-cases.csv)
-- [sewage-genomes.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-genomes.csv)
-- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
-- **Obsolete - not updated anymore**:
-- [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
-    - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
-- [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
-- [sewage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
-- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
-    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
-    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
-- [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
-- [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
-- [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
-- [ostanizdrav.csv](https://github.com/sledilnik/data/blob/master/csv/ostanizdrav.csv)
-- **Dictionaries**:
-    - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
-    - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
-    - [dict-region.csv](https://github.com/sledilnik/data/blob/master/csv/dict-region.csv)
-    - [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv)
-    - [dict-age-groups.csv](https://github.com/sledilnik/data/blob/master/csv/dict-age-groups.csv)
-    - [dict-risk-factors-country.csv](https://github.com/sledilnik/data/blob/master/csv/dict-risk-factors-country.csv)
-    - [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv)
-    - [dict-schools-values.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools-values.csv)
-
+-   [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
+-   [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
+-   [lab-tests.csv](https://github.com/sledilnik/data/blob/master/csv/lab-tests.csv)
+-   [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
+    -   [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
+    -   [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
+    -   [region-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/region-deceased.csv)
+-   [municipality-cases.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-cases.csv)
+    -   [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
+    -   [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
+    -   [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+-   [sewage-cases.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-cases.csv)
+-   [sewage-genomes.csv](https://github.com/sledilnik/data/blob/master/csv/sewage-genomes.csv)
+-   [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
+-   **Obsolete - not updated anymore**:
+-   [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
+    -   [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
+-   [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
+-   [sewage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+-   [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
+    -   [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
+    -   [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
+-   [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
+-   [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
+-   [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
+-   [ostanizdrav.csv](https://github.com/sledilnik/data/blob/master/csv/ostanizdrav.csv)
+-   **Dictionaries**:
+    -   [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
+    -   [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
+    -   [dict-region.csv](https://github.com/sledilnik/data/blob/master/csv/dict-region.csv)
+    -   [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv)
+    -   [dict-age-groups.csv](https://github.com/sledilnik/data/blob/master/csv/dict-age-groups.csv)
+    -   [dict-risk-factors-country.csv](https://github.com/sledilnik/data/blob/master/csv/dict-risk-factors-country.csv)
+    -   [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv)
+    -   [dict-schools-values.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools-values.csv)
 
 Complete data and source code used to process the data are available on [GitHub](https://github.com/sledilnik/data/).
 
-
 ## REST API
-- [summary](https://api.sledilnik.org/api/summary)
-- [stats](https://api.sledilnik.org/api/stats)
-- [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
-- [lab-tests](https://api.sledilnik.org/api/lab-tests)
-- [vaccinations](https://api.sledilnik.org/api/vaccinations)
-- [regions](https://api.sledilnik.org/api/regions)
-- [municipalities](https://api.sledilnik.org/api/municipalities)
-- [patients](https://api.sledilnik.org/api/patients)
-- [hospitals](https://api.sledilnik.org/api/hospitals)
-- [health-centers](https://api.sledilnik.org/api/health-centers)
-- [schools](https://api.sledilnik.org/api/schools)
-- [school-status](https://api.sledilnik.org/api/school-status)
-- [sewage](https://api.sledilnik.org/api/sewage)
-- [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
-- [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
-- [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
-- **Dictionaries**:
-    - [hospitals-list](https://api.sledilnik.org/api/hospitals-list)
-    - [retirement-homes-list](https://api.sledilnik.org/api/retirement-homes-list)
 
+-   [summary](https://api.sledilnik.org/api/summary)
+-   [stats](https://api.sledilnik.org/api/stats)
+-   [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
+-   [lab-tests](https://api.sledilnik.org/api/lab-tests)
+-   [vaccinations](https://api.sledilnik.org/api/vaccinations)
+-   [regions](https://api.sledilnik.org/api/regions)
+-   [municipalities](https://api.sledilnik.org/api/municipalities)
+-   [patients](https://api.sledilnik.org/api/patients)
+-   [hospitals](https://api.sledilnik.org/api/hospitals)
+-   [health-centers](https://api.sledilnik.org/api/health-centers)
+-   [schools](https://api.sledilnik.org/api/schools)
+-   [school-status](https://api.sledilnik.org/api/school-status)
+-   [sewage](https://api.sledilnik.org/api/sewage)
+-   [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
+-   [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
+-   [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
+-   **Dictionaries**:
+    -   [hospitals-list](https://api.sledilnik.org/api/hospitals-list)
+    -   [retirement-homes-list](https://api.sledilnik.org/api/retirement-homes-list)
 
 More information on how to use the API and the API source code are available on [GitHub](https://github.com/sledilnik/data-api/)-u.
 
-
 ## Google Docs Sheet
 
-
-- [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
-
+-   [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
 
 ## Measures and Restrictions
 

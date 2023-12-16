@@ -10,7 +10,7 @@ This software is licensed under [GNU Affero General Public License](LICENSE).
 ## Structure
 
 | folder           | content                                                                                                                                                       |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `src/assets`     | Static content (images, media files)                                                                                                                          |
 | `src/components` | Reusable page components                                                                                                                                      |
 | `src/content`    | Markdown content for static pages                                                                                                                             |
@@ -28,7 +28,7 @@ current [deployments](https://github.com/sledilnik/website/deployments)
 Deployment is done using GitHub actions in `.github/workflows`
 
 | file           | about                                             |
-|----------------|---------------------------------------------------|
+| -------------- | ------------------------------------------------- |
 | prod.yml       | Deploy producition when GitHub release is created |
 | stage.yml      | Deploy staging on every commit pushed to `master` |
 | pr.yml         | Deploy PRs with label `deploy-peview`             |
@@ -70,10 +70,10 @@ label removed, deployment is stopped.
 
 ## What you need
 
-* yarn
-* node
-* .net core https://dotnet.microsoft.com/download
-* probably something I forgot
+-   yarn
+-   node
+-   .net core https://dotnet.microsoft.com/download
+-   probably something I forgot
 
 ## Project setup
 
@@ -147,9 +147,8 @@ Now you should have a new menu item under `Tools` | `External Tools`
 1. Rebuild the solution.
 2. Run `Owid.Analyzer highest` in the command line. It should write out the new
    countries lists for the four categories.
-3.
-Open `slo-covid-19\website\src\visualizations\CountriesChartViz\CountrySets.fs`
-file in IDE.
+3. Open `slo-covid-19\website\src\visualizations\CountriesChartViz\CountrySets.fs`
+   file in IDE.
 
 4. Replace existing countries lists with the ones returned by the tool. Example,
    in the following line, replace the value of `CountriesCodes` array with the
@@ -166,7 +165,7 @@ let setHighestNewCases = {
 
 ## Resources
 
-* vue (framework) https://vuejs.org/v2/guide/
-* vue-router (view routing) https://router.vuejs.org/
-* vue-bootstrap (styled components) https://bootstrap-vue.js.org/
-* webpack (bundler) https://webpack.js.org/concepts/
+-   vue (framework) https://vuejs.org/v2/guide/
+-   vue-router (view routing) https://router.vuejs.org/
+-   vue-bootstrap (styled components) https://bootstrap-vue.js.org/
+-   webpack (bundler) https://webpack.js.org/concepts/
