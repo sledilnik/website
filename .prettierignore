@@ -1,0 +1,8 @@
+public/
+.fable
+fable_modules/
+node_modules/
+.idea
+.helm
+.ionide
+
