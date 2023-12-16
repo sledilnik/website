@@ -1,7 +1,7 @@
 import ApiService from '../services/api.service'
 import { exportTime } from './index'
 
-const dataApi = new ApiService({})
+const dataApi = new ApiService()
 
 const state = {
     exportTime: null,

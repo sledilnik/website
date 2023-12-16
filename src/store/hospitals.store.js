@@ -1,7 +1,7 @@
 import { exportTime } from './index'
 import hospitalsJSON from '../services/dict.hospitals.json'
 import ApiService from '../services/api.service'
-const dataApi = new ApiService({})
+const dataApi = new ApiService()
 
 const state = {
     loaded: false,

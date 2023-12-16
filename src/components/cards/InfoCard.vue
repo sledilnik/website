@@ -101,6 +101,8 @@
     </div>
 </template>
 <script>
+import { get } from 'lodash-es'
+
 export default {
     props: {
         cardData: Object,
@@ -110,16 +112,16 @@ export default {
     },
     computed: {
         subLabelExtraText() {
-            const fieldNameToPut = _.get(
+            const fieldNameToPut = get(
                 this.cardData,
                 'extraFields.withSubLabel'
             )
-            const value = _.get(this.cardData, `subValues.${fieldNameToPut}`)
+            const value = get(this.cardData, `subValues.${fieldNameToPut}`)
             return value
         },
         valueExtraText() {
-            const fieldNameToPut = _.get(this.cardData, 'extraFields.withValue')
-            const value = _.get(this.cardData, `subValues.${fieldNameToPut}`)
+            const fieldNameToPut = get(this.cardData, 'extraFields.withValue')
+            const value = get(this.cardData, `subValues.${fieldNameToPut}`)
             return value
         },
         date() {

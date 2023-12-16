@@ -1,10 +1,10 @@
-import _ from 'lodash'
+import { defaultsDeep } from 'lodash-es'
 import { exportTime } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 import i18n from '../i18n'
 
-const dataApi = new ApiService({})
+const dataApi = new ApiService()
 
 // This is a function so that the translations are changed when a language change happend.
 const infoCardConfig = () => {
@@ -65,10 +65,11 @@ const getters = {
 
 const actions = {
     fetchSummary: async ({ dispatch, commit }, date) => {
-        const { data } = await dataApi.get('/api/summary', {
+        const resp = await dataApi.get('/api/summary', {
             params: { toDate: date },
         })
-        commit('setSummary', _.defaultsDeep({}, data, infoCardConfig()))
+        console.log('fetchSummary', resp, typeof resp.data)
+        commit('setSummary', defaultsDeep({}, resp.data, infoCardConfig()))
 
         // This is just to get the timestamp from the header. Remove on better solution.
         dispatch('fetchTimestamp', date)
@@ -88,6 +89,7 @@ const actions = {
         const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
         const from = new Date(tempDate.setDate(tempDate.getDate() - 11))
         const data = await dataApi.get('/api/stats', { params: { from, to } })
+        console.log('data2', data.data, from, to)
         const d =
             typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
 
@@ -110,6 +112,7 @@ const mutations = {
     },
 
     setSummary: (state, data) => {
+        console.log('setSummary', data)
         state.summary = data
     },
 

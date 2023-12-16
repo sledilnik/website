@@ -1,12 +1,12 @@
-import { Axios } from 'axios'
+import axios from 'axios'
 
 export const CONTENT_ENDPOINT_BASE = import.meta.env
     .VITE_APP_CONTENT_ENDPOINT_BASE
 
 class ContentApiService {
-    constructor() {
-        this.axios = new Axios({
-            baseURL: CONTENT_ENDPOINT_BASE,
+    constructor({ baseURL = CONTENT_ENDPOINT_BASE } = {}) {
+        this.axios = axios.create({
+            baseURL: baseURL,
         })
     }
 

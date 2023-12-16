@@ -56,7 +56,6 @@ import TimeStamp from '@/components/TimeStamp'
 import FloatingMenu from '@/components/FloatingMenu'
 // import { Visualizations } from "@/visualizations/Main";
 import chartsFloatMenu from '@/components/floatingMenuDict'
-import { API_ENDPOINT_BASE } from '../services/api.service'
 
 export default {
     name: 'StatsPage',

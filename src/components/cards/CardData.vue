@@ -106,9 +106,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .card-content {
-//   flex: 1 1 0;
-// }
 .card-content:not(:last-child) {
     margin-right: 30px;
 }
