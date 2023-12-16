@@ -59,7 +59,6 @@ function extract(filename) {
     }
 
     console.log(JSON.stringify(locales, null, 4))
-    // console.log(JSON.stringify(faq, null, 4))
 }
 
 extract('src/content/en/faq.md')
