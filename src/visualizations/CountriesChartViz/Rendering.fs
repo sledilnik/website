@@ -4,6 +4,7 @@ open System
 open Browser
 open Elmish
 open Feliz
+open Fable.React
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 

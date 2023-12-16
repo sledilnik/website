@@ -42,7 +42,7 @@ import PostTeaser from "@/components/cards/PostTeaser";
 import PostTeaserSkeleton from "@/components/cards/PostTeaserSkeleton";
 import TimeStamp from "@/components/TimeStamp";
 import FloatingMenu from "@/components/FloatingMenu";
-import { Visualizations } from "@/visualizations/Main";
+// import { Visualizations } from "@/visualizations/Main";
 import chartsFloatMenu from "@/components/floatingMenuDict";
 import { API_ENDPOINT_BASE } from '../services/api.service';
 
@@ -82,12 +82,12 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations(
-        "visualizations",
-        "local",
-        this.$route.query,
-        API_ENDPOINT_BASE
-      );
+    //   Visualizations(
+    //     "visualizations",
+    //     "local",
+    //     this.$route.query,
+    //     API_ENDPOINT_BASE
+    //   );
     });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)

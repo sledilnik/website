@@ -40,11 +40,15 @@ export default {
         },
         "MetricsComparison": {
           value: "MetricsComparison",
-          text: this.$t('charts.metricsComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
+          text: this.$t('charts.metricsComparison.title', { context: "" } ),
+          // TODO: inject
+        //   text: this.$t('charts.metricsComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
           dimensions: [1140, 720]
         },
         "DailyComparison": {
           value: "DailyComparison",
+          // TODO: inject
+        //   text: this.$t('charts.dailyComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
           text: this.$t('charts.dailyComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
           dimensions: [1140, 720]
         },

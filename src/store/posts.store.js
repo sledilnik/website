@@ -2,7 +2,7 @@ import ContentApiService from "../services/content-api.service";
 import _ from "lodash";
 import i18next from 'i18next'
 
-const contentApi = new ContentApiService();
+const contentApi = new ContentApiService({});
 const state = {
   // API will return posts, ordered by created date and pinned status (first pinned, everything ordered by date DESC)
   posts: [],

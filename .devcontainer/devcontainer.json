@@ -32,7 +32,8 @@
                     "**/node_modules": true,
                     "**/bower_components": true,
                     "**/*.code-search": true,
-                    "**/fable_modules": true
+                    "**/fable_modules": true,
+                    "**/*.fs.js": true
                 }
 			},
 

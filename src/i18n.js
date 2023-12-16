@@ -77,7 +77,9 @@ i18next.on('languageChanged', function(lng) {
 });
 
 i18next.use(LanguageDetector).init({
-  lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
+    // TODO: inject this somehow
+//   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
+    lng: 'sl',
   fallbackLng: ['en', 'sl', 'hr', 'de', 'it'],
   returnObjects: true,
   resources: {
@@ -111,7 +113,9 @@ i18next.services.pluralResolver.addRule(
     },
   }
 )
-localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
+// TODO: inject
+// localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
+localStorage.setItem('contextCountry', "sl")
 
 const i18n = new VueI18Next(i18next)
 

@@ -1,6 +1,6 @@
 import ContentApiService from "../services/content-api.service";
 
-const contentApi = new ContentApiService();
+const contentApi = new ContentApiService({});
 const state = {
   faqVaccines: {
     sl: [],

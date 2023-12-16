@@ -253,7 +253,9 @@ export default {
       StripeCheckout
   },
   data () {
-    this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
+    // TODO: inject this
+    // this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
+    this.publishableKey = "";
 
     let urlParams = new URLSearchParams(window.location.search);
     var stripeSuccess = urlParams.has('stripeSessionId');
@@ -270,8 +272,11 @@ export default {
       stripeSessionId: stripeSessionId,
       successTranslationKey: successTranslationKey,
       loading: false,
-      stripeSubscriptions: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_SUBSCRIPTIONS),
-      stripeOneTimeDonations: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_ONETIME),
+      // TODO: inject this
+    //   stripeSubscriptions: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_SUBSCRIPTIONS),
+    //   stripeOneTimeDonations: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_ONETIME),
+    stripeSubscriptions: "",
+    stripeOneTimeDonations: "",
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
       language: `${this.$i18n.i18next.language}`,

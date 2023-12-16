@@ -1,5 +1,5 @@
 import Vue from "vue";
-import marked from "marked"
+import { marked } from "marked"
 import { formatNumber } from "./i18n";
 
 Vue.filter("prefixDiff", function (value) {

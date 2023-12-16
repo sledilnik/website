@@ -14,7 +14,7 @@ Boost(Highcharts)
 XRange(Highcharts)
 
 import HighchartsReact from 'highcharts-react-official';
-require("./_highcharts.scss");
+import "./_highcharts.scss";
 
 window.Highcharts = window.Highcharts || Highcharts;
 

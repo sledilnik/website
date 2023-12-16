@@ -1,7 +1,7 @@
 import ContentApiService from "../services/content-api.service";
 import { unionBy, map } from "lodash";
 
-const contentApi = new ContentApiService();
+const contentApi = new ContentApiService({});
 const state = {
   lastUpdate: null,
   restrictions: [],

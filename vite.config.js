@@ -1,17 +1,18 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue2'
+import { fileURLToPath } from 'node:url';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [vue()],
     build: {
         rollupOptions: {
-        //   external: new Regexp('src/visualizations/.*'),
-          input: {
-            main: resolve(__dirname, 'index.html'),
-            // embed: resolve(__dirname, 'index_embed.html'),
-          },
+            external: [fileURLToPath(new URL('src/visualizations/App.fsproj',import.meta.url))],
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                // embed: resolve(__dirname, 'index_embed.html'),
+            },
         },
       },
     resolve: {
@@ -23,7 +24,7 @@ export default defineConfig({
             }
         ]
     },
-    assetsInclude: ['**/*.md', '**/*.fsproj'],
+    assetsInclude: ['**/*.md'],
     css: {
         preprocessorOptions: {
             scss: {
