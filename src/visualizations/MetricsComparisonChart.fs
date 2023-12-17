@@ -4,7 +4,7 @@ module MetricsComparisonChart
 open System
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
+open Feliz.UseElmish
 open Browser
 
 open Highcharts
@@ -141,7 +141,7 @@ type Msg =
     | MetricTypeChanged of FullMetricType
     | RangeSelectionChanged of int
 
-let init data : State * Cmd<Msg> =
+let init (data: StatsData) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
@@ -399,5 +399,10 @@ let render state dispatch =
             renderMetricsSelectors state dispatch
         ]
 
-let metricsComparisonChart (props : {| data : StatsData |}) =
-    React.elmishComponent("MetricsComparisonChart", init props.data, update, render)
+// let metricsComparisonChart (props : {| data : StatsData |}) =
+//     React.elmishComponent("MetricsComparisonChart", init props.data, update, render)
+
+[<ReactComponent>]
+let MetricsComparisonChart(data: StatsData) =
+    let state, dispatch = React.useElmish(init data, update, [| |])
+    render state dispatch

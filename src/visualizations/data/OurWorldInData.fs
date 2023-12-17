@@ -2,7 +2,6 @@ module Data.OurWorldInData
 
 open System
 open Fable.SimpleHttp
-open Fable.Extras.Web
 
 open Types
 

@@ -214,3 +214,4 @@ let render (state : State) dispatch =
 
 let ratiosChart (props : {| data : StatsData |}) =
     React.elmishComponent("RatiosChart", init props.data, update, render)
+

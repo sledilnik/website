@@ -7,7 +7,7 @@ type Ii18n =
     abstract t : string -> string
     abstract t : string * obj -> string
 
-let i18n : Ii18n = importDefault "i18n"
+let i18n : Ii18n = importDefault "i18next"
 
 let t key = i18n.t key
 
@@ -28,5 +28,5 @@ type NumberFormat =
     abstract formatNumber : float -> string
     abstract formatNumber : float * obj -> string
 
-[<ImportAll("i18n")>]
+[<ImportAll("i18next")>]
 let NumberFormat : NumberFormat = jsNative

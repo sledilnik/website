@@ -125,759 +125,760 @@ let update (msg: Msg) (state: State) =
 open Elmish.React
 
 let render (state: State) (_: Msg -> unit) =
-    let hospitals =
-          { VisualizationType = Hospitals
-            ClassName = "hospitals-chart"
-            ChartTextsGroup = "hospitals"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
+    Html.div []
+//     let hospitals =
+//           { VisualizationType = Hospitals
+//             ClassName = "hospitals-chart"
+//             ChartTextsGroup = "hospitals"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
 
-    let metricsComparison =
-          { VisualizationType = MetricsComparison
-            ClassName = "metrics-comparison-chart"
-            ChartTextsGroup = "metricsComparison"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+//     let metricsComparison =
+//           { VisualizationType = MetricsComparison
+//             ClassName = "metrics-comparison-chart"
+//             ChartTextsGroup = "metricsComparison"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
 
-    let dailyComparison =
-          { VisualizationType = DailyComparison
-            ClassName = "daily-comparison-chart"
-            ChartTextsGroup = "dailyComparison"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView DailyComparisonChart.dailyComparisonChart {| data = data |} }
+//     let dailyComparison =
+//           { VisualizationType = DailyComparison
+//             ClassName = "daily-comparison-chart"
+//             ChartTextsGroup = "dailyComparison"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView DailyComparisonChart.dailyComparisonChart {| data = data |} }
 
-    let spread =
-          { VisualizationType = Spread
-            ClassName = "spread-chart"
-            ChartTextsGroup = "spread"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
+//     let spread =
+//           { VisualizationType = Spread
+//             ClassName = "spread-chart"
+//             ChartTextsGroup = "spread"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
 
-    let map =
-          { VisualizationType = Map
-            ClassName = "map-chart"
-            ChartTextsGroup = "map"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.MunicipalitiesData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapMunicipalitiesChart {| query = state.Query; data = data |} }
+//     let map =
+//           { VisualizationType = Map
+//             ClassName = "map-chart"
+//             ChartTextsGroup = "map"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.MunicipalitiesData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView Map.mapMunicipalitiesChart {| query = state.Query; data = data |} }
 
-    let regionMap =
-          { VisualizationType = RegionMap
-            ClassName = "rmap-chart"
-            ChartTextsGroup = "rmap"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.RegionsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapRegionChart {|query = state.Query; data = data |} }
+//     let regionMap =
+//           { VisualizationType = RegionMap
+//             ClassName = "rmap-chart"
+//             ChartTextsGroup = "rmap"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.RegionsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView Map.mapRegionChart {|query = state.Query; data = data |} }
 
-    let municipalities =
-          { VisualizationType = Municipalities
-            ClassName = "municipalities-chart"
-            ChartTextsGroup = "municipalities"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.MunicipalitiesData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
+//     let municipalities =
+//           { VisualizationType = Municipalities
+//             ClassName = "municipalities-chart"
+//             ChartTextsGroup = "municipalities"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.MunicipalitiesData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
 
-    let europeMap =
-          { VisualizationType = EuropeMap
-            ClassName = "europe-chart"
-            ChartTextsGroup = "europe"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyStatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.Europe; data = data |} }
+//     let europeMap =
+//           { VisualizationType = EuropeMap
+//             ClassName = "europe-chart"
+//             ChartTextsGroup = "europe"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyStatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.Europe; data = data |} }
 
-    let worldMap =
-          { VisualizationType = WorldMap
-            ClassName = "world-chart"
-            ChartTextsGroup = "world"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyStatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.World; data = data |} }
+//     let worldMap =
+//           { VisualizationType = WorldMap
+//             ClassName = "world-chart"
+//             ChartTextsGroup = "world"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyStatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.World; data = data |} }
 
-    let ageGroupsTimeline =
-          { VisualizationType = AgeGroupsTimeline
-            ClassName = "age-groups-trends-chart"
-            ChartTextsGroup = "ageGroupsTimeline"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView AgeGroupsTimelineViz.Rendering.renderChart
-                            {| data = data |} }
+//     let ageGroupsTimeline =
+//           { VisualizationType = AgeGroupsTimeline
+//             ClassName = "age-groups-trends-chart"
+//             ChartTextsGroup = "ageGroupsTimeline"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView AgeGroupsTimelineViz.Rendering.renderChart
+//                             {| data = data |} }
 
-    let tests =
-          { VisualizationType = Tests
-            ClassName = "tests-chart"
-            ChartTextsGroup = "tests"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView TestsChart.testsChart () }
+//     let tests =
+//           { VisualizationType = Tests
+//             ClassName = "tests-chart"
+//             ChartTextsGroup = "tests"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView TestsChart.testsChart () }
 
-    let hCenters =
-          { VisualizationType = HCenters
-            ClassName = "hcenters-chart"
-            ChartTextsGroup = "hCenters"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView HCentersChart.hCentersChart state.ApiEndpoint }
+//     let hCenters =
+//           { VisualizationType = HCenters
+//             ClassName = "hcenters-chart"
+//             ChartTextsGroup = "hCenters"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView HCentersChart.hCentersChart state.ApiEndpoint }
 
-    let infections =
-          { VisualizationType = Infections
-            ClassName = "infections-chart"
-            ChartTextsGroup = "infections"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
+//     let infections =
+//           { VisualizationType = Infections
+//             ClassName = "infections-chart"
+//             ChartTextsGroup = "infections"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
 
-    let cases =
-          { VisualizationType = Cases
-            ClassName = "cases-chart"
-            ChartTextsGroup = "cases"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView CasesChart.casesChart {| data = data |} }
+//     let cases =
+//           { VisualizationType = Cases
+//             ClassName = "cases-chart"
+//             ChartTextsGroup = "cases"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView CasesChart.casesChart {| data = data |} }
 
-    let patients =
-          { VisualizationType = Patients
-            ClassName = "patients-chart"
-            ChartTextsGroup = "patients"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+//     let patients =
+//           { VisualizationType = Patients
+//             ClassName = "patients-chart"
+//             ChartTextsGroup = "patients"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
 
-    let patientsICU =
-          { VisualizationType = IcuPatients
-            ClassName = "icu-patients-chart"
-            ChartTextsGroup = "icuPatients"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitalsICU |} }
+//     let patientsICU =
+//           { VisualizationType = IcuPatients
+//             ClassName = "icu-patients-chart"
+//             ChartTextsGroup = "icuPatients"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitalsICU |} }
 
-    let patientsCare =
-          { VisualizationType = CarePatients
-            ClassName = "care-patients-chart"
-            ChartTextsGroup = "carePatients"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
+//     let patientsCare =
+//           { VisualizationType = CarePatients
+//             ClassName = "care-patients-chart"
+//             ChartTextsGroup = "carePatients"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
-    let patientsAge =
-          { VisualizationType = PatientsAge
-            ClassName = "patients-age-chart"
-            ChartTextsGroup = "patientsAge"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyEpisariData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView PatientsAgeChart.patientsAgeChart {| data = data |} }
+//     let patientsAge =
+//           { VisualizationType = PatientsAge
+//             ClassName = "patients-age-chart"
+//             ChartTextsGroup = "patientsAge"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyEpisariData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView PatientsAgeChart.patientsAgeChart {| data = data |} }
 
-    let ratios =
-          { VisualizationType = Ratios
-            ClassName = "ratios-chart"
-            ChartTextsGroup = "ratios"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
+//     let ratios =
+//           { VisualizationType = Ratios
+//             ClassName = "ratios-chart"
+//             ChartTextsGroup = "ratios"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
 
-    let ageGroups =
-          { VisualizationType = AgeGroups
-            ClassName = "age-groups-chart"
-            ChartTextsGroup = "ageGroups"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
+//     let ageGroups =
+//           { VisualizationType = AgeGroups
+//             ClassName = "age-groups-chart"
+//             ChartTextsGroup = "ageGroups"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
 
-    let regionsAbs =
-          { VisualizationType = Regions
-            ClassName = "regions-chart"
-            ChartTextsGroup = "regions"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.RegionsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        let config: RegionsChartConfig =
-                            { RelativeTo = RegionsChartViz.Analysis
-                                               .MetricRelativeTo.Absolute
-                              ChartTextsGroup = "regions"
-                            }
-                        let props = {| data = data |}
-                        lazyView
-                            (RegionsChartViz.Rendering.renderChart config) props
-            }
+//     let regionsAbs =
+//           { VisualizationType = Regions
+//             ClassName = "regions-chart"
+//             ChartTextsGroup = "regions"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.RegionsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         let config: RegionsChartConfig =
+//                             { RelativeTo = RegionsChartViz.Analysis
+//                                                .MetricRelativeTo.Absolute
+//                               ChartTextsGroup = "regions"
+//                             }
+//                         let props = {| data = data |}
+//                         lazyView
+//                             (RegionsChartViz.Rendering.renderChart config) props
+//             }
 
-    let regions100k =
-          { VisualizationType = Regions100k
-            ClassName = "regions-chart-100k"
-            ChartTextsGroup = "regions100k"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.RegionsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        let config: RegionsChartConfig =
-                            { RelativeTo = RegionsChartViz.Analysis
-                                               .MetricRelativeTo.Pop100k
-                              ChartTextsGroup = "regions100k"
-                            }
-                        let props = {| data = data |}
-                        lazyView
-                            (RegionsChartViz.Rendering.renderChart config) props
-         }
-
-    let vaccination =
-          { VisualizationType = Vaccination
-            ClassName = "vaccination-chart"
-            ChartTextsGroup = "vaccination"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
-
-    let vaccines =
-          { VisualizationType = Vaccines
-            ClassName = "vaccines-chart"
-            ChartTextsGroup = "vaccines"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView VaccinesChart.vaccinesChart () }
-
-    let vaccineEffect =
-          { VisualizationType = VaccineEffect
-            ClassName = "vaccine-effect-chart"
-            ChartTextsGroup = "vaccineEffect"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData, state.WeeklyStatsData with
-                    | NotAsked, _ -> Html.none
-                    | _, NotAsked -> Html.none
-                    | Loading, _ -> Utils.renderLoading
-                    | _,  Loading -> Utils.renderLoading
-                    | Failure error, _ -> Utils.renderErrorLoading error
-                    | _, Failure error-> Utils.renderErrorLoading error
-                    | Success data, Success weeklyData ->
-                        lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
-
-    let vaccineEffectAge =
-          { VisualizationType = VaccineEffectAge
-            ClassName = "vaccine-effect-age-chart"
-            ChartTextsGroup = "vaccineEffectAge"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyEpisariData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView VaccineEffectAgeChart.vaccineEffectAgeChart {| data = data |} }
-
-
-    let schools =
-          { VisualizationType = Schools
-            ClassName = "schools-chart"
-            ChartTextsGroup = "schools"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
-
-    let schoolStatus =
-          { VisualizationType = SchoolStatus
-            ClassName = "school-status-chart"
-            ChartTextsGroup = "schoolStatus"
-            ChartEnabled = true
-            Explicit = false
-            Renderer = fun _ -> lazyView SchoolStatusChart.schoolStatusChart {| query = state.Query |} }
-
-    let sources =
-          { VisualizationType = Sources
-            ClassName = "sources-chart"
-            ChartTextsGroup = "sources"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyStatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
-
-    let sewage =
-          { VisualizationType = Sewage
-            ClassName = "sewage-chart"
-            ChartTextsGroup = "sewage"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.MunicipalitiesData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView SewageChart.chart {| data = data |} }
-
-    let hcCases =
-          { VisualizationType = HcCases
-            ClassName = "hc-cases-chart"
-            ChartTextsGroup = "hcCases"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.WeeklyStatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
-
-    let deceased =
-          { VisualizationType = Deceased
-            ClassName = "deceased-chart"
-            ChartTextsGroup = "deceased"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success statsData ->
-                        lazyView DeceasedViz.Rendering.renderChart statsData
-          }
-
-    let countriesCasesPer100k =
-          { VisualizationType = CountriesCasesPer100k
-            ClassName = "countries-cases-chart"
-            ChartTextsGroup = "countriesNewCasesPer100k"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { StatsData = data
-                              MetricToDisplay = NewCasesPer100k
-                              ChartTextsGroup = "countriesNewCasesPer100k"
-                              DataSource = "dsOWD_NIJZ"
-                            }
-          }
-
-    let countriesActiveCasesPer100k =
-          { VisualizationType = CountriesActiveCasesPer100k
-            ClassName = "countries-active-chart"
-            ChartTextsGroup = "countriesActiveCasesPer100k"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { StatsData = data
-                              MetricToDisplay = ActiveCasesPer100k
-                              ChartTextsGroup = "countriesActiveCasesPer100k"
-                              DataSource = "dsOWD_NIJZ"
-                            }
-          }
-
-    let countriesNewDeathsPer100k =
-          { VisualizationType = CountriesNewDeathsPer100k
-            ClassName = "countries-new-deaths-chart"
-            ChartTextsGroup = "countriesNewDeathsPer100k"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { StatsData = data
-                              MetricToDisplay = NewDeathsPer100k
-                              ChartTextsGroup = "countriesNewDeathsPer100k"
-                              DataSource = "dsOWD_MZ"
-                            }
-          }
-
-    let countriesTotalDeathsPer100k =
-          { VisualizationType = CountriesTotalDeathsPer100k
-            ClassName = "countries-total-deaths-chart"
-            ChartTextsGroup = "countriesTotalDeathsPer100k"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { StatsData = data
-                              MetricToDisplay = TotalDeathsPer100k
-                              ChartTextsGroup = "countriesTotalDeathsPer100k"
-                              DataSource = "dsOWD_MZ"
-                            }
-          }
-
-//    let countriesDeathsPerCases =
-//          { VisualizationType = CountriesDeathsPer100k
-//            ClassName = "countries-deaths-per-cases"
-//            ChartTextsGroup = "countriesDeathsPerCases"
-//            ChartEnabled = true
-//            Explicit = false
-//            Renderer =
-//                fun _ ->
-//                    lazyView CountriesChartViz.Rendering.renderChart
-//                        { MetricToDisplay = DeathsPerCases
-//                          ChartTextsGroup = "countriesDeathsPerCases"
-//                        }
+//     let regions100k =
+//           { VisualizationType = Regions100k
+//             ClassName = "regions-chart-100k"
+//             ChartTextsGroup = "regions100k"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.RegionsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         let config: RegionsChartConfig =
+//                             { RelativeTo = RegionsChartViz.Analysis
+//                                                .MetricRelativeTo.Pop100k
+//                               ChartTextsGroup = "regions100k"
+//                             }
+//                         let props = {| data = data |}
+//                         lazyView
+//                             (RegionsChartViz.Rendering.renderChart config) props
 //          }
 
-    let phaseDiagram =
-          { VisualizationType = PhaseDiagram
-            ClassName = "phase-diagram-chart"
-            ChartTextsGroup = "phaseDiagram"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
+//     let vaccination =
+//           { VisualizationType = Vaccination
+//             ClassName = "vaccination-chart"
+//             ChartTextsGroup = "vaccination"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
 
-    let excessDeaths =
-          { VisualizationType = ExcessDeaths
-            ClassName = "excess-deaths-chart"
-            ChartTextsGroup = "excessDeaths"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> ExcessDeathsChart.Main.chart {| statsData = data |} }
+//     let vaccines =
+//           { VisualizationType = Vaccines
+//             ClassName = "vaccines-chart"
+//             ChartTextsGroup = "vaccines"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView VaccinesChart.vaccinesChart () }
 
-    let metricsCorrelation =
-          { VisualizationType = MetricsCorrelation
-            ClassName = "metrics-correlation-chart"
-            ChartTextsGroup = "metricsCorrelation"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView MetricsCorrelationViz.Rendering.renderChart
-                            {| data = data |} }
+//     let vaccineEffect =
+//           { VisualizationType = VaccineEffect
+//             ClassName = "vaccine-effect-chart"
+//             ChartTextsGroup = "vaccineEffect"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData, state.WeeklyStatsData with
+//                     | NotAsked, _ -> Html.none
+//                     | _, NotAsked -> Html.none
+//                     | Loading, _ -> Utils.renderLoading
+//                     | _,  Loading -> Utils.renderLoading
+//                     | Failure error, _ -> Utils.renderErrorLoading error
+//                     | _, Failure error-> Utils.renderErrorLoading error
+//                     | Success data, Success weeklyData ->
+//                         lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
 
-    let weeklyDemographics =
-          { VisualizationType = WeeklyDemographics
-            ClassName = "weekly-demographics-chart"
-            ChartTextsGroup = "weeklyDemographics"
-            ChartEnabled = true
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
-
-    let localVisualizations =
-        [ metricsComparison;
-          dailyComparison;
-          patientsAge;
-          sewage;
-          spread;
-          tests; ageGroupsTimeline;
-          map; municipalities; regionMap; regions100k;
-          patients; patientsICU; hospitals;
-          weeklyDemographics; ageGroups;
-          sources; europeMap;
-          metricsCorrelation; deceased; excessDeaths
-          infections; hcCases;
-          cases;
-          regionsAbs
-          phaseDiagram;
-          vaccineEffectAge; vaccineEffect;
-          vaccination; vaccines;
-          schools; schoolStatus
-          patientsCare;
-          hCenters
-        ]
-
-    let worldVisualizations =
-        [ worldMap
-          countriesActiveCasesPer100k
-          countriesCasesPer100k
-          countriesNewDeathsPer100k
-          countriesTotalDeathsPer100k
-          // countriesDeathsPerCases
-        ]
-
-    let allVisualizations =
-        [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
-          europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsICU; patientsCare; patientsAge;
-          deceased; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; schools; schoolStatus; hcCases
-          countriesCasesPer100k
-          countriesActiveCasesPer100k
-          countriesNewDeathsPer100k
-          countriesTotalDeathsPer100k
-          phaseDiagram
-          excessDeaths
-          weeklyDemographics
-        ]
-
-    let embedded, visualizations =
-        match state.Page, state.RenderingMode with
-        | ("local", Normal) ->
-            false,
-            localVisualizations
-            |> List.filter (fun viz -> not viz.Explicit)
-        | ("world", Normal) ->
-            false,
-            worldVisualizations
-            |> List.filter (fun viz -> not viz.Explicit)
-        | (_, Embedded visualizationType) ->
-            match visualizationType with
-            | None -> true, []
-            | Some visualizationType ->
-                true,
-                allVisualizations
-                |> List.filter
-                       (fun viz -> viz.VisualizationType = visualizationType)
-        | _ -> invalidOp "BUG: this should never happen."
-
-    let brandLink =
-        match state.RenderingMode with
-        | Normal -> Html.none
-        | Embedded _ ->
-            Html.a
-                [ prop.className "brand-link"
-                  prop.target "_blank"
-                  prop.href "https://covid-19.sledilnik.org/"
-                  prop.text (t "meta.title") ]
+//     let vaccineEffectAge =
+//           { VisualizationType = VaccineEffectAge
+//             ClassName = "vaccine-effect-age-chart"
+//             ChartTextsGroup = "vaccineEffectAge"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyEpisariData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView VaccineEffectAgeChart.vaccineEffectAgeChart {| data = data |} }
 
 
-    let renderFaqLink (visualization: Visualization) =
-        if visualization.Explicit then
-            Html.none // we do not have FAQ for hidden charts yet
-        else
-            Html.div
-                [ prop.className "faq-link-wrapper"
-                  prop.children
-                      [ Html.a
-                          [ prop.className "faq-link"
-                            prop.key visualization.ClassName
-                            prop.target "_blank"
-                            prop.href
-                                ("/"
-                                 + localStorage.getItem ("i18nextLng")
-                                 + "/faq#"
-                                 + visualization.ClassName)
-                            prop.text "?" ]
-                        |> Html.div ] ]
+//     let schools =
+//           { VisualizationType = Schools
+//             ClassName = "schools-chart"
+//             ChartTextsGroup = "schools"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
+
+//     let schoolStatus =
+//           { VisualizationType = SchoolStatus
+//             ClassName = "school-status-chart"
+//             ChartTextsGroup = "schoolStatus"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer = fun _ -> lazyView SchoolStatusChart.schoolStatusChart {| query = state.Query |} }
+
+//     let sources =
+//           { VisualizationType = Sources
+//             ClassName = "sources-chart"
+//             ChartTextsGroup = "sources"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyStatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
+
+//     let sewage =
+//           { VisualizationType = Sewage
+//             ClassName = "sewage-chart"
+//             ChartTextsGroup = "sewage"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.MunicipalitiesData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView SewageChart.chart {| data = data |} }
+
+//     let hcCases =
+//           { VisualizationType = HcCases
+//             ClassName = "hc-cases-chart"
+//             ChartTextsGroup = "hcCases"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.WeeklyStatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
+
+//     let deceased =
+//           { VisualizationType = Deceased
+//             ClassName = "deceased-chart"
+//             ChartTextsGroup = "deceased"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success statsData ->
+//                         lazyView DeceasedViz.Rendering.renderChart statsData
+//           }
+
+//     let countriesCasesPer100k =
+//           { VisualizationType = CountriesCasesPer100k
+//             ClassName = "countries-cases-chart"
+//             ChartTextsGroup = "countriesNewCasesPer100k"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView CountriesChartViz.Rendering.renderChart
+//                             { StatsData = data
+//                               MetricToDisplay = NewCasesPer100k
+//                               ChartTextsGroup = "countriesNewCasesPer100k"
+//                               DataSource = "dsOWD_NIJZ"
+//                             }
+//           }
+
+//     let countriesActiveCasesPer100k =
+//           { VisualizationType = CountriesActiveCasesPer100k
+//             ClassName = "countries-active-chart"
+//             ChartTextsGroup = "countriesActiveCasesPer100k"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView CountriesChartViz.Rendering.renderChart
+//                             { StatsData = data
+//                               MetricToDisplay = ActiveCasesPer100k
+//                               ChartTextsGroup = "countriesActiveCasesPer100k"
+//                               DataSource = "dsOWD_NIJZ"
+//                             }
+//           }
+
+//     let countriesNewDeathsPer100k =
+//           { VisualizationType = CountriesNewDeathsPer100k
+//             ClassName = "countries-new-deaths-chart"
+//             ChartTextsGroup = "countriesNewDeathsPer100k"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView CountriesChartViz.Rendering.renderChart
+//                             { StatsData = data
+//                               MetricToDisplay = NewDeathsPer100k
+//                               ChartTextsGroup = "countriesNewDeathsPer100k"
+//                               DataSource = "dsOWD_MZ"
+//                             }
+//           }
+
+//     let countriesTotalDeathsPer100k =
+//           { VisualizationType = CountriesTotalDeathsPer100k
+//             ClassName = "countries-total-deaths-chart"
+//             ChartTextsGroup = "countriesTotalDeathsPer100k"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView CountriesChartViz.Rendering.renderChart
+//                             { StatsData = data
+//                               MetricToDisplay = TotalDeathsPer100k
+//                               ChartTextsGroup = "countriesTotalDeathsPer100k"
+//                               DataSource = "dsOWD_MZ"
+//                             }
+//           }
+
+// //    let countriesDeathsPerCases =
+// //          { VisualizationType = CountriesDeathsPer100k
+// //            ClassName = "countries-deaths-per-cases"
+// //            ChartTextsGroup = "countriesDeathsPerCases"
+// //            ChartEnabled = true
+// //            Explicit = false
+// //            Renderer =
+// //                fun _ ->
+// //                    lazyView CountriesChartViz.Rendering.renderChart
+// //                        { MetricToDisplay = DeathsPerCases
+// //                          ChartTextsGroup = "countriesDeathsPerCases"
+// //                        }
+// //          }
+
+//     let phaseDiagram =
+//           { VisualizationType = PhaseDiagram
+//             ClassName = "phase-diagram-chart"
+//             ChartTextsGroup = "phaseDiagram"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
+
+//     let excessDeaths =
+//           { VisualizationType = ExcessDeaths
+//             ClassName = "excess-deaths-chart"
+//             ChartTextsGroup = "excessDeaths"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> ExcessDeathsChart.Main.chart {| statsData = data |} }
+
+//     let metricsCorrelation =
+//           { VisualizationType = MetricsCorrelation
+//             ClassName = "metrics-correlation-chart"
+//             ChartTextsGroup = "metricsCorrelation"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data ->
+//                         lazyView MetricsCorrelationViz.Rendering.renderChart
+//                             {| data = data |} }
+
+//     let weeklyDemographics =
+//           { VisualizationType = WeeklyDemographics
+//             ClassName = "weekly-demographics-chart"
+//             ChartTextsGroup = "weeklyDemographics"
+//             ChartEnabled = true
+//             Explicit = false
+//             Renderer =
+//                 fun state ->
+//                     match state.StatsData with
+//                     | NotAsked -> Html.none
+//                     | Loading -> Utils.renderLoading
+//                     | Failure error -> Utils.renderErrorLoading error
+//                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
+
+//     let localVisualizations =
+//         [ metricsComparison;
+//           dailyComparison;
+//           patientsAge;
+//           sewage;
+//           spread;
+//           tests; ageGroupsTimeline;
+//           map; municipalities; regionMap; regions100k;
+//           patients; patientsICU; hospitals;
+//           weeklyDemographics; ageGroups;
+//           sources; europeMap;
+//           metricsCorrelation; deceased; excessDeaths
+//           infections; hcCases;
+//           cases;
+//           regionsAbs
+//           phaseDiagram;
+//           vaccineEffectAge; vaccineEffect;
+//           vaccination; vaccines;
+//           schools; schoolStatus
+//           patientsCare;
+//           hCenters
+//         ]
+
+//     let worldVisualizations =
+//         [ worldMap
+//           countriesActiveCasesPer100k
+//           countriesCasesPer100k
+//           countriesNewDeathsPer100k
+//           countriesTotalDeathsPer100k
+//           // countriesDeathsPerCases
+//         ]
+
+//     let allVisualizations =
+//         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+//           municipalities; sources; vaccination; vaccines; vaccineEffectAge; vaccineEffect;
+//           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
+//           cases; patients; patientsICU; patientsCare; patientsAge;
+//           deceased; ratios; ageGroups; regionMap; regionsAbs
+//           regions100k; schools; schoolStatus; hcCases
+//           countriesCasesPer100k
+//           countriesActiveCasesPer100k
+//           countriesNewDeathsPer100k
+//           countriesTotalDeathsPer100k
+//           phaseDiagram
+//           excessDeaths
+//           weeklyDemographics
+//         ]
+
+//     let embedded, visualizations =
+//         match state.Page, state.RenderingMode with
+//         | ("local", Normal) ->
+//             false,
+//             localVisualizations
+//             |> List.filter (fun viz -> not viz.Explicit)
+//         | ("world", Normal) ->
+//             false,
+//             worldVisualizations
+//             |> List.filter (fun viz -> not viz.Explicit)
+//         | (_, Embedded visualizationType) ->
+//             match visualizationType with
+//             | None -> true, []
+//             | Some visualizationType ->
+//                 true,
+//                 allVisualizations
+//                 |> List.filter
+//                        (fun viz -> viz.VisualizationType = visualizationType)
+//         | _ -> invalidOp "BUG: this should never happen."
+
+//     let brandLink =
+//         match state.RenderingMode with
+//         | Normal -> Html.none
+//         | Embedded _ ->
+//             Html.a
+//                 [ prop.className "brand-link"
+//                   prop.target "_blank"
+//                   prop.href "https://covid-19.sledilnik.org/"
+//                   prop.text (t "meta.title") ]
 
 
-    let renderFaqAndShareBtn (visualization: Visualization) =
-        match state.RenderingMode with
-        | Embedded _ ->
-            Html.div
-                [ prop.className "faq-and-share-wrapper"
-                  prop.children
-                      [ renderFaqLink visualization
-                        brandLink ] ]
-        | Normal ->
-            Html.div
-                [ prop.className "faq-and-share-wrapper"
-                  prop.children
-                      [ renderFaqLink visualization
-                        ShareButton.dropdown visualization () ] ]
+//     let renderFaqLink (visualization: Visualization) =
+//         if visualization.Explicit then
+//             Html.none // we do not have FAQ for hidden charts yet
+//         else
+//             Html.div
+//                 [ prop.className "faq-link-wrapper"
+//                   prop.children
+//                       [ Html.a
+//                           [ prop.className "faq-link"
+//                             prop.key visualization.ClassName
+//                             prop.target "_blank"
+//                             prop.href
+//                                 ("/"
+//                                  + localStorage.getItem ("i18nextLng")
+//                                  + "/faq#"
+//                                  + visualization.ClassName)
+//                             prop.text "?" ]
+//                         |> Html.div ] ]
 
 
-    let renderChartTitle (visualization: Visualization) =
+//     let renderFaqAndShareBtn (visualization: Visualization) =
+//         match state.RenderingMode with
+//         | Embedded _ ->
+//             Html.div
+//                 [ prop.className "faq-and-share-wrapper"
+//                   prop.children
+//                       [ renderFaqLink visualization
+//                         brandLink ] ]
+//         | Normal ->
+//             Html.div
+//                 [ prop.className "faq-and-share-wrapper"
+//                   prop.children
+//                       [ renderFaqLink visualization
+//                         ShareButton.dropdown visualization () ] ]
 
-        let scrollToElement (e: MouseEvent) visualizationId =
-            e.preventDefault ()
 
-            let element =
-                document.getElementById (visualizationId)
+//     let renderChartTitle (visualization: Visualization) =
 
-            let offset = -100.
+//         let scrollToElement (e: MouseEvent) visualizationId =
+//             e.preventDefault ()
 
-            let position =
-                element.getBoundingClientRect().top
-                + window.pageYOffset
-                + offset
+//             let element =
+//                 document.getElementById (visualizationId)
 
-            window.scrollTo
-                ({| top = position
-                    behavior = "smooth" |}
-                 |> unbox) // behavior = smooth | auto
-            window.history.pushState (null, null, "#" + visualizationId)
+//             let offset = -100.
 
-        let context = localStorage.getItem ("contextCountry")
+//             let position =
+//                 element.getBoundingClientRect().top
+//                 + window.pageYOffset
+//                 + offset
 
-        Html.div
-            [ prop.className "title-brand-wrapper"
-              prop.children
-                  [ Html.h2
-                      [ prop.children
-                          [ Html.a
-                              [ prop.href ("#" + visualization.ClassName)
-                                prop.text (tOptions ("charts." + visualization.ChartTextsGroup + ".title") {| context = context |} )
-                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ]
-                            Html.span
-                              [ prop.text ("charts." + visualization.ChartTextsGroup + ".titleMenu")
-                                prop.className "hidden" ] ] ] ] ]
+//             window.scrollTo
+//                 ({| top = position
+//                     behavior = "smooth" |}
+//                  |> unbox) // behavior = smooth | auto
+//             window.history.pushState (null, null, "#" + visualizationId)
 
-    Html.div
-        [ Utils.classes [
-            (true, "visualization container")
-            (embedded, "embeded") ]
-          prop.children (
-            visualizations
-            |> List.map (fun viz ->
-                Html.section [
-                    prop.className [ viz.ClassName ; "visualization-chart"; (if viz.ChartEnabled then "" else "chart-disabled") ]
-                    prop.id viz.ClassName
-                    prop.children [
-                        Html.div [
-                            prop.className "title-chart-wrapper"
-                            prop.children [
-                                renderChartTitle viz
-                                renderFaqAndShareBtn viz
-                            ]
-                        ]
-                        if not viz.ChartEnabled then (
-                            Html.div [
-                                prop.className "disabled-notice"
-                                prop.children [
-                                    Utils.Markdown.render (chartText viz.ChartTextsGroup "disabled")
-                                ]
-                            ]
-                        )
-                        IntersectionObserver.Component.intersectionObserver
-                            {| targetElementId = viz.ClassName
-                               content = state |> viz.Renderer
-                               options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
-                            |}
-                    ] ] ) ) ]
+//         let context = localStorage.getItem ("contextCountry")
+
+//         Html.div
+//             [ prop.className "title-brand-wrapper"
+//               prop.children
+//                   [ Html.h2
+//                       [ prop.children
+//                           [ Html.a
+//                               [ prop.href ("#" + visualization.ClassName)
+//                                 prop.text (tOptions ("charts." + visualization.ChartTextsGroup + ".title") {| context = context |} )
+//                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ]
+//                             Html.span
+//                               [ prop.text ("charts." + visualization.ChartTextsGroup + ".titleMenu")
+//                                 prop.className "hidden" ] ] ] ] ]
+
+//     Html.div
+//         [ Utils.classes [
+//             (true, "visualization container")
+//             (embedded, "embeded") ]
+//           prop.children (
+//             visualizations
+//             |> List.map (fun viz ->
+//                 Html.section [
+//                     prop.className [ viz.ClassName ; "visualization-chart"; (if viz.ChartEnabled then "" else "chart-disabled") ]
+//                     prop.id viz.ClassName
+//                     prop.children [
+//                         Html.div [
+//                             prop.className "title-chart-wrapper"
+//                             prop.children [
+//                                 renderChartTitle viz
+//                                 renderFaqAndShareBtn viz
+//                             ]
+//                         ]
+//                         if not viz.ChartEnabled then (
+//                             Html.div [
+//                                 prop.className "disabled-notice"
+//                                 prop.children [
+//                                     Utils.Markdown.render (chartText viz.ChartTextsGroup "disabled")
+//                                 ]
+//                             ]
+//                         )
+//                         IntersectionObserver.Component.intersectionObserver
+//                             {| targetElementId = viz.ClassName
+//                                content = state |> viz.Renderer
+//                                options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
+//                             |}
+//                     ] ] ) ) ]

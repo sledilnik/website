@@ -6,6 +6,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
+open Fable.React
 
 open Types
 open Data.Patients
@@ -513,4 +514,5 @@ let render (state : State) dispatch =
         ]
 
 let hospitalsChart () =
+    
     React.elmishComponent("HospitalsChart", init (), update, render)

@@ -33,6 +33,7 @@
             <b-row cols="12">
                 <b-col>
                     <div id="visualizations" class="visualizations"></div>
+                    <MetricsComparisonChart/>
                 </b-col>
             </b-row>
             <!-- COMMENT OUT
@@ -55,7 +56,9 @@ import PostTeaserSkeleton from '@/components/cards/PostTeaserSkeleton'
 import TimeStamp from '@/components/TimeStamp'
 import FloatingMenu from '@/components/FloatingMenu'
 // import { Visualizations } from "@/visualizations/Main";
+import { MetricsComparisonChart } from '@/visualizations/MetricsComparisonChart';
 import chartsFloatMenu from '@/components/floatingMenuDict'
+import { ReactInVue } from 'vuera'
 
 export default {
     name: 'StatsPage',
@@ -66,6 +69,7 @@ export default {
         PostTeaserSkeleton,
         //Youtube,
         FloatingMenu,
+        MetricsComparisonChart: ReactInVue(MetricsComparisonChart),
     },
     data() {
         return {
@@ -100,6 +104,8 @@ export default {
             //     API_ENDPOINT_BASE
             //   );
         })
+
+        console.log("MetricsComparisonChart", MetricsComparisonChart)
 
         // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
         let checker = setInterval(() => {

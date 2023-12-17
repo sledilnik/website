@@ -133,7 +133,7 @@ let percentWith3DecimalSignFormatter (value: float) =
 module Markdown =
 
     let marked (mardown : string) : string =
-        importDefault "marked"
+        import "marked" "marked"
 
     let render markdown : ReactElement =
         Html.div [ prop.dangerouslySetInnerHTML (marked markdown) ]
