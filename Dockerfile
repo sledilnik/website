@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install nodejs -y && npm install --global yarn
 
 ADD . /app
 RUN yarn
-RUN CADDY_BUILD=1 NODE_OPTIONS=--openssl-legacy-provider yarn build --mode ${BUILD_MODE}
+RUN CADDY_BUILD=1 yarn build --mode ${BUILD_MODE}
 
 ########################################
 # Actual webserver image
