@@ -1268,10 +1268,10 @@
         }
     },
     "pageNotFound": {
-        "somethingWentWrong": "ups … došlo je do neke greške :(",
-        "imageDescription": "prometni stošci povezani žutom vrpcom",
+        "somethingWentWrong": "ups... nešto je pošlo po zlu :(",
+        "imageDescription": "dva prometna čunja povezana žutom trakom",
         "notFound": "404: stranica nije pronađena",
-        "back": "Natrag"
+        "back": "Nazad"
     },
     "month": {
         "10": "studenog",
