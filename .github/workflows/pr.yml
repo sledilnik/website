@@ -21,7 +21,7 @@ jobs:
         uses: hmarr/debug-action@v2.1.0
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3.6.0
         with:
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -80,7 +80,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy
         uses: sledilnik/action-helm-deploy@v1.0.2
