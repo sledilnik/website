@@ -34,7 +34,7 @@ jobs:
         uses: hmarr/debug-action@v2.1.0
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Undeploy
         uses: sledilnik/action-helm-deploy@v1.0.2
