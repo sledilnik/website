@@ -700,7 +700,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ metricsComparison;
-          dailyComparison;
+        //   dailyComparison;
           patientsAge;
           sewage;
           spread;
