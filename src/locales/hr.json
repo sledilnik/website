@@ -350,7 +350,7 @@
             "x_months_2": "{{ count }} mj.",
             "zoom": "Razdoblje",
             "shortDateFormat": "%e. %b",
-            "linkFaq": "Često postavljena pitanja",
+            "linkFaq": "ČPP",
             "to": " – ",
             "from": " ",
             "sortBy": "Razvrstaj prema:",
@@ -993,14 +993,14 @@
         },
         "publicTransport": {
             "description": "Obustava javnog prijevoza",
-            "title": "Javni prijevoz"
+            "title": "Prijevoz"
         },
         "shops": {
             "title": "Trgovine",
             "description": "Trgovine od 8 – 10 sati i zadnji sat isključivo <br>za ugrožene skupine (invalidi, umirovljenici, trudnice)"
         },
         "liftPublicTransport": {
-            "title": "Javni prijevoz",
+            "title": "Prijevoz",
             "description": "Ublažavanje ograničenja: javni prijevoz, sve zdravstvene i stomatološke usluge"
         },
         "retirementHomes": {
@@ -1271,7 +1271,7 @@
         "somethingWentWrong": "ups... nešto je pošlo po zlu :(",
         "imageDescription": "liječnik koji sliježe ramenima",
         "notFound": "404: stranica nije pronađena",
-        "back": "Nazad"
+        "back": "Natrag"
     },
     "month": {
         "10": "studenog",
@@ -1308,7 +1308,7 @@
             "ru": "Ruski"
         },
         "about": "O projektu",
-        "faq": "FAQ",
+        "faq": "ČPP",
         "menu": "Izbornik",
         "animation": "Animacija",
         "goToGraph": "Prijeđi na dijagram",
@@ -1694,7 +1694,7 @@
         "timestamp": "{{ date, %e. %B %Y. }}"
     },
     "faq": {
-        "pageTitle": "FAQ",
+        "pageTitle": "Često postavljena pitanja",
         "intro": "_Svrha projekta Sledilnik i svih njegovih statističkih dijagrama i tablica/prikaza je prikazati sve postojeće podatke o epidemiji COVID-19 u Sloveniji na razumljiv način. Sastavili smo popis često postavljenih pitanja. Popis često postavljenih pitanja trenutačno nije iscrpan, ali se često aktualizira. U slučaju bilo kakvih pitanja, kontaktiraj nas na: info@slednik.org. (Radujemo se pohvalama, povratnim informacijama i prijedlozima!)_",
         "searchPlaceholder": "Upiši traženi pojam",
         "what-is-sledilnik": {
