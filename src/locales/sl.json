@@ -987,7 +987,7 @@
             "deceased": "Umrli"
         },
         "deceased": {
-            "title": "Umrli",
+            "title": "Umrli [do 26.3.2023]",
             "titleMenu": "Umrli",
             "disclaimer": "Opomba: podatke o umrlih po starosti in v DSO prejemamo tedensko, zato so za zadnja dva tedna nepopolni.",
             "disclaimerHospitals": "Opomba: podatki o umrlih v bolnišnicah so se poročali samo do 31. 3. 2023.",
@@ -1007,7 +1007,7 @@
             "deceased-total": "Umrli skupaj"
         },
         "cases": {
-            "title": "Potrjeni primeri",
+            "title": "Potrjeni primeri [do 31.3.2023]",
             "titleMenu": "Primeri",
             "active": "Aktivni",
             "hospitalized": "Hospitalizirani",
@@ -1188,7 +1188,7 @@
             "disclaimer": "Upoštevane so samo hospitalizacije vodene v sistemu EPISARI, kar izključuje sprejeme zaradi COVID-19 a brez resne akutne okužbe dihal."
         },
         "hcCases": {
-            "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
+            "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko [do 26.3.2023]",
             "titleMenu": "Zdravstvo in DSO - primeri",
             "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
             "structure": "Struktura",
@@ -1315,7 +1315,7 @@
             "disclaimer": "Opomba: Demografske podatke (spol, starost) o umrlih NIJZ poroča tedensko. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na tem grafu."
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah",
+            "title": "Potrjeni primeri po starostnih skupinah [do 2.4.2023]",
             "titleMenu": "Starost – delež"
         },
         "countriesActiveCasesPer100k": {
@@ -1548,7 +1548,7 @@
             "locationUnknown": "neznano"
         },
         "weeklyDemographics": {
-            "title": "Demografija potrjenih primerov, tedensko",
+            "title": "Demografija potrjenih primerov, tedensko [do 26.3.2023]",
             "titleMenu": "Starost – po tednih",
             "ageGroup": "Starostna skupina",
             "male": "Moški",
@@ -1570,7 +1570,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020-2023 Sledilnik.org"
+        "copyright": "© 2020-2024 Sledilnik.org"
     },
     "schoolDict": {
         "E": "Zaposleni",
@@ -1837,7 +1837,7 @@
         "notFound": "404: stran ne obstaja",
         "somethingWentWrong": "ups… nekaj se je zalomilo :(",
         "back": "Nazaj",
-        "imageDescription": "prometna stožca povezana z rumenim trakom"
+        "imageDescription": "skomigajoči zdravnik"
     },
     "mk": {
         "hospital": {

@@ -319,7 +319,7 @@
             "deceased": "Deaths"
         },
         "deceased": {
-            "title": "Deaths",
+            "title": "Deaths [until 3/26/2023]",
             "titleMenu": "Deaths",
             "disclaimer": "Note: deceased by age and retirement homes data is provided weekly, therefore it is not complete for last two weeks.",
             "disclaimerHospitals": "Note: data about deceased in hospitals was reported until 3/31/2023.",
@@ -339,7 +339,7 @@
             "deceased-total": "Deaths Total"
         },
         "cases": {
-            "title": "Confirmed Cases",
+            "title": "Confirmed Cases [until 3/31/2023]",
             "titleMenu": "Cases",
             "active": "Active",
             "hospitalized": "Hospitalized",
@@ -411,7 +411,7 @@
             "hospitalDeceasedShare": "Share of Hospital Deaths"
         },
         "hCenters": {
-            "title": "Healthcare Center Treatment",
+            "title": "Healthcare Center Treatment [until 10/25/2020]",
             "titleMenu": "HC - treatment",
             "disclaimer": "Note: this chart is not up-to-date. From October 25, 2020, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
@@ -423,7 +423,7 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Cases in Health Care and Retirement Homes, weekly",
+            "title": "Cases in Health Care and Retirement Homes, weekly [until 3/26/2023]",
             "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
             "structure": "Structure",
@@ -617,7 +617,7 @@
             "disclaimer": "Note: demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
-            "title": "Confirmed Cases by Age Groups",
+            "title": "Confirmed Cases by Age Groups [until 4/2/2023]",
             "titleMenu": "Age - share"
         },
         "countriesActiveCasesPer100k": {
@@ -889,7 +889,7 @@
             "locationUnknown": "Unknown"
         },
         "weeklyDemographics": {
-            "title": "Weekly Cases – Demographics",
+            "title": "Weekly Cases – Demographics [until 3/26/2023]",
             "titleMenu": "Age Groups – Weekly",
             "ageGroup": "Age Group",
             "male": "Male",
@@ -900,7 +900,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020–⁠2023 Sledilnik.org"
+        "copyright": "© 2020–⁠2024 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1615,7 +1615,7 @@
         "notFound": "404: page not found",
         "somethingWentWrong": "oops… something went wrong :(",
         "back": "Back",
-        "imageDescription": "two traffic cones connected by yellow tape"
+        "imageDescription": "a shrugging doctor"
     },
     "mk": {
         "phase": {

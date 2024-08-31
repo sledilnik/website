@@ -26,7 +26,7 @@ type DisplayType =
     | ICUAdmitted
     | Deceased
     | VacDosesAdministered
-    static member UseStatsData dType = [ Active; New; VacDosesAdministered ] |> List.contains dType
+    static member UseStatsData dType = [ Active; New; VacDosesAdministered; Deceased ] |> List.contains dType
 
     static member UseLabTestsData dType =[ TestsPCR; PositivePctPCR; TestsHAT; PositivePctHAT ] |> List.contains dType
 
@@ -41,7 +41,7 @@ type DisplayType =
           // HospitalAdmitted
           // HospitalDischarged
           // ICUAdmitted
-          // Deceased
+          Deceased
         ]
 
     static member Default = New
@@ -160,6 +160,7 @@ let renderChartOptions (state: State) dispatch =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
+        | Deceased -> dp.Deceased
         | VacDosesAdministered -> dp.Vaccination.Used.Today
         | _ -> None
 
@@ -182,7 +183,8 @@ let renderChartOptions (state: State) dispatch =
         | HospitalAdmitted -> dp.total.inHospital.``in``
         | HospitalDischarged -> dp.total.inHospital.out
         | ICUAdmitted -> dp.total.icu.``in``
-        | Deceased -> dp.total.deceased.today
+        // We do not use hospital data anymore for deceased
+        // | Deceased -> dp.total.deceased.today
         | _ -> None
 
     let dataShown =

@@ -73,7 +73,7 @@ export default {
         // 'vaccinationSummary',
         // 'hospitalizedCurrent',
         // 'icuCurrent',
-        // 'deceasedToDate'
+        'deceasedToDate'
       ]
     };
   },

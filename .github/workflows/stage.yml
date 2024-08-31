@@ -14,13 +14,13 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Debug
         uses: hmarr/debug-action@v2.1.0
 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3.6.0
         with:
@@ -45,12 +45,12 @@ jobs:
       # - run: yarn test-fsharp
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: test
     if: "!contains(github.event.head_commit.message, 'NOBUILD')"
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -74,12 +74,12 @@ jobs:
             BUILD_MODE=staging
 
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: build
     if: "!contains(github.event.head_commit.message, 'NODEPLOY')"
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy
         uses: sledilnik/action-helm-deploy@v1.0.2

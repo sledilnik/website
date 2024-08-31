@@ -70,6 +70,7 @@ type Metric =
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
              ConfirmedCasesToDate; ActiveCases; RecoveredToDate
+             DeceasedToday; DeceasedToDate;
              VacAdministeredToday; VacAdministeredToDate;
              VacAdministered2Today; VacAdministered2ToDate;
              VacAdministered3Today; VacAdministered3ToDate ]
@@ -91,30 +92,30 @@ module Metrics  =
         { Metric=VacAdministeredToday;  Color="#189a73"; Visible=false; Type=Today;  Id="vaccinationAdministered" }
         { Metric=VacAdministered3Today; Color="#2ca25f"; Visible=false; Type=Today;  Id="vaccinationAdministered3rd" }
         { Metric=ActiveCases;           Color="#dba51d"; Visible=true;  Type=Active; Id="activeCases" }
-        { Metric=HospitalToday;         Color="#be7A2a"; Visible=true;  Type=Active; Id="hospitalized" }
-        { Metric=ICUToday;              Color="#fb6a4a"; Visible=true;  Type=Active; Id="icu" }
-        { Metric=NiVentilatorToday;     Color="#de2d26"; Visible=true;  Type=Active; Id="niVentilator" }
-        { Metric=VentilatorToday;       Color="#a50f15"; Visible=true;  Type=Active; Id="ventilator" }
+        { Metric=HospitalToday;         Color="#be7A2a"; Visible=false; Type=Active; Id="hospitalized" }
+        { Metric=ICUToday;              Color="#fb6a4a"; Visible=false; Type=Active; Id="icu" }
+        { Metric=NiVentilatorToday;     Color="#de2d26"; Visible=false; Type=Active; Id="niVentilator" }
+        { Metric=VentilatorToday;       Color="#a50f15"; Visible=false; Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
-        { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
+        { Metric=HospitalIn;            Color="#be7A2a"; Visible=false; Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
-        { Metric=ICUIn;                 Color="#fb6a4a"; Visible=true;  Type=Today;  Id="icuAdmitted" }
+        { Metric=ICUIn;                 Color="#fb6a4a"; Visible=false; Type=Today;  Id="icuAdmitted" }
         { Metric=ICUOut;                Color="#ffb4a2"; Visible=false; Type=Today;  Id="icuDischarged" }
-        { Metric=VentilatorIn;          Color="#bf5747"; Visible=true;  Type=Today;  Id="ventilatorAdmitted" }
+        { Metric=VentilatorIn;          Color="#bf5747"; Visible=false; Type=Today;  Id="ventilatorAdmitted" }
         { Metric=VentilatorOut;         Color="#d99a91"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
         { Metric=DeceasedToday;         Color="#6d5b80"; Visible=true;  Type=Today;  Id="deceased" }
-        { Metric=VacAdministered2ToDate;Color="#0e5842"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
-        { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
-        { Metric=VacAdministered3ToDate;Color="#2ca25f"; Visible=true;  Type=ToDate; Id="vaccinationAdministered3rd" }
+        { Metric=VacAdministered2ToDate;Color="#0e5842"; Visible=false; Type=ToDate; Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministeredToDate; Color="#189a73"; Visible=false; Type=ToDate; Id="vaccinationAdministered" }
+        { Metric=VacAdministered3ToDate;Color="#2ca25f"; Visible=false; Type=ToDate; Id="vaccinationAdministered3rd" }
         { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
-        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
+        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=false; Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#fb6a4a"; Visible=false; Type=ToDate; Id="icuAdmitted" }
         { Metric=VentilatorToDate;      Color="#a50f15"; Visible=false; Type=ToDate; Id="ventilatorAdmitted" }
         { Metric=DeceasedToDate;        Color="#6d5b80"; Visible=true;  Type=ToDate; Id="deceased" }
-        { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
+        { Metric=RecoveredToDate;       Color="#20b16d"; Visible=false; Type=ToDate; Id="recovered" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -199,6 +200,8 @@ let statsDataGenerator metric =
         | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
         | ActiveCases -> point.Cases.Active
         | RecoveredToDate -> point.Cases.RecoveredToDate
+        | DeceasedToday -> point.Deceased |> Utils.zeroToNone
+        | DeceasedToDate -> point.DeceasedToDate
         | VacAdministeredToday -> point.Vaccination.Administered.Today
         | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
         | VacAdministered2Today -> point.Vaccination.Administered2nd.Today
@@ -224,8 +227,9 @@ let patientsDataGenerator metric =
         | VentilatorIn -> point.total.critical.``in``
         | VentilatorOut -> point.total.critical.out
         | VentilatorToDate -> point.total.critical.toDate
-        | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
-        | DeceasedToDate -> point.total.deceased.toDate
+        // From Hospital data - not used anymore
+        // | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
+        // | DeceasedToDate -> point.total.deceased.toDate
         | _ -> None
 
 
@@ -327,6 +331,19 @@ let renderChartOptions state dispatch =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
         credits = chartCreditsNIJZMZHospitals
+
+        plotOptions = pojo
+            {| series = pojo {| dataGrouping = pojo {| enabled = false |}; turboThreshold = 0 |} |}
+
+        // As number of data points grow over time, HighCharts will kick into boost mode.
+        // For boost mode to work correctly, data points must be [x, y] pairs.
+        // Right now are data points are objects in order to shove in extra data for tooltips
+        // When performance without boost mode becomes a problem refactor tooltip formatting and use data points in [x, y] form.
+        //
+        // See:
+        //  - https://api.highcharts.com/highcharts/boost.seriesThreshold
+        //  - https://assets.highcharts.com/errors/12/
+        boost = pojo {| enabled = false |}
     |}
 
 let renderChartContainer state dispatch =

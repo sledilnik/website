@@ -896,7 +896,7 @@
         "vaccination_administered_todate": "Geimpfte Personen (bis heute)"
     },
     "footer": {
-        "copyright": "© 2020-2023 Sledilnik.org"
+        "copyright": "© 2020-2024 Sledilnik.org"
     },
     "cm": {
         "shops": {
@@ -1402,8 +1402,8 @@
     },
     "pageNotFound": {
         "back": "Zurück",
-        "somethingWentWrong": "Etwas ist schief gelaufen :(",
-        "imageDescription": "zwei durch gelbes Band verbundene Verkehrskegel",
+        "somethingWentWrong": "Ups, da ist etwas schief gelaufen :(",
+        "imageDescription": "ein achselzuckender Arzt",
         "notFound": "404: Seite nicht gefunden"
     },
     "tables": {
