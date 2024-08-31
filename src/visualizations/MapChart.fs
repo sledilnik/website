@@ -16,7 +16,7 @@ open Types
 
 type MapToDisplay = MunicipalityMap | RegionMap
 
-let munGeoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
+let munGeoJsonUrl = "/maps/municipalities-regions-gurs-simplified-3857.geojson"
 let regGeoJsonUrl = "/maps/statistical-regions-gurs-simplified-3857.geojson"
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
@@ -607,7 +607,7 @@ let renderMap (state : State) =
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
                colorKey = "value"
-               nullColor = "white"
+               nullColor = "transparent"
                borderColor = "#000"
                borderWidth = 0.2
                minSize = 1
