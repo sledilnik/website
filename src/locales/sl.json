@@ -1507,7 +1507,9 @@
             "concentrationGen1": "Razmerje SARS-CoV-2 gen N1 in PMMoV",
             "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
             "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):",
-            "other": "Drugo"
+            "other": "Drugo",
+            "casesPer100k": "Primeri na 100.000 prebivalcev",
+            "titleMenu": "Odpadne vode"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko [do 26.3.2023]",
@@ -1570,7 +1572,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020-2024 Sledilnik.org"
+        "copyright": "© 2020-2025 Sledilnik.org"
     },
     "schoolDict": {
         "E": "Zaposleni",
