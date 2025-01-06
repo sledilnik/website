@@ -823,7 +823,8 @@
             "title": "Intensivbehandlung"
         },
         "sewage": {
-            "activeCases": "Aktive Fälle"
+            "activeCases": "Aktive Fälle",
+            "casesPer100k": "Fälle pro 100.000 Menschen"
         },
         "vaccineEffect": {
             "confirmedCases": "Bestätigte Fälle",
