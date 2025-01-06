@@ -1496,7 +1496,8 @@
             "newCases7dAve": "Nuovi casi (media di 7 giorni)",
             "activeCases": "Casi attivi",
             "titleMenu": "Acque di scarico",
-            "title": "Virus nelle acque di scarico"
+            "title": "Virus nelle acque di scarico",
+            "casesPer100k": "Casi su 100.000 persone"
         },
         "note": {
             "deceasedReporting": "Maggiori informazioni sulla denuncia di deceduti da parte della NIJZ e del governo sono disponibili nell'articolo <b> <a href=\"https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2\" target=\"_blank\"> Zakaj razlike v številu umrlih? </a> </b>."
