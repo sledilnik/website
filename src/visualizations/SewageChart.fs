@@ -52,7 +52,7 @@ type DisplayType =
 
     member this.GetName =
         match this with
-        | Cases100k -> chartText "cases100k"
+        | Cases100k -> chartText "casesPer100k"
         | GenomesRatio -> chartText "genomesRatio"
         | MeasurementsNIB -> chartText "measurementsNIB"
 

@@ -1498,7 +1498,7 @@
         },
         "sewage": {
             "title": "Virus in različice v odpadnih vodah",
-            "cases100k": "Primeri na 100.000 prebivalcev",
+            "casesPer100k": "Primeri na 100.000 prebivalcev",
             "genomesRatio": "Deleži mutacij genoma",
             "measurementsNIB": "Meritve NIB [do 28.2.2023]",
             "estimatedCases": "Ocenjeno število primerov",
@@ -1508,7 +1508,6 @@
             "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
             "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):",
             "other": "Drugo",
-            "casesPer100k": "Primeri na 100.000 prebivalcev",
             "titleMenu": "Odpadne vode"
         },
         "sources": {
