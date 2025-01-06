@@ -911,7 +911,8 @@
             "titleMenu": "Kanalizacija",
             "title": "Virus u kanalizaciji",
             "concentrationGen2": "Omjer SARS-CoV-2 gena N2 i PMMoV",
-            "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV"
+            "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV",
+            "casesPer100k": "Slučajevi na 100.000 stanovnika"
         },
         "vaccineEffect": {
             "relative100k": "Relativno na 100.000 osoba u skupini",
