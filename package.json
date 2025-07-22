@@ -22,7 +22,7 @@
     "axios-etag-cache": "^1.0.5",
     "bootstrap-vue": "^2.23.1",
     "d3": "^7.8.4",
-    "date-fns": "^2.29.3",
+    "date-fns": "^4.1.0",
     "highcharts": "^10.3.3",
     "highcharts-react-official": "^3.1.0",
     "i18next": "^22.4.14",
