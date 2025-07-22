@@ -2275,14 +2275,17 @@
     "donation": {
         "title": "Podpiram Sledilnik",
         "intro": "Smo **Znanstveno društvo Sledilnik** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Vsak prispevek pomeni vložek v prihodnost, boljšo ozaveščenost o razsežnostih težave in pravilno oceno tveganj.\n\nZ vašim prispevkom nam pomagate ostati to, kar smo: znanstvena skupnost, ki nudi javne in prosto dostopne informacije ter analize za vse – **za boljši danes in jutri vseh nas**. Hvala, ker vam ni vseeno!",
-        "bankDetails": {
-            "recipient": "Prejemnik",
-            "purposeCode": "Koda namena",
-            "purpose": "Namen",
-            "reference": "Referenca",
-            "iban": "Račun IBAN",
-            "bank": "Banka",
-            "bankBicSwift": "BIC/SWIFT banke"
+        "banktransfer": {
+            "description": "Prispevek lahko **nakažete tudi z bančnega računa** - mesečno s trajnikom ali enkratno z nalogom UPN. V obeh primerih na nalog vpišite **poljuben znesek**.",
+            "details": {
+                "recipient": "Prejemnik",
+                "purposeCode": "Koda namena",
+                "purpose": "Namen",
+                "reference": "Referenca",
+                "iban": "Račun IBAN",
+                "bank": "Banka",
+                "bankBicSwift": "BIC/SWIFT banke"
+            }
         },
         "success": {
             "title": "Hvala za vašo donacijo",
@@ -2290,13 +2293,12 @@
             "session": "ID seje plačila:"
         },
         "onetime": {
-            "title": "Enkratna donacija",
             "banktransfer": {
-                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**.",
-                "detailsButton": "Podatki za nakazilo z UPN"
+                "description": "**UPN nalog** izpolnite s spodnjimi podatki in **poljubnim zneskom**. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem **QR-kode**.",
+                "detailsButton": "Nakazilo z UPN"
             },
             "stripe": {
-                "description": "Enkratni prispevek Sledilniku lahko vplačate tudi **s kreditno kartico**. Izberite znesek, s katerim želite podpreti naše delovanje:",
+                "description": "Lahko se odločite tudi za **enkratno** donacijo:",
                 "success": {
                     "title": "Hvala za enkratno donacijo",
                     "description": " "
@@ -2311,10 +2313,8 @@
             }
         },
         "monthly": {
-            "title": "Redna mesečna donacija",
             "stripe": {
-                "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vaš strošek podpore pa se enakomerno porazdeli skozi leto. Izberite znesek, s katerim ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
-                "stopping": "Donacijo lahko prekinete kadarkoli tako, da nam to sporočite na drustvo@sledilnik.org.",
+                "description": "Naše delovanje lahko podprete **s kreditno kartico**. Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vaš strošek podpore pa se enakomerno porazdeli skozi leto. Donacijo lahko prekinete kadarkoli tako, da nam to sporočite na drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} na mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
@@ -2324,7 +2324,7 @@
             "permanentBankTransferOrder": {
                 "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska.",
                 "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi.",
-                "detailsButton": "Podatki za trajnik"
+                "detailsButton": "Trajni nalog"
             }
         },
         "incomeTax": {

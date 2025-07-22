@@ -1932,14 +1932,17 @@
     "donation": {
         "title": "I support Sledilnik",
         "intro": "Here at the **Sledilnik non-profit scientific society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
-        "bankDetails": {
-            "recipient": "Recipient",
-            "purposeCode": "Purpose code",
-            "purpose": "Purpose",
-            "reference": "Reference",
-            "iban": "IBAN Account",
-            "bank": "Bank",
-            "bankBicSwift": "Bank SWIFT/BIC"
+        "banktransfer": {
+            "description": "Our activities can also be supported **by bank transfer**, with **any amount**.",
+            "details": {
+                "recipient": "Recipient",
+                "purposeCode": "Purpose code",
+                "purpose": "Purpose",
+                "reference": "Reference",
+                "iban": "IBAN Account",
+                "bank": "Bank",
+                "bankBicSwift": "Bank SWIFT/BIC"
+            }
         },
         "success": {
             "title": "Thank you for your donation",
@@ -1947,13 +1950,12 @@
             "session": "Payment session ID:"
         },
         "onetime": {
-            "title": "One-time support",
             "banktransfer": {
-                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:",
+                "description": "The payment instructions are as follows:",
                 "detailsButton": "Bank transfer details"
             },
             "stripe": {
-                "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
+                "description": "Alternatively, you can make a **one-off** donation of:",
                 "success": {
                     "title": "Thank you for your one-time donation",
                     "description": " "
@@ -1961,11 +1963,9 @@
             }
         },
         "monthly": {
-            "title": "Monthly recurring donation",
             "stripe": {
-                "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
+                "description": "You can support us **by credit card**. A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} per month",
-                "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
                     "description": "If you would like to stop your recurring donation please let us know at drustvo@sledilnik.org."
