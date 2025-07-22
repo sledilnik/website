@@ -281,6 +281,7 @@ let renderChangedSchools (state: State) dispatch =
                         | Some a -> Some (a, status)
                         | None -> None)
         |> List.sortBy (fun (school,status) -> school.Name)
+        |> List.sortByDescending (fun (school,status) -> status.regimes.Length + status.absences.Length)
         |> List.map (fun (school, status) ->
                         Html.option [
                             prop.text (sprintf "%s (%d)" school.Name (status.regimes.Length + status.absences.Length))
