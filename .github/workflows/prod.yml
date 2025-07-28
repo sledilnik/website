@@ -14,7 +14,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Debug
         uses: hmarr/debug-action@v2.1.0
@@ -22,9 +22,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3.6.0
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20.11.1'
       - run: yarn
       - run: yarn lint
       # - run: yarn test
@@ -32,24 +32,24 @@ jobs:
       # - run: yarn test-fsharp
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: test
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Login to ghcr.io
-        uses: docker/login-action@v2 
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
       
       - name: Build and push docker container image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           push: true
           context: .
@@ -60,7 +60,7 @@ jobs:
             BUILD_MODE=production
 
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: build
     steps:
       - name: Checkout repo
