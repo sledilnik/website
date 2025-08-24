@@ -2791,10 +2791,10 @@ axios-cache-adapter@^2.5.0:
     cache-control-esm "1.0.0"
     md5 "^2.2.1"
 
-axios-etag-cache@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/axios-etag-cache/-/axios-etag-cache-1.0.5.tgz#0e0b50eadb67b3247314c7748a8b0764daf539b4"
-  integrity sha512-j0ChWqpNDe0oGyOH6fq+dnc0yvFqg0gQgB08mSM9IsE8cS+5SqomcNU51s6xupKVcbFVMJOzgLVwgl2vYhMT1w==
+axios-etag-cache@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/axios-etag-cache/-/axios-etag-cache-1.4.0.tgz#8d418370a1d362febfe76d27ffb4fd9c6f9b0c7f"
+  integrity sha512-EsCgszxRvJzUtFA9xIOzlRe5IctfpsIGuvIy7n8rIMyueyhVUOZPpvBnZ0LT9rv2RsBNlE/hL/k3G+SEtBpLew==
 
 axios@^0.21.1:
   version "0.21.4"
