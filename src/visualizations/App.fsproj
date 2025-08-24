@@ -100,7 +100,7 @@
         <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
         <PackageReference Include="Fable.Extras" Version="0.1.0" />
         <PackageReference Include="Feliz" Version="1.61.0" />
-        <PackageReference Include="Feliz.UseElmish" Version="1.4.1" />
+        <PackageReference Include="Feliz.UseElmish" Version="2.4.0" />
         <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
         <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
     </ItemGroup>
