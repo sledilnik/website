@@ -284,7 +284,7 @@
             "deceased": "Smrtni slučajevi: ",
             "sortBy": "Razvrstaj prema:",
             "doubles": "Udvostručenja ",
-            "title": "Slučajevi po općinama",
+            "title": "Slučajevi po općinama [do 2. 4. 2023.]",
             "sortActive": "Aktivni",
             "showLess": "Prikaži manje",
             "viewActive": "Aktivne",
@@ -365,12 +365,13 @@
             "dsMIZS": "MIZŠ",
             "dsNIB": "Nacionalni biološki institut",
             "total": "Ukupno",
-            "dsHospitals": "bolnice"
+            "dsHospitals": "bolnice",
+            "dsNLZOH": "Nacionalni laboratorij za zdravlje, okolinu i hranu"
         },
         "map": {
             "populationC": "Stanovništvo",
             "mortalityOfConfirmedCases": "Smrtnost u potvrđenim slučajevima",
-            "title": "Karta općina",
+            "title": "Karta općina [do 2. 4. 2023.]",
             "confirmedCases": "Potvrđeni slučajevi",
             "per100k": "po 100 tisuća",
             "last_x_days_0": "{{ count }} dan",
@@ -406,7 +407,7 @@
         "ageGroups": {
             "male": "Muškarci",
             "populationTotal": "Stanovništvo ukupno",
-            "title": "Dobne skupine",
+            "title": "Dobne skupine [do 26. 3. 2023.]",
             "age": "Dob",
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
@@ -421,7 +422,7 @@
             "titleMenu": "Dob, spol"
         },
         "ageGroupsTimeline": {
-            "title": "Potvrđeni slučajevi po dobnim skupinama",
+            "title": "Potvrđeni slučajevi po dobnim skupinama [do 2. 4. 2023.]",
             "titleMenu": "Dob – udio"
         },
         "patients": {
@@ -551,7 +552,7 @@
             "titleMenu": "Testiranje",
             "byLabPercent": "Po laboratorijima: postotak pozitivnih",
             "byLab": "Po laboratorijima: PCR testovi",
-            "disclaimer": "Napomena: od 3. prosinca 2020. ne dobivamo podatke po laboratorijima.",
+            "disclaimer": "Napomena: Od 1. veljače 2022. pozitivan rezultat PCR ili RAT testa smatra se potvrđenim slučajem. Osobe koje su dodatno testirane PCR testom nakon pozitivnog RAT testa nisu uključene u statistiku pozitivnih RAT-ova.",
             "hagt": "Regularni: RAT",
             "positiveTotal": "Pozitivni ukupno",
             "positivePCR": "Pozitivni PCR",
@@ -565,7 +566,7 @@
             "allConfirmed": "Svi potvrđeni",
             "otherPersons": "Ostale osobe",
             "rhOccupant": "Stanovnici domova umirovljenika",
-            "title": "Struktura potvrđenih slučajeva",
+            "title": "Struktura potvrđenih slučajeva [do 31. 3. 2023.]",
             "hcStaff": "Zdravstveni radnici",
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
@@ -574,7 +575,7 @@
         },
         "hCenters": {
             "testsPositive": "Testovi (pozitivni*)",
-            "title": "Liječenje u domu zdravlja",
+            "title": "Liječenje u domu zdravlja [do 25. 10. 2020.]",
             "emergencyExamination": "Hitni pregledi",
             "sentToSelfIsolation": "Poslani u samoizolaciju",
             "suspectedCovidExamination": "Sumnja na COVID-19 (pregled)",
@@ -585,7 +586,7 @@
             "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada 2020. prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
         },
         "regions": {
-            "title": "Po regijiama",
+            "title": "Po regijiama [do 2. 4. 2023.]",
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni",
@@ -602,7 +603,7 @@
         "cases": {
             "active": "Aktivni",
             "recovered": "Ozdravili",
-            "title": "Potvrđeni slučajevi",
+            "title": "Potvrđeni slučajevi [do 31. 3. 2023.]",
             "deceased": "Umrli",
             "icu": "Na odjelu intenzivne njege",
             "ventilator": "Na respiratoru (intubirani)",
@@ -627,14 +628,14 @@
             "noData": "Nema podataka",
             "titleMenu": "Europa – stanje",
             "weeklyIncrease": "Tjedni rast",
-            "statusDarkRed": "oporavljeni/cijepljeni ili desetodnevna karantena (zabranjen ulazak strancima bez prebivališta)"
+            "statusDarkRed": "10-dnevna karantena i PCR test 1., 5. i 10. dana, zabranjen ulaz strancima bez prebivališta<br>*potvrđena prisutnost omikron varijante"
         },
         "world": {
             "title": "COVID-19 stanje u svijetu",
             "titleMenu": "Svijet – stanje"
         },
         "rmap": {
-            "title": "Karta regija",
+            "title": "Karta regija [do 2. 4. 2023.]",
             "titleMenu": "Regije – karta"
         },
         "countriesDeathsPerCases": {
@@ -686,10 +687,10 @@
             "confirmedFromQuarantine": "Potvrđeni iz karantene",
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
-            "title": "Izvori i mjesta zaraze, tjedno",
+            "title": "Izvori i mjesta zaraze, tjedno [do 26. 3. 2023.]",
             "titleMenu": "Izvori i mjesta zaraze",
             "disclaimer": "Napomena: epidemiolozi su 25. listopada 2020. prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
-            "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – broj slučajeva je možda manji od stvarnog.",
+            "disclaimerGeneral": "Napomena: od 21. veljače 2022. epidemiolozi ne prate sve pojedinačne kontakte.",
             "retirementHome": "Dom umirovljenika",
             "locationUnknown": "Nepoznato",
             "locationOther": "Ostalo",
@@ -713,7 +714,7 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "title": "Po regijama (na 100.000 stanovnika)",
+            "title": "Po regijama (na 100.000 stanovnika) [do 2. 4. 2023.]",
             "titleMenu": "Regija – usporedba"
         },
         "phaseDiagram": {
@@ -754,7 +755,7 @@
             "healthcareEmployeesCases": "Zdravstveni radnici",
             "confirmedCases": "Potvrđeni slučajevi",
             "titleMenu": "Zdravstvo i domovi umirovljenika – slučajevi",
-            "title": "Slučajevi u zdravstvu i domovima umirovljenika, tjedno",
+            "title": "Slučajevi u zdravstvu i domovima umirovljenika, tjedno [do 26. 3. 2023.]",
             "disclaimer": "Napomena: podaci za prošli tjedan još nisu potpuni – udio zdravstvenih radnika može biti manji od stvarnog.",
             "otherCases": "Ostale osobe",
             "rhOccupantCases": "Stanovnici domova umirovljenika",
@@ -775,7 +776,7 @@
             "deceasedToDateRelative": "Smrtni slučajevi do datuma (relativno)",
             "deceasedToDate": "Smrtni slučajevi do datuma",
             "titleMenu": "Smrtni slučajevi",
-            "title": "Smrtni slučajevi",
+            "title": "Smrtni slučajevi [do 26. 3. 2023.]",
             "deceasedByAgeTodayRelative": "Smrtni slučajevi po starosti (dnevno, relativno)",
             "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)",
             "disclaimer": "Napomena: podaci o preminulima prema dobi i domovima umirovljenika pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna.",
@@ -787,7 +788,8 @@
             "showPercent": "Proporcija",
             "showNormal": "Apsolutno",
             "showToDate": "Na datum",
-            "showToday": "Dnevno"
+            "showToday": "Dnevno",
+            "disclaimerHospitals": "Napomena: podaci o umrlima u bolnicama su prijavljeni do 31. 3. 2023."
         },
         "excessDeaths": {
             "excess": {
@@ -833,7 +835,7 @@
             "male": "Muškarci",
             "ageGroup": "Dobna grupa",
             "titleMenu": "Dobne skupine – tjedno",
-            "title": "Demografija potvrđenih slučajeva, tjedno"
+            "title": "Demografija potvrđenih slučajeva, tjedno [do 26. 3. 2023.]"
         },
         "icuPatients": {
             "titleMenu": "Intenzivna njega",
@@ -882,7 +884,8 @@
             "byAge1st": "Prva doza",
             "byAgeAll": "Potpuno cijepljeni",
             "byAge3rd": "Dodatna doza",
-            "protectedEstimated": "Procjena zaštite"
+            "protectedEstimated": "Procjena zaštite",
+            "disclaimer": "Napomena: Dijagram prikazuje udio stanovništva koje je u posljednjih 6 mjeseci bilo u potpunosti cijepljeno ili je primilo dodatnu dozu cjepiva. Zaštita se smatra učinkovito postignutom 14 dana nakon primanja te doze i traje 6 mjeseci od tog datuma."
         },
         "vaccines": {
             "deliveredDoses": "Isporučene doze",
@@ -909,10 +912,14 @@
             "newCases7dAve": "Novi slučajevi (sedmodnevni prosjek)",
             "activeCases": "Aktivni slučajevi",
             "titleMenu": "Kanalizacija",
-            "title": "Virus u kanalizaciji",
+            "title": "Virus i mutacije u kanalizaciji",
             "concentrationGen2": "Omjer SARS-CoV-2 gena N2 i PMMoV",
             "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV",
-            "casesPer100k": "Slučajevi na 100.000 stanovnika"
+            "casesPer100k": "Slučajevi na 100.000 stanovnika",
+            "genomesRatio": "Udio genskih mutacija",
+            "measurementsNIB": "NIB mjerenja [do 28. 02. 2023.]",
+            "estimatedCases": "Procijenjeni broj slučajeva",
+            "other": "Ostalo"
         },
         "vaccineEffect": {
             "relative100k": "Relativno na 100.000 osoba u skupini",
@@ -927,7 +934,9 @@
             "casesProtected": "Zaštićeni cjepivom",
             "casesPartiallyVaccinated": "Djelomično cijepljeni",
             "casesUnvaccinated": "Necijepljeni",
-            "casesOther": "Ostali (necijepljeni, djelomično cijepljeni)"
+            "casesOther": "Ostali (necijepljeni, djelomično cijepljeni)",
+            "confirmedCasesRatio": "Među potvrđenim slučajevima, **{{multiple}}** puta je više necijepljenih i djelomično cijepljenih nego potpuno zaštićenih cijepljenjem.",
+            "disabled": "Napomena: Ove podatke ne možemo aktualizirati od 17. siječnja 2022. zbog promjene u izvještavanju."
         },
         "patientsAge": {
             "deceased": "Umrli",
@@ -935,7 +944,8 @@
             "hospitalIn": "Primljeni u bolnici",
             "icuIn": "Primljeni na odjel intenzivne njege",
             "title": "Hospitalizacija (SARI) po starosti, tjedno",
-            "titleMenu": "Hospitalizacija – starost"
+            "titleMenu": "Hospitalizacija – starost",
+            "disclaimer": "To uključuje samo hospitalizacije praćene u EPISARI sustavu, što isključuje prijeme zbog COVID-19 bez teških akutnih respiratornih infekcija."
         },
         "vaccineEffectAge": {
             "absolute": "Apsolutno",
@@ -1256,7 +1266,8 @@
             "title": "🚫22 – 5 h"
         },
         "masksOnEvents": {
-            "title": "Maske🎭"
+            "title": "Maske🎭",
+            "description": "Obavezno nošenje maski na javnim kulturnim događajima."
         },
         "liftMasksOnEvents": {
             "title": "Maske"
@@ -1266,6 +1277,45 @@
         },
         "liftMasksRV": {
             "title": "Maske"
+        },
+        "pctSports": {
+            "title": "RVT⛹️",
+            "description": "RVT (oporavljen, cijepljen, testiran) stanje moraju ispunjavati svi sudionici organiziranih rekreacijskih aktivnosti."
+        },
+        "pctContacts": {
+            "title": "RVT",
+            "description": "RVT (oporavljen, cijepljen, testiran) stanje moraju ispunjavati sve osobe koje u obavljanju svog posla dolaze u izravan kontakt s drugim osobama."
+        },
+        "pctEverywhere": {
+            "title": "RVT!",
+            "description": "RVT (oporavljen, cijepljen, testiran) stanje moraju ispunjavati svi koji obavljaju posao i svi korisnici usluga."
+        },
+        "gatherings3": {
+            "title": "Okupljanja"
+        },
+        "liftQuarantineAll": {
+            "title": "Karantena",
+            "description": "Ublažavanje ograničenja: nema karantene nakon bliskog kontakta"
+        },
+        "liftPCT": {
+            "title": "RVT",
+            "description": "Ublažavanje ograničenja: sva ograničenja su ukinuta, maske su potrebne samo u zatvorenom prostoru.<br>RVT (oporavljen, cijepljen, testiran) stanje je potrebno samo u zdravstvenim ustanovama, ustanovama socijalne zaštite i zatvorima."
+        },
+        "liftMasksSchools": {
+            "title": "Maske",
+            "description": "Ublažavanje ograničenja: maske više nisu obavezne u školama i fakultetima."
+        },
+        "liftMasksInside": {
+            "title": "Maske",
+            "description": "Ublažavanje ograničenja: maske više nisu obavezne u zatvorenom prostoru.<br>Maske su i dalje obavezne u zdravstvenim i ustanovama socijalne skrbi."
+        },
+        "liftEverything": {
+            "title": "🏳️",
+            "description": "Ublažavanje ograničenja: ukidanje svih ograničenja.<br>Slijedi preporuke Nacionalnog instituta za javno zdravstvo (NIJZ)."
+        },
+        "noHospitalData": {
+            "title": "🏥",
+            "description": "Prestanak prikupljanja podataka o hospitaliziranim pacijentima.<br>Prekidanje aplikacije #OstaniZdrav."
         }
     },
     "pageNotFound": {
