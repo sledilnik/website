@@ -27,7 +27,6 @@ ProjectSection(SolutionItems) = preProject
 	vue.config.js = vue.config.js
 	fsharplint-config.json = fsharplint-config.json
 	owid.analyzer.bat = owid.analyzer.bat
-	base.Dockerfile = base.Dockerfile
 	docker-compose.test.yml = docker-compose.test.yml
 	docker-compose.yml = docker-compose.yml
 	Dockerfile = Dockerfile

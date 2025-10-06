@@ -1,10 +1,10 @@
-# [Choice] .NET Core version: 3.1, 2.1
-ARG VARIANT=3.1
+# Use .NET 8 version
+ARG VARIANT=8.0
 FROM mcr.microsoft.com/vscode/devcontainers/dotnetcore:dev-${VARIANT}
 
-# [Option] Install Node.js
+# [Option] Install Node.js 20.11.1 to match the main Dockerfile
 ARG INSTALL_NODE="true"
-ARG NODE_VERSION="lts/*"
+ARG NODE_VERSION="20.11.1"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "source /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 # [Option] Install Azure CLI
