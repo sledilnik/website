@@ -14,7 +14,7 @@ env:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Debug
         uses: hmarr/debug-action@v2.1.0
@@ -32,7 +32,7 @@ jobs:
       # - run: yarn test-fsharp
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: test
     steps:
       - name: Checkout repo
@@ -60,7 +60,7 @@ jobs:
             BUILD_MODE=production
 
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: build
     steps:
       - name: Checkout repo
