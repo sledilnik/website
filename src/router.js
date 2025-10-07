@@ -13,18 +13,21 @@ import aboutMdEn from './content/en/about.md'
 import aboutMdHr from './content/hr/about.md'
 import aboutMdDe from './content/de/about.md'
 import aboutMdIt from './content/it/about.md'
+import aboutMdEs from './content/es/about.md'
 
 import dataMdSl from './content/sl/data.md'
 import dataMdEn from './content/en/data.md'
 import dataMdHr from './content/hr/data.md'
 import dataMdDe from './content/de/data.md'
 import dataMdIt from './content/it/data.md'
+import dataMdEs from './content/es/data.md'
 
 import modelsMdSl from './content/sl/models.md'
 import modelsMdEn from './content/en/models.md'
 import modelsMdHr from './content/hr/models.md'
 import modelsMdDe from './content/de/models.md'
 import modelsMdIt from './content/it/models.md'
+import modelsMdEs from './content/es/models.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
@@ -36,6 +39,7 @@ const mdContent = {
     hr: aboutMdHr,
     de: aboutMdDe,
     it: aboutMdIt,
+    es: aboutMdEs,
   },
   data: {
     sl: dataMdSl,
@@ -43,6 +47,7 @@ const mdContent = {
     hr: dataMdHr,
     de: dataMdDe,
     it: dataMdIt,
+    es: dataMdEs,
   },
   models: {
     sl: modelsMdSl,
@@ -50,6 +55,7 @@ const mdContent = {
     hr: modelsMdHr,
     de: modelsMdDe,
     it: modelsMdIt,
+    es: modelsMdEs,
   },
 }
 
