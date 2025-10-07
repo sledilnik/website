@@ -8,6 +8,12 @@ import sl from './locales/sl.json'
 import hr from './locales/hr.json'
 import de from './locales/de.json'
 import it from './locales/it.json'
+import ru from './locales/ru.json'
+import mk from './locales/mk.json'
+import sq from './locales/sq.json'
+import me from './locales/me.json'
+import nb from './locales/nb_NO.json'
+import es from './locales/es.json'
 
 import {Highcharts} from './visualizations/_highcharts'
 
@@ -78,7 +84,7 @@ i18next.on('languageChanged', function(lng) {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'hr', 'de', 'it'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'it', 'ru', 'mk', 'sq', 'me', 'nb', 'es'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
@@ -86,6 +92,12 @@ i18next.use(LanguageDetector).init({
     hr: { translation: hr },
     de: { translation: de },
     it: { translation: it },
+    ru: { translation: ru },
+    mk: { translation: mk },
+    sq: { translation: sq },
+    me: { translation: me },
+    nb: { translation: nb },
+    es: { translation: es },
   },
   detection: detectionOptions,
   interpolation: {
