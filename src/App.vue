@@ -33,6 +33,7 @@ export default {
         { vmid: 'description', name: 'description', content: this.$t('meta.description') },
         { vmid: 'og:title', property: 'og:title', content: this.$t('meta.title') },
         { vmid: 'og:description', property: 'og:description', content: this.$t('meta.description') },
+        { vmid: 'og:image', property: 'og:image', content: 'https://' + location.host + '/covid-19-logo.png' },
       ],
       link: links,
     }
