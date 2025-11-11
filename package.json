@@ -60,7 +60,7 @@
     "markdown-loader": "^5.1.0",
     "remotedev": "^0.2.9",
     "sass": "^1.26.11",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^16.0.3",
     "vue-cli-plugin-webpack-bundle-analyzer": "~4.0.0",
     "vue-template-compiler": "^2.7.14"
   },
