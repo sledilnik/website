@@ -19,7 +19,7 @@
     "@vue-stripe/vue-stripe": "^4.5.0",
     "axios": "^0.21.1",
     "axios-cache-adapter": "^2.5.0",
-    "axios-etag-cache": "^1.0.5",
+    "axios-etag-cache": "^1.4.0",
     "bootstrap-vue": "^2.23.1",
     "d3": "^7.8.4",
     "date-fns": "^2.29.3",
